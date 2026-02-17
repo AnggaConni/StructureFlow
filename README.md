@@ -1,4 +1,4 @@
-Apa itu StructureFlow? 
+# Apa itu StructureFlow? 
 
 StructureFlow adalah alat bantu penulisan cerdas berbasis web yang dirancang untuk membantu Anda menyusun dokumen kompleks—seperti Jurnal Akademis, Proposal Proyek, atau Laporan Riset—dengan struktur yang presisi dan bantuan AI.
 
