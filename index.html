@@ -3,15 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>StructureFlow v2.0</title>
-    
-    <!-- Tailwind CSS -->
+    <title>StructureFlow v3.0 — Modular AI Writing Engine</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- html2pdf.js for PDF Generation -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-
-    <!-- React & ReactDOM & Lucide via Import Map -->
     <script type="importmap">
     {
         "imports": {
@@ -21,718 +15,1105 @@
         }
     }
     </script>
-    
-    <!-- Babel for JSX Compilation -->
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-
-    <!-- Custom CSS for Scrollbars & Animation Shims (replicating tailwindcss-animate) -->
     <style>
-        /* Custom Scrollbar */
-        .custom-scrollbar::-webkit-scrollbar {
-            width: 6px;
-        }
-        .custom-scrollbar::-webkit-scrollbar-track {
-            background: transparent;
-        }
-        .custom-scrollbar::-webkit-scrollbar-thumb {
-            background-color: #cbd5e1;
-            border-radius: 20px;
-        }
-        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-            background-color: #94a3b8;
-        }
-
-        /* Animation Keyframes (Shims for tailwindcss-animate) */
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-        @keyframes slideInBottom { from { transform: translateY(1rem); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
-        @keyframes slideInRight { from { transform: translateX(1rem); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
-        @keyframes zoomIn { from { transform: scale(0.95); opacity: 0; } to { transform: scale(1); opacity: 1; } }
-
-        .animate-in { animation-duration: 0.5s; animation-fill-mode: both; }
-        .fade-in { animation-name: fadeIn; }
-        .slide-in-from-bottom-4 { animation-name: slideInBottom; }
-        .slide-in-from-right-4 { animation-name: slideInRight; }
-        .zoom-in-95 { animation-name: zoomIn; }
-        
-        /* Utility */
-        .delay-200 { animation-delay: 200ms; }
-        .duration-300 { animation-duration: 300ms; }
-        .duration-500 { animation-duration: 500ms; }
+        .custom-scrollbar::-webkit-scrollbar { width: 5px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 20px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+        @keyframes fadeIn { from{opacity:0}to{opacity:1} }
+        @keyframes slideUp { from{transform:translateY(16px);opacity:0}to{transform:translateY(0);opacity:1} }
+        @keyframes slideRight { from{transform:translateX(12px);opacity:0}to{transform:translateX(0);opacity:1} }
+        @keyframes scaleIn { from{transform:scale(.96);opacity:0}to{transform:scale(1);opacity:1} }
+        .anim-fade { animation: fadeIn .35s ease both; }
+        .anim-up { animation: slideUp .4s cubic-bezier(.22,1,.36,1) both; }
+        .anim-right { animation: slideRight .3s ease both; }
+        .anim-scale { animation: scaleIn .35s cubic-bezier(.22,1,.36,1) both; }
+        .delay-1 { animation-delay: .05s; }
+        .delay-2 { animation-delay: .1s; }
+        .delay-3 { animation-delay: .15s; }
+        .delay-4 { animation-delay: .2s; }
+        @media print { .no-print{display:none!important} }
+        .prose-card h1,.prose-card h2,.prose-card h3{margin:.8em 0 .4em;font-weight:600;line-height:1.3}
+        .prose-card h3{font-size:1rem;color:#1e40af}
+        .prose-card p{margin-bottom:.7em;line-height:1.65;color:#374151}
+        .prose-card ul,.prose-card ol{padding-left:1.4em;margin-bottom:.7em}
+        .prose-card li{margin-bottom:.3em;color:#374151}
+        .prose-card strong{color:#111827;font-weight:600}
+        .prose-card em{color:#4b5563}
+        .prose-card blockquote{border-left:3px solid #6366f1;padding:.5em 1em;background:#f5f3ff;margin:1em 0;border-radius:0 6px 6px 0;font-style:italic;color:#4338ca}
     </style>
 </head>
 <body class="bg-slate-100 text-slate-900">
-    <div id="root"></div>
+<div id="root"></div>
 
-    <script type="text/babel" data-type="module">
-        import React, { useState, useEffect, useRef } from 'react';
-        import { createRoot } from 'react-dom/client';
-        import { 
-            Layout, Plus, Trash2, Edit3, Save, Upload, FileText, 
-            ArrowUp, ArrowDown, Globe, BookOpen, FilePlus, 
-            MoreVertical, ChevronLeft, Bold, Italic, List, 
-            Printer, PenTool, FolderOpen, GraduationCap, Scale, Globe as GlobeIcon, Mail, Sparkles
-        } from 'lucide-react';
+<script type="text/babel" data-type="module">
+import React, { useState, useEffect, useRef, useCallback } from 'react';
+import { createRoot } from 'react-dom/client';
+import {
+    Layout, Plus, Trash2, Edit3, Save, Upload, FileText,
+    ArrowUp, ArrowDown, Globe, BookOpen, ChevronLeft,
+    Bold, Italic, List, Printer, FolderOpen, Mail,
+    Sparkles, GraduationCap, Scale, Newspaper, Megaphone,
+    PenTool, BarChart2, Search, Tag, CheckCircle2,
+    AlertCircle, Lightbulb, Library, Layers, Cpu, X,
+    ChevronDown, ChevronRight, Star, Zap, Info
+} from 'lucide-react';
 
-        // --- TEMPLATES DATA (WITH DUMMY CONTENT) ---
-        const SAMPLE_CONTENT = {
-            academic: {
-                abstract: "<p><strong>Abstract</strong></p><p>This study investigates the impact of rising temperatures on urban agriculture yields. Using a mixed-method approach, we analyzed data from 50 community gardens. Findings suggest heat stress reduces crop viability by 15%.</p>",
-                intro: "<h3>1. Introduction</h3><p>Urban agriculture is critical for sustainable cities. However, climate change presents new challenges. <em>Research Gap:</em> Data on urban microclimates remains scarce.</p>",
-                methods: "<h3>2. Methodology</h3><ul><li>Data Collection: Sensors and yield logs.</li><li>Participants: 50 urban farmers.</li><li>Analysis: Linear regression.</li></ul>",
-            },
-            policy: {
-                exec_summary: "<p><strong>Executive Summary</strong></p><p>This brief recommends a ban on single-use plastics in coastal zones. Implementation is projected to reduce marine debris by 40%.</p>",
-                intro: "<h3>Context</h3><p>Coastal tourism generates 50% of marine waste. Current infrastructure is overwhelmed.</p>",
-            }
-        };
+/* ═══════════════════════════════════════════════════════════════
+   MODULE REGISTRY — The core of the modular architecture
+   Each PublicationModule follows the canonical schema.
+   Install logic: if ID already exists → skip; if schema version
+   mismatch → replace.
+═══════════════════════════════════════════════════════════════ */
 
-        const TEMPLATES = {
-            journal: {
-                title: 'Academic Paper',
-                icon: <GraduationCap className="w-8 h-8 text-blue-400" />,
-                color: 'from-blue-500/20 to-blue-600/5',
-                border: 'group-hover:border-blue-500/50',
-                description: 'Standard research paper structure.',
-                data: {
-                    id: 'root',
-                    content: 'Research Paper Draft',
-                    children: [
-                        { id: 'j1', content: SAMPLE_CONTENT.academic.abstract, guidance_id: 'Rangkuman singkat (150-250 kata).', guidance_en: 'Brief summary (150-250 words).', children: [] },
-                        { id: 'j2', content: SAMPLE_CONTENT.academic.intro, guidance_id: 'Latar belakang & gap penelitian.', guidance_en: 'Background & research gap.', children: [] },
-                        { id: 'j3', content: SAMPLE_CONTENT.academic.methods, guidance_id: 'Desain penelitian & metode.', guidance_en: 'Research design & methods.', children: [] },
-                        { id: 'j4', content: '<h3>3. Results</h3><p>[Insert your findings here]</p>', guidance_id: 'Sajikan data fakta.', guidance_en: 'Present factual data.', children: [] },
-                        { id: 'j5', content: '<h3>4. Discussion</h3><p>[Interpret your results here]</p>', guidance_id: 'Interpretasi hasil.', guidance_en: 'Interpret results.', children: [] },
-                        { id: 'j6', content: '<h3>5. Conclusion</h3><p>[Summarize key points]</p>', guidance_id: 'Kesimpulan & saran.', guidance_en: 'Conclusion & suggestions.', children: [] }
-                    ]
-                }
-            },
-            policy: {
-                title: 'Policy Brief',
-                icon: <Scale className="w-8 h-8 text-emerald-400" />,
-                color: 'from-emerald-500/20 to-emerald-600/5',
-                border: 'group-hover:border-emerald-500/50',
-                description: 'Recommendation for stakeholders.',
-                data: {
-                    id: 'root',
-                    content: 'Policy Recommendation',
-                    children: [
-                        { id: 'p1', content: SAMPLE_CONTENT.policy.exec_summary, guidance_id: 'Ringkasan inti & rekomendasi.', guidance_en: 'Core summary & recommendations.', children: [] },
-                        { id: 'p2', content: SAMPLE_CONTENT.policy.intro, guidance_id: 'Urgensi masalah & data.', guidance_en: 'Urgency & data.', children: [] },
-                        { id: 'p3', content: '<h3>Critique</h3><p>[Analyze current policy]</p>', guidance_id: 'Kekurangan kebijakan saat ini.', guidance_en: 'Shortcomings of current policy.', children: [] },
-                        { id: 'p4', content: '<h3>Recommendations</h3><p>[Propose solutions]</p>', guidance_id: 'Usulan konkret.', guidance_en: 'Concrete proposals.', children: [] }
-                    ]
-                }
-            },
-            web: {
-                title: 'SEO Article',
-                icon: <GlobeIcon className="w-8 h-8 text-purple-400" />,
-                color: 'from-purple-500/20 to-purple-600/5',
-                border: 'group-hover:border-purple-500/50',
-                description: 'Optimized for web readers.',
-                data: {
-                    id: 'root',
-                    content: 'SEO Article Headline',
-                    children: [
-                        { id: 'w1', content: '<p><strong>Intro / Hook</strong></p>', guidance_id: 'Paragraf pembuka yang menarik.', guidance_en: 'Engaging opening paragraph.', children: [] },
-                        { id: 'w2', content: '<h3>Subheading (H2)</h3>', guidance_id: 'Poin utama pertama.', guidance_en: 'First key point.', children: [] },
-                        { id: 'w3', content: '<h3>Subheading (H2)</h3>', guidance_id: 'Poin utama kedua.', guidance_en: 'Second key point.', children: [] },
-                        { id: 'w4', content: '<p><strong>Conclusion / CTA</strong></p>', guidance_id: 'Kesimpulan & ajakan bertindak.', guidance_en: 'Conclusion & Call to Action.', children: [] }
-                    ]
-                }
-            },
-            newsletter: {
-                title: 'Newsletter',
-                icon: <Mail className="w-8 h-8 text-orange-400" />,
-                color: 'from-orange-500/20 to-orange-600/5',
-                border: 'group-hover:border-orange-500/50',
-                description: 'Engaging email format.',
-                data: {
-                    id: 'root',
-                    content: 'Subject Line',
-                    children: [
-                        { id: 'n1', content: '<p>Hi [Name],</p>', guidance_id: 'Sapaan personal.', guidance_en: 'Personal greeting.', children: [] },
-                        { id: 'n2', content: '<h3>Main Story</h3>', guidance_id: 'Cerita atau update utama.', guidance_en: 'Main story or update.', children: [] },
-                        { id: 'n3', content: '<h3>Key Takeaway</h3>', guidance_id: 'Nilai yang didapat pembaca.', guidance_en: 'Value for the reader.', children: [] },
-                        { id: 'n4', content: '<p><a href="#">Call to Action</a></p>', guidance_id: 'Link atau tombol.', guidance_en: 'Link or button.', children: [] }
-                    ]
-                }
-            },
-            blank: {
-                title: 'Custom Blank',
-                icon: <Sparkles className="w-8 h-8 text-slate-400" />,
-                color: 'from-slate-500/20 to-slate-600/5',
-                border: 'group-hover:border-slate-500/50',
-                description: 'Start from scratch.',
-                data: {
-                    id: 'root',
-                    content: 'My Document',
-                    children: [
-                        { id: 'c1', content: '<p>Start writing here...</p>', guidance_id: 'Mulai tulisanmu di sini.', guidance_en: 'Start your writing here.', children: [] }
-                    ]
-                }
-            }
-        };
+const SCHEMA_VERSION = '3.0.0';
 
-        // --- UTILS ---
-        const generateId = () => Math.random().toString(36).substr(2, 9);
+// ─── DUMMY DATA ENGINE ────────────────────────────────────────
+// Generates realistic, publishable-quality content per module.
+// NOT lorem ipsum — resembles real professional writing.
 
-        const stripContent = (node) => {
-            let newContent = node.content;
-            if (newContent.length > 50) { 
-                if (newContent.includes('<h3>')) {
-                     newContent = newContent.split('</h3>')[0] + '</h3><p>[Write here...]</p>';
-                } else if (newContent.includes('<strong>')) {
-                     newContent = newContent.split('</strong>')[0] + '</strong><p>[Write here...]</p>';
-                } else {
-                     newContent = '<p>[Write here...]</p>';
-                }
-            }
-            return {
-                ...node,
-                content: newContent,
-                children: node.children ? node.children.map(stripContent) : []
-            };
-        };
+const DUMMY_DATA = {
 
-        const normalizeData = (nestedNode, parentId = null) => {
-            let map = {};
-            const nodeId = nestedNode.id || generateId();
-            const node = {
-                id: nodeId,
-                content: nestedNode.content || '',
-                guidance_id: nestedNode.guidance_id || 'Tidak ada panduan khusus.',
-                guidance_en: nestedNode.guidance_en || 'No specific guidance.',
-                parentId: parentId,
-                children: []
-            };
-            map[nodeId] = node;
-            if (nestedNode.children) {
-                nestedNode.children.forEach(child => {
-                    const { map: childMap, rootId: childRootId } = normalizeData(child, nodeId);
-                    map = { ...map, ...childMap };
-                    node.children.push(childRootId);
-                });
-            }
-            return { map, rootId: nodeId };
-        };
+  journal_article: {
+    title: 'The Impact of Digital Collaboration Tools on Remote Knowledge-Work Productivity: A Mixed-Methods Study',
+    sections: [
+      { key: 'abstract', content: `<h3>Abstract</h3>
+<p>This study examines the relationship between enterprise digital collaboration tools and knowledge-worker productivity in fully remote environments. Drawing on a mixed-methods design combining a survey of 412 participants across 18 industries with semi-structured interviews (n = 24), we identify three mediating variables — <strong>tool integration depth</strong>, <strong>asynchronous communication norms</strong>, and <strong>digital boundary management</strong> — that explain 61% of the variance in self-reported productivity scores. Findings challenge the prevailing assumption that synchronous videoconferencing is inherently superior; structured asynchronous workflows yielded a 23% higher deep-work index (DWI) compared to meeting-heavy counterparts (p &lt; .001). Implications for organizational design and HCI research are discussed.</p>
+<p><em>Keywords:</em> remote work, knowledge productivity, collaboration technology, asynchronous communication, human-computer interaction` },
 
-        // --- COMPONENTS ---
+      { key: 'introduction', content: `<h3>1. Introduction</h3>
+<p>The unprecedented shift to remote work during 2020–2021 compressed a decade of organizational experimentation into eighteen months (Bloom, 2022). While enterprises rapidly adopted platforms such as collaborative workspace suites, persistent messaging channels, and virtual whiteboarding tools, the productivity effects of these adoptions remain contested in the empirical literature.</p>
+<p>Early studies emphasized reduced commute time as a net productivity gain (Brynjolfsson et al., 2020), while subsequent research highlighted the cognitive costs of fragmented attention, notification overload, and the dissolution of work–life temporal boundaries (Bailenson, 2021; Mark et al., 2022). A critical gap persists: few studies systematically examine how the <em>configuration</em> of tool ecosystems — rather than individual tools in isolation — mediates productivity outcomes.</p>
+<p>This study addresses that gap by proposing and testing a <strong>Tool Ecosystem Configuration Model (TECM)</strong>, which treats the digital workspace as a systemic whole rather than a collection of discrete applications. Our central research question is: <em>To what extent does the structural configuration of digital collaboration tool ecosystems predict knowledge-worker productivity, and through what mechanisms?</em></p>` },
 
-        // 1. NATIVE RICH TEXT EDITOR
-        const RichTextEditor = ({ initialContent, onSave, onCancel }) => {
-            const editorRef = useRef(null);
+      { key: 'framework', content: `<h3>2. Theoretical Framework</h3>
+<p>Our framework synthesizes three bodies of theory. First, <strong>Media Synchronicity Theory</strong> (Dennis & Valacich, 1999) posits that communication media vary along dimensions of synchronicity, rehearsability, and symbol variety, and that task-media fit determines communication performance. We extend MST to encompass multi-tool ecosystems rather than single-channel communications.</p>
+<p>Second, <strong>Cognitive Load Theory</strong> (Sweller, 1988) informs our treatment of notification fragmentation as extraneous cognitive load that crowds out productive working memory capacity. Third, we draw on <strong>Boundary Theory</strong> (Ashforth et al., 2000) to explain how tool-mediated work–home boundary permeability moderates productivity at the individual level.</p>
+<blockquote>TECM Proposition: Productivity in remote knowledge work is a function of tool integration depth (structural factor), asynchronous norm institutionalization (cultural factor), and enacted boundary management behaviors (individual factor).</blockquote>` },
 
-            const execCmd = (command, value = null) => {
-                document.execCommand(command, false, value);
-                editorRef.current.focus();
-            };
+      { key: 'methodology', content: `<h3>3. Methodology</h3>
+<p><strong>Phase 1 — Survey Instrument:</strong> A 47-item Likert-scale questionnaire was administered online to a stratified sample of 412 knowledge workers (response rate 68%) across technology, finance, education, healthcare, and consulting sectors. Productivity was operationalized using a composite Deep-Work Index (DWI) adapted from Newport (2016), supplemented by objective output proxies (task completion rates, revision cycles).</p>
+<p><strong>Phase 2 — Semi-Structured Interviews:</strong> A purposive sub-sample of 24 participants representing high-DWI (n = 12) and low-DWI (n = 12) cohorts participated in 45-minute interviews exploring tool usage patterns, norm formation, and boundary strategies. Interviews were transcribed and analyzed using reflexive thematic analysis (Braun & Clarke, 2019).</p>
+<p><strong>Analysis:</strong> Structural equation modeling (SEM) was used for Phase 1 data (RMSEA = .048, CFI = .962). Thematic findings were integrated via convergent mixed-methods triangulation. Ethical approval was obtained from the Institutional Review Board (Protocol #IRB-2023-0441).</p>` },
 
-            return (
-                <div className="border border-blue-400 rounded-lg overflow-hidden bg-white shadow-md flex flex-col h-full animate-in fade-in duration-200">
-                    <div className="bg-slate-50 border-b border-slate-200 p-2 flex gap-1 flex-wrap items-center">
-                        <button onClick={() => execCmd('bold')} className="p-1.5 hover:bg-slate-200 rounded" title="Bold"><Bold className="w-4 h-4"/></button>
-                        <button onClick={() => execCmd('italic')} className="p-1.5 hover:bg-slate-200 rounded" title="Italic"><Italic className="w-4 h-4"/></button>
-                        <div className="w-px h-4 bg-slate-300 mx-1"></div>
-                        <button onClick={() => execCmd('formatBlock', 'H3')} className="p-1.5 hover:bg-slate-200 rounded text-xs font-bold" title="Heading">H3</button>
-                        <button onClick={() => execCmd('formatBlock', 'P')} className="p-1.5 hover:bg-slate-200 rounded text-xs" title="Paragraph">P</button>
-                        <div className="w-px h-4 bg-slate-300 mx-1"></div>
-                        <button onClick={() => execCmd('insertUnorderedList')} className="p-1.5 hover:bg-slate-200 rounded" title="List"><List className="w-4 h-4"/></button>
-                    </div>
-                    <div 
-                        ref={editorRef}
-                        className="flex-1 p-4 overflow-y-auto outline-none prose prose-sm max-w-none"
-                        contentEditable
-                        suppressContentEditableWarning
-                        dangerouslySetInnerHTML={{ __html: initialContent }}
-                        style={{ minHeight: '150px' }}
-                    />
-                    <div className="p-2 border-t bg-slate-50 flex justify-end gap-2">
-                        <button onClick={onCancel} className="px-3 py-1 text-xs text-slate-600 hover:bg-slate-200 rounded">Cancel</button>
-                        <button onClick={() => onSave(editorRef.current.innerHTML)} className="px-4 py-1 text-xs bg-blue-600 text-white rounded hover:bg-blue-700 font-medium">Done</button>
-                    </div>
-                </div>
-            );
-        };
+      { key: 'findings', content: `<h3>4. Findings</h3>
+<p><strong>4.1 Tool Integration Depth</strong></p>
+<p>Participants using deeply integrated ecosystems (≥4 tools sharing unified data environments) scored 31% higher on DWI than those using siloed, disconnected tools (M = 6.8 vs. 5.2; SD = 1.2; p &lt; .001). Context-switching costs, measured via self-report frequency of application-toggling, fully mediated this relationship (β = –.44, p &lt; .001).</p>
+<p><strong>4.2 Asynchronous Communication Norms</strong></p>
+<p>Teams with explicitly documented async-first norms demonstrated significantly lower meeting loads (mean 9.2 hours/week vs. 17.6 hours/week) and correspondingly higher deep-work blocks. Interview data revealed that norm clarity — not merely norm existence — was the operative mechanism: <em>"We don't just say 'async first.' We have actual expected response windows, so nobody spirals into compulsive inbox-checking."</em> (Participant 7, Technology Sector).</p>
+<p><strong>4.3 Digital Boundary Management</strong></p>
+<p>Boundary management behaviors showed the strongest individual-level effect (β = .52, p &lt; .001). High-DWI workers consistently employed temporal (defined off-hours), spatial (dedicated device or profile), and notification-architecture boundaries simultaneously. Low-DWI workers relied on single-dimension strategies that proved insufficient against organizational availability expectations.</p>` },
 
-        // 2. AESTHETIC LANDING PAGE
-        const LandingPage = ({ onSelectTemplate, onImport }) => {
-            const [viewState, setViewState] = useState('main'); // 'main', 'new', 'tutorial'
+      { key: 'discussion', content: `<h3>5. Discussion</h3>
+<p>Our findings reframe the productivity debate from tool adoption to tool <em>governance</em>. The data suggest that organizations investing in technology without parallel investment in norm infrastructure are effectively providing workers with fast cars on unmarked roads. The TECM model provides a three-lever framework for organizational intervention.</p>
+<p>The counterintuitive superiority of asynchronous workflows extends and nuances earlier work by Golden & Gajendran (2019), who found remote work productivity gains concentrated in low-interdependence roles. Our data suggest that async-first norms can extend these gains even to high-interdependence knowledge work, provided that norms include explicit coordination scaffolds (shared project documents, structured update cadences).</p>
+<p><strong>Limitations:</strong> The cross-sectional design precludes causal inference. Self-reported productivity measures, while consistent with established instruments, introduce social desirability bias. Future research should employ longitudinal designs with objective productivity telemetry where privacy constraints permit.</p>` },
 
-            const TemplateGrid = ({ isTutorial }) => (
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full max-w-6xl animate-in slide-in-from-bottom-4 duration-500">
-                    {Object.entries(TEMPLATES).map(([key, tpl]) => (
-                        <button 
-                            key={key}
-                            onClick={() => onSelectTemplate(key, isTutorial)}
-                            className={`
-                                relative overflow-hidden p-6 rounded-2xl border border-slate-700/50 bg-slate-800/50 backdrop-blur-sm
-                                text-left transition-all duration-300 group hover:-translate-y-1 hover:shadow-2xl hover:shadow-blue-900/20
-                                bg-gradient-to-br ${tpl.color} ${tpl.border}
-                            `}
-                        >
-                            <div className="relative z-10">
-                                <div className="mb-4 p-3 bg-slate-900/50 rounded-xl w-fit border border-slate-700 group-hover:scale-110 transition-transform duration-300">
-                                    {tpl.icon}
-                                </div>
-                                <h3 className="font-bold text-xl mb-2 text-slate-100">{tpl.title}</h3>
-                                <p className="text-sm text-slate-400 group-hover:text-slate-300 transition-colors">{tpl.description}</p>
-                            </div>
-                        </button>
-                    ))}
-                </div>
-            );
+      { key: 'conclusion', content: `<h3>6. Conclusion</h3>
+<p>This study demonstrates that the configuration of digital collaboration tool ecosystems — not the presence of any single tool — is the primary structural determinant of remote knowledge-worker productivity. Three actionable levers emerge: deepen tool integration to reduce context-switching, institutionalize asynchronous norms with explicit response-window agreements, and support workers in constructing multi-dimensional digital boundary architectures.</p>
+<p>For HCI researchers, these findings invite renewed attention to ecosystem-level design: tools must not only perform well in isolation but must be designed with interoperability and cognitive coherence as first-order requirements. For organizational leaders, the imperative is clear — technology deployment without governance is incomplete deployment.</p>
+<p><em>Data availability: Survey instruments and anonymized datasets are available upon reasonable request from the corresponding author.</em></p>` }
+    ]
+  },
 
-            return (
-                <div className="flex flex-col items-center justify-center min-h-screen bg-[#0f172a] text-white p-6 relative overflow-hidden">
-                    {/* Background Gradient Accents */}
-                    <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-blue-600/20 rounded-full blur-[120px] pointer-events-none"></div>
-                    <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-emerald-600/10 rounded-full blur-[120px] pointer-events-none"></div>
+  conference_paper: {
+    title: 'Adaptive Attention Mechanisms in Low-Resource Natural Language Understanding: Preliminary Results',
+    sections: [
+      { key: 'abstract', content: `<h3>Abstract</h3><p>We present preliminary results from an ongoing investigation into adaptive attention mechanisms for natural language understanding (NLU) tasks in low-resource language settings. Using a modified transformer architecture with dynamic attention head pruning, we achieve competitive performance on three benchmark datasets (F1 ≥ 0.81) while reducing model parameters by 38%. This paper reports methodology and early findings as a basis for community discussion.</p>` },
+      { key: 'introduction', content: `<h3>1. Introduction</h3><p>Low-resource NLP remains one of the field's most persistent equity challenges. While large language models have achieved near-human performance on high-resource language benchmarks, the performance gap for languages with fewer than 100k training tokens remains substantial. We ask: can attention mechanism design partially compensate for data scarcity?</p>` },
+      { key: 'related_work', content: `<h3>2. Related Work</h3><p>Prior work on attention pruning (Michel et al., 2019) demonstrated that up to 80% of attention heads could be removed post-training with minimal performance degradation. Concurrent work by Lauscher et al. (2020) established cross-lingual transfer baselines for low-resource settings. Our contribution lies at the intersection of these streams.</p>` },
+      { key: 'method', content: `<h3>3. Method</h3><p>We implement a <strong>Selective Head Activation Network (SHAN)</strong> in which attention heads are gated by a learned importance score derived from training-time gradient magnitudes. During fine-tuning on low-resource data, low-importance heads are frozen, concentrating gradient updates on task-relevant representational capacity. Full architectural details are provided in Appendix A.</p>` },
+      { key: 'experiments', content: `<h3>4. Experiments & Results</h3><p>Experiments were conducted on three low-resource benchmarks: UD-Swahili (POS tagging), AmericasNLI (NLI, Quechua subset), and XCOPA (commonsense reasoning, Tamil). SHAN outperforms the full-parameter baseline by 2.1 F1 points on average while using 38% fewer active parameters, suggesting that attention head selection acts as an implicit regularizer in data-scarce regimes.</p>` },
+      { key: 'conclusion', content: `<h3>5. Conclusion & Future Work</h3><p>These early results are encouraging. We plan to extend evaluation to 12 additional low-resource languages and investigate whether the head importance scores learned in high-resource languages transfer meaningfully across language families. We release our codebase to encourage replication and extension.</p>` }
+    ]
+  },
 
-                    {/* Header */}
-                    <div className="text-center mb-12 relative z-10">
-                        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-800/50 border border-slate-700/50 mb-4 backdrop-blur text-xs font-medium text-blue-400">
-                            <Sparkles className="w-3 h-3" /> StructureFlow v2.0
-                        </div>
-                        <h1 className="text-5xl font-extrabold flex items-center justify-center gap-4 mb-4 tracking-tight">
-                            <Layout className="w-12 h-12 text-blue-500" /> 
-                            <span>Structure<span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-emerald-400">Flow</span></span>
-                        </h1>
-                        <p className="text-slate-400 text-lg max-w-lg mx-auto leading-relaxed">
-                            Framework-based writing tool to organize your thoughts instantly.
-                        </p>
-                    </div>
+  research_report: {
+    title: 'Urban Mobility Transitions: Adoption Barriers and Enablers for Shared Electric Micromobility in Secondary Cities',
+    sections: [
+      { key: 'executive_summary', content: `<h3>Executive Summary</h3><p>This report presents findings from a 14-month study of shared electric micromobility (SEM) adoption in eight secondary cities across Southeast Asia. We identify five primary adoption barriers — infrastructure readiness, regulatory uncertainty, affordability perception, safety trust, and cultural norm alignment — and seven cross-cutting enablers. Policy recommendations are provided for municipal governments, mobility operators, and national transport ministries.</p>` },
+      { key: 'background', content: `<h3>1. Background & Rationale</h3><p>Secondary cities (population 200k–2M) represent a significant opportunity for decarbonizing urban mobility. Unlike megacities where infrastructure constraints and congestion dominate, secondary cities often retain sufficient road density for micromobility viability while lacking the transit saturation that reduces modal appeal. Yet research on SEM adoption has concentrated disproportionately on first-tier urban contexts.</p>` },
+      { key: 'methodology', content: `<h3>2. Research Design</h3><p>The study employed a sequential mixed-methods design. Phase 1 involved ecosystem mapping across eight cities through stakeholder interviews (n = 87) and regulatory document analysis. Phase 2 administered a population-representative survey (n = 3,420) measuring adoption intention using an extended Technology Acceptance Model framework. Phase 3 conducted two participatory design workshops per city to validate and enrich quantitative findings.</p>` },
+      { key: 'findings', content: `<h3>3. Key Findings</h3><p><strong>Barrier 1 — Infrastructure Readiness:</strong> 71% of non-adopters cited inadequate dedicated lane infrastructure as a primary concern. Critically, this perception persisted even in cities with existing lane coverage, suggesting a safety-trust rather than infrastructure gap. <strong>Barrier 2 — Affordability Perception:</strong> Despite per-trip costs lower than motorbike taxi alternatives, 58% of potential users perceived SEM as expensive, driven by unfamiliarity with subscription pricing models. Enablers were concentrated in social norm visibility: in cities where adoption exceeded 8% modal share, peer-effect multipliers drove further adoption nonlinearly.</p>` },
+      { key: 'recommendations', content: `<h3>4. Policy Recommendations</h3><p>We recommend a three-horizon intervention framework. <strong>Horizon 1 (0–12 months):</strong> Establish "safe corridors" with paint and signage investments to shift safety-trust perception before infrastructure capital is allocated. <strong>Horizon 2 (1–3 years):</strong> Pilot income-linked subscription pricing with municipal co-subsidy to address affordability perception. <strong>Horizon 3 (3–5 years):</strong> Develop regional regulatory sandboxes to reduce operator uncertainty and attract competitive market entry. Full implementation roadmaps and cost estimates are provided in Appendices B–D.</p>` }
+    ]
+  },
 
-                    {/* CONTENT AREA */}
-                    <div className="w-full max-w-6xl relative z-10 min-h-[400px] flex flex-col items-center">
-                        
-                        {viewState === 'main' && (
-                            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full animate-in fade-in zoom-in-95 duration-500">
-                                {/* 1. START NEW (Blank) */}
-                                <button 
-                                    onClick={() => setViewState('new')}
-                                    className="group relative p-8 rounded-3xl bg-slate-800 border border-slate-700 hover:border-blue-500/50 transition-all hover:shadow-2xl hover:shadow-blue-500/10 text-left flex flex-col items-start h-80 justify-between overflow-hidden"
-                                >
-                                    <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                                    <div className="p-4 bg-blue-500/10 rounded-2xl text-blue-400 mb-4 group-hover:bg-blue-500 group-hover:text-white transition-colors">
-                                        <PenTool className="w-8 h-8" />
-                                    </div>
-                                    <div className="relative z-10">
-                                        <h2 className="text-2xl font-bold text-white mb-2">Start New Project</h2>
-                                        <p className="text-slate-400">Create a document from a blank template structure.</p>
-                                    </div>
-                                    <div className="mt-auto flex items-center gap-2 text-blue-400 font-medium group-hover:translate-x-2 transition-transform">
-                                        Select Template <ChevronLeft className="w-4 h-4 rotate-180" />
-                                    </div>
-                                </button>
+  thesis: {
+    title: 'Contested Geographies of Care: Feminist Political Economy of Domestic Labour Migration Between Indonesia and Singapore, 1998–2023',
+    sections: [
+      { key: 'abstract', content: `<h3>Abstract</h3><p>This thesis examines how intersecting systems of gender, nationality, and class produce and reproduce the domestic labour migration corridor between Indonesia and Singapore across three political-economic phases: post-Asian Financial Crisis restructuring (1998–2007), the regulatory reform period (2008–2016), and the pandemic and post-pandemic reconfiguration (2017–2023). Drawing on feminist political economy and transnational care chain theory, and grounded in 68 in-depth interviews with migrant domestic workers, recruitment agency personnel, and civil society advocates, I argue that care labour markets are constitutively shaped by what I term <strong>differential inclusion</strong> — a regulatory logic that makes migrant workers simultaneously indispensable and legally precarious.</p>` },
+      { key: 'introduction', content: `<h3>Chapter 1: Introduction</h3><p>On any given morning in Singapore, an estimated 255,000 migrant domestic workers — predominantly from Indonesia, the Philippines, and Myanmar — begin their workdays in private homes across the island. They occupy a peculiar juridical position: essential to the social reproduction infrastructure of one of the world's most productive economies, yet systematically excluded from the labour protections that govern other categories of worker. This thesis asks: how is this paradox produced, sustained, and contested?</p><p>The inquiry is both empirical and theoretical. Empirically, it traces the mechanisms through which regulatory frameworks, recruitment industry practices, and household employment relations constitute a distinctive form of labour precarity. Theoretically, it contributes the concept of <em>differential inclusion</em> to the literatures on transnational migration, care work, and feminist political economy.</p>` },
+      { key: 'literature_review', content: `<h3>Chapter 2: Literature Review</h3><p>Scholarship on migrant domestic labour sits at the intersection of three major theoretical traditions. The first, <strong>global care chain theory</strong> (Hochschild, 2000; Yeates, 2012), illuminates the transnational redistribution of care responsibilities from wealthier to less wealthy households, mediated by migration. The second, <strong>feminist political economy</strong> (Bakker & Gill, 2003; Elias, 2010), situates care work within broader structures of capital accumulation and gendered social reproduction. The third, <strong>legal geographies of migration</strong> (De Genova, 2002; Gammeltoft-Hansen & Sørensen, 2013), interrogates how juridical status produces and disciplines migrant labour subjectivities.</p><p>I identify a productive tension between care chain theory's emphasis on economic stratification and legal geography's attention to sovereign power, arguing that feminist political economy provides the synthetic framework necessary to hold both in productive tension.</p>` },
+      { key: 'methodology', content: `<h3>Chapter 3: Methodology</h3><p>This research adopts a feminist qualitative methodology committed to epistemological reflexivity and the ethical obligations entailed by research with vulnerable populations. The primary method is in-depth semi-structured interviewing, conducted across three field sites: Jakarta (migrant recruitment hubs), Batam (transit and deportation processing zone), and Singapore (employment context). Sixty-eight interviews were conducted between 2021 and 2023; 41 with current or former migrant domestic workers, 14 with recruitment agency staff, and 13 with NGO advocates and government officials.</p><p>Interview data were analyzed using feminist grounded theory procedures (Charmaz, 2014), with theoretical sampling guided by emerging concepts. Participant anonymity is protected through pseudonymization and selective detail alteration. Research ethics approval was obtained from three institutional review boards across the field sites.</p>` },
+      { key: 'chapter4', content: `<h3>Chapter 4: Producing the Precarious Worker — Recruitment Industry Architecture</h3><p>This chapter traces how the recruitment industry — spanning Indonesian sending-area agents, Singapore-based agencies, and the contractual infrastructure connecting them — constitutes migrant domestic workers as particular kinds of economic subjects before they cross any border. I argue that the <em>debt-financed migration model</em>, in which recruitment fees are deducted from first-year wages, produces a form of structured indebtedness that functions as extra-juridical labour discipline, rendering workers economically unable to exit abusive employment relationships even where legal exit channels formally exist.</p>` },
+      { key: 'conclusion', content: `<h3>Chapter 7: Conclusion — Toward Differential Inclusion's Abolition?</h3><p>This thesis has demonstrated that the domestic labour migration corridor between Indonesia and Singapore is not an outcome of market forces or bilateral diplomatic agreement alone, but a historically constituted and actively reproduced regulatory formation that serves intersecting interests of capital accumulation and social reproduction in both receiving and sending states. The concept of differential inclusion names this formation with precision: migrant domestic workers are included in Singapore's social and economic life on terms designed to prevent the full political and juridical inclusion that would allow collective bargaining, mobility between employers, or access to permanent residency.</p><p>Whether this formation can be meaningfully reformed within existing political-economic constraints, or whether abolition of the live-in requirement and extension of full labour rights represent the minimum conditions for structural change, remains an open question — one that the activists, advocates, and workers I interviewed are already debating with clarity and urgency that exceeds what academic theory can offer.</p>` }
+    ]
+  },
 
-                                {/* 2. TUTORIAL (Dummy Data) */}
-                                <button 
-                                    onClick={() => setViewState('tutorial')}
-                                    className="group relative p-8 rounded-3xl bg-slate-800 border border-slate-700 hover:border-emerald-500/50 transition-all hover:shadow-2xl hover:shadow-emerald-500/10 text-left flex flex-col items-start h-80 justify-between overflow-hidden"
-                                >
-                                    <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                                    <div className="p-4 bg-emerald-500/10 rounded-2xl text-emerald-400 mb-4 group-hover:bg-emerald-500 group-hover:text-white transition-colors">
-                                        <BookOpen className="w-8 h-8" />
-                                    </div>
-                                    <div className="relative z-10">
-                                        <h2 className="text-2xl font-bold text-white mb-2">Tutorial & Examples</h2>
-                                        <p className="text-slate-400">Learn by exploring pre-filled document examples.</p>
-                                    </div>
-                                    <div className="mt-auto flex items-center gap-2 text-emerald-400 font-medium group-hover:translate-x-2 transition-transform">
-                                        Browse Examples <ChevronLeft className="w-4 h-4 rotate-180" />
-                                    </div>
-                                </button>
+  policy_brief: {
+    title: 'Closing the Digital Skills Gap in Informal Sector Workforces: Evidence-Based Recommendations for Rapid Intervention',
+    sections: [
+      { key: 'exec_summary', content: `<h3>Executive Summary</h3><p>Approximately 1.8 billion informal workers globally lack the digital literacy required to access platform-mediated income opportunities, government e-services, and digital financial tools. This brief synthesizes evidence from 23 national digital skills programs and recommends a three-priority intervention package for policymakers: (1) embed micro-credentialing within existing livelihood support infrastructure, (2) mandate device access as a prerequisite for platform operator licensing, and (3) establish peer-trainer networks anchored in existing community institutions. Estimated cost per beneficiary: USD 47–120 depending on delivery model.</p>` },
+      { key: 'problem', content: `<h3>The Problem</h3><p>The informal economy represents 61% of global employment (ILO, 2023), yet digital transformation policies are designed predominantly for formal-sector workers with existing internet access and device ownership. The resulting skills gap is self-reinforcing: workers without digital access cannot acquire platform income; without platform income, device investment is not economically rational. Standard training programs fail because they address skills in isolation from the access and economic incentive constraints that determine adoption.</p>` },
+      { key: 'evidence', content: `<h3>Evidence Base</h3><p>Analysis of 23 national programs across 14 countries identifies three consistent predictors of sustained skill adoption: <strong>(1) Contextual relevance</strong> — training embedded in existing work contexts outperforms classroom delivery (adoption rates 68% vs. 31% at 12-month follow-up); <strong>(2) Device provision</strong> — programs that include device access show 2.4x higher course completion; <strong>(3) Peer facilitation</strong> — community-based training with local "digital champions" sustains knowledge transfer beyond formal program endpoints. Programs meeting all three criteria show median income increases of 23% among participants within 18 months.</p>` },
+      { key: 'recommendations', content: `<h3>Recommendations</h3><p><strong>Priority 1:</strong> Integrate micro-credentialing modules into existing government livelihood transfer programs. No new infrastructure required; estimated implementation timeline 6–9 months. <strong>Priority 2:</strong> Introduce digital access provisions in platform economy licensing frameworks — operators above a defined revenue threshold subsidize device and connectivity access for registered workers. <strong>Priority 3:</strong> Establish national "Digital Champion" certification, with peer trainers drawn from and accountable to community cooperatives, trained and compensated through existing cooperative development budgets.</p>` }
+    ]
+  },
 
-                                {/* 3. IMPORT */}
-                                <label className="group relative p-8 rounded-3xl bg-slate-800 border border-dashed border-slate-600 hover:border-purple-500 hover:bg-slate-800/80 transition-all cursor-pointer text-left flex flex-col items-start h-80 justify-between">
-                                    <input type="file" onChange={onImport} className="hidden" accept=".json"/>
-                                    <div className="p-4 bg-purple-500/10 rounded-2xl text-purple-400 mb-4 group-hover:bg-purple-500 group-hover:text-white transition-colors">
-                                        <FolderOpen className="w-8 h-8" />
-                                    </div>
-                                    <div>
-                                        <h2 className="text-2xl font-bold text-white mb-2">Load JSON</h2>
-                                        <p className="text-slate-400">Continue working on a previously saved file.</p>
-                                    </div>
-                                    <div className="mt-auto flex items-center gap-2 text-purple-400 font-medium group-hover:translate-x-2 transition-transform">
-                                        Upload File <Upload className="w-4 h-4" />
-                                    </div>
-                                </label>
-                            </div>
-                        )}
+  policy_paper: {
+    title: 'Governing Algorithmic Hiring: A Regulatory Framework for AI-Mediated Employment Screening in the European Context',
+    sections: [
+      { key: 'abstract', content: `<h3>Abstract</h3><p>The proliferation of algorithmic hiring systems — encompassing automated CV screening, AI-conducted video interviews, and predictive cultural-fit scoring — raises significant questions about labour market discrimination, transparency rights, and accountability gaps that existing EU regulatory frameworks were not designed to address. This paper analyzes the limitations of the AI Act (2024) and the General Data Protection Regulation (GDPR) in governing employment-specific algorithmic systems, and proposes a complementary Algorithmic Employment Fairness Directive (AEFD) grounded in comparative regulatory analysis of emerging national frameworks in France, the Netherlands, and Germany.</p>` },
+      { key: 'introduction', content: `<h3>1. Introduction and Problem Framing</h3><p>By 2023, an estimated 67% of large European employers used at least one algorithmic screening tool in their hiring processes (European Labour Authority, 2023). These systems promise efficiency gains and, under ideal conditions, the removal of human cognitive bias from initial screening. In practice, however, documented cases of systemic discrimination — particularly on grounds of race, gender, disability status, and socioeconomic background — suggest that algorithmic hiring systems encode and amplify existing inequalities rather than transcending them.</p>` },
+      { key: 'regulatory_analysis', content: `<h3>2. Regulatory Landscape Analysis</h3><p>The EU AI Act classifies employment-related AI systems as "high-risk" under Annex III, mandating conformity assessments, transparency documentation, and human oversight provisions. However, three implementation gaps significantly limit effectiveness in practice. First, conformity assessment obligations rest with system deployers (employers) rather than developers, creating accountability diffusion. Second, the "human oversight" requirement is satisfied by formal review processes that in practice function as rubber-stamp procedures given the volume of algorithmic outputs. Third, the Act contains no affirmative obligation for bias testing against protected characteristics before deployment.</p>` },
+      { key: 'comparative', content: `<h3>3. Comparative National Frameworks</h3><p>France's 2022 <em>Loi Numérique et Travail</em> requires employers to notify works councils before deploying algorithmic hiring tools and mandates annual algorithmic impact assessments reviewed by the labor inspectorate. The Netherlands' experimental "Algorithm Register" — while not binding — has catalyzed industry transparency norms. Germany's Works Constitution Act amendments proposed in 2023 would grant works councils the right to co-determine algorithmic hiring criteria. These national approaches share a structural logic of <em>institutional mediation</em> — inserting established labor relations bodies between algorithmic systems and employment decisions.</p>` },
+      { key: 'recommendations', content: `<h3>4. Proposed Directive Framework</h3><p>We propose an Algorithmic Employment Fairness Directive organized around four principles: <strong>Pre-deployment bias audit requirements</strong> with results registered with national labor authorities; <strong>Candidate explainability rights</strong> including the right to receive algorithmic score breakdowns upon request; <strong>Works council co-determination</strong> of algorithmic screening criteria in firms employing more than 50 workers; and <strong>Adverse impact monitoring</strong> with mandatory annual disclosure of screening outcomes by protected characteristic. The framework is deliberately interoperable with existing AI Act compliance infrastructure to minimize implementation burden.</p>` }
+    ]
+  },
 
-                        {/* TEMPLATE SELECTION VIEW */}
-                        {(viewState === 'new' || viewState === 'tutorial') && (
-                            <div className="w-full flex flex-col items-center">
-                                <button 
-                                    onClick={() => setViewState('main')}
-                                    className="self-start mb-6 flex items-center gap-2 text-slate-400 hover:text-white transition-colors px-4 py-2 rounded-full hover:bg-slate-800"
-                                >
-                                    <ChevronLeft className="w-5 h-5" /> Back to Menu
-                                </button>
-                                <h2 className="text-2xl font-bold mb-8">
-                                    {viewState === 'new' ? 'Choose a Blank Structure' : 'Choose an Example to Explore'}
-                                </h2>
-                                <TemplateGrid isTutorial={viewState === 'tutorial'} />
-                            </div>
-                        )}
+  newsletter: {
+    title: 'The Infrastructure Letter | Issue 47: What the Battery Revolution Actually Looks Like From the Inside',
+    sections: [
+      { key: 'greeting', content: `<p>Hey there,</p><p>A few weeks ago, I stood inside a lithium-ion battery manufacturing facility the size of four football pitches and tried to comprehend the scale of what was happening. By next year, this single building will produce enough battery cells to electrify 800,000 vehicles. It was one of those experiences that makes the energy transition feel real rather than theoretical.</p><p>Here's what I learned — and why it changes how I think about the next decade.</p>` },
+      { key: 'main_story', content: `<h3>The Gigafactory Floor Is a Logistics Problem</h3><p>The popular narrative about the battery revolution centers on chemistry — cathode materials, solid-state architectures, energy density curves. What you don't hear about is the manufacturing logistics problem, which may actually be the harder constraint.</p><p>To produce a single EV battery pack, you need: raw materials sourced from 4–6 countries, precision electrode coating to tolerances measured in micrometers, a clean room environment comparable to semiconductor fabs, and a formation cycling process that takes 12–24 hours per cell. The chemistry is hard. The choreography is harder.</p><p>The facilities that crack this logistics problem — consistent yield at high volume with acceptable defect rates — will define competitive advantage in the 2030s far more than any single chemistry breakthrough.</p>` },
+      { key: 'insight', content: `<h3>The Number That Surprised Me Most</h3><p>Battery pack prices have fallen 90% since 2010. Everyone knows this. What's less discussed: the learning rate appears to be accelerating rather than plateauing. The industry's internal projections suggest a further 40% cost reduction is achievable by 2028 — not through new chemistry but through manufacturing process improvement, yield optimization, and supply chain localization. <strong>The battery revolution is becoming a manufacturing revolution.</strong> That distinction matters enormously for where investment flows and which regions build enduring competitive position.</p>` },
+      { key: 'cta', content: `<p>The full 3,000-word deep-dive — including facility photos, supply chain maps, and a conversation with the plant's chief engineer — is available to founding members this week.</p><p><strong><a href="#">Read the full report →</a></strong></p><p>See you next Thursday,<br/><em>— Alex</em></p>` }
+    ]
+  },
 
-                    </div>
-                </div>
-            );
-        };
+  feature_article: {
+    title: 'The Quiet Collapse of the Coral Triangle: Scientists Racing Against Warm Water and Slow Policy',
+    sections: [
+      { key: 'hook', content: `<p>The first thing Maria Santos noticed was the silence. On a research dive near the Tubbataha Reef in late April, the marine biologist descended twenty meters into water that should have been — that had always been — an orchestral chaos of reef sound. Parrotfish scraping, shrimp clicking, the low-frequency hum of large schools in motion. Instead: near-total quiet, punctuated only by the sound of her own breathing.</p><p>The coral was bleached white as chalk across four hectares she'd monitored for eleven years.</p><p>"I've seen bleaching before," she told me later, her field notes spread across a guesthouse table in Puerto Princesa. "But not like this. Not here. This reef is supposed to be the last stronghold."</p>` },
+      { key: 'context', content: `<h3>The Cradle of Marine Life Under Siege</h3><p>The Coral Triangle — a roughly 6 million square kilometer ocean region spanning Indonesia, Malaysia, Papua New Guinea, the Philippines, Solomon Islands, and Timor-Leste — contains roughly 76% of the world's known coral species and supports the food security of approximately 120 million people. Scientists have long called it the Amazon of the seas. But unlike the Amazon, where satellite imagery has made deforestation viscerally visible to global audiences, the Triangle's degradation happens beneath the surface, documented primarily by a scattered community of researchers and local fishers whose warnings have consistently fallen short of the political urgency required to act.</p><p>That is beginning to change — but scientists are increasingly uncertain whether the change is happening fast enough.</p>` },
+      { key: 'expert_voices', content: `<h3>"We've Moved the Goalposts Without Admitting It"</h3><p>At the IUCN's regional coral assessment workshop in Manado in February, the data presentations had the atmosphere of a triage ward. Researchers from six countries described marine heat waves that now occur in patterns that, as recently as a decade ago, would have been categorized as once-in-a-century events. "We've quietly normalized mortality rates that would have been considered catastrophic in 2010," said Dr. Hiroshi Yamamoto, a thermal stress modeling specialist from Hokkaido University. "The question has shifted from 'can we prevent significant loss' to 'what is the minimum viable reef ecosystem and can we protect it.' That's a profoundly different question."</p>` },
+      { key: 'policy_dimension', content: `<h3>The Policy Gap</h3><p>The Coral Triangle Initiative on Coral Reefs, Fisheries and Food Security (CTI-CFF) — the intergovernmental partnership created in 2009 to coordinate regional conservation — has produced fourteen years of shared management frameworks, biodiversity corridors, and climate adaptation plans. Members of the conservation community describe it, with varying degrees of diplomacy, as better at producing documents than outcomes. Enforcement of existing marine protected area regulations remains, across most of the region, aspirational rather than operational.</p>` },
+      { key: 'resolution', content: `<h3>What Remains, and Why It Matters</h3><p>Santos surfaces from her second dive of the day — this one on a deeper, cooler section of reef that shows less damage — with news that is cautiously good: spawning activity observed, juvenile coral recruits visible on sections of dead skeleton. Reefs have recovered from bleaching before. Whether they can recover from bleaching events that now arrive before full recovery from the last one is the open question that will define the ecological fate of one of Earth's most productive marine ecosystems — and the food security of 120 million people who have never heard of the Coral Triangle by name but whose protein supply depends on it entirely.</p>` }
+    ]
+  },
 
-        // 3. MAIN APP
-        function App() {
-            const [view, setView] = useState('landing');
-            const [nodes, setNodes] = useState({});
-            const [rootId, setRootId] = useState(null);
-            const [selectedNodeId, setSelectedNodeId] = useState(null);
-            const [editingId, setEditingId] = useState(null);
-            const [lang, setLang] = useState('en');
-            const [currentTemplate, setCurrentTemplate] = useState('journal');
+  press_release: {
+    title: 'ClearPath Analytics Launches Real-Time Supply Chain Risk Intelligence Platform for Mid-Market Manufacturers',
+    sections: [
+      { key: 'dateline', content: `<p><strong>FOR IMMEDIATE RELEASE</strong></p><p>Contact: Sarah Mitchell, Communications Director<br/>Email: press@clearpath-analytics.com | Tel: +1 (415) 882-0044</p>` },
+      { key: 'lead', content: `<h3>ClearPath Analytics Launches RiskRadar™ — Giving Mid-Market Manufacturers Enterprise-Grade Supply Chain Visibility at Accessible Price Points</h3>
+<p><strong>SAN FRANCISCO, February 12, 2026</strong> — ClearPath Analytics today announced the commercial launch of RiskRadar™, a real-time supply chain risk intelligence platform designed specifically for mid-market manufacturers with revenues between $50M and $500M. RiskRadar™ delivers the supplier financial health monitoring, geopolitical disruption alerts, and logistics delay prediction capabilities previously available only to enterprise customers with dedicated risk management teams — at a price point accessible to companies without those resources.</p>` },
+      { key: 'problem_solution', content: `<h3>Addressing the Mid-Market Intelligence Gap</h3><p>"Mid-market manufacturers experienced the same supply chain shocks as their enterprise counterparts during 2020–2023, but with far fewer tools to anticipate and respond to them," said James Okonkwo, ClearPath's Chief Executive Officer. "A company with 300 employees and a network of 80 suppliers doesn't have a VP of Supply Chain Risk — but that doesn't mean their business is less exposed. RiskRadar was built specifically for their context: powerful intelligence with implementation measured in days, not quarters."</p>
+<p>RiskRadar™ aggregates data from over 400 sources — including port authority feeds, financial filings, weather systems, geopolitical event monitors, and satellite logistics data — and applies proprietary risk-scoring models to generate actionable alerts at the supplier, lane, and portfolio levels.</p>` },
+      { key: 'product_details', content: `<h3>Key Platform Capabilities</h3><p>RiskRadar™ features include: <strong>Supplier Financial Health Monitoring</strong> with 90-day distress probability scores for up to 500 tier-1 and tier-2 suppliers; <strong>Disruption Early Warning</strong> with average 14-day lead time on logistics disruptions in monitored lanes; <strong>Scenario Modeling</strong> enabling users to simulate the impact of supplier failures or port closures on production schedules; and <strong>ERP Integration</strong> with native connectors for SAP Business One, Oracle NetSuite, and Microsoft Dynamics 365. Pricing begins at $2,800 per month for networks up to 100 suppliers.</p>` },
+      { key: 'close', content: `<p>RiskRadar™ is available immediately. A 30-day free trial is available at clearpath-analytics.com/riskradar. ClearPath Analytics will demonstrate the platform at the Manufacturing Technology Conference, Booth 1142, March 3–5, 2026, Chicago.</p><p><strong>About ClearPath Analytics:</strong> ClearPath Analytics provides supply chain intelligence software to 340 manufacturers across North America and Europe. Founded in 2019 and headquartered in San Francisco, the company has raised $42M in Series B funding.</p><p><em>###</em></p>` }
+    ]
+  },
 
-            // --- ACTIONS ---
-            const handleSelectTemplate = (key, isTutorial) => {
-                const rawData = TEMPLATES[key].data;
-                const dataToLoad = isTutorial ? rawData : stripContent(JSON.parse(JSON.stringify(rawData)));
-                const { map, rootId } = normalizeData(dataToLoad);
-                setNodes(map);
-                setRootId(rootId);
-                setSelectedNodeId(map[rootId].children[0] || null);
-                setCurrentTemplate(key);
-                setView('workspace');
-            };
+  blog_post: {
+    title: 'Why Your Second Brain Is Probably Making You Dumber (And What to Do About It)',
+    sections: [
+      { key: 'hook', content: `<p>I spent two years building the most elaborate personal knowledge management system you've ever seen. 4,000 notes. 47 tags. A tagging taxonomy with sub-taxonomies. Bidirectional links. A weekly review process that took three hours.</p><p>I also did some of the worst thinking of my career during those two years.</p><p>The correlation is not a coincidence.</p>` },
+      { key: 'argument', content: `<h3>The Capture Illusion</h3><p>The "second brain" movement — rooted in Tiago Forte's influential work and subsequently amplified across a dozen productivity frameworks — rests on a core proposition: that capturing information reliably frees cognitive resources for higher-order thinking. The proposition sounds right. It might even be partly right. But it contains a dangerous assumption: that <em>collection</em> and <em>understanding</em> are related activities.</p><p>They aren't. In fact, aggressive note-taking can actively interfere with comprehension. Research on "the generation effect" (Slamecka & Graf, 1978) demonstrates that information we generate ourselves — through effortful recall or synthesis — is retained and understood at significantly higher rates than information we passively record. When you capture a quote in your note-taking app, you've created a retrieval shortcut that bypasses the consolidation process through which that idea would have become genuinely yours.</p>` },
+      { key: 'nuance', content: `<h3>What Actually Works (And Why It's Uncomfortable)</h3><p>The research points toward a different model: sparse notes written in your own words, created after rather than during reading; a retrieval practice habit that tests your understanding rather than searches your archive; and — counterintuitively — strategic forgetting that allows underdeveloped ideas to naturally atrophy rather than cluttering your system with half-understood concepts.</p><p>This is uncomfortable because it produces systems that <em>look</em> less impressive. 200 notes you've genuinely processed are worth exponentially more than 4,000 you've captured. But 200 looks meager. We've optimized our systems for legibility to ourselves rather than for actual cognitive output.</p>` },
+      { key: 'cta', content: `<h3>A Different Question to Ask</h3><p>Instead of "did I capture this?", try: "could I teach this to someone in five minutes without looking at my notes?" If the answer is no, you haven't learned it yet — regardless of what your note-taking app says. The second brain should be a scaffold for generating original thinking, not an archive that substitutes for it. Start there, and rebuild from a different foundation.</p><p><em>What's your experience with knowledge management systems? I'm genuinely curious whether others have noticed this pattern — reach out via the form below or on the usual channels.</em></p>` }
+    ]
+  }
+};
 
-            const handleImport = (e) => {
-                const reader = new FileReader();
-                reader.onload = (event) => {
-                    try {
-                        const parsed = JSON.parse(event.target.result);
-                        setNodes(parsed);
-                        const root = Object.values(parsed).find(n => !n.parentId);
-                        if (root) {
-                            setRootId(root.id);
-                            setSelectedNodeId(root.children[0] || root.id);
-                            setView('workspace');
-                        }
-                    } catch(err) { alert('Invalid JSON'); }
-                };
-                reader.readAsText(e.target.files[0]);
-            };
+// ─── GUIDANCE ENGINE ──────────────────────────────────────────
+// Per-module, per-section bilingual guidance.
 
-            const handleSaveJSON = () => {
-                const dataStr = JSON.stringify(nodes);
-                const link = document.createElement('a');
-                link.href = 'data:text/json;charset=utf-8,' + encodeURIComponent(dataStr);
-                link.download = `structure-flow-${Date.now()}.json`;
-                link.click();
-            };
+const GUIDANCE = {
+  journal_article: {
+    _analogy: { en: 'A journal article is a courtroom argument — every claim must be evidenced, every assertion defended, every conclusion earned from your data.', id: 'Artikel jurnal ibarat argumen di pengadilan — setiap klaim harus dibuktikan, setiap pernyataan harus dipertahankan, setiap kesimpulan harus diperoleh dari data Anda.' },
+    abstract: {
+      en: { what: 'A self-contained summary of the entire paper: problem, method, key findings, and implication. Readers decide whether to read on based solely on this.', why: 'Most readers never read beyond the abstract. It is the most-read part of any academic paper.', mistakes: 'Writing it first (write it last), using vague language, omitting key findings, exceeding 250–300 words.', tip: 'Think of it as a movie trailer: it must convey the genre, stakes, and payoff without spoiling every scene.' },
+      id: { what: 'Ringkasan mandiri seluruh makalah: masalah, metode, temuan utama, dan implikasi. Pembaca memutuskan apakah akan membaca lebih lanjut hanya berdasarkan ini.', why: 'Sebagian besar pembaca tidak pernah membaca melampaui abstrak. Ini adalah bagian yang paling banyak dibaca dari setiap makalah akademis.', mistakes: 'Menulisnya lebih dulu (tulis terakhir), menggunakan bahasa samar, menghilangkan temuan utama, melebihi 250–300 kata.', tip: 'Bayangkan seperti trailer film: harus menyampaikan genre, taruhan, dan hasil tanpa membocorkan setiap adegan.' }
+    },
+    introduction: {
+      en: { what: 'Establish the research context, identify the gap your study addresses, state your research question, and outline your approach.', why: 'Orients the reader, justifies the study\'s existence, and frames everything that follows.', mistakes: 'Starting too broadly ("Since the dawn of time..."), burying the research question, failing to establish stakes.', tip: 'Open with the specific, not the general. The best introductions start at the exact moment the problem becomes interesting.' },
+      id: { what: 'Tetapkan konteks penelitian, identifikasi kesenjangan yang ditangani studi Anda, nyatakan pertanyaan penelitian, dan uraikan pendekatan Anda.', why: 'Mengorientasikan pembaca, membenarkan keberadaan studi, dan membingkai segalanya yang mengikutinya.', mistakes: 'Memulai terlalu luas, mengubur pertanyaan penelitian, gagal menetapkan taruhan.', tip: 'Buka dengan yang spesifik, bukan yang umum. Pendahuluan terbaik dimulai tepat saat masalah menjadi menarik.' }
+    },
+    framework: {
+      en: { what: 'Synthesize the theoretical traditions your study builds on. Show how they relate and where your contribution sits.', why: 'Demonstrates scholarly command of the field and positions your contribution within the conversation.', mistakes: 'Summarizing theories without synthesizing them, missing the theoretical gap your study fills.', tip: 'Don\'t just stack theories — show how they are in tension, or how combining them produces a new analytical lens.' },
+      id: { what: 'Sintesiskan tradisi teoritis yang menjadi dasar studi Anda. Tunjukkan bagaimana mereka berhubungan dan di mana kontribusi Anda berada.', why: 'Menunjukkan penguasaan akademis bidang tersebut dan memposisikan kontribusi Anda dalam percakapan.', mistakes: 'Merangkum teori tanpa mensintesisnya, melewatkan kesenjangan teoretis yang diisi studi Anda.', tip: 'Jangan hanya menumpuk teori — tunjukkan bagaimana mereka berkonflik, atau bagaimana menggabungkannya menghasilkan lensa analitis baru.' }
+    },
+    methodology: {
+      en: { what: 'Detail your research design, data sources, sample, instruments, and analysis approach with sufficient precision for replication.', why: 'Methodology is the quality guarantee — readers assess the validity of your findings through it.', mistakes: 'Insufficient detail, confusing methods with methodology, omitting ethical considerations.', tip: 'Write for a skeptical peer reviewer who will probe every methodological choice. Justify, don\'t just describe.' },
+      id: { what: 'Rinci desain penelitian, sumber data, sampel, instrumen, dan pendekatan analisis Anda dengan presisi yang cukup untuk replikasi.', why: 'Metodologi adalah jaminan kualitas — pembaca menilai validitas temuan Anda melaluinya.', mistakes: 'Detail tidak cukup, mencampur metode dengan metodologi, menghilangkan pertimbangan etis.', tip: 'Tulis untuk peninjau sejawat yang skeptis yang akan menyelidiki setiap pilihan metodologis. Justifikasi, jangan hanya deskripsikan.' }
+    },
+    findings: {
+      en: { what: 'Present your data and results clearly and objectively. Organize by research question or theme, not by data collection order.', why: 'This is the empirical core of your contribution — everything else supports or interprets it.', mistakes: 'Interpreting findings in this section (save that for Discussion), presenting data without analysis, omitting negative or null results.', tip: 'Let the data speak in organized fashion. Use tables and figures strategically — where they add precision that prose cannot.' },
+      id: { what: 'Sajikan data dan hasil Anda dengan jelas dan objektif. Atur berdasarkan pertanyaan penelitian atau tema, bukan berdasarkan urutan pengumpulan data.', why: 'Ini adalah inti empiris kontribusi Anda — segalanya yang lain mendukung atau menafsirkannya.', mistakes: 'Menafsirkan temuan di bagian ini, menyajikan data tanpa analisis, menghilangkan hasil negatif atau nol.', tip: 'Biarkan data berbicara secara terorganisir. Gunakan tabel dan gambar secara strategis — di mana mereka menambahkan presisi yang tidak bisa dilakukan prosa.' }
+    },
+    discussion: {
+      en: { what: 'Interpret your findings: what do they mean, how do they relate to existing theory, what are the limitations, what are the implications?', why: 'This is where you demonstrate scholarly judgment — moving from data to knowledge.', mistakes: 'Repeating findings rather than interpreting them, ignoring contradictory findings, overreaching your conclusions.', tip: 'The best discussion sections are intellectually honest — they engage seriously with limitations and alternative interpretations rather than defensively minimizing them.' },
+      id: { what: 'Tafsirkan temuan Anda: apa artinya, bagaimana hubungannya dengan teori yang ada, apa batasannya, apa implikasinya?', why: 'Di sinilah Anda menunjukkan penilaian akademis — bergerak dari data ke pengetahuan.', mistakes: 'Mengulang temuan alih-alih menafsirkannya, mengabaikan temuan yang kontradiktif, terlalu jauh melampui kesimpulan.', tip: 'Bagian diskusi terbaik secara intelektual jujur — mereka secara serius terlibat dengan batasan dan interpretasi alternatif.' }
+    },
+    conclusion: {
+      en: { what: 'Synthesize the study\'s contribution, state practical and theoretical implications, and indicate directions for future research.', why: 'The final impression — it determines whether readers leave with clear takeaways or vague impressions.', mistakes: 'Introducing new information, simply summarizing without synthesizing, ending abruptly without future directions.', tip: 'End with the largest implication, not the smallest. What does your study, if correct, change about how we understand or do things?' },
+      id: { what: 'Sintesiskan kontribusi studi, nyatakan implikasi praktis dan teoritis, dan tunjukkan arah untuk penelitian masa depan.', why: 'Kesan terakhir — ini menentukan apakah pembaca pergi dengan takeaway yang jelas atau kesan yang samar.', mistakes: 'Memperkenalkan informasi baru, hanya merangkum tanpa mensintesis, berakhir tiba-tiba tanpa arahan masa depan.', tip: 'Akhiri dengan implikasi terbesar, bukan yang terkecil. Apa yang studi Anda, jika benar, mengubah cara kita memahami atau melakukan sesuatu?' }
+    }
+  },
 
-            const handleExportDoc = () => {
-                let html = `<html><head><style>body{font-family:Arial;}</style></head><body>`;
-                const buildHtml = (id) => {
-                    const node = nodes[id];
-                    if(node.parentId) html += `<div>${node.content}</div><br/>`;
-                    if(node.children) node.children.forEach(buildHtml);
-                };
-                buildHtml(rootId);
-                html += `</body></html>`;
-                const blob = new Blob(['\ufeff', html], { type: 'application/msword' });
-                const link = document.createElement('a');
-                link.href = URL.createObjectURL(blob);
-                link.download = `document.doc`;
-                link.click();
-            };
+  conference_paper: {
+    _analogy: { en: 'A conference paper is a conversation opener at a professional gathering — it presents your work-in-progress clearly enough to invite intelligent critique and collaboration.', id: 'Makalah konferensi adalah pembuka percakapan di pertemuan profesional — menyajikan pekerjaan yang sedang berjalan cukup jelas untuk mengundang kritik dan kolaborasi yang cerdas.' },
+    abstract: { en: { what: 'Concise summary (150–200 words) covering question, method, key result, and significance.', why: 'Program committees use this for acceptance decisions; attendees use it to decide which sessions to attend.', mistakes: 'Vague language, promising more than you deliver, failing to state a clear finding.', tip: 'Conference abstracts are more forward-looking than journal abstracts — it\'s acceptable to state what you will show rather than what you have conclusively proven.' }, id: { what: 'Ringkasan singkat (150-200 kata) yang mencakup pertanyaan, metode, hasil utama, dan signifikansi.', why: 'Komite program menggunakan ini untuk keputusan penerimaan; peserta menggunakannya untuk memutuskan sesi mana yang akan dihadiri.', mistakes: 'Bahasa samar, menjanjikan lebih dari yang Anda berikan, gagal menyatakan temuan yang jelas.', tip: 'Abstrak konferensi lebih berorientasi ke depan daripada abstrak jurnal — dapat diterima untuk menyatakan apa yang akan Anda tunjukkan.' } },
+    introduction: { en: { what: 'Frame the problem, establish significance, state your contribution clearly.', why: 'Conference audiences are deciding in real-time whether to keep listening — establish stakes quickly.', mistakes: 'Long literature reviews that delay the contribution statement.', tip: 'State your contribution within the first paragraph. Conference readers are impatient in the best possible way.' }, id: { what: 'Bingkai masalah, tetapkan signifikansi, nyatakan kontribusi Anda dengan jelas.', why: 'Audiens konferensi memutuskan secara real-time apakah akan terus mendengarkan — tetapkan taruhan dengan cepat.', mistakes: 'Ulasan literatur yang panjang yang menunda pernyataan kontribusi.', tip: 'Nyatakan kontribusi Anda dalam paragraf pertama. Pembaca konferensi tidak sabar dengan cara terbaik.' } },
+    related_work: { en: { what: 'Position your contribution against directly relevant prior work. Be selective — only what is directly related.', why: 'Establishes that you know the field and that your work is genuinely novel.', mistakes: 'Citing everything tangentially related; failing to distinguish your work from most similar papers.', tip: 'Related work should read like a map that shows exactly where your contribution fills a gap.' }, id: { what: 'Posisikan kontribusi Anda terhadap karya sebelumnya yang langsung relevan. Selektif — hanya yang langsung terkait.', why: 'Menetapkan bahwa Anda mengenal bidang tersebut dan bahwa pekerjaan Anda benar-benar baru.', mistakes: 'Mengutip semua yang secara tangensial terkait; gagal membedakan pekerjaan Anda dari makalah yang paling mirip.', tip: 'Karya terkait harus dibaca seperti peta yang menunjukkan tepat di mana kontribusi Anda mengisi celah.' } },
+    method: { en: { what: 'Sufficient methodological detail for evaluation — not full replication depth, but enough for credibility assessment.', why: 'Conference reviewers must assess validity; readers must trust your findings.', mistakes: 'Too brief to assess validity; or too detailed, leaving no room for results.', tip: 'Conference methodology sections are compression challenges. Lead with what makes your approach distinctive, then cover essentials.' }, id: { what: 'Detail metodologis yang cukup untuk evaluasi — tidak mendalam seperti replikasi penuh, tetapi cukup untuk penilaian kredibilitas.', why: 'Peninjau konferensi harus menilai validitas; pembaca harus mempercayai temuan Anda.', mistakes: 'Terlalu singkat untuk menilai validitas; atau terlalu rinci, tidak ada ruang untuk hasil.', tip: 'Bagian metodologi konferensi adalah tantangan kompresi. Pimpin dengan apa yang membuat pendekatan Anda berbeda, lalu tutup hal-hal penting.' } },
+    experiments: { en: { what: 'Present your main empirical or experimental results clearly, with comparison to baselines or benchmarks.', why: 'This is the core contribution. Everything else leads to and supports this.', mistakes: 'Cherry-picking favorable conditions; omitting failure cases; no statistical grounding.', tip: 'Tables and figures carry the argument in conference papers. Make them self-explanatory — captions should convey the finding, not just describe the content.' }, id: { what: 'Sajikan hasil empiris atau eksperimental utama Anda dengan jelas, dengan perbandingan terhadap baseline atau benchmark.', why: 'Ini adalah kontribusi inti. Segalanya yang lain mengarah ke dan mendukung ini.', mistakes: 'Memilih kondisi yang menguntungkan; menghilangkan kasus kegagalan; tidak ada dasar statistik.', tip: 'Tabel dan gambar membawa argumen dalam makalah konferensi. Buat mereka mandiri — keterangan harus menyampaikan temuan, bukan hanya mendeskripsikan konten.' } },
+    conclusion: { en: { what: 'Summarize contribution, acknowledge limitations, and signal future directions.', why: 'Closes the loop and establishes research trajectory for interested collaborators.', mistakes: 'Overstating contributions; under-acknowledging limitations in conference settings where peers will push back in Q&A.', tip: 'End with the most ambitious version of your future work — conference conclusions are also grant proposal seeds.' }, id: { what: 'Ringkas kontribusi, akui batasan, dan sinyal arah masa depan.', why: 'Menutup lingkaran dan menetapkan trajektori penelitian untuk kolaborator yang tertarik.', mistakes: 'Melebih-lebihkan kontribusi; kurang mengakui batasan.', tip: 'Akhiri dengan versi paling ambisius dari pekerjaan masa depan Anda — kesimpulan konferensi juga merupakan benih proposal hibah.' } }
+  },
 
-            // --- SMART PDF GENERATION ---
-            const handlePrintPDF = () => {
-                if (!window.html2pdf) {
-                    alert('PDF Generator is initializing... please try again in 5 seconds.');
-                    return;
-                }
+  research_report: {
+    _analogy: { en: 'A research report is a navigator\'s chart — it tells decision-makers exactly where the risks are, what the terrain looks like, and what routes are available.', id: 'Laporan penelitian seperti peta navigator — ini memberi tahu pengambil keputusan di mana risikonya, seperti apa medannya, dan rute apa yang tersedia.' },
+    executive_summary: { en: { what: 'A standalone summary that allows busy senior stakeholders to grasp the full report in 2–3 minutes.', why: 'Many decision-makers will read only this section. It must carry the full weight of the report\'s argument.', mistakes: 'Too long, too technical, too hedged. Executive summaries are for executives, not researchers.', tip: 'Lead with implications, not methods. What should the reader DO with this information? State it immediately.' }, id: { what: 'Ringkasan mandiri yang memungkinkan pemangku kepentingan senior yang sibuk memahami laporan penuh dalam 2-3 menit.', why: 'Banyak pengambil keputusan hanya akan membaca bagian ini. Harus membawa bobot penuh argumen laporan.', mistakes: 'Terlalu panjang, terlalu teknis, terlalu berpagar. Ringkasan eksekutif untuk eksekutif, bukan peneliti.', tip: 'Pimpin dengan implikasi, bukan metode. Apa yang harus DILAKUKAN pembaca dengan informasi ini? Nyatakan segera.' } },
+    background: { en: { what: 'Establish the research context, the problem the report addresses, and why it matters to the commissioning audience.', why: 'Orients readers to the terrain and justifies the research investment.', mistakes: 'Too academic in tone, too comprehensive — background should be purposive, not encyclopedic.', tip: 'Research report background sections are not literature reviews. They answer: "why did we need to do this study, for whom, and by when?"' }, id: { what: 'Tetapkan konteks penelitian, masalah yang ditangani laporan, dan mengapa itu penting bagi audiens yang menugaskan.', why: 'Mengorientasikan pembaca ke medan dan membenarkan investasi penelitian.', mistakes: 'Terlalu akademis dalam nada, terlalu komprehensif — latar belakang harus bertujuan, bukan ensiklopedis.', tip: 'Bagian latar belakang laporan penelitian bukan ulasan literatur. Mereka menjawab: "mengapa kita perlu melakukan studi ini, untuk siapa, dan kapan?"' } },
+    methodology: { en: { what: 'Describe research design, data sources, and analytical approach with sufficient rigor for credibility assessment.', why: 'Report credibility rests on methodological transparency. Stakeholders must be able to evaluate the evidence base.', mistakes: 'Burying important methodological limitations, insufficient detail on sampling and data quality.', tip: 'Match methodology detail to audience sophistication. Non-technical commissioners need the "what" and "why"; technical readers also need the "how."' }, id: { what: 'Describe desain penelitian, sumber data, dan pendekatan analitis dengan kekakuan yang cukup untuk penilaian kredibilitas.', why: 'Kredibilitas laporan bergantung pada transparansi metodologis. Pemangku kepentingan harus dapat mengevaluasi basis bukti.', mistakes: 'Mengubur batasan metodologis penting, detail tidak cukup tentang pengambilan sampel dan kualitas data.', tip: 'Cocokkan detail metodologi dengan kecanggihan audiens. Komisaris non-teknis membutuhkan "apa" dan "mengapa"; pembaca teknis juga membutuhkan "bagaimana."' } },
+    findings: { en: { what: 'Present research findings organized around key themes or questions. Include both confirming and complicating findings.', why: 'This is the evidentiary core — the reason the report was commissioned.', mistakes: 'Presenting raw data without synthesis, burying unexpected findings, writing for researchers instead of the intended audience.', tip: 'Lead each finding section with a bold declarative statement — the finding itself — then support it with evidence. Avoid the academic habit of presenting evidence before conclusions.' }, id: { what: 'Sajikan temuan penelitian yang diorganisir di sekitar tema atau pertanyaan utama. Sertakan temuan yang mengkonfirmasi dan yang memperumit.', why: 'Ini adalah inti evidentif — alasan laporan ditugaskan.', mistakes: 'Menyajikan data mentah tanpa sintesis, mengubur temuan yang tidak terduga, menulis untuk peneliti alih-alih audiens yang dituju.', tip: 'Pimpin setiap bagian temuan dengan pernyataan deklaratif yang berani — temuan itu sendiri — lalu dukung dengan bukti.' } },
+    recommendations: { en: { what: 'Translate findings into specific, actionable recommendations organized by timeline, responsibility, or priority.', why: 'The entire report exists to support better decisions. Recommendations are where research becomes action.', mistakes: 'Recommendations that are too vague to act on, too many recommendations (dilutes attention), failing to connect recommendations back to evidence.', tip: 'Every recommendation should answer: WHO does WHAT by WHEN with WHAT resources. If any of these is missing, the recommendation is incomplete.' }, id: { what: 'Terjemahkan temuan menjadi rekomendasi spesifik dan dapat ditindaklanjuti yang diorganisir berdasarkan timeline, tanggung jawab, atau prioritas.', why: 'Seluruh laporan ada untuk mendukung keputusan yang lebih baik. Rekomendasi adalah di mana penelitian menjadi tindakan.', mistakes: 'Rekomendasi yang terlalu samar untuk ditindaklanjuti, terlalu banyak rekomendasi, gagal menghubungkan rekomendasi kembali ke bukti.', tip: 'Setiap rekomendasi harus menjawab: SIAPA melakukan APA pada KAPAN dengan sumber daya APA. Jika ada yang hilang, rekomendasi tidak lengkap.' } }
+  },
 
-                const element = document.createElement('div');
-                // Extract Title
-                const titleNode = nodes[rootId];
-                let contentHtml = `<h1 class="doc-title">${titleNode.content.replace(/<[^>]+>/g, '')}</h1>`;
+  thesis: {
+    _analogy: { en: 'A thesis is an architectural masterplan — it must demonstrate that you understand the entire intellectual landscape, that your intervention is sited correctly within it, and that the building you\'ve constructed will stand.', id: 'Tesis adalah rencana induk arsitektur — harus menunjukkan bahwa Anda memahami seluruh lanskap intelektual, bahwa intervensi Anda ditempatkan dengan benar di dalamnya, dan bahwa bangunan yang Anda bangun akan berdiri.' },
+    abstract: { en: { what: 'A comprehensive but compact summary (300–500 words) covering the problem, theoretical framework, methodology, core argument, and contribution.', why: 'The abstract is your thesis\'s passport — it determines discoverability and sets scholarly expectations.', mistakes: 'Too short for a thesis (unlike journal articles, thesis abstracts should be fuller), omitting the theoretical contribution.', tip: 'A thesis abstract must communicate both the empirical AND theoretical contribution. Many students only report findings and forget to state what the thesis contributes to theory.' }, id: { what: 'Ringkasan komprehensif namun ringkas (300-500 kata) yang mencakup masalah, kerangka teori, metodologi, argumen inti, dan kontribusi.', why: 'Abstrak adalah paspor tesis Anda — menentukan kemampuan ditemukan dan menetapkan harapan akademis.', mistakes: 'Terlalu singkat untuk tesis, menghilangkan kontribusi teoritis.', tip: 'Abstrak tesis harus mengomunikasikan kontribusi empiris DAN teoritis.' } },
+    introduction: { en: { what: 'Introduce the research problem and its significance, state the research questions, outline the theoretical framework and methodology, and preview the thesis structure.', why: 'Orients the reader to a long, complex document. Must justify the scale of the undertaking.', mistakes: 'Failing to state the central argument clearly, chapter previews that read like tables of contents rather than arguments.', tip: 'The best thesis introductions tell the reader the answer first, then explain how the thesis proves it. Don\'t save the argument for the conclusion.' }, id: { what: 'Perkenalkan masalah penelitian dan signifikansinya, nyatakan pertanyaan penelitian, uraikan kerangka teoritis dan metodologi, dan pratinjau struktur tesis.', why: 'Mengorientasikan pembaca ke dokumen yang panjang dan kompleks. Harus membenarkan skala usaha.', mistakes: 'Gagal menyatakan argumen sentral dengan jelas, pratinjau bab yang terbaca seperti daftar isi daripada argumen.', tip: 'Pendahuluan tesis terbaik memberi tahu pembaca jawabannya terlebih dahulu, lalu menjelaskan bagaimana tesis membuktikannya.' } },
+    literature_review: { en: { what: 'A critical synthesis of the scholarly conversation your thesis enters, identifying gaps, tensions, and the theoretical space your work occupies.', why: 'Demonstrates scholarly command and positions your contribution as necessary and novel.', mistakes: 'Annotated bibliography style (no synthesis), covering the field entirely instead of the specific conversation, failure to identify the gap your thesis fills.', tip: 'A literature review should have an argument: it should tell a story about the field that ends with a gap that only your thesis can fill.' }, id: { what: 'Sintesis kritis dari percakapan akademis yang dimasuki tesis Anda, mengidentifikasi celah, ketegangan, dan ruang teoritis yang ditempati pekerjaan Anda.', why: 'Menunjukkan penguasaan akademis dan memposisikan kontribusi Anda sebagai perlu dan baru.', mistakes: 'Gaya bibliografi yang dianotasi (tanpa sintesis), mencakup bidang sepenuhnya alih-alih percakapan spesifik, gagal mengidentifikasi celah yang diisi tesis Anda.', tip: 'Ulasan literatur harus memiliki argumen: harus menceritakan kisah tentang bidang yang berakhir dengan celah yang hanya dapat diisi tesis Anda.' } },
+    methodology: { en: { what: 'Defend your methodological choices fully — design, epistemological framework, data sources, analysis approach, and ethical considerations.', why: 'In a thesis, methodological chapters are where examiners probe most rigorously. Every choice must be justified.', mistakes: 'Describing rather than justifying methods, inadequate treatment of reflexivity, underselling ethical complexity.', tip: 'Methodology chapters in qualitative theses should include explicit reflexivity sections. Your positionality affects your data — own it, analyze it, and show how you\'ve accounted for it.' }, id: { what: 'Pertahankan pilihan metodologis Anda sepenuhnya — desain, kerangka epistemologis, sumber data, pendekatan analisis, dan pertimbangan etis.', why: 'Dalam tesis, bab metodologis adalah tempat para penguji menyelidiki paling ketat. Setiap pilihan harus dijustifikasi.', mistakes: 'Mendeskripsikan daripada membenarkan metode, perlakuan refleksivitas yang tidak memadai.', tip: 'Bab metodologi dalam tesis kualitatif harus mencakup bagian refleksivitas eksplisit. Posisionalitas Anda mempengaruhi data Anda — akui, analisis, dan tunjukkan bagaimana Anda memperhitungkannya.' } },
+    chapter4: { en: { what: 'An empirical or analytical chapter presenting a major dimension of your argument, organized thematically rather than chronologically.', why: 'Each chapter must advance the central argument — not just present data, but build the case.', mistakes: 'Chapters that could exist independently without reference to the thesis\'s central argument; insufficient connection between evidence and argument.', tip: 'Begin each chapter with a mini-argument: state what this chapter will prove and how it contributes to the thesis\'s overall claim.' }, id: { what: 'Bab empiris atau analitis yang menyajikan dimensi utama argumen Anda, diorganisir secara tematik daripada kronologis.', why: 'Setiap bab harus memajukan argumen sentral — tidak hanya menyajikan data, tetapi membangun kasus.', mistakes: 'Bab yang dapat berdiri sendiri tanpa referensi ke argumen sentral tesis; koneksi yang tidak cukup antara bukti dan argumen.', tip: 'Mulai setiap bab dengan mini-argumen: nyatakan apa yang akan dibuktikan bab ini dan bagaimana kontribusinya terhadap klaim keseluruhan tesis.' } },
+    conclusion: { en: { what: 'Synthesize the thesis\'s argument across all chapters, state the theoretical contribution explicitly, acknowledge limitations, and articulate future research directions.', why: 'The conclusion is where you claim your scholarly contribution. It must be done explicitly and with confidence.', mistakes: 'Simply summarizing chapters, failing to state the theoretical contribution, excessive hedging.', tip: 'Your conclusion should contain a paragraph that begins: "This thesis contributes to the literature by..." Write that paragraph first. Everything else in the conclusion supports or contextualizes that claim.' }, id: { what: 'Sintesiskan argumen tesis di semua bab, nyatakan kontribusi teoritis secara eksplisit, akui batasan, dan artikulasikan arah penelitian masa depan.', why: 'Kesimpulan adalah tempat Anda mengklaim kontribusi akademis Anda. Harus dilakukan secara eksplisit dan dengan percaya diri.', mistakes: 'Hanya merangkum bab, gagal menyatakan kontribusi teoritis, terlalu banyak pagar.', tip: 'Kesimpulan Anda harus berisi paragraf yang dimulai: "Tesis ini berkontribusi pada literatur dengan..." Tulis paragraf itu terlebih dahulu.' } }
+  },
 
-                // Recursive Content Build
-                const buildHtml = (id) => {
-                    const node = nodes[id];
-                    if (node.parentId) { 
-                         contentHtml += `<div class="doc-section">${node.content}</div>`;
-                    }
-                    if (node.children) {
-                        node.children.forEach(childId => buildHtml(childId));
-                    }
-                };
-                buildHtml(rootId);
-                element.innerHTML = contentHtml;
+  policy_brief: {
+    _analogy: { en: 'A policy brief is an executive GPS — it doesn\'t show all the roads, only the fastest route to the destination, with clear turn-by-turn instructions.', id: 'Policy brief adalah GPS eksekutif — tidak menampilkan semua jalan, hanya rute tercepat ke tujuan, dengan instruksi belok demi belok yang jelas.' },
+    exec_summary: { en: { what: 'A 200–300 word synthesis of the entire brief: problem, evidence, and concrete recommendations.', why: 'Most policy audiences read only the executive summary. This section carries the full weight of your argument.', mistakes: 'Too nuanced, too hedged, too long. Executive summaries are for time-poor decision-makers — clarity over completeness.', tip: 'Lead with the recommendation, not the problem. Decision-makers know there are problems; they need solutions with evidence attached.' }, id: { what: 'Sintesis 200-300 kata dari seluruh brief: masalah, bukti, dan rekomendasi konkret.', why: 'Sebagian besar audiens kebijakan hanya membaca ringkasan eksekutif. Bagian ini membawa bobot penuh argumen Anda.', mistakes: 'Terlalu bernuansa, terlalu berpagar, terlalu panjang.', tip: 'Pimpin dengan rekomendasi, bukan masalah. Pengambil keputusan tahu ada masalah; mereka membutuhkan solusi dengan bukti terlampir.' } },
+    problem: { en: { what: 'Define the policy problem precisely: who is affected, at what scale, and why current approaches are insufficient.', why: 'Establishes the stakes and justifies intervention. No problem framing = no urgency.', mistakes: 'Defining the problem too broadly, failing to quantify, missing the "why now" dimension.', tip: 'The most persuasive problem statements are specific: not "housing is expensive" but "median rent-to-income ratio for households in the lowest income quintile reached 52% in 2024, up from 38% in 2015."' }, id: { what: 'Definisikan masalah kebijakan secara tepat: siapa yang terdampak, pada skala apa, dan mengapa pendekatan saat ini tidak memadai.', why: 'Menetapkan taruhan dan membenarkan intervensi. Tanpa framing masalah = tanpa urgensi.', mistakes: 'Mendefinisikan masalah terlalu luas, gagal mengkuantifikasi, melewatkan dimensi "mengapa sekarang".', tip: 'Pernyataan masalah yang paling persuasif bersifat spesifik: bukan "perumahan mahal" tetapi "rasio sewa-ke-pendapatan median untuk rumah tangga mencapai 52% pada 2024."' } },
+    evidence: { en: { what: 'Present the empirical basis for your recommendations — what works, what doesn\'t, and the evidence quality.', why: 'Credibility of recommendations rests entirely on evidence quality and transparency.', mistakes: 'Cherry-picking favorable evidence, conflating correlation and causation, omitting evidence quality limitations.', tip: 'Grade your evidence. If your strongest evidence is observational, say so. Policy audiences are sophisticated — transparency about evidence limits increases rather than decreases credibility.' }, id: { what: 'Sajikan dasar empiris untuk rekomendasi Anda — apa yang berhasil, apa yang tidak, dan kualitas bukti.', why: 'Kredibilitas rekomendasi sepenuhnya bergantung pada kualitas dan transparansi bukti.', mistakes: 'Memilih bukti yang menguntungkan, mencampur korelasi dan kausalitas, menghilangkan batasan kualitas bukti.', tip: 'Beri tingkatan pada bukti Anda. Jika bukti terkuat Anda bersifat observasional, katakan demikian.' } },
+    recommendations: { en: { what: 'Specific, actionable recommendations organized by priority. Each must include who should act, what they should do, and by when.', why: 'Recommendations are the entire point. Everything else builds to this moment.', mistakes: 'Recommendations framed as aspirations rather than actions, too many recommendations, no prioritization.', tip: 'Limit to 3–5 recommendations maximum. If you have 10 recommendations, you have a research report, not a policy brief. Force the prioritization.' }, id: { what: 'Rekomendasi spesifik dan dapat ditindaklanjuti yang diorganisir berdasarkan prioritas. Masing-masing harus mencakup siapa yang harus bertindak, apa yang harus mereka lakukan, dan kapan.', why: 'Rekomendasi adalah seluruh poinnya. Segalanya yang lain mengarah ke momen ini.', mistakes: 'Rekomendasi yang diframing sebagai aspirasi daripada tindakan, terlalu banyak rekomendasi, tidak ada prioritisasi.', tip: 'Batasi hingga 3-5 rekomendasi maksimum. Jika Anda memiliki 10 rekomendasi, Anda memiliki laporan penelitian, bukan policy brief.' } }
+  },
 
-                // --- STYLES BASED ON TEMPLATE ---
-                let styles = `
-                    body { font-size: 12pt; color: #000; -webkit-font-smoothing: antialiased; }
-                    .doc-title { text-align: center; margin-bottom: 30px; }
-                    .doc-section { margin-bottom: 1em; page-break-inside: avoid; }
-                    h1, h2, h3 { margin-top: 1.5em; margin-bottom: 0.5em; }
-                    p { margin-bottom: 0.8em; line-height: 1.5; }
-                    ul, ol { margin-bottom: 0.8em; padding-left: 20px; }
-                `;
+  policy_paper: {
+    _analogy: { en: 'A policy paper is a legal brief meets academic article — rigorous evidence and argument in service of a specific regulatory or governance outcome.', id: 'Makalah kebijakan adalah brief hukum bertemu artikel akademis — bukti dan argumen yang ketat untuk melayani hasil regulasi atau tata kelola tertentu.' },
+    abstract: { en: { what: 'Summarize the policy problem, analytical approach, and proposed framework or recommendations in 250–350 words.', why: 'Policy papers circulate widely among analysts, academics, and officials — the abstract determines whether they are read and cited.', mistakes: 'Overly academic language that excludes policy audiences, insufficient specification of the proposed framework.', tip: 'Policy paper abstracts should bridge two audiences: scholars who will evaluate your analysis and practitioners who will implement your proposals. Write for both.' }, id: { what: 'Ringkas masalah kebijakan, pendekatan analitis, dan kerangka atau rekomendasi yang diusulkan dalam 250-350 kata.', why: 'Makalah kebijakan beredar luas di antara analis, akademisi, dan pejabat — abstrak menentukan apakah mereka dibaca dan dikutip.', mistakes: 'Bahasa akademis yang terlalu eksklusif bagi audiens kebijakan, spesifikasi kerangka yang diusulkan tidak cukup.', tip: 'Abstrak makalah kebijakan harus menjembatani dua audiens: cendekiawan yang akan mengevaluasi analisis Anda dan praktisi yang akan mengimplementasikan proposal Anda.' } },
+    introduction: { en: { what: 'Establish the policy problem, explain why existing frameworks are insufficient, and state the paper\'s analytical and normative contribution.', why: 'Policy papers must immediately establish both the problem\'s significance and the existing governance gap.', mistakes: 'Failing to specify the governance gap, overpromising the paper\'s contribution to real-world change.', tip: 'The most effective policy paper introductions name a specific regulatory or governance failure and explain precisely why existing tools cannot address it.' }, id: { what: 'Tetapkan masalah kebijakan, jelaskan mengapa kerangka yang ada tidak cukup, dan nyatakan kontribusi analitis dan normatif makalah.', why: 'Makalah kebijakan harus segera menetapkan baik signifikansi masalah maupun kesenjangan tata kelola yang ada.', mistakes: 'Gagal menentukan kesenjangan tata kelola, terlalu menjanjikan kontribusi makalah.', tip: 'Pendahuluan makalah kebijakan yang paling efektif menyebut kegagalan regulasi atau tata kelola tertentu dan menjelaskan dengan tepat mengapa alat yang ada tidak dapat mengatasinya.' } },
+    regulatory_analysis: { en: { what: 'Analyze the existing regulatory landscape — what frameworks currently apply, how they function in practice, and where they fall short.', why: 'Any new policy proposal must be grounded in an honest analysis of what already exists and why it\'s insufficient.', mistakes: 'Strawmanning existing regulation, failing to acknowledge where existing frameworks partially succeed.', tip: 'The strongest regulatory analyses are charitable to existing frameworks before identifying their limits. This builds credibility and shows you understand the system you\'re proposing to change.' }, id: { what: 'Analisis lanskap regulasi yang ada — kerangka apa yang saat ini berlaku, bagaimana fungsinya dalam praktik, dan di mana mereka gagal.', why: 'Setiap proposal kebijakan baru harus didasarkan pada analisis jujur tentang apa yang sudah ada dan mengapa tidak cukup.', mistakes: 'Membuat strawman regulasi yang ada, gagal mengakui di mana kerangka yang ada sebagian berhasil.', tip: 'Analisis regulasi yang paling kuat bersikap dermawan terhadap kerangka yang ada sebelum mengidentifikasi batasannya.' } },
+    comparative: { en: { what: 'Examine how comparable jurisdictions or contexts have addressed the same problem, identifying transferable lessons and context-specific limitations.', why: 'Comparative analysis provides empirical grounding for novel proposals and demonstrates feasibility through precedent.', mistakes: 'Selecting only favorable comparisons, failing to account for contextual differences that affect transferability.', tip: 'Comparative sections are most powerful when they identify convergent trends across diverse contexts — this suggests structural rather than contextual solutions.' }, id: { what: 'Periksa bagaimana yurisdiksi atau konteks yang sebanding telah menangani masalah yang sama, mengidentifikasi pelajaran yang dapat ditransfer dan batasan spesifik konteks.', why: 'Analisis komparatif memberikan dasar empiris untuk proposal baru dan menunjukkan kelayakan melalui preseden.', mistakes: 'Memilih hanya perbandingan yang menguntungkan, gagal memperhitungkan perbedaan kontekstual.', tip: 'Bagian komparatif paling kuat ketika mengidentifikasi tren konvergen di berbagai konteks yang beragam.' } },
+    recommendations: { en: { what: 'Propose specific regulatory or governance interventions organized as a coherent framework, with implementation pathways and political economy considerations.', why: 'The entire paper\'s analytical work exists to support actionable proposals.', mistakes: 'Recommendations that ignore implementation constraints, failing to address likely political objections.', tip: 'Policy paper recommendations must anticipate objections. For each major proposal, briefly acknowledge the strongest counterargument and explain why your proposal is preferable despite it.' }, id: { what: 'Usulkan intervensi regulasi atau tata kelola tertentu yang diorganisir sebagai kerangka yang koheren, dengan jalur implementasi dan pertimbangan ekonomi politik.', why: 'Seluruh pekerjaan analitis makalah ada untuk mendukung proposal yang dapat ditindaklanjuti.', mistakes: 'Rekomendasi yang mengabaikan kendala implementasi, gagal menangani keberatan politik yang mungkin.', tip: 'Rekomendasi makalah kebijakan harus mengantisipasi keberatan. Untuk setiap proposal utama, akui argumen balik terkuat secara singkat.' } }
+  },
 
-                if (currentTemplate === 'journal') {
-                    styles += `
-                        body { font-family: "Times New Roman", Times, serif; line-height: 1.6; }
-                        .doc-title { font-size: 20pt; font-weight: bold; text-transform: uppercase; border-bottom: 1px solid #000; padding-bottom: 20px; }
-                        h3 { font-size: 14pt; font-weight: bold; }
-                        p { text-align: justify; }
-                    `;
-                } else if (currentTemplate === 'policy') {
-                    styles += `
-                        body { font-family: Arial, Helvetica, sans-serif; line-height: 1.4; color: #333; }
-                        .doc-title { font-size: 24pt; color: #1e3a8a; border-left: 8px solid #1e3a8a; padding-left: 20px; text-align: left; }
-                        h3 { color: #1e3a8a; border-bottom: 1px solid #e2e8f0; padding-bottom: 5px; margin-top: 25px; }
-                        .doc-section { background-color: #f8fafc; padding: 15px; border-radius: 4px; }
-                    `;
-                } else if (currentTemplate === 'web') {
-                    styles += `
-                        body { font-family: Georgia, serif; line-height: 1.7; font-size: 13pt; color: #111; }
-                        .doc-title { font-family: Helvetica, Arial, sans-serif; font-size: 28pt; font-weight: 800; letter-spacing: -0.5px; text-align: left; }
-                        h3 { font-family: Helvetica, Arial, sans-serif; font-weight: 700; color: #2563eb; margin-top: 40px; }
-                    `;
-                } else if (currentTemplate === 'newsletter') {
-                    styles += `
-                        body { font-family: Verdana, sans-serif; line-height: 1.6; font-size: 11pt; max-width: 600px; margin: 0 auto; }
-                        .doc-title { font-size: 18pt; color: #ea580c; border-bottom: 2px dashed #ea580c; padding-bottom: 15px; }
-                        h3 { color: #c2410c; text-transform: uppercase; font-size: 10pt; letter-spacing: 1px; }
-                    `;
-                }
+  newsletter: {
+    _analogy: { en: 'A newsletter is an intimate conversation in print — it\'s a friend who happens to know things, writing to you specifically, not broadcasting to a crowd.', id: 'Newsletter adalah percakapan intim dalam tulisan — ini adalah teman yang kebetulan tahu hal-hal, menulis khusus untuk Anda, bukan menyiarkan ke kerumunan.' },
+    greeting: { en: { what: 'Open with a direct address to the reader and an orienting sentence that establishes why this issue matters today.', why: 'Newsletters live or die by the open rate. The first two sentences must reward the reader for opening.', mistakes: 'Generic openings, starting with your own update instead of the reader\'s value proposition, forgetting the voice.', tip: 'The best newsletter openings create a sense that the writer is speaking directly to you specifically — this is achieved through specificity of observation, not through literally using "you."' }, id: { what: 'Buka dengan sapaan langsung kepada pembaca dan kalimat orientasi yang menetapkan mengapa edisi ini penting hari ini.', why: 'Newsletter hidup atau mati berdasarkan tingkat buka. Dua kalimat pertama harus memberi hadiah kepada pembaca karena membuka.', mistakes: 'Pembukaan generik, memulai dengan pembaruan Anda sendiri daripada proposisi nilai pembaca.', tip: 'Pembukaan newsletter terbaik menciptakan perasaan bahwa penulis berbicara langsung kepada Anda secara khusus.' } },
+    main_story: { en: { what: 'The primary story, insight, or analysis that gives this issue its reason for existence. Should be substantial enough to justify the read.', why: 'This is the core value the reader subscribed for. Everything else is context.', mistakes: 'Stories that could have been a tweet, lack of an original perspective or insight, too many caveats.', tip: 'The best newsletter main stories contain something the reader couldn\'t have gotten from any other source — a perspective, a synthesis, or an access that only you provide.' }, id: { what: 'Cerita utama, wawasan, atau analisis yang memberi edisi ini alasan untuk ada. Harus cukup substansial untuk membenarkan pembacaan.', why: 'Ini adalah nilai inti yang membuat pembaca berlangganan. Segalanya yang lain adalah konteks.', mistakes: 'Cerita yang bisa saja menjadi tweet, kurangnya perspektif atau wawasan orisinal.', tip: 'Cerita utama newsletter terbaik berisi sesuatu yang tidak bisa diperoleh pembaca dari sumber lain.' } },
+    insight: { en: { what: 'A focused secondary observation, data point, or reflection that extends the main story\'s theme.', why: 'Provides density of value and extends the conversation beyond a single angle.', mistakes: 'Padding with loosely related content, competing with rather than extending the main story.', tip: 'The insight section is where you can be more speculative or personal than in the main story. Use it to explore the implications of what you just reported.' }, id: { what: 'Pengamatan sekunder yang fokus, titik data, atau refleksi yang memperluas tema cerita utama.', why: 'Memberikan kepadatan nilai dan memperluas percakapan beyond sudut tunggal.', mistakes: 'Menambal dengan konten yang terkait longgar, bersaing daripada memperluas cerita utama.', tip: 'Bagian wawasan adalah di mana Anda bisa lebih spekulatif atau pribadi daripada dalam cerita utama.' } },
+    cta: { en: { what: 'A clear call to action — link, reply prompt, survey, or event — that extends the reader\'s relationship with the newsletter beyond passive consumption.', why: 'Newsletters that generate responses build communities; those that don\'t remain broadcast media.', mistakes: 'Multiple competing CTAs, CTAs that aren\'t relevant to the issue\'s topic, no CTA at all.', tip: 'The best CTAs feel like natural extensions of the conversation rather than marketing appended to editorial. "What do you think about X?" is often more effective than "Click here to Y."' }, id: { what: 'Ajakan bertindak yang jelas — tautan, permintaan balasan, survei, atau acara — yang memperluas hubungan pembaca dengan newsletter melampaui konsumsi pasif.', why: 'Newsletter yang menghasilkan respons membangun komunitas; yang tidak tetap menjadi media siaran.', mistakes: 'Beberapa CTA yang bersaing, CTA yang tidak relevan dengan topik edisi, tidak ada CTA sama sekali.', tip: 'CTA terbaik terasa seperti ekstensi alami dari percakapan daripada pemasaran yang ditambahkan ke editorial.' } }
+  },
 
-                const styleTag = document.createElement('style');
-                styleTag.innerHTML = styles;
-                element.appendChild(styleTag);
+  feature_article: {
+    _analogy: { en: 'A feature article is a documentary in print — it combines the authority of reporting with the immersion of narrative to make complex realities emotionally legible.', id: 'Artikel feature adalah dokumenter dalam tulisan — menggabungkan otoritas pelaporan dengan imersi narasi untuk membuat realitas kompleks menjadi mudah dipahami secara emosional.' },
+    hook: { en: { what: 'An immersive scene, anecdote, or image that draws the reader into the story\'s world and establishes its emotional stakes.', why: 'Feature readers are not obligated to finish what they start. The opening scene must make them feel they cannot leave.', mistakes: 'Starting with statistics instead of scenes, openings that explain rather than show, failing to establish human stakes.', tip: 'The best feature openings drop the reader in the middle of a moment — a specific person, in a specific place, at a specific time, experiencing something that encapsulates the story\'s meaning.' }, id: { what: 'Adegan, anekdot, atau gambar imersif yang menarik pembaca ke dalam dunia cerita dan menetapkan taruhannya secara emosional.', why: 'Pembaca feature tidak wajib menyelesaikan apa yang mereka mulai. Adegan pembuka harus membuat mereka merasa tidak bisa pergi.', mistakes: 'Memulai dengan statistik daripada adegan, pembukaan yang menjelaskan daripada menunjukkan.', tip: 'Pembukaan feature terbaik menempatkan pembaca di tengah momen — orang tertentu, di tempat tertentu, pada waktu tertentu.' } },
+    context: { en: { what: 'Expand from the opening scene to provide the systemic context that makes the story matter beyond the individual case.', why: 'Features must justify their length. Context shows why this individual story represents a larger phenomenon.', mistakes: 'Jumping too quickly to context (breaking the narrative spell), context that feels like a separate article grafted onto the scene.', tip: 'Transition from scene to context using a pivot sentence that connects the individual to the systemic: "Maria\'s silence was not unique. Across the Coral Triangle..."' }, id: { what: 'Perluas dari adegan pembuka untuk memberikan konteks sistemik yang membuat cerita penting di luar kasus individual.', why: 'Feature harus membenarkan panjangnya. Konteks menunjukkan mengapa cerita individual ini mewakili fenomena yang lebih besar.', mistakes: 'Terlalu cepat melompat ke konteks, konteks yang terasa seperti artikel terpisah yang ditempelkan ke adegan.', tip: 'Transisi dari adegan ke konteks menggunakan kalimat pivot yang menghubungkan individu ke sistemik.' } },
+    expert_voices: { en: { what: 'Expert analysis and institutional perspective that provides authority and depth to the story\'s claims.', why: 'Features require both narrative authority (earned through scene and reporting) and analytical authority (earned through expertise). Both are necessary.', mistakes: 'Too many voices diluting each other, expert quotes that simply confirm what you\'ve already stated, failing to let experts be specific and complex.', tip: 'The best expert quotes in features say something the reader couldn\'t have predicted — something specific, counterintuitive, or emotionally resonant beyond what a press release would contain.' }, id: { what: 'Analisis ahli dan perspektif institusional yang memberikan otoritas dan kedalaman pada klaim cerita.', why: 'Feature membutuhkan baik otoritas naratif maupun otoritas analitis. Keduanya diperlukan.', mistakes: 'Terlalu banyak suara yang saling mengencerkan, kutipan ahli yang hanya mengkonfirmasi apa yang sudah Anda nyatakan.', tip: 'Kutipan ahli terbaik dalam feature mengatakan sesuatu yang tidak dapat diprediksi pembaca — sesuatu yang spesifik, kontra-intuitif, atau berresonansi secara emosional.' } },
+    policy_dimension: { en: { what: 'The institutional, political, or structural dimension that explains why the problem persists despite being known — the accountability layer.', why: 'Features that illuminate a problem without interrogating why it persists leave readers frustrated and uninformed.', mistakes: 'False balance, strawmanning institutional actors, failing to distinguish between individual failure and structural constraint.', tip: 'The policy dimension section is where features earn their social function. It must be fair and specific — not "institutions have failed" but "this specific mechanism, operated by these stakeholders, produces this outcome for these reasons."' }, id: { what: 'Dimensi institusional, politik, atau struktural yang menjelaskan mengapa masalah tetap ada meskipun diketahui.', why: 'Feature yang menerangi masalah tanpa meninterogasi mengapa itu berlanjut membuat pembaca frustrasi.', mistakes: 'Keseimbangan palsu, membuat strawman aktor institusional.', tip: 'Bagian dimensi kebijakan adalah tempat feature mendapatkan fungsi sosialnya. Harus adil dan spesifik.' } },
+    resolution: { en: { what: 'Return to the human story from the opening and provide a close that is honest about complexity while leaving the reader with something — hope, understanding, or a clear sense of what\'s at stake.', why: 'Features must end where they began, at the human level. Resolution doesn\'t mean solution — it means emotional completion.', mistakes: 'False optimism, nihilistic despair, endings that summarize rather than resonate.', tip: 'End on a specific image or observation, not an abstraction. The last line of a feature should be memorable as a sentence, not just as an idea.' }, id: { what: 'Kembali ke cerita manusia dari pembuka dan berikan penutup yang jujur tentang kompleksitas sambil meninggalkan pembaca dengan sesuatu.', why: 'Feature harus berakhir di mana mereka mulai, di level manusia. Resolusi tidak berarti solusi — itu berarti penyelesaian emosional.', mistakes: 'Optimisme palsu, keputusasaan nihilistis, akhiran yang merangkum daripada beresonansi.', tip: 'Akhiri dengan gambar atau pengamatan tertentu, bukan abstraksi. Baris terakhir feature harus berkesan sebagai kalimat.' } }
+  },
 
-                const opt = {
-                    margin: 1,
-                    filename: `${currentTemplate}-draft.pdf`,
-                    image: { type: 'jpeg', quality: 0.98 },
-                    html2canvas: { scale: 2 },
-                    jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
-                };
+  press_release: {
+    _analogy: { en: 'A press release is a product launch speech distilled to 400 words — it must be so clear, complete, and newsworthy that a journalist can publish it with minimal rewriting.', id: 'Press release adalah pidato peluncuran produk yang disuling menjadi 400 kata — harus begitu jelas, lengkap, dan layak berita sehingga jurnalis dapat menerbitkannya dengan penulisan ulang minimal.' },
+    dateline: { en: { what: 'Contact information, embargo status, and release designation at the top of the document.', why: 'Journalists need to know immediately: can I use this now, and who do I call?', mistakes: 'Missing contact details, unclear embargo instructions, burying the release date.', tip: 'Press release boilerplate is the one place where you should not be creative. Use the standard format journalists expect. Deviation causes friction.' }, id: { what: 'Informasi kontak, status embargo, dan penunjukan rilis di bagian atas dokumen.', why: 'Jurnalis perlu tahu segera: bisakah saya menggunakan ini sekarang, dan siapa yang harus saya hubungi?', mistakes: 'Informasi kontak yang hilang, instruksi embargo yang tidak jelas.', tip: 'Boilerplate press release adalah satu-satunya tempat di mana Anda tidak boleh kreatif. Gunakan format standar yang diharapkan jurnalis.' } },
+    lead: { en: { what: 'A headline that captures the news value, followed by a lead paragraph covering who, what, when, where, why.', why: 'Journalists decide in 8 seconds whether a press release is worth reading. The headline and first paragraph are the entire pitch.', mistakes: 'Headlines that describe the company rather than the news, leads that bury the news value in the third sentence.', tip: 'Write your headline as though it is the newspaper headline a reporter would write — not your marketing tagline, but the actual news described in plain, active language.' }, id: { what: 'Judul yang menangkap nilai berita, diikuti oleh paragraf utama yang mencakup siapa, apa, kapan, di mana, mengapa.', why: 'Jurnalis memutuskan dalam 8 detik apakah press release layak dibaca.', mistakes: 'Judul yang mendeskripsikan perusahaan daripada berita, lead yang mengubur nilai berita.', tip: 'Tulis judul Anda seolah-olah itu adalah judul koran yang akan ditulis reporter — bukan tagline pemasaran Anda, tetapi berita aktual.' } },
+    problem_solution: { en: { what: 'Establish the market problem your announcement addresses, and explain your solution in plain language with supporting data.', why: 'Provides journalistic context. Reporters need to explain to readers why this news matters.', mistakes: 'Using marketing language instead of plain language, claims without data, focusing on features instead of outcomes.', tip: 'Every claim in a press release must be attributable — either to data or to a named person in a quote. Unattributed claims read as marketing copy and lose journalistic credibility.' }, id: { what: 'Tetapkan masalah pasar yang ditangani pengumuman Anda, dan jelaskan solusi Anda dalam bahasa sederhana dengan data pendukung.', why: 'Memberikan konteks jurnalistik. Reporter perlu menjelaskan kepada pembaca mengapa berita ini penting.', mistakes: 'Menggunakan bahasa pemasaran daripada bahasa sederhana, klaim tanpa data.', tip: 'Setiap klaim dalam press release harus dapat diatribusikan — baik ke data atau ke orang yang disebutkan namanya dalam kutipan.' } },
+    product_details: { en: { what: 'Specific product or announcement details organized for quick scanning: key features, pricing, availability, and technical specifications where relevant.', why: 'Journalists and prospective customers scan for specifics. Vague descriptions get skipped.', mistakes: 'No pricing information, features listed without context for why they matter, jargon-heavy technical descriptions.', tip: 'Bullet points are acceptable and preferred in this section. Journalists scan before they read; formatting that aids scanning serves the document\'s function.' }, id: { what: 'Detail produk atau pengumuman tertentu yang diorganisir untuk pemindaian cepat: fitur utama, harga, ketersediaan, dan spesifikasi teknis jika relevan.', why: 'Jurnalis dan calon pelanggan memindai untuk spesifik. Deskripsi samar dilewati.', mistakes: 'Tidak ada informasi harga, fitur yang terdaftar tanpa konteks mengapa penting, deskripsi teknis berjargon.', tip: 'Poin-poin dapat diterima dan disukai di bagian ini.' } },
+    close: { en: { what: 'Availability information, event details, and the standard company boilerplate "About" paragraph.', why: 'Journalists need to know how to find out more and how to cover this story for their audience.', mistakes: 'Boilerplate that\'s more than 75 words, no next-step information for journalists.', tip: 'The "About" paragraph should be identical across all your releases — consistency builds recognition. Update it quarterly at most. End with ### to signal the release is complete.' }, id: { what: 'Informasi ketersediaan, detail acara, dan paragraf "Tentang" boilerplate perusahaan standar.', why: 'Jurnalis perlu tahu cara menemukan lebih banyak dan cara meliput cerita ini.', mistakes: 'Boilerplate lebih dari 75 kata, tidak ada informasi langkah selanjutnya untuk jurnalis.', tip: 'Paragraf "Tentang" harus identik di semua rilis Anda. Akhiri dengan ### untuk menandakan rilis selesai.' } }
+  },
 
-                window.html2pdf().set(opt).from(element).save();
-            };
+  blog_post: {
+    _analogy: { en: 'A blog post is a well-argued dinner party opinion — confident, personal, evidence-informed, and designed to make the reader think rather than just agree.', id: 'Blog post adalah opini pesta makan malam yang berargumen baik — percaya diri, personal, berbasis bukti, dan dirancang untuk membuat pembaca berpikir daripada sekadar setuju.' },
+    hook: { en: { what: 'An opening that creates a tension, contradiction, or unexpected claim that the post will resolve.', why: 'Web readers have the lowest commitment of any reading context. The hook must earn every subsequent paragraph.', mistakes: 'Starting with your credentials, starting with "In this post I will...", starting with a definition.', tip: 'The best blog hooks open with a specific claim or scenario that is slightly counterintuitive. Readers who agree with your opening don\'t need to read further — those who\'re curious or skeptical will.' }, id: { what: 'Pembukaan yang menciptakan ketegangan, kontradiksi, atau klaim tak terduga yang akan diselesaikan posting.', why: 'Pembaca web memiliki komitmen terendah dari konteks membaca mana pun. Hook harus mendapatkan setiap paragraf berikutnya.', mistakes: 'Memulai dengan kredensial Anda, memulai dengan "Dalam posting ini saya akan...", memulai dengan definisi.', tip: 'Hook blog terbaik dibuka dengan klaim atau skenario spesifik yang sedikit kontra-intuitif.' } },
+    argument: { en: { what: 'The central argument developed through evidence, reasoning, and illustration. The conceptual core of the post.', why: 'This is what the reader came for. The argument must have genuine intellectual substance — not just an interesting question but a developed answer.', mistakes: 'Circular reasoning, making claims without support, substituting anecdote for evidence where evidence is available.', tip: 'The best blog arguments build progressively — each paragraph assumes what was established in the last. Avoid leaping. If a step in your reasoning is missing, you\'ll lose readers at that gap.' }, id: { what: 'Argumen sentral yang dikembangkan melalui bukti, penalaran, dan ilustrasi. Inti konseptual dari posting.', why: 'Ini adalah yang dicari pembaca. Argumen harus memiliki substansi intelektual yang tulus.', mistakes: 'Penalaran melingkar, membuat klaim tanpa dukungan, mengganti anekdot dengan bukti di mana bukti tersedia.', tip: 'Argumen blog terbaik dibangun secara progresif — setiap paragraf mengasumsikan apa yang ditetapkan di yang terakhir.' } },
+    nuance: { en: { what: 'Acknowledge the strongest objections to your argument and show why your position still holds.', why: 'Intellectual honesty signals intelligence and builds reader trust. Refuting counterarguments is stronger than ignoring them.', mistakes: 'Strawman objections that no serious thinker would make, capitulating to objections rather than genuinely engaging them.', tip: 'Steel-man the objection before defeating it: present the counterargument in its strongest form, acknowledge what\'s right about it, then show where it ultimately fails.' }, id: { what: 'Akui keberatan terkuat terhadap argumen Anda dan tunjukkan mengapa posisi Anda masih berlaku.', why: 'Kejujuran intelektual menandakan kecerdasan dan membangun kepercayaan pembaca.', mistakes: 'Keberatan strawman yang tidak akan dibuat pemikir serius mana pun, menyerah pada keberatan daripada benar-benar terlibat.', tip: 'Steel-man keberatan sebelum mengalahkannya: sajikan argumen balik dalam bentuk terkuatnya, akui apa yang benar tentangnya, lalu tunjukkan di mana akhirnya gagal.' } },
+    cta: { en: { what: 'A closing that gives the reader a practical next step or a question that invites continued engagement.', why: 'Blog posts that end without a forward-pointing close lose the energy they\'ve built. The reader\'s momentum should go somewhere.', mistakes: 'Summarizing instead of closing, multiple competing CTAs, leaving readers with no next step.', tip: 'The most effective blog closings give the reader something to DO — a question to answer, a practice to try, a perspective shift to apply. Not "what do you think?" but "Try asking yourself X for one week and see what changes."' }, id: { what: 'Penutup yang memberi pembaca langkah praktis berikutnya atau pertanyaan yang mengundang keterlibatan berlanjut.', why: 'Blog post yang berakhir tanpa penutup yang mengarah ke depan kehilangan energi yang telah mereka bangun.', mistakes: 'Merangkum daripada menutup, beberapa CTA yang bersaing.', tip: 'Penutup blog yang paling efektif memberi pembaca sesuatu untuk DILAKUKAN — pertanyaan untuk dijawab, praktik untuk dicoba.' } }
+  }
+};
 
-            const handleAddSection = () => {
-                const newId = generateId();
-                const newNode = {
-                    id: newId, content: '<p>New Section</p>', parentId: rootId, children: [],
-                    guidance_id: 'Bagian baru.', guidance_en: 'New section.'
-                };
-                setNodes(prev => ({
-                    ...prev,
-                    [rootId]: { ...prev[rootId], children: [...prev[rootId].children, newId] },
-                    [newId]: newNode
-                }));
-                setSelectedNodeId(newId);
-                setEditingId(newId);
-            };
+// ─── MODULE REGISTRY ──────────────────────────────────────────
 
-            const handleUpdateContent = (id, newContent) => {
-                setNodes(prev => ({ ...prev, [id]: { ...prev[id], content: newContent } }));
-            };
+const CATEGORY_CONFIG = {
+  academic: { label: 'Academic', color: 'blue', icon: <GraduationCap className="w-5 h-5" />, logic: 'IMRaD' },
+  policy: { label: 'Policy', color: 'emerald', icon: <Scale className="w-5 h-5" />, logic: 'Problem–Solution–Implication' },
+  media: { label: 'Media', color: 'orange', icon: <Newspaper className="w-5 h-5" />, logic: 'Hook–Narrative–Impact' }
+};
 
-            const handleMove = (id, dir) => {
-                if(id === rootId) return;
-                const parentId = nodes[id].parentId;
-                const parent = nodes[parentId];
-                const idx = parent.children.indexOf(id);
-                if (dir === 'up' && idx > 0) {
-                    const newChildren = [...parent.children];
-                    [newChildren[idx], newChildren[idx-1]] = [newChildren[idx-1], newChildren[idx]];
-                    setNodes(prev => ({ ...prev, [parentId]: { ...parent, children: newChildren } }));
-                } else if (dir === 'down' && idx < parent.children.length - 1) {
-                    const newChildren = [...parent.children];
-                    [newChildren[idx], newChildren[idx+1]] = [newChildren[idx+1], newChildren[idx]];
-                    setNodes(prev => ({ ...prev, [parentId]: { ...parent, children: newChildren } }));
-                }
-            };
+const colorMap = {
+  blue: { bg: 'bg-blue-500/10', border: 'border-blue-500/30 hover:border-blue-500', text: 'text-blue-400', badge: 'bg-blue-900/50 text-blue-300 border-blue-500/30', glow: 'hover:shadow-blue-500/10' },
+  emerald: { bg: 'bg-emerald-500/10', border: 'border-emerald-500/30 hover:border-emerald-500', text: 'text-emerald-400', badge: 'bg-emerald-900/50 text-emerald-300 border-emerald-500/30', glow: 'hover:shadow-emerald-500/10' },
+  orange: { bg: 'bg-orange-500/10', border: 'border-orange-500/30 hover:border-orange-500', text: 'text-orange-400', badge: 'bg-orange-900/50 text-orange-300 border-orange-500/30', glow: 'hover:shadow-orange-500/10' }
+};
 
-            const handleDelete = (id) => {
-                if (!confirm('Delete section?')) return;
-                const parentId = nodes[id].parentId;
-                setNodes(prev => {
-                    const newNodes = { ...prev };
-                    newNodes[parentId].children = newNodes[parentId].children.filter(c => c !== id);
-                    delete newNodes[id];
-                    return newNodes;
-                });
-                setSelectedNodeId(null);
-            };
+const MODULE_REGISTRY_DEFINITION = [
+  {
+    id: 'journal_article', name: 'Journal Article', category: 'academic', schema_version: SCHEMA_VERSION,
+    academic_level: 'Graduate / Postgraduate',
+    target_audience: 'Academic peers, journal editors, researchers',
+    tone_profile: 'Formal, precise, hedged, impersonal',
+    constraints: { min_words: 4000, max_words: 9000, citation_style: 'APA/Chicago/Vancouver', sections: 6 },
+    structural_sections: ['abstract','introduction','framework','methodology','findings','discussion','conclusion'],
+    icon_key: 'GraduationCap', color: 'blue',
+    description: 'Full empirical research paper following IMRaD structure for peer-reviewed publication.'
+  },
+  {
+    id: 'conference_paper', name: 'Conference Paper', category: 'academic', schema_version: SCHEMA_VERSION,
+    academic_level: 'Graduate / Professional',
+    target_audience: 'Conference attendees, program committee, peers in sub-field',
+    tone_profile: 'Formal, concise, contribution-forward',
+    constraints: { min_words: 2000, max_words: 5000, citation_style: 'Author-Date or numbered', sections: 5 },
+    structural_sections: ['abstract','introduction','related_work','method','experiments','conclusion'],
+    icon_key: 'Library', color: 'blue',
+    description: 'Concise research contribution for academic conference proceedings.'
+  },
+  {
+    id: 'research_report', name: 'Research Report', category: 'academic', schema_version: SCHEMA_VERSION,
+    academic_level: 'Professional / Applied Research',
+    target_audience: 'Commissioning agencies, policy practitioners, institutional stakeholders',
+    tone_profile: 'Authoritative, accessible, action-oriented',
+    constraints: { min_words: 3000, max_words: 15000, citation_style: 'Organizational style', sections: 5 },
+    structural_sections: ['executive_summary','background','methodology','findings','recommendations'],
+    icon_key: 'BarChart2', color: 'blue',
+    description: 'Commissioned investigation with structured findings and actionable recommendations.'
+  },
+  {
+    id: 'thesis', name: 'Thesis / Dissertation', category: 'academic', schema_version: SCHEMA_VERSION,
+    academic_level: 'Masters / Doctoral',
+    target_audience: 'Thesis committee, examiners, scholarly community',
+    tone_profile: 'Formal, reflexive, theoretically sophisticated',
+    constraints: { min_words: 15000, max_words: 100000, citation_style: 'Discipline-specific', sections: 7 },
+    structural_sections: ['abstract','introduction','literature_review','methodology','chapter4','chapter5','conclusion'],
+    icon_key: 'BookOpen', color: 'blue',
+    description: 'Original scholarly research demonstrating mastery and independent contribution.'
+  },
+  {
+    id: 'policy_brief', name: 'Policy Brief', category: 'policy', schema_version: SCHEMA_VERSION,
+    academic_level: 'Professional',
+    target_audience: 'Government officials, senior executives, decision-makers',
+    tone_profile: 'Concise, directive, evidence-grounded, non-partisan',
+    constraints: { min_words: 800, max_words: 2000, citation_style: 'In-text minimal', sections: 4 },
+    structural_sections: ['exec_summary','problem','evidence','recommendations'],
+    icon_key: 'Zap', color: 'emerald',
+    description: 'Targeted evidence-to-action document for senior policy decision-makers.'
+  },
+  {
+    id: 'policy_paper', name: 'Policy Paper', category: 'policy', schema_version: SCHEMA_VERSION,
+    academic_level: 'Professional / Academic',
+    target_audience: 'Policy analysts, legislators, think tanks, academic community',
+    tone_profile: 'Rigorous, analytical, normatively explicit',
+    constraints: { min_words: 3000, max_words: 8000, citation_style: 'Academic footnotes or endnotes', sections: 5 },
+    structural_sections: ['abstract','introduction','regulatory_analysis','comparative','recommendations'],
+    icon_key: 'Scale', color: 'emerald',
+    description: 'Analytical document examining governance frameworks and proposing regulatory reform.'
+  },
+  {
+    id: 'newsletter', name: 'Newsletter', category: 'media', schema_version: SCHEMA_VERSION,
+    academic_level: 'General / Professional',
+    target_audience: 'Opted-in subscriber community',
+    tone_profile: 'Conversational, expert, intimate, personal',
+    constraints: { min_words: 400, max_words: 1500, citation_style: 'Hyperlinks', sections: 4 },
+    structural_sections: ['greeting','main_story','insight','cta'],
+    icon_key: 'Mail', color: 'orange',
+    description: 'Recurring email publication building audience relationship through editorial voice.'
+  },
+  {
+    id: 'feature_article', name: 'Feature Article', category: 'media', schema_version: SCHEMA_VERSION,
+    academic_level: 'General',
+    target_audience: 'Magazine or longform publication readers',
+    tone_profile: 'Narrative, reported, immersive, authoritative',
+    constraints: { min_words: 2000, max_words: 8000, citation_style: 'Attribution in-text', sections: 5 },
+    structural_sections: ['hook','context','expert_voices','policy_dimension','resolution'],
+    icon_key: 'Newspaper', color: 'orange',
+    description: 'Longform reported narrative combining journalism with literary technique.'
+  },
+  {
+    id: 'press_release', name: 'Press Release', category: 'media', schema_version: SCHEMA_VERSION,
+    academic_level: 'Professional',
+    target_audience: 'Journalists, editors, industry analysts',
+    tone_profile: 'Newswire style, factual, AP format, active voice',
+    constraints: { min_words: 300, max_words: 600, citation_style: 'Data attribution only', sections: 5 },
+    structural_sections: ['dateline','lead','problem_solution','product_details','close'],
+    icon_key: 'Megaphone', color: 'orange',
+    description: 'Official announcement formatted for media distribution and potential direct publication.'
+  },
+  {
+    id: 'blog_post', name: 'Blog Post', category: 'media', schema_version: SCHEMA_VERSION,
+    academic_level: 'General / Semi-professional',
+    target_audience: 'Blog readers, social media audience, search engine users',
+    tone_profile: 'Informal, opinionated, direct, reader-conversational',
+    constraints: { min_words: 800, max_words: 3000, citation_style: 'Hyperlinks / informal', sections: 4 },
+    structural_sections: ['hook','argument','nuance','cta'],
+    icon_key: 'PenTool', color: 'orange',
+    description: 'Perspective-driven digital content combining personal voice with informed argument.'
+  }
+];
 
-            if (view === 'landing') return <LandingPage onSelectTemplate={handleSelectTemplate} onImport={handleImport} />;
+// ─── MODULE INSTALLER ─────────────────────────────────────────
+// Deduplication: if ID exists with same schema_version → skip.
+// If schema_version mismatch → replace (update).
 
-            const activeNode = selectedNodeId ? nodes[selectedNodeId] : null;
-            const cardList = rootId && nodes[rootId] ? nodes[rootId].children : [];
-
-            return (
-                <div className="flex flex-col h-screen bg-slate-100 text-slate-800 font-sans overflow-hidden">
-                    {/* TOP BAR */}
-                    <div className="bg-slate-900 text-white p-3 flex justify-between items-center shadow-md z-30 no-print">
-                        <div className="flex items-center gap-4">
-                            <button onClick={() => setView('landing')} className="text-slate-400 hover:text-white flex items-center gap-1 text-sm font-medium" title="Back to Menu">
-                                <ChevronLeft className="w-4 h-4" /> Menu
-                            </button>
-                            <div className="h-6 w-px bg-slate-700"></div>
-                            <div className="flex items-center gap-2 font-bold text-lg">
-                                <Layout className="text-blue-400" /> StructureFlow
-                            </div>
-                        </div>
-                        <div className="flex items-center gap-2">
-                            <button onClick={handleSaveJSON} className="p-2 bg-slate-700 hover:bg-slate-600 rounded-lg text-white transition-colors" title="Save JSON">
-                                <Save className="w-5 h-5"/>
-                            </button>
-                            
-                            <div className="relative">
-                                <button className="p-2 bg-slate-700 hover:bg-slate-600 rounded-lg text-white transition-colors relative overflow-hidden" title="Load JSON">
-                                     <input type="file" onChange={handleImport} className="absolute inset-0 opacity-0 cursor-pointer"/>
-                                     <Upload className="w-5 h-5"/>
-                                </button>
-                            </div>
-
-                            <div className="h-6 w-px bg-slate-700 mx-1"></div>
-                            
-                            <button onClick={handleExportDoc} className="p-2 bg-blue-600 hover:bg-blue-700 rounded-lg text-white transition-colors shadow-lg shadow-blue-900/20" title="Export to Word">
-                                <FileText className="w-5 h-5"/>
-                            </button>
-                            <button onClick={handlePrintPDF} className="p-2 bg-red-600 hover:bg-red-700 rounded-lg text-white transition-colors shadow-lg shadow-red-900/20" title="Print to PDF">
-                                <Printer className="w-5 h-5"/>
-                            </button>
-                        </div>
-                    </div>
-
-                    {/* WORKSPACE */}
-                    <div className="flex flex-1 overflow-hidden">
-                        {/* LEFT: CONTENT */}
-                        <div className="w-2/3 flex flex-col bg-slate-50 border-r relative print:w-full">
-                            <div className="p-4 border-b bg-white/80 backdrop-blur sticky top-0 z-20 flex justify-between items-center no-print">
-                                <span className="text-xs font-bold uppercase text-slate-500 tracking-wider">Document Structure</span>
-                                <button onClick={handleAddSection} className="text-xs bg-blue-600 text-white px-3 py-1.5 rounded-full flex items-center gap-1 hover:bg-blue-700 transition-shadow shadow-md shadow-blue-500/20">
-                                    <Plus className="w-3 h-3"/> Add Section
-                                </button>
-                            </div>
-                            
-                            <div className="flex-1 overflow-y-auto p-8 custom-scrollbar print:overflow-visible">
-                                <div className="max-w-3xl mx-auto pb-20 print:pb-0">
-                                    {/* PROJECT TITLE INPUT */}
-                                    {rootId && nodes[rootId] && (
-                                        <input
-                                            type="text"
-                                            value={nodes[rootId].content.replace(/(<([^>]+)>)/gi, "")}
-                                            onChange={(e) => handleUpdateContent(rootId, e.target.value)}
-                                            className="w-full text-4xl font-extrabold text-red-500 mb-8 bg-transparent border-b-2 border-transparent hover:border-slate-200 focus:border-red-400 focus:outline-none transition-all placeholder:text-slate-300"
-                                            placeholder="Judul Project"
-                                        />
-                                    )}
-
-                                    {cardList.length === 0 && (
-                                        <div className="text-center py-20 text-slate-400">
-                                            <p>No sections yet. Add one to start.</p>
-                                        </div>
-                                    )}
-                                    {cardList.map((id, index) => {
-                                        const node = nodes[id];
-                                        const isSelected = selectedNodeId === id;
-                                        const isEditing = editingId === id;
-                                        
-                                        return (
-                                            <div key={id} className="flex gap-4 relative group/card print:break-inside-avoid">
-                                                {/* Visual Line */}
-                                                <div className="flex flex-col items-center w-8 pt-6 relative no-print">
-                                                    <div className={`w-4 h-4 rounded-full border-2 z-10 transition-colors ${isSelected ? 'bg-blue-500 border-blue-500 shadow-lg shadow-blue-500/30' : 'bg-white border-slate-300'}`}></div>
-                                                    {index < cardList.length - 1 && <div className="w-0.5 bg-slate-200 h-full absolute top-8 -bottom-6 left-1/2 -translate-x-1/2"></div>}
-                                                </div>
-
-                                                {/* Card */}
-                                                <div 
-                                                    onClick={() => setSelectedNodeId(id)}
-                                                    className={`flex-1 mb-6 rounded-xl border transition-all duration-300 relative ${isSelected ? 'border-blue-500 shadow-xl bg-white scale-[1.01]' : 'border-slate-200 bg-white hover:border-blue-300 hover:shadow-md'} print:border-0 print:shadow-none print:mb-4`}
-                                                >
-                                                    <div className="p-5">
-                                                        {isEditing ? (
-                                                            <RichTextEditor 
-                                                                initialContent={node.content}
-                                                                onSave={(val) => { handleUpdateContent(id, val); setEditingId(null); }}
-                                                                onCancel={() => setEditingId(null)}
-                                                            />
-                                                        ) : (
-                                                            <div className="group/content" onDoubleClick={() => setEditingId(id)}>
-                                                                <div className="prose prose-sm max-w-none text-slate-700" dangerouslySetInnerHTML={{__html: node.content}} />
-                                                                
-                                                                {/* Hover Controls */}
-                                                                <div className={`absolute top-2 right-2 flex gap-1 bg-white p-1 rounded-lg border shadow-sm no-print ${isSelected ? 'opacity-100' : 'opacity-0 group-hover/card:opacity-100'} transition-all duration-200`}>
-                                                                    <button onClick={(e) => { e.stopPropagation(); handleMove(id, 'up'); }} className="icon-btn" title="Move Up"><ArrowUp className="w-3 h-3"/></button>
-                                                                    <button onClick={(e) => { e.stopPropagation(); handleMove(id, 'down'); }} className="icon-btn" title="Move Down"><ArrowDown className="w-3 h-3"/></button>
-                                                                    <div className="w-px bg-slate-200 h-4 mx-1"></div>
-                                                                    <button onClick={(e) => { e.stopPropagation(); setEditingId(id); }} className="icon-btn text-blue-600 hover:bg-blue-50" title="Edit"><Edit3 className="w-3 h-3"/></button>
-                                                                    <button onClick={(e) => { e.stopPropagation(); handleDelete(id); }} className="icon-btn text-red-600 hover:bg-red-50" title="Delete"><Trash2 className="w-3 h-3"/></button>
-                                                                </div>
-                                                            </div>
-                                                        )}
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        );
-                                    })}
-                                </div>
-                            </div>
-                        </div>
-
-                        {/* RIGHT: GUIDANCE */}
-                        <div className="w-1/3 bg-white border-l shadow-2xl flex flex-col z-20 no-print">
-                            <div className="p-4 border-b flex justify-between items-center bg-slate-50">
-                                <span className="font-bold text-slate-700 flex gap-2 items-center"><BookOpen className="w-4 h-4 text-blue-500"/> Guidance</span>
-                                <button onClick={() => setLang(l => l === 'en' ? 'id' : 'en')} className="text-xs border border-slate-200 px-3 py-1.5 rounded-full bg-white hover:bg-slate-100 flex gap-2 font-medium transition-colors">
-                                    <Globe className="w-3 h-3"/> {lang === 'en' ? 'English' : 'Bahasa'}
-                                </button>
-                            </div>
-                            <div className="p-6 overflow-y-auto flex-1 prose prose-sm">
-                                {activeNode ? (
-                                    <div className="animate-in slide-in-from-right-4 fade-in duration-300">
-                                        <h3 className="text-blue-600 mt-0 flex items-center gap-2">
-                                            {lang === 'en' ? 'Instructions' : 'Instruksi'}
-                                        </h3>
-                                        <div className="text-slate-600 text-base leading-relaxed">
-                                            {lang === 'en' ? activeNode.guidance_en : activeNode.guidance_id}
-                                        </div>
-                                        
-                                        <div className="mt-8 p-5 bg-gradient-to-br from-yellow-50 to-orange-50 border border-yellow-100 rounded-xl text-yellow-900 shadow-sm">
-                                            <strong className="block mb-2 text-xs uppercase tracking-wider text-yellow-600">💡 {lang === 'en' ? 'Writing Tip' : 'Tips Menulis'}</strong>
-                                            {lang === 'en' 
-                                                ? 'Keep this section focused on one main idea. Use simple sentences to start.' 
-                                                : 'Fokuskan bagian ini pada satu ide utama. Gunakan kalimat sederhana untuk memulai.'}
-                                        </div>
-                                    </div>
-                                ) : (
-                                    <div className="flex flex-col items-center justify-center h-full text-slate-400">
-                                        <BookOpen className="w-12 h-12 mb-4 text-slate-200" />
-                                        <p>Select a section on the left to view guidance.</p>
-                                    </div>
-                                )}
-                            </div>
-                        </div>
-                    </div>
-
-                    <style>{`
-                        .btn-toolbar { @apply px-3 py-1.5 rounded text-xs flex items-center gap-2 transition-colors text-white font-medium; }
-                        .icon-btn { @apply p-1.5 hover:bg-slate-100 rounded text-slate-500 transition-colors; }
-                        @media print { .no-print { display: none !important; } .prose { max-width: 100% !important; } }
-                    `}</style>
-                </div>
-            );
+class ModuleInstaller {
+  constructor() { this.registry = {}; }
+  install(modules) {
+    const report = { installed: [], skipped: [], updated: [] };
+    modules.forEach(mod => {
+      if (this.registry[mod.id]) {
+        if (this.registry[mod.id].schema_version === mod.schema_version) {
+          report.skipped.push(mod.id);
+        } else {
+          this.registry[mod.id] = mod;
+          report.updated.push(mod.id);
         }
+      } else {
+        this.registry[mod.id] = mod;
+        report.installed.push(mod.id);
+      }
+    });
+    return report;
+  }
+  get(id) { return this.registry[id] || null; }
+  getAll() { return Object.values(this.registry); }
+  getByCategory(cat) { return this.getAll().filter(m => m.category === cat); }
+}
 
-        const root = createRoot(document.getElementById('root'));
-        root.render(<App />);
-    </script>
+const installer = new ModuleInstaller();
+const installReport = installer.install(MODULE_REGISTRY_DEFINITION);
+
+// ─── UTILS ────────────────────────────────────────────────────
+
+const generateId = () => Math.random().toString(36).substr(2, 9);
+
+const buildModuleData = (moduleId, isTutorial) => {
+  const mod = installer.get(moduleId);
+  if (!mod) return null;
+  const dummyMod = DUMMY_DATA[moduleId];
+  const guidanceMod = GUIDANCE[moduleId] || {};
+
+  const sections = mod.structural_sections.map(secKey => {
+    const dummySection = dummyMod?.sections.find(s => s.key === secKey);
+    const gEn = guidanceMod[secKey]?.en || {};
+    const gId = guidanceMod[secKey]?.id || {};
+    return {
+      id: generateId(),
+      sectionKey: secKey,
+      content: isTutorial
+        ? (dummySection?.content || `<h3>${secKey.replace(/_/g,' ')}</h3><p>[Write here]</p>`)
+        : `<h3>${secKey.replace(/_/g,' ')}</h3><p>[Write here...]</p>`,
+      guidance: {
+        en: { what: gEn.what||'Write content for this section.', why: gEn.why||'This section serves a structural purpose.', mistakes: gEn.mistakes||'Avoid common mistakes.', tip: gEn.tip||'Focus on clarity.' },
+        id: { what: gId.what||'Tulis konten untuk bagian ini.', why: gId.why||'Bagian ini melayani tujuan struktural.', mistakes: gId.mistakes||'Hindari kesalahan umum.', tip: gId.tip||'Fokus pada kejelasan.' }
+      },
+      analogy: { en: guidanceMod._analogy?.en || '', id: guidanceMod._analogy?.id || '' },
+      children: []
+    };
+  });
+
+  return {
+    id: generateId(),
+    moduleId,
+    title: isTutorial ? (dummyMod?.title || mod.name) : `My ${mod.name}`,
+    sections,
+    metadata: mod
+  };
+};
+
+// ─── RICH TEXT EDITOR ─────────────────────────────────────────
+
+const RichTextEditor = ({ initialContent, onSave, onCancel }) => {
+  const editorRef = useRef(null);
+  const execCmd = (cmd, val = null) => { document.execCommand(cmd, false, val); editorRef.current.focus(); };
+  return (
+    <div className="border-2 border-blue-400 rounded-xl overflow-hidden bg-white flex flex-col shadow-lg anim-scale">
+      <div className="bg-slate-50 border-b p-2 flex gap-1 items-center flex-wrap">
+        <button onClick={() => execCmd('bold')} className="p-1.5 hover:bg-slate-200 rounded" title="Bold"><Bold className="w-3.5 h-3.5"/></button>
+        <button onClick={() => execCmd('italic')} className="p-1.5 hover:bg-slate-200 rounded" title="Italic"><Italic className="w-3.5 h-3.5"/></button>
+        <div className="w-px h-4 bg-slate-300 mx-1"/>
+        <button onClick={() => execCmd('formatBlock','H3')} className="px-2 py-1 hover:bg-slate-200 rounded text-xs font-bold">H3</button>
+        <button onClick={() => execCmd('formatBlock','P')} className="px-2 py-1 hover:bg-slate-200 rounded text-xs">¶</button>
+        <div className="w-px h-4 bg-slate-300 mx-1"/>
+        <button onClick={() => execCmd('insertUnorderedList')} className="p-1.5 hover:bg-slate-200 rounded"><List className="w-3.5 h-3.5"/></button>
+        <button onClick={() => execCmd('insertOrderedList')} className="p-1.5 hover:bg-slate-200 rounded text-xs font-mono">1.</button>
+      </div>
+      <div ref={editorRef} className="p-4 outline-none prose-card text-sm" contentEditable suppressContentEditableWarning
+        dangerouslySetInnerHTML={{ __html: initialContent }} style={{ minHeight: '140px' }}/>
+      <div className="p-2 border-t bg-slate-50 flex justify-end gap-2">
+        <button onClick={onCancel} className="px-3 py-1.5 text-xs text-slate-600 hover:bg-slate-100 rounded-lg">Cancel</button>
+        <button onClick={() => onSave(editorRef.current.innerHTML)} className="px-4 py-1.5 text-xs bg-blue-600 text-white rounded-lg hover:bg-blue-700 font-semibold">Save</button>
+      </div>
+    </div>
+  );
+};
+
+// ─── GUIDANCE PANEL ───────────────────────────────────────────
+
+const GuidancePanel = ({ section, moduleId, lang }) => {
+  const [tab, setTab] = useState('what');
+  if (!section) return (
+    <div className="flex flex-col items-center justify-center h-full text-slate-500 p-6">
+      <BookOpen className="w-12 h-12 mb-3 text-slate-300"/>
+      <p className="text-sm text-center">Select a section to view guidance</p>
+    </div>
+  );
+
+  const g = section.guidance?.[lang] || {};
+  const analogy = section.analogy?.[lang] || '';
+  const tabs = [
+    { id: 'what', label: lang === 'en' ? 'What to Write' : 'Apa yang Ditulis', icon: <PenTool className="w-3 h-3"/> },
+    { id: 'why', label: lang === 'en' ? 'Why It Matters' : 'Mengapa Penting', icon: <Info className="w-3 h-3"/> },
+    { id: 'mistakes', label: lang === 'en' ? 'Avoid' : 'Hindari', icon: <AlertCircle className="w-3 h-3"/> },
+    { id: 'tip', label: lang === 'en' ? 'Pro Tip' : 'Tips Pro', icon: <Lightbulb className="w-3 h-3"/> }
+  ];
+
+  return (
+    <div className="flex flex-col h-full anim-right">
+      {/* Section Header */}
+      <div className="p-4 border-b bg-slate-50">
+        <div className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-1">
+          {section.sectionKey?.replace(/_/g,' ')}
+        </div>
+        {analogy && (
+          <div className="text-xs text-indigo-600 italic leading-relaxed bg-indigo-50 rounded-lg p-2 border border-indigo-100">
+            💡 {analogy}
+          </div>
+        )}
+      </div>
+
+      {/* Tab Nav */}
+      <div className="flex border-b bg-white">
+        {tabs.map(t => (
+          <button key={t.id} onClick={() => setTab(t.id)}
+            className={`flex-1 py-2 text-xs font-medium flex items-center justify-center gap-1 transition-colors border-b-2 ${
+              tab === t.id ? 'border-blue-500 text-blue-600 bg-blue-50/50' : 'border-transparent text-slate-500 hover:text-slate-700'
+            }`}>
+            {t.icon} <span className="hidden sm:inline">{t.label}</span>
+          </button>
+        ))}
+      </div>
+
+      {/* Tab Content */}
+      <div className="p-4 overflow-y-auto flex-1 custom-scrollbar">
+        <p className="text-sm leading-relaxed text-slate-700">{g[tab]}</p>
+      </div>
+    </div>
+  );
+};
+
+// ─── MODULE DETAIL CARD ───────────────────────────────────────
+
+const ModuleDetailPanel = ({ mod, onSelect, onClose }) => {
+  const cat = CATEGORY_CONFIG[mod.category];
+  const col = colorMap[mod.color];
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm anim-fade">
+      <div className="bg-slate-900 border border-slate-700 rounded-2xl max-w-lg w-full p-6 anim-scale shadow-2xl">
+        <div className="flex justify-between items-start mb-4">
+          <div>
+            <div className={`inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-xs border ${col.badge} mb-2`}>
+              {cat.icon} {cat.label} · {cat.logic}
+            </div>
+            <h2 className="text-xl font-bold text-white">{mod.name}</h2>
+          </div>
+          <button onClick={onClose} className="p-2 hover:bg-slate-700 rounded-lg text-slate-400"><X className="w-4 h-4"/></button>
+        </div>
+
+        <p className="text-slate-400 text-sm mb-4">{mod.description}</p>
+
+        <div className="grid grid-cols-2 gap-3 mb-5">
+          {[
+            { label: 'Audience', val: mod.target_audience },
+            { label: 'Tone', val: mod.tone_profile },
+            { label: 'Level', val: mod.academic_level },
+            { label: 'Length', val: `${mod.constraints.min_words.toLocaleString()}–${mod.constraints.max_words.toLocaleString()} words` }
+          ].map(item => (
+            <div key={item.label} className="bg-slate-800 rounded-lg p-3">
+              <div className="text-xs text-slate-500 uppercase tracking-wider mb-1">{item.label}</div>
+              <div className="text-xs text-slate-300">{item.val}</div>
+            </div>
+          ))}
+        </div>
+
+        <div className="mb-5">
+          <div className="text-xs text-slate-500 uppercase tracking-wider mb-2">Structure ({mod.structural_sections.length} sections)</div>
+          <div className="flex flex-wrap gap-1.5">
+            {mod.structural_sections.map((s, i) => (
+              <span key={s} className={`px-2 py-1 rounded text-xs border ${col.badge}`}>
+                {i+1}. {s.replace(/_/g,' ')}
+              </span>
+            ))}
+          </div>
+        </div>
+
+        <div className="flex gap-3">
+          <button onClick={() => onSelect(mod.id, false)} className="flex-1 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-sm font-semibold transition-colors">
+            Start Blank
+          </button>
+          <button onClick={() => onSelect(mod.id, true)} className="flex-1 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-sm font-semibold transition-colors">
+            Load Example
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+// ─── LANDING PAGE ─────────────────────────────────────────────
+
+const LandingPage = ({ onSelectTemplate, onImport }) => {
+  const [activeCategory, setActiveCategory] = useState('academic');
+  const [detailMod, setDetailMod] = useState(null);
+  const [showInstallLog, setShowInstallLog] = useState(false);
+
+  const modules = installer.getByCategory(activeCategory);
+
+  return (
+    <div className="min-h-screen bg-[#0a0f1e] text-white flex flex-col overflow-auto">
+      {/* Ambient bg */}
+      <div className="fixed inset-0 pointer-events-none overflow-hidden">
+        <div className="absolute top-[-15%] left-[-10%] w-[50%] h-[50%] bg-blue-700/10 rounded-full blur-[150px]"/>
+        <div className="absolute bottom-[-10%] right-[-5%] w-[40%] h-[40%] bg-emerald-700/8 rounded-full blur-[150px]"/>
+        <div className="absolute top-[40%] left-[50%] w-[30%] h-[30%] bg-purple-700/6 rounded-full blur-[150px]"/>
+      </div>
+
+      <div className="relative z-10 flex flex-col items-center px-6 py-12">
+        {/* Header */}
+        <div className="text-center mb-8 anim-up">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-800/80 border border-slate-700/50 mb-4 text-xs font-semibold text-blue-400">
+            <Cpu className="w-3 h-3"/> Modular AI Writing Engine · v3.0
+          </div>
+          <h1 className="text-5xl font-black mb-3 tracking-tight">
+            Structure<span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-400 to-emerald-400">Flow</span>
+          </h1>
+          <p className="text-slate-400 max-w-md mx-auto leading-relaxed">
+            10 publication modules. Professional guidance. Bilingual intelligence.
+          </p>
+        </div>
+
+        {/* Install Report Badge */}
+        <button onClick={() => setShowInstallLog(v => !v)}
+          className="mb-8 flex items-center gap-2 px-3 py-1.5 bg-slate-800/60 border border-slate-700/50 rounded-full text-xs text-slate-400 hover:text-slate-300 transition-colors anim-up delay-1">
+          <Layers className="w-3 h-3 text-green-400"/>
+          {installReport.installed.length} modules installed · {installReport.skipped.length} verified ·
+          <ChevronDown className={`w-3 h-3 transition-transform ${showInstallLog ? 'rotate-180' : ''}`}/>
+        </button>
+
+        {showInstallLog && (
+          <div className="mb-6 max-w-lg w-full bg-slate-900/80 border border-slate-700 rounded-xl p-4 text-xs anim-scale">
+            <div className="font-bold text-slate-300 mb-2 flex items-center gap-1"><Cpu className="w-3 h-3 text-green-400"/> Module Installation Log</div>
+            {installReport.installed.map(id => (
+              <div key={id} className="flex items-center gap-2 py-0.5 text-slate-400">
+                <CheckCircle2 className="w-3 h-3 text-green-400 flex-shrink-0"/> INSTALLED: {id}
+              </div>
+            ))}
+            {installReport.skipped.map(id => (
+              <div key={id} className="flex items-center gap-2 py-0.5 text-slate-500">
+                <CheckCircle2 className="w-3 h-3 text-slate-600 flex-shrink-0"/> VERIFIED (no update): {id}
+              </div>
+            ))}
+            {installReport.updated.map(id => (
+              <div key={id} className="flex items-center gap-2 py-0.5 text-yellow-400">
+                <AlertCircle className="w-3 h-3 flex-shrink-0"/> UPDATED (schema change): {id}
+              </div>
+            ))}
+          </div>
+        )}
+
+        {/* Category Tabs */}
+        <div className="flex gap-2 mb-8 bg-slate-800/50 p-1 rounded-xl border border-slate-700/50 anim-up delay-2">
+          {Object.entries(CATEGORY_CONFIG).map(([key, cat]) => (
+            <button key={key} onClick={() => setActiveCategory(key)}
+              className={`flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-semibold transition-all ${
+                activeCategory === key
+                  ? 'bg-slate-700 text-white shadow-lg'
+                  : 'text-slate-400 hover:text-slate-300'
+              }`}>
+              {cat.icon} {cat.label}
+              <span className="text-xs opacity-60">({installer.getByCategory(key).length})</span>
+            </button>
+          ))}
+        </div>
+
+        {/* Category Logic Tag */}
+        <div className="mb-6 text-xs text-slate-500 flex items-center gap-2 anim-up delay-3">
+          <Layers className="w-3 h-3"/>
+          Structure logic: <span className="text-slate-300 font-medium">{CATEGORY_CONFIG[activeCategory].logic}</span>
+        </div>
+
+        {/* Module Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 max-w-7xl w-full mb-10 anim-up delay-3">
+          {modules.map((mod, i) => {
+            const col = colorMap[mod.color];
+            return (
+              <button key={mod.id}
+                onClick={() => setDetailMod(mod)}
+                className={`relative p-5 rounded-xl border ${col.border} bg-slate-800/60 backdrop-blur text-left transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl ${col.glow} group`}
+                style={{ animationDelay: `${i * 60}ms` }}>
+                <div className={`w-9 h-9 rounded-lg ${col.bg} flex items-center justify-center mb-3 group-hover:scale-110 transition-transform`}>
+                  <span className={col.text}>
+                    {mod.category === 'academic' && mod.id === 'journal_article' && <GraduationCap className="w-4 h-4"/>}
+                    {mod.category === 'academic' && mod.id === 'conference_paper' && <Library className="w-4 h-4"/>}
+                    {mod.category === 'academic' && mod.id === 'research_report' && <BarChart2 className="w-4 h-4"/>}
+                    {mod.category === 'academic' && mod.id === 'thesis' && <BookOpen className="w-4 h-4"/>}
+                    {mod.category === 'policy' && mod.id === 'policy_brief' && <Zap className="w-4 h-4"/>}
+                    {mod.category === 'policy' && mod.id === 'policy_paper' && <Scale className="w-4 h-4"/>}
+                    {mod.category === 'media' && mod.id === 'newsletter' && <Mail className="w-4 h-4"/>}
+                    {mod.category === 'media' && mod.id === 'feature_article' && <Newspaper className="w-4 h-4"/>}
+                    {mod.category === 'media' && mod.id === 'press_release' && <Megaphone className="w-4 h-4"/>}
+                    {mod.category === 'media' && mod.id === 'blog_post' && <PenTool className="w-4 h-4"/>}
+                  </span>
+                </div>
+                <h3 className="font-bold text-slate-100 text-sm mb-1">{mod.name}</h3>
+                <p className="text-xs text-slate-400 leading-relaxed mb-3">{mod.description}</p>
+                <div className="flex items-center gap-1.5 flex-wrap">
+                  <span className={`px-1.5 py-0.5 rounded text-xs border ${col.badge}`}>
+                    {mod.structural_sections.length} sections
+                  </span>
+                  <span className="text-xs text-slate-600">{mod.constraints.min_words/1000}k–{mod.constraints.max_words/1000}k w</span>
+                </div>
+              </button>
+            );
+          })}
+        </div>
+
+        {/* Import */}
+        <label className="flex items-center gap-3 px-5 py-3 rounded-xl border border-dashed border-slate-600 hover:border-purple-500 bg-slate-800/30 cursor-pointer transition-colors group text-sm text-slate-400 hover:text-slate-300">
+          <input type="file" onChange={onImport} className="hidden" accept=".json"/>
+          <FolderOpen className="w-4 h-4 group-hover:text-purple-400 transition-colors"/>
+          Load previously saved JSON session
+        </label>
+      </div>
+
+      {/* Module Detail Modal */}
+      {detailMod && (
+        <ModuleDetailPanel
+          mod={detailMod}
+          onSelect={(id, isTutorial) => { setDetailMod(null); onSelectTemplate(id, isTutorial); }}
+          onClose={() => setDetailMod(null)}
+        />
+      )}
+    </div>
+  );
+};
+
+// ─── MAIN WORKSPACE ───────────────────────────────────────────
+
+function App() {
+  const [view, setView] = useState('landing');
+  const [docData, setDocData] = useState(null); // { id, moduleId, title, sections[], metadata }
+  const [selectedIdx, setSelectedIdx] = useState(0);
+  const [editingIdx, setEditingIdx] = useState(null);
+  const [lang, setLang] = useState('en');
+
+  const handleSelectTemplate = (moduleId, isTutorial) => {
+    const data = buildModuleData(moduleId, isTutorial);
+    if (!data) return;
+    setDocData(data);
+    setSelectedIdx(0);
+    setEditingIdx(null);
+    setView('workspace');
+  };
+
+  const handleImport = (e) => {
+    const reader = new FileReader();
+    reader.onload = (ev) => {
+      try {
+        const parsed = JSON.parse(ev.target.result);
+        setDocData(parsed);
+        setSelectedIdx(0);
+        setView('workspace');
+      } catch { alert('Invalid JSON file.'); }
+    };
+    reader.readAsText(e.target.files[0]);
+    e.target.value = '';
+  };
+
+  const handleSaveJSON = () => {
+    const dataStr = JSON.stringify(docData, null, 2);
+    const link = document.createElement('a');
+    link.href = 'data:application/json;charset=utf-8,' + encodeURIComponent(dataStr);
+    link.download = `structureflow-${docData.moduleId}-${Date.now()}.json`;
+    link.click();
+  };
+
+  const handleExportWord = () => {
+    let html = `<html><head><style>
+      body{font-family:Arial;font-size:12pt;margin:2cm}
+      h1{font-size:18pt;text-align:center;margin-bottom:1em}
+      h3{font-size:13pt;margin-top:1.5em}
+      p{line-height:1.6;margin-bottom:.8em}
+      ul,ol{padding-left:1.5em;margin-bottom:.8em}
+    </style></head><body>`;
+    html += `<h1>${docData.title}</h1>`;
+    docData.sections.forEach(sec => { html += `<div>${sec.content}</div><br/>`; });
+    html += `</body></html>`;
+    const blob = new Blob(['\ufeff', html], { type: 'application/msword' });
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = `${docData.moduleId}-draft.doc`;
+    a.click();
+  };
+
+  const handlePrintPDF = () => {
+    if (!window.html2pdf) { alert('PDF generator loading — try in a moment.'); return; }
+    const el = document.createElement('div');
+    let contentHtml = `<h1 class="doc-title">${docData.title}</h1>`;
+    docData.sections.forEach(sec => {
+      contentHtml += `<div class="doc-section">${sec.content}</div>`;
+    });
+    el.innerHTML = contentHtml;
+    const style = document.createElement('style');
+    style.textContent = `
+      body{font-family:'Times New Roman',serif;font-size:12pt;color:#111;-webkit-font-smoothing:antialiased}
+      .doc-title{text-align:center;font-size:18pt;margin-bottom:30px;font-weight:bold}
+      .doc-section{margin-bottom:1.2em;page-break-inside:avoid}
+      h3{font-size:13pt;margin:1.5em 0 .5em;font-weight:bold}
+      p{margin-bottom:.8em;line-height:1.6;text-align:justify}
+      ul,ol{padding-left:1.5em;margin-bottom:.8em}
+      li{margin-bottom:.3em}
+      blockquote{border-left:3px solid #666;padding:.5em 1em;margin:1em 0;font-style:italic}
+      strong{font-weight:bold}
+    `;
+    el.appendChild(style);
+    window.html2pdf().set({
+      margin: 1, filename: `${docData.moduleId}-draft.pdf`,
+      image: { type: 'jpeg', quality: 0.98 },
+      html2canvas: { scale: 2 },
+      jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+    }).from(el).save();
+  };
+
+  const handleAddSection = () => {
+    const newSection = {
+      id: generateId(), sectionKey: 'custom',
+      content: '<h3>New Section</h3><p>[Write here...]</p>',
+      guidance: {
+        en: { what: 'Write content for this custom section.', why: 'You added this section for a specific purpose.', mistakes: 'Avoid being vague about its purpose.', tip: 'Give this section a clear heading that signals its function to the reader.' },
+        id: { what: 'Tulis konten untuk bagian kustom ini.', why: 'Anda menambahkan bagian ini untuk tujuan tertentu.', mistakes: 'Hindari menjadi samar tentang tujuannya.', tip: 'Beri bagian ini judul yang jelas yang menandakan fungsinya kepada pembaca.' }
+      },
+      analogy: { en: '', id: '' },
+      children: []
+    };
+    const updated = { ...docData, sections: [...docData.sections, newSection] };
+    setDocData(updated);
+    setSelectedIdx(updated.sections.length - 1);
+    setEditingIdx(updated.sections.length - 1);
+  };
+
+  const handleUpdateSection = (idx, content) => {
+    const sections = [...docData.sections];
+    sections[idx] = { ...sections[idx], content };
+    setDocData({ ...docData, sections });
+  };
+
+  const handleMove = (idx, dir) => {
+    const sections = [...docData.sections];
+    const target = idx + dir;
+    if (target < 0 || target >= sections.length) return;
+    [sections[idx], sections[target]] = [sections[target], sections[idx]];
+    setDocData({ ...docData, sections });
+    setSelectedIdx(target);
+  };
+
+  const handleDelete = (idx) => {
+    if (!confirm('Delete this section?')) return;
+    const sections = docData.sections.filter((_, i) => i !== idx);
+    setDocData({ ...docData, sections });
+    setSelectedIdx(Math.min(idx, sections.length - 1));
+  };
+
+  if (view === 'landing') return <LandingPage onSelectTemplate={handleSelectTemplate} onImport={handleImport}/>;
+
+  const mod = docData?.metadata;
+  const col = mod ? colorMap[mod.color] : colorMap.blue;
+  const cat = mod ? CATEGORY_CONFIG[mod.category] : null;
+  const activeSection = docData?.sections?.[selectedIdx] || null;
+
+  return (
+    <div className="flex flex-col h-screen bg-slate-100 overflow-hidden font-sans">
+      {/* TOP BAR */}
+      <div className="bg-slate-900 text-white flex items-center justify-between px-4 py-2.5 z-30 no-print shadow-xl">
+        <div className="flex items-center gap-3">
+          <button onClick={() => setView('landing')} className="flex items-center gap-1 text-slate-400 hover:text-white text-sm transition-colors">
+            <ChevronLeft className="w-4 h-4"/> Back
+          </button>
+          <div className="h-5 w-px bg-slate-700"/>
+          <div className="flex items-center gap-2">
+            <Cpu className="w-4 h-4 text-blue-400"/>
+            <span className="font-bold text-sm text-white">StructureFlow</span>
+            {mod && (
+              <>
+                <div className="h-4 w-px bg-slate-700"/>
+                <span className={`px-2 py-0.5 rounded-full text-xs border ${col.badge}`}>
+                  {mod.name}
+                </span>
+              </>
+            )}
+          </div>
+        </div>
+
+        <div className="flex items-center gap-1.5">
+          <button onClick={handleSaveJSON} className="p-2 bg-slate-700 hover:bg-slate-600 rounded-lg transition-colors" title="Save JSON">
+            <Save className="w-4 h-4"/>
+          </button>
+          <label className="p-2 bg-slate-700 hover:bg-slate-600 rounded-lg cursor-pointer transition-colors relative" title="Load JSON">
+            <input type="file" onChange={handleImport} className="absolute inset-0 opacity-0 cursor-pointer" accept=".json"/>
+            <Upload className="w-4 h-4"/>
+          </label>
+          <div className="h-5 w-px bg-slate-700 mx-1"/>
+          <button onClick={handleExportWord} className="p-2 bg-blue-700 hover:bg-blue-600 rounded-lg transition-colors" title="Export Word">
+            <FileText className="w-4 h-4"/>
+          </button>
+          <button onClick={handlePrintPDF} className="p-2 bg-red-700 hover:bg-red-600 rounded-lg transition-colors" title="Export PDF">
+            <Printer className="w-4 h-4"/>
+          </button>
+        </div>
+      </div>
+
+      {/* WORKSPACE */}
+      <div className="flex flex-1 overflow-hidden">
+        {/* LEFT — Document Editor */}
+        <div className="w-2/3 flex flex-col bg-slate-50 border-r overflow-hidden">
+          {/* Subheader */}
+          <div className="px-6 py-3 border-b bg-white/90 backdrop-blur flex items-center justify-between no-print">
+            <div className="flex items-center gap-3">
+              <span className="text-xs font-bold uppercase tracking-wider text-slate-400">Document</span>
+              {mod && cat && (
+                <span className="text-xs text-slate-400 flex items-center gap-1">
+                  {cat.icon}
+                  <span className="text-slate-500">{cat.logic}</span>
+                </span>
+              )}
+            </div>
+            <button onClick={handleAddSection}
+              className="flex items-center gap-1.5 px-3 py-1.5 bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold rounded-full transition-colors shadow-md shadow-blue-500/20">
+              <Plus className="w-3 h-3"/> Add Section
+            </button>
+          </div>
+
+          <div className="flex-1 overflow-y-auto px-8 py-8 custom-scrollbar">
+            <div className="max-w-3xl mx-auto pb-24">
+              {/* Title */}
+              {docData && (
+                <input type="text" value={docData.title}
+                  onChange={e => setDocData({ ...docData, title: e.target.value })}
+                  className="w-full text-3xl font-black text-slate-800 mb-8 bg-transparent border-b-2 border-transparent hover:border-slate-200 focus:border-blue-400 focus:outline-none transition-all placeholder:text-slate-300 leading-tight"
+                  placeholder="Document Title"/>
+              )}
+
+              {/* Module metadata strip */}
+              {mod && (
+                <div className="mb-6 p-3 bg-white rounded-xl border border-slate-200 flex flex-wrap gap-3 text-xs text-slate-500 no-print">
+                  <span className="flex items-center gap-1"><Tag className="w-3 h-3"/> {mod.target_audience}</span>
+                  <span className="flex items-center gap-1"><Star className="w-3 h-3"/> {mod.tone_profile}</span>
+                  <span className="flex items-center gap-1"><BarChart2 className="w-3 h-3"/> {mod.constraints.min_words.toLocaleString()}–{mod.constraints.max_words.toLocaleString()} words</span>
+                </div>
+              )}
+
+              {/* Sections */}
+              {docData?.sections.map((section, idx) => {
+                const isSelected = selectedIdx === idx;
+                const isEditing = editingIdx === idx;
+                return (
+                  <div key={section.id} className="flex gap-3 group/row relative">
+                    {/* Timeline dot */}
+                    <div className="flex flex-col items-center w-6 pt-5 no-print flex-shrink-0">
+                      <div className={`w-3 h-3 rounded-full border-2 z-10 transition-all duration-200 ${isSelected ? `bg-blue-500 border-blue-500 shadow-lg shadow-blue-400/30` : 'bg-white border-slate-300'}`}/>
+                      {idx < docData.sections.length - 1 && (
+                        <div className="w-0.5 bg-slate-200 flex-1 mt-1"/>
+                      )}
+                    </div>
+
+                    {/* Card */}
+                    <div className={`flex-1 mb-5 rounded-xl border-2 transition-all duration-200 bg-white cursor-pointer relative
+                      ${isSelected ? 'border-blue-500 shadow-xl shadow-blue-500/10' : 'border-slate-200 hover:border-blue-200 hover:shadow-md'}`}
+                      onClick={() => { setSelectedIdx(idx); }}>
+
+                      {/* Section key badge */}
+                      <div className={`absolute -top-2.5 left-3 px-2 py-0.5 text-xs rounded-full border font-medium ${col.badge} no-print`}>
+                        {section.sectionKey.replace(/_/g,' ')}
+                      </div>
+
+                      <div className="p-5 pt-6">
+                        {isEditing ? (
+                          <RichTextEditor
+                            initialContent={section.content}
+                            onSave={val => { handleUpdateSection(idx, val); setEditingIdx(null); }}
+                            onCancel={() => setEditingIdx(null)}
+                          />
+                        ) : (
+                          <div onDoubleClick={() => setEditingIdx(idx)}>
+                            <div className="prose-card text-sm" dangerouslySetInnerHTML={{ __html: section.content }}/>
+                            {/* Controls */}
+                            <div className={`absolute top-3 right-3 flex gap-1 bg-white rounded-lg border border-slate-200 p-0.5 shadow-sm no-print transition-opacity duration-200 ${isSelected ? 'opacity-100' : 'opacity-0 group-hover/row:opacity-100'}`}>
+                              <button onClick={e => { e.stopPropagation(); handleMove(idx, -1); }} className="p-1.5 hover:bg-slate-100 rounded text-slate-400 hover:text-slate-700" title="Move Up"><ArrowUp className="w-3 h-3"/></button>
+                              <button onClick={e => { e.stopPropagation(); handleMove(idx, 1); }} className="p-1.5 hover:bg-slate-100 rounded text-slate-400 hover:text-slate-700" title="Move Down"><ArrowDown className="w-3 h-3"/></button>
+                              <div className="w-px bg-slate-200 my-1"/>
+                              <button onClick={e => { e.stopPropagation(); setEditingIdx(idx); }} className="p-1.5 hover:bg-blue-50 rounded text-blue-500" title="Edit"><Edit3 className="w-3 h-3"/></button>
+                              <button onClick={e => { e.stopPropagation(); handleDelete(idx); }} className="p-1.5 hover:bg-red-50 rounded text-red-500" title="Delete"><Trash2 className="w-3 h-3"/></button>
+                            </div>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+
+        {/* RIGHT — Guidance Panel */}
+        <div className="w-1/3 bg-white border-l flex flex-col no-print">
+          {/* Panel Header */}
+          <div className="px-4 py-3 border-b bg-slate-50 flex items-center justify-between">
+            <div className="flex items-center gap-2 font-bold text-slate-700 text-sm">
+              <BookOpen className="w-4 h-4 text-blue-500"/> Guidance Engine
+            </div>
+            <button onClick={() => setLang(l => l === 'en' ? 'id' : 'en')}
+              className="flex items-center gap-1.5 text-xs border border-slate-200 px-3 py-1.5 rounded-full bg-white hover:bg-slate-50 transition-colors font-medium text-slate-600">
+              <Globe className="w-3 h-3"/>
+              {lang === 'en' ? 'EN → ID' : 'ID → EN'}
+            </button>
+          </div>
+
+          {/* Module Analogy Header */}
+          {activeSection?.analogy?.[lang] && (
+            <div className="px-4 py-3 border-b bg-indigo-50 border-indigo-100">
+              <p className="text-xs text-indigo-700 italic leading-relaxed">{activeSection.analogy[lang]}</p>
+            </div>
+          )}
+
+          {/* Module Metadata Panel */}
+          {mod && !activeSection && (
+            <div className="p-4 border-b bg-slate-50">
+              <div className="text-xs text-slate-500 uppercase tracking-wider mb-2">Module Profile</div>
+              <div className="text-sm font-bold text-slate-800 mb-1">{mod.name}</div>
+              <p className="text-xs text-slate-500">{mod.description}</p>
+            </div>
+          )}
+
+          {/* Guidance Content */}
+          <div className="flex-1 overflow-hidden">
+            <GuidancePanel section={activeSection} moduleId={docData?.moduleId} lang={lang}/>
+          </div>
+
+          {/* Constraint reminder footer */}
+          {mod && (
+            <div className="px-4 py-2.5 border-t bg-slate-50 flex items-center gap-2 text-xs text-slate-400">
+              <BarChart2 className="w-3 h-3"/>
+              Target: {mod.constraints.min_words.toLocaleString()}–{mod.constraints.max_words.toLocaleString()} words · {mod.constraints.citation_style}
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+createRoot(document.getElementById('root')).render(<App/>);
+</script>
 </body>
 </html>
