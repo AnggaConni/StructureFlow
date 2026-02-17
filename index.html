@@ -213,12 +213,134 @@ const DUMMY_DATA = {
         { key: 'budget', content: `<h3>4. Budget Overview</h3><p>The total requested amount is $50,000, allocated primarily for trainers and equipment.</p>` }
     ] 
   },
-
-  /* ------------------------------------------------------------- */
-  
-  conference_paper: { title: 'Adaptive Attention Mechanisms', sections: [] },
-  research_report: { title: 'Urban Mobility Transitions', sections: [] }
-};
+    conference_paper: { 
+  title: 'Adaptive Attention Mechanisms in Transformer Architectures', 
+  sections: [
+    { key: 'abstract', content: `<h3>Abstract</h3><p>Recent advances in transformer models have relied on fixed attention patterns. This paper proposes a novel adaptive attention mechanism that dynamically adjusts receptive fields based on input complexity. Experiments on GLUE and SuperGLUE benchmarks show a 2.3% average improvement while reducing FLOPs by 15%.</p>` },
+    { key: 'introduction', content: `<h3>1. Introduction</h3><p>The transformer architecture has become ubiquitous in NLP. However, its fixed attention patterns may be suboptimal for varying input lengths and complexities. We introduce AdaAttn, a module that learns to allocate attention spans per layer and head. We demonstrate its effectiveness on multiple tasks.</p>` },
+    { key: 'related_work', content: `<h3>2. Related Work</h3><p>Previous work has explored sparse attention (Child et al., 2019) and adaptive computation time (Graves, 2016). Our work differs by making attention span a learnable parameter conditioned on input.</p>` },
+    { key: 'method', content: `<h3>3. Method</h3><p>We augment each attention head with a learnable gate that controls the effective context size. The gate is a sigmoid over a learned embedding. The model is trained end-to-end with the standard cross-entropy loss.</p>` },
+    { key: 'experiments', content: `<h3>4. Experiments</h3><p>We evaluate on GLUE (Wang et al., 2018) and SuperGLUE. We compare against BERT-base and RoBERTa-base. Results show AdaAttn outperforms baselines on 7 out of 11 tasks.</p>` },
+    { key: 'conclusion', content: `<h3>5. Conclusion</h3><p>We presented an adaptive attention mechanism that improves efficiency and performance. Future work includes applying it to long-document tasks.</p>` }
+  ] 
+},
+research_report: { 
+  title: 'Urban Mobility Transitions in Post-Pandemic Cities', 
+  sections: [
+    { key: 'executive_summary', content: `<h3>Executive Summary</h3><p>This report examines shifts in urban mobility patterns following the COVID-19 pandemic. Using data from 12 global cities, we identify a sustained increase in cycling and micro-mobility usage, and a decline in public transit ridership. Recommendations for urban planners are provided.</p>` },
+    { key: 'background', content: `<h3>1. Background</h3><p>The pandemic accelerated changes in how people move. Lockdowns led to a temporary drop in all travel, but as economies reopen, modal splits have shifted. This study investigates whether these changes are temporary or permanent.</p>` },
+    { key: 'methodology', content: `<h3>2. Methodology</h3><p>We collected anonymized mobile phone data, public transport usage statistics, and cycling counts from 12 cities across North America, Europe, and Asia. Data spans 2019–2023. We applied interrupted time series analysis.</p>` },
+    { key: 'findings', content: `<h3>3. Findings</h3><p>Cycling increased by an average of 42% compared to pre-pandemic levels. Public transit ridership remains 25% below 2019 levels. Car usage has returned to near pre-pandemic levels. Significant variation exists between cities.</p>` },
+    { key: 'recommendations', content: `<h3>4. Recommendations</h3><p>Cities should invest in protected cycling infrastructure, reconsider road space allocation, and explore integrated mobility-as-a-service platforms to boost public transit.</p>` }
+  ] 
+},working_paper: { 
+  title: 'Generative AI and Labor Market Dynamics: A Preliminary Analysis', 
+  sections: [
+    { key: 'abstract', content: `<h3>Abstract</h3><p>This working paper explores the early impact of generative AI on employment across sectors. Using job posting data from 2022–2024, we find that occupations involving writing and coding are experiencing significant shifts, with a 12% decline in entry-level postings. We discuss implications for workforce development.</p>` },
+    { key: 'introduction', content: `<h3>1. Introduction</h3><p>The rapid adoption of generative AI tools like ChatGPT has raised concerns about job displacement. This paper provides preliminary evidence on how firms are adjusting their hiring.</p>` },
+    { key: 'literature_review', content: `<h3>2. Literature Review</h3><p>Previous studies on automation (Acemoglu & Restrepo, 2020) have focused on routine tasks. Generative AI targets non-routine cognitive tasks, suggesting a new wave of automation.</p>` },
+    { key: 'theoretical_framework', content: `<h3>3. Theoretical Framework</h3><p>We draw on task-based models of labor demand, where AI substitutes for certain tasks and complements others.</p>` },
+    { key: 'preliminary_analysis', content: `<h3>4. Preliminary Analysis</h3><p>Using Burning Glass Technologies data, we analyze job postings in 10 occupational groups. We find significant declines in writing-intensive roles, but increases in AI-related roles.</p>` },
+    { key: 'discussion', content: `<h3>5. Discussion</h3><p>These early trends suggest a need for reskilling programs and updated labor market policies.</p>` },
+    { key: 'conclusion', content: `<h3>6. Conclusion</h3><p>Ongoing research will refine these estimates and explore heterogeneity by firm size and industry.</p>` }
+  ] 
+},
+dissertation_thesis: { 
+  title: 'Essays on the Economics of Digital Platforms', 
+  sections: [
+    { key: 'abstract', content: `<h3>Abstract</h3><p>This dissertation comprises three essays examining the economic effects of digital platforms. The first essay studies market power in app stores. The second analyzes labor supply on gig platforms. The third investigates algorithmic pricing and collusion. Using a combination of structural models and reduced-form methods, I find significant welfare implications for consumers and workers.</p>` },
+    { key: 'introduction', content: `<h3>1. Introduction</h3><p>Digital platforms have transformed markets, but their economic impacts are not fully understood. This dissertation aims to fill that gap.</p>` },
+    { key: 'literature_review', content: `<h3>2. Literature Review</h3><p>I review the literature on two-sided markets, platform governance, and gig economy.</p>` },
+    { key: 'methodology', content: `<h3>3. Methodology</h3><p>Essay 1 uses a differentiated products demand model. Essay 2 applies dynamic panel data methods. Essay 3 uses algorithmic collusion simulations.</p>` },
+    { key: 'findings', content: `<h3>4. Findings</h3><p>I find that app store fees lead to higher consumer prices; gig workers face significant earnings volatility; and algorithmic pricing can sustain collusion without communication.</p>` },
+    { key: 'discussion', content: `<h3>5. Discussion</h3><p>The results have implications for antitrust policy and labor regulation.</p>` },
+    { key: 'conclusion', content: `<h3>6. Conclusion</h3><p>Future work should explore platform design interventions.</p>` },
+    { key: 'references', content: `<h3>References</h3><p>[1] Rochet, J.-C., & Tirole, J. (2003). Platform competition...<br>[2] etc.</p>` }
+  ] 
+},
+policy_brief: { 
+  title: 'Expanding Access to Early Childhood Education', 
+  sections: [
+    { key: 'executive_summary', content: `<h3>Executive Summary</h3><p>Only 60% of low-income children have access to pre-K programs. This brief recommends a federal-state partnership to fund universal pre-K, estimating a net economic benefit of $8,000 per child over their lifetime.</p>` },
+    { key: 'key_recommendations', content: `<h3>Key Recommendations</h3><ul><li>Increase federal matching funds for state pre-K programs.</li><li>Establish quality standards and training requirements.</li><li>Integrate with existing childcare subsidies.</li></ul>` },
+    { key: 'context', content: `<h3>Context</h3><p>Research shows that early childhood education yields high returns, yet access remains unequal.</p>` },
+    { key: 'evidence', content: `<h3>Evidence</h3><p>Studies from Chicago and Boston show participants have higher graduation rates and earnings. Cost-benefit analyses suggest a benefit-cost ratio of 7:1.</p>` },
+    { key: 'implications', content: `<h3>Implications</h3><p>Universal pre-K could reduce achievement gaps and boost long-term productivity.</p>` },
+    { key: 'conclusion', content: `<h3>Conclusion</h3><p>Policymakers should act now to expand access.</p>` }
+  ] 
+},
+policy_paper: { 
+  title: 'Reforming the Renewable Energy Subsidy Framework', 
+  sections: [
+    { key: 'executive_summary', content: `<h3>Executive Summary</h3><p>Current renewable energy subsidies are inefficient and regressive. This paper analyzes three reform options: a carbon tax with rebate, a clean energy standard, and technology-neutral auctions. We recommend a phased transition to technology-neutral auctions combined with a carbon price floor.</p>` },
+    { key: 'problem_definition', content: `<h3>1. Problem Definition</h3><p>Subsidies vary widely by technology, leading to market distortions and high costs to consumers.</p>` },
+    { key: 'policy_options', content: `<h3>2. Policy Options</h3><p>Option A: Carbon tax with revenue recycling. Option B: Clean energy standard. Option C: Technology-neutral auctions.</p>` },
+    { key: 'analysis', content: `<h3>3. Analysis</h3><p>We evaluate each option on cost-effectiveness, equity, and political feasibility. Auctions score highest on cost but require careful design.</p>` },
+    { key: 'recommendations', content: `<h3>4. Recommendations</h3><p>Implement auctions for all new renewable capacity, with set-asides for emerging technologies. Phase out production tax credits over five years.</p>` },
+    { key: 'implementation', content: `<h3>5. Implementation</h3><p>Create an independent agency to run auctions. Coordinate with states.</p>` }
+  ] 
+},
+white_paper: { 
+  title: 'Zero-Trust Architecture for Cloud Security', 
+  sections: [
+    { key: 'executive_summary', content: `<h3>Executive Summary</h3><p>As organizations migrate to the cloud, traditional perimeter-based security is inadequate. Zero-trust architecture (ZTA) assumes no implicit trust and verifies every access request. This white paper outlines a framework for implementing ZTA, including key components and deployment roadmap.</p>` },
+    { key: 'introduction', content: `<h3>1. Introduction</h3><p>The rise of remote work and cloud services has blurred network perimeters. ZTA offers a more robust security model.</p>` },
+    { key: 'current_challenges', content: `<h3>2. Current Challenges</h3><p>VPN vulnerabilities, insider threats, and complex identity management.</p>` },
+    { key: 'proposed_solution', content: `<h3>3. Proposed Solution</h3><p>Implement ZTA using micro-segmentation, continuous monitoring, and identity-aware proxies.</p>` },
+    { key: 'benefits', content: `<h3>4. Benefits</h3><p>Reduced attack surface, improved compliance, and better user experience.</p>` },
+    { key: 'roadmap', content: `<h3>5. Roadmap</h3><p>Phase 1: Inventory and classify assets. Phase 2: Deploy identity and access management. Phase 3: Implement micro-segmentation. Phase 4: Continuous monitoring and analytics.</p>` },
+    { key: 'conclusion', content: `<h3>6. Conclusion</h3><p>ZTA is essential for modern cloud security. Organizations should start now.</p>` }
+  ] 
+},
+position_paper: { 
+  title: 'Position on Data Localization Requirements', 
+  sections: [
+    { key: 'executive_summary', content: `<h3>Executive Summary</h3><p>This paper presents the Chamber of Commerce's position on data localization laws. While we recognize data privacy concerns, we argue that mandatory data localization harms trade, increases costs, and does not necessarily improve security. We advocate for interoperability frameworks and cross-border data flows with strong privacy safeguards.</p>` },
+    { key: 'introduction', content: `<h3>1. Introduction</h3><p>Several countries have introduced data localization requirements. This paper examines their impact.</p>` },
+    { key: 'stance', content: `<h3>2. Stance</h3><p>We oppose mandatory data localization. Instead, we support mutual recognition of privacy regimes.</p>` },
+    { key: 'arguments', content: `<h3>3. Arguments</h3><p>Localization raises costs for SMEs, fragments the internet, and can lead to trade retaliation.</p>` },
+    { key: 'counterarguments', content: `<h3>4. Counterarguments</h3><p>Proponents argue localization protects privacy and national security. However, existing privacy laws like GDPR already provide strong protections without localization.</p>` },
+    { key: 'conclusion', content: `<h3>5. Conclusion</h3><p>We urge policymakers to reject data localization and pursue international agreements on data flows.</p>` }
+  ] 
+},
+technical_report: { 
+  title: 'Performance Evaluation of LoRaWAN in Urban Environments', 
+  sections: [
+    { key: 'abstract', content: `<h3>Abstract</h3><p>This technical report evaluates the performance of LoRaWAN networks in dense urban settings. We deployed 20 gateways and 500 end devices across a 10 km² area. Results show a packet delivery ratio of 92% for distances up to 2 km, but significant interference in high-rise zones. Recommendations for network planning are provided.</p>` },
+    { key: 'introduction', content: `<h3>1. Introduction</h3><p>LoRaWAN is a popular LPWAN technology, but its performance in urban canyons is not well documented.</p>` },
+    { key: 'system_overview', content: `<h3>2. System Overview</h3><p>We used Multitech gateways and various end devices. The network operates at 868 MHz.</p>` },
+    { key: 'methodology', content: `<h3>3. Methodology</h3><p>We measured RSSI, SNR, and packet loss at multiple locations. Data was collected over 30 days.</p>` },
+    { key: 'results', content: `<h3>4. Results</h3><p>Average RSSI: -95 dBm; SNR: 6 dB; packet delivery ratio: 92% line-of-sight, 78% non-line-of-sight.</p>` },
+    { key: 'discussion', content: `<h3>5. Discussion</h3><p>Interference from other devices and multipath fading are major issues. Increasing gateway density can mitigate.</p>` },
+    { key: 'conclusion', content: `<h3>6. Conclusion</h3><p>LoRaWAN is viable for urban IoT but requires careful planning.</p>` }
+  ] 
+},
+guideline_sop: { 
+  title: 'Standard Operating Procedure for Clinical Trial Data Management', 
+  sections: [
+    { key: 'purpose', content: `<h3>1. Purpose</h3><p>This SOP defines the procedures for data collection, entry, validation, and storage in clinical trials to ensure compliance with GCP guidelines.</p>` },
+    { key: 'scope', content: `<h3>2. Scope</h3><p>Applies to all clinical trial staff involved in data management.</p>` },
+    { key: 'definitions', content: `<h3>3. Definitions</h3><p>CRF: Case Report Form; eCRF: electronic Case Report Form; Query: request for clarification.</p>` },
+    { key: 'responsibilities', content: `<h3>4. Responsibilities</h3><p>Data Manager: oversees data entry and validation. CRA: monitors data quality. Investigator: ensures accuracy.</p>` },
+    { key: 'procedure', content: `<h3>5. Procedure</h3><ol><li>Data entry within 5 days of visit.</li><li>Automated validation checks.</li><li>Query resolution within 3 days.</li><li>Database lock after final monitoring visit.</li></ol>` },
+    { key: 'compliance', content: `<h3>6. Compliance</h3><p>Non-compliance will be reported to QA and may result in corrective action.</p>` },
+    { key: 'references', content: `<h3>7. References</h3><p>ICH GCP E6(R2); 21 CFR Part 11.</p>` }
+  ] 
+},
+regulatory_impact_assessment: { 
+  title: 'RIA of Proposed Fuel Economy Standards for Light-Duty Vehicles', 
+  sections: [
+    { key: 'executive_summary', content: `<h3>Executive Summary</h3><p>This RIA assesses the proposed rule to increase average fuel economy to 55 mpg by 2026. Benefits include reduced greenhouse gas emissions and fuel savings, while costs include higher vehicle prices. Net benefits are estimated at $150 billion over 30 years.</p>` },
+    { key: 'problem_identification', content: `<h3>1. Problem Identification</h3><p>Transportation accounts for 29% of U.S. GHG emissions. Current standards are insufficient to meet climate goals.</p>` },
+    { key: 'objectives', content: `<h3>2. Objectives</h3><p>Reduce emissions, reduce oil dependence, and provide consumer savings.</p>` },
+    { key: 'options', content: `<h3>3. Options</h3><p>Option 1: No action. Option 2: 50 mpg by 2026. Option 3: 55 mpg by 2026 (preferred). Option 4: 60 mpg by 2026.</p>` },
+    { key: 'impact_analysis', content: `<h3>4. Impact Analysis</h3><p>Option 3 yields the highest net benefits. Costs: +$1,500 per vehicle. Benefits: $4,000 fuel savings per vehicle over lifetime, 200 Mt CO2 reduction.</p>` },
+    { key: 'consultation', content: `<h3>5. Consultation</h3><p>Stakeholder comments from automakers, environmental groups, and consumers were considered.</p>` },
+    { key: 'recommendation', content: `<h3>6. Recommendation</h3><p>Adopt Option 3 with a phased implementation.</p>` }
+  ] 
+}
+    ;
+      /* ------------------------------------------------------------- */
 
 // 2. GUIDANCE ENGINE (Panduan Bilingual - EN & ID)
 const GUIDANCE = {
@@ -254,7 +376,329 @@ const GUIDANCE = {
       en: { what: 'Justification of costs.', tip: 'Ensure every dollar aligns with an objective.' },
       id: { what: 'Justifikasi biaya.', tip: 'Pastikan setiap Rupiah selaras dengan tujuan.' }
     }
+  }, conference_paper: {
+  _analogy: { en: 'A conference paper is a snapshot of ongoing research.', id: 'Makalah konferensi adalah cuplikan penelitian yang sedang berlangsung.' },
+  abstract: {
+    en: { what: 'Summarize the problem, method, key result, and implication.', tip: 'Make it self-contained; readers decide to attend based on this.' },
+    id: { what: 'Ringkas masalah, metode, hasil utama, dan implikasi.', tip: 'Buatlah mandiri; pembaca memutuskan untuk hadir berdasarkan ini.' }
   },
+  introduction: {
+    en: { what: 'State the research question, motivation, and contribution.', tip: 'End with a clear outline of the paper.' },
+    id: { what: 'Nyatakan pertanyaan penelitian, motivasi, dan kontribusi.', tip: 'Akhiri dengan garis besar makalah yang jelas.' }
+  },
+  related_work: {
+    en: { what: 'Situate your work among existing literature.', tip: 'Highlight the gap you are filling.' },
+    id: { what: 'Letakkan karya Anda di antara literatur yang ada.', tip: 'Soroti celah yang Anda isi.' }
+  },
+  method: {
+    en: { what: 'Describe your approach, data, and experimental setup.', tip: 'Provide enough detail for reproducibility.' },
+    id: { what: 'Jelaskan pendekatan, data, dan pengaturan eksperimen Anda.', tip: 'Berikan detail yang cukup untuk reproduksibilitas.' }
+  },
+  experiments: {
+    en: { what: 'Present results, comparisons, and ablation studies.', tip: 'Use tables/figures to summarize.' },
+    id: { what: 'Sajikan hasil, perbandingan, dan studi ablasi.', tip: 'Gunakan tabel/figur untuk meringkas.' }
+  },
+  conclusion: {
+    en: { what: 'Summarize findings and future work.', tip: 'Do not introduce new results.' },
+    id: { what: 'Ringkas temuan dan penelitian selanjutnya.', tip: 'Jangan memperkenalkan hasil baru.' }
+  }
+},
+research_report: {
+  _analogy: { en: 'A research report is a briefing for decision-makers.', id: 'Laporan penelitian adalah briefing untuk pengambil keputusan.' },
+  executive_summary: {
+    en: { what: 'Summarize the entire report: problem, methods, key findings, recommendations.', tip: 'Write last; keep to one page.' },
+    id: { what: 'Ringkas seluruh laporan: masalah, metode, temuan utama, rekomendasi.', tip: 'Tulis terakhir; tetap dalam satu halaman.' }
+  },
+  background: {
+    en: { what: 'Provide context, why the research was commissioned.', tip: 'Include relevant statistics.' },
+    id: { what: 'Berikan konteks, mengapa penelitian ini dipesan.', tip: 'Sertakan statistik yang relevan.' }
+  },
+  methodology: {
+    en: { what: 'Explain data sources, collection methods, and analysis.', tip: 'Be transparent about limitations.' },
+    id: { what: 'Jelaskan sumber data, metode pengumpulan, dan analisis.', tip: 'Bersikaplah transparan tentang keterbatasan.' }
+  },
+  findings: {
+    en: { what: 'Present the evidence without interpretation.', tip: 'Use bullet points for clarity.' },
+    id: { what: 'Sajikan bukti tanpa interpretasi.', tip: 'Gunakan poin-poin untuk kejelasan.' }
+  },
+  recommendations: {
+    en: { what: 'List actionable steps based on findings.', tip: 'Prioritize by impact/feasibility.' },
+    id: { what: 'Daftar langkah-langkah yang dapat ditindaklanjuti berdasarkan temuan.', tip: 'Prioritaskan berdasarkan dampak/kelayakan.' }
+  }
+},
+
+// === PANDUAN UNTUK TEMPLATE BARU ===
+working_paper: {
+  _analogy: { en: 'A working paper is a work in progress, open for feedback.', id: 'Working paper adalah karya yang sedang berjalan, terbuka untuk masukan.' },
+  abstract: {
+    en: { what: 'State the research question, preliminary findings, and contribution.', tip: 'Emphasize novelty.' },
+    id: { what: 'Nyatakan pertanyaan penelitian, temuan awal, dan kontribusi.', tip: 'Tekankan kebaruan.' }
+  },
+  introduction: {
+    en: { what: 'Introduce the problem and why it matters now.', tip: 'Cite recent developments.' },
+    id: { what: 'Perkenalkan masalah dan mengapa penting saat ini.', tip: 'Kutip perkembangan terbaru.' }
+  },
+  literature_review: {
+    en: { what: 'Discuss relevant prior work and identify gaps.', tip: 'Focus on literature from the last 5 years.' },
+    id: { what: 'Bahas karya sebelumnya yang relevan dan identifikasi celah.', tip: 'Fokus pada literatur 5 tahun terakhir.' }
+  },
+  theoretical_framework: {
+    en: { what: 'Outline the concepts or models guiding your analysis.', tip: 'Keep it concise; elaborate in later versions.' },
+    id: { what: 'Gariskan konsep atau model yang memandu analisis Anda.', tip: 'Tetap ringkas; akan diperluas di versi selanjutnya.' }
+  },
+  preliminary_analysis: {
+    en: { what: 'Present early data or stylized facts.', tip: 'Acknowledge limitations.' },
+    id: { what: 'Sajikan data awal atau fakta bergaya.', tip: 'Akui keterbatasan.' }
+  },
+  discussion: {
+    en: { what: 'Interpret findings and link to literature.', tip: 'Suggest implications.' },
+    id: { what: 'Interpretasikan temuan dan hubungkan dengan literatur.', tip: 'Sarankan implikasi.' }
+  },
+  conclusion: {
+    en: { what: 'Summarize and outline next steps.', tip: 'Invite feedback.' },
+    id: { what: 'Ringkas dan gariskan langkah selanjutnya.', tip: 'Undang masukan.' }
+  }
+},
+dissertation_thesis: {
+  _analogy: { en: 'A thesis is your contribution to a scholarly conversation.', id: 'Tesis adalah kontribusi Anda dalam percakapan ilmiah.' },
+  abstract: {
+    en: { what: 'Summarize each essay/chapter, overall contribution.', tip: 'Write after completing the dissertation.' },
+    id: { what: 'Ringkas setiap esai/bab, kontribusi keseluruhan.', tip: 'Tulis setelah menyelesaikan disertasi.' }
+  },
+  introduction: {
+    en: { what: 'Present the overarching research question and why it matters.', tip: 'Outline the structure.' },
+    id: { what: 'Sajikan pertanyaan penelitian utama dan mengapa penting.', tip: 'Gariskan struktur.' }
+  },
+  literature_review: {
+    en: { what: 'Synthesize literature that frames all essays.', tip: 'Identify the gap your thesis fills.' },
+    id: { what: 'Sintesis literatur yang membingkai semua esai.', tip: 'Identifikasi celah yang diisi tesis Anda.' }
+  },
+  methodology: {
+    en: { what: 'Describe methods used across essays (if common).', tip: 'Justify choices.' },
+    id: { what: 'Jelaskan metode yang digunakan di semua esai (jika umum).', tip: 'Justifikasi pilihan.' }
+  },
+  findings: {
+    en: { what: 'Present key results from each essay.', tip: 'Use subheadings per essay.' },
+    id: { what: 'Sajikan hasil utama dari setiap esai.', tip: 'Gunakan subjudul per esai.' }
+  },
+  discussion: {
+    en: { what: 'Integrate findings, discuss implications, limitations.', tip: 'Connect back to literature.' },
+    id: { what: 'Integrasikan temuan, bahas implikasi, keterbatasan.', tip: 'Hubungkan kembali ke literatur.' }
+  },
+  conclusion: {
+    en: { what: 'Summarize contributions and future research.', tip: 'End with a strong takeaway.' },
+    id: { what: 'Ringkas kontribusi dan penelitian selanjutnya.', tip: 'Akhiri dengan pesan kuat.' }
+  },
+  references: {
+    en: { what: 'List all cited works in consistent style.', tip: 'Use reference manager.' },
+    id: { what: 'Daftar semua karya yang dikutip dengan gaya konsisten.', tip: 'Gunakan manajer referensi.' }
+  }
+},
+policy_brief: {
+  _analogy: { en: 'A policy brief is a call to action for busy policymakers.', id: 'Policy brief adalah ajakan bertindak untuk pembuat kebijakan yang sibuk.' },
+  executive_summary: {
+    en: { what: 'State the problem, key recommendation, and main evidence.', tip: 'One paragraph max.' },
+    id: { what: 'Nyatakan masalah, rekomendasi utama, dan bukti utama.', tip: 'Maksimal satu paragraf.' }
+  },
+  key_recommendations: {
+    en: { what: 'List 3–5 actionable recommendations.', tip: 'Make them specific and feasible.' },
+    id: { what: 'Daftar 3–5 rekomendasi yang dapat ditindaklanjuti.', tip: 'Buatlah spesifik dan layak.' }
+  },
+  context: {
+    en: { what: 'Briefly describe the policy issue and its importance.', tip: 'Use a hook to grab attention.' },
+    id: { what: 'Jelaskan secara singkat masalah kebijakan dan pentingnya.', tip: 'Gunakan kalimat pembuka yang menarik.' }
+  },
+  evidence: {
+    en: { what: 'Present data, research, or case studies supporting your recommendations.', tip: 'Highlight 2–3 key facts.' },
+    id: { what: 'Sajikan data, penelitian, atau studi kasus yang mendukung rekomendasi Anda.', tip: 'Sorot 2–3 fakta kunci.' }
+  },
+  implications: {
+    en: { what: 'Discuss costs, benefits, and trade-offs.', tip: 'Be honest about uncertainties.' },
+    id: { what: 'Bahas biaya, manfaat, dan trade-off.', tip: 'Jujurlah tentang ketidakpastian.' }
+  },
+  conclusion: {
+    en: { what: 'Reiterate the call to action.', tip: 'Keep it short.' },
+    id: { what: 'Ulangi ajakan bertindak.', tip: 'Tetap singkat.' }
+  }
+},
+policy_paper: {
+  _analogy: { en: 'A policy paper is a deep dive into options.', id: 'Policy paper adalah analisis mendalam tentang pilihan-pilihan.' },
+  executive_summary: {
+    en: { what: 'Summarize the problem, options analyzed, and recommended course.', tip: 'Include key numbers.' },
+    id: { what: 'Ringkas masalah, opsi yang dianalisis, dan arah yang direkomendasikan.', tip: 'Sertakan angka-angka kunci.' }
+  },
+  problem_definition: {
+    en: { what: 'Define the issue with evidence.', tip: 'Use data to show magnitude.' },
+    id: { what: 'Definisikan masalah dengan bukti.', tip: 'Gunakan data untuk menunjukkan besaran.' }
+  },
+  policy_options: {
+    en: { what: 'Describe each option clearly.', tip: 'Include a “no action” baseline.' },
+    id: { what: 'Jelaskan setiap opsi dengan jelas.', tip: 'Sertakan opsi “tanpa tindakan” sebagai dasar.' }
+  },
+  analysis: {
+    en: { what: 'Evaluate options against criteria (cost, effectiveness, equity, feasibility).', tip: 'Use a comparison matrix.' },
+    id: { what: 'Evaluasi opsi berdasarkan kriteria (biaya, efektivitas, kesetaraan, kelayakan).', tip: 'Gunakan matriks perbandingan.' }
+  },
+  recommendations: {
+    en: { what: 'State your preferred option and justify.', tip: 'Address implementation challenges.' },
+    id: { what: 'Nyatakan opsi pilihan Anda dan beri justifikasi.', tip: 'Bahasa tantangan implementasi.' }
+  },
+  implementation: {
+    en: { what: 'Outline steps, timeline, and responsible actors.', tip: 'Mention monitoring mechanisms.' },
+    id: { what: 'Gariskan langkah, jadwal, dan aktor yang bertanggung jawab.', tip: 'Sebutkan mekanisme pemantauan.' }
+  }
+},
+white_paper: {
+  _analogy: { en: 'A white paper is a persuasive technical brief.', id: 'White paper adalah brief teknis yang persuasif.' },
+  executive_summary: {
+    en: { what: 'Summarize the problem, solution, and benefits.', tip: 'Target C-level readers.' },
+    id: { what: 'Ringkas masalah, solusi, dan manfaat.', tip: 'Targetkan pembaca tingkat direksi.' }
+  },
+  introduction: {
+    en: { what: 'Set the stage: why this issue matters now.', tip: 'Use a compelling statistic.' },
+    id: { what: 'Atur panggung: mengapa masalah ini penting saat ini.', tip: 'Gunakan statistik yang menarik.' }
+  },
+  current_challenges: {
+    en: { what: 'Describe pain points and limitations of existing approaches.', tip: 'Be specific with examples.' },
+    id: { what: 'Jelaskan masalah dan keterbatasan pendekatan yang ada.', tip: 'Berikan contoh spesifik.' }
+  },
+  proposed_solution: {
+    en: { what: 'Explain your solution, how it works, and its uniqueness.', tip: 'Use diagrams if possible (describe).' },
+    id: { what: 'Jelaskan solusi Anda, cara kerjanya, dan keunikannya.', tip: 'Gunakan diagram jika memungkinkan (deskripsikan).' }
+  },
+  benefits: {
+    en: { what: 'Quantify advantages: ROI, efficiency, security.', tip: 'Compare to alternatives.' },
+    id: { what: 'Kuantifikasi keuntungan: ROI, efisiensi, keamanan.', tip: 'Bandingkan dengan alternatif.' }
+  },
+  roadmap: {
+    en: { what: 'Outline implementation phases and timeline.', tip: 'Be realistic.' },
+    id: { what: 'Gariskan fase implementasi dan jadwal.', tip: 'Bersikaplah realistis.' }
+  },
+  conclusion: {
+    en: { what: 'Reinforce the call to adopt the solution.', tip: 'End with contact/next steps.' },
+    id: { what: 'Perkuat ajakan untuk mengadopsi solusi.', tip: 'Akhiri dengan kontak/langkah selanjutnya.' }
+  }
+},
+position_paper: {
+  _analogy: { en: 'A position paper states where you stand.', id: 'Position paper menyatakan posisi Anda.' },
+  executive_summary: {
+    en: { what: 'State your position and main arguments.', tip: 'One paragraph.' },
+    id: { what: 'Nyatakan posisi Anda dan argumen utama.', tip: 'Satu paragraf.' }
+  },
+  introduction: {
+    en: { what: 'Introduce the issue and why it’s contested.', tip: 'Brief background.' },
+    id: { what: 'Perkenalkan isu dan mengapa diperdebatkan.', tip: 'Latar belakang singkat.' }
+  },
+  stance: {
+    en: { what: 'Clearly articulate your position.', tip: 'Use a strong thesis statement.' },
+    id: { what: 'Artikulasikan posisi Anda dengan jelas.', tip: 'Gunakan pernyataan tesis yang kuat.' }
+  },
+  arguments: {
+    en: { what: 'Present supporting evidence and reasoning.', tip: 'Address each argument separately.' },
+    id: { what: 'Sajikan bukti dan alasan pendukung.', tip: 'Tangani setiap argumen secara terpisah.' }
+  },
+  counterarguments: {
+    en: { what: 'Acknowledge opposing views and rebut them.', tip: 'Show fairness and strength.' },
+    id: { what: 'Akui pandangan yang berlawanan dan bantah.', tip: 'Tunjukkan keadilan dan kekuatan.' }
+  },
+  conclusion: {
+    en: { what: 'Summarize and call for action.', tip: 'Reiterate the stakes.' },
+    id: { what: 'Ringkas dan ajak bertindak.', tip: 'Ulangi apa yang dipertaruhkan.' }
+  }
+},
+technical_report: {
+  _analogy: { en: 'A technical report is a lab notebook for others.', id: 'Laporan teknis adalah catatan laboratorium untuk orang lain.' },
+  abstract: {
+    en: { what: 'Summarize objectives, methods, key results, and conclusions.', tip: 'Include numerical highlights.' },
+    id: { what: 'Ringkas tujuan, metode, hasil utama, dan kesimpulan.', tip: 'Sertakan sorotan numerik.' }
+  },
+  introduction: {
+    en: { what: 'State the problem and context.', tip: 'Mention who commissioned it.' },
+    id: { what: 'Nyatakan masalah dan konteks.', tip: 'Sebutkan siapa yang memesannya.' }
+  },
+  system_overview: {
+    en: { what: 'Describe the hardware/software/system under test.', tip: 'Include specifications.' },
+    id: { what: 'Jelaskan perangkat keras/perangkat lunak/sistem yang diuji.', tip: 'Sertakan spesifikasi.' }
+  },
+  methodology: {
+    en: { what: 'Detail test setup, procedures, and measurement tools.', tip: 'Include calibration info.' },
+    id: { what: 'Rinci pengaturan uji, prosedur, dan alat ukur.', tip: 'Sertakan info kalibrasi.' }
+  },
+  results: {
+    en: { what: 'Present data in tables/figures with brief descriptions.', tip: 'Do not interpret yet.' },
+    id: { what: 'Sajikan data dalam tabel/figur dengan deskripsi singkat.', tip: 'Jangan interpretasi dulu.' }
+  },
+  discussion: {
+    en: { what: 'Interpret results, compare to expectations, note anomalies.', tip: 'Suggest improvements.' },
+    id: { what: 'Interpretasi hasil, bandingkan dengan harapan, catat anomali.', tip: 'Sarankan perbaikan.' }
+  },
+  conclusion: {
+    en: { what: 'Summarize main takeaways.', tip: 'Mention if further testing is needed.' },
+    id: { what: 'Ringkas kesimpulan utama.', tip: 'Sebutkan jika diperlukan pengujian lebih lanjut.' }
+  }
+},
+guideline_sop: {
+  _analogy: { en: 'An SOP is a recipe for consistency.', id: 'SOP adalah resep untuk konsistensi.' },
+  purpose: {
+    en: { what: 'Explain why the SOP exists.', tip: 'Link to regulations if applicable.' },
+    id: { what: 'Jelaskan mengapa SOP ini ada.', tip: 'Hubungkan dengan regulasi jika ada.' }
+  },
+  scope: {
+    en: { what: 'Define who and what the SOP covers.', tip: 'Mention exclusions.' },
+    id: { what: 'Tentukan siapa dan apa yang dicakup SOP.', tip: 'Sebutkan pengecualian.' }
+  },
+  definitions: {
+    en: { what: 'Define key terms and acronyms.', tip: 'Keep it simple.' },
+    id: { what: 'Definisikan istilah dan akronim kunci.', tip: 'Tetap sederhana.' }
+  },
+  responsibilities: {
+    en: { what: 'List roles and their duties.', tip: 'Use a table if many.' },
+    id: { what: 'Daftar peran dan tugas mereka.', tip: 'Gunakan tabel jika banyak.' }
+  },
+  procedure: {
+    en: { what: 'Provide step-by-step instructions.', tip: 'Use numbered steps, active voice.' },
+    id: { what: 'Berikan instruksi langkah demi langkah.', tip: 'Gunakan langkah bernomor, kalimat aktif.' }
+  },
+  compliance: {
+    en: { what: 'Explain consequences of non-compliance.', tip: 'Reference related policies.' },
+    id: { what: 'Jelaskan konsekuensi ketidakpatuhan.', tip: 'Rujuk kebijakan terkait.' }
+  },
+  references: {
+    en: { what: 'List related documents and regulations.', tip: 'Include version numbers.' },
+    id: { what: 'Daftar dokumen dan regulasi terkait.', tip: 'Sertakan nomor versi.' }
+  }
+},
+regulatory_impact_assessment: {
+  _analogy: { en: 'An RIA is a cost–benefit analysis for rules.', id: 'RIA adalah analisis biaya-manfaat untuk peraturan.' },
+  executive_summary: {
+    en: { what: 'Summarize the problem, preferred option, and net benefits.', tip: 'Highlight key numbers.' },
+    id: { what: 'Ringkas masalah, opsi yang dipilih, dan manfaat bersih.', tip: 'Sorot angka-angka kunci.' }
+  },
+  problem_identification: {
+    en: { what: 'Describe the market failure or issue.', tip: 'Use evidence.' },
+    id: { what: 'Jelaskan kegagalan pasar atau masalah.', tip: 'Gunakan bukti.' }
+  },
+  objectives: {
+    en: { what: 'State what the regulation aims to achieve.', tip: 'Be specific and measurable.' },
+    id: { what: 'Nyatakan apa yang ingin dicapai oleh regulasi.', tip: 'Spesifik dan terukur.' }
+  },
+  options: {
+    en: { what: 'List alternative approaches, including “do nothing”.', tip: 'Describe each concisely.' },
+    id: { what: 'Daftar pendekatan alternatif, termasuk “tidak melakukan apa pun”.', tip: 'Jelaskan masing-masing secara ringkas.' }
+  },
+  impact_analysis: {
+    en: { what: 'Quantify costs, benefits, and distributional effects.', tip: 'Use monetized values where possible.' },
+    id: { what: 'Kuantifikasi biaya, manfaat, dan efek distribusi.', tip: 'Gunakan nilai moneter jika memungkinkan.' }
+  },
+  consultation: {
+    en: { what: 'Summarize stakeholder feedback and how it influenced the analysis.', tip: 'Be transparent.' },
+    id: { what: 'Ringkas masukan pemangku kepentingan dan bagaimana pengaruhnya terhadap analisis.', tip: 'Bersikaplah transparan.' }
+  },
+  recommendation: {
+    en: { what: 'State the preferred option and justification.', tip: 'Mention next steps.' },
+    id: { what: 'Nyatakan opsi yang dipilih dan justifikasi.', tip: 'Sebutkan langkah selanjutnya.' }
+  }
+}
 
   /* ------------------------------------------------------------- */
 };
@@ -288,7 +732,87 @@ const MODULE_REGISTRY_DEFINITION = [
       structural_sections: ['executive_summary','problem_statement','objectives','implementation_plan','budget'], 
       color: 'blue', 
       description: 'Proposal pendanaan proyek standar.' 
-  },
+  }, { 
+  id: 'working_paper', 
+  name: 'Working Paper', 
+  category: 'academic', 
+  schema_version: SCHEMA_VERSION, 
+  structural_sections: ['abstract','introduction','literature_review','theoretical_framework','preliminary_analysis','discussion','conclusion'], 
+  color: 'blue', 
+  description: 'Preliminary research findings shared for feedback.' 
+},
+{ 
+  id: 'dissertation_thesis', 
+  name: 'Dissertation / Thesis', 
+  category: 'academic', 
+  schema_version: SCHEMA_VERSION, 
+  structural_sections: ['abstract','introduction','literature_review','methodology','findings','discussion','conclusion','references'], 
+  color: 'blue', 
+  description: 'Original research for doctoral or master\'s degree.' 
+},
+{ 
+  id: 'policy_brief', 
+  name: 'Policy Brief', 
+  category: 'policy', 
+  schema_version: SCHEMA_VERSION, 
+  structural_sections: ['executive_summary','key_recommendations','context','evidence','implications','conclusion'], 
+  color: 'emerald', 
+  description: 'Concise summary of policy issue and recommendations.' 
+},
+{ 
+  id: 'policy_paper', 
+  name: 'Policy Paper', 
+  category: 'policy', 
+  schema_version: SCHEMA_VERSION, 
+  structural_sections: ['executive_summary','problem_definition','policy_options','analysis','recommendations','implementation'], 
+  color: 'emerald', 
+  description: 'Detailed analysis of policy options.' 
+},
+{ 
+  id: 'white_paper', 
+  name: 'White Paper', 
+  category: 'policy', 
+  schema_version: SCHEMA_VERSION, 
+  structural_sections: ['executive_summary','introduction','current_challenges','proposed_solution','benefits','roadmap','conclusion'], 
+  color: 'emerald', 
+  description: 'Authoritative report on a specific issue and solution.' 
+},
+{ 
+  id: 'position_paper', 
+  name: 'Position Paper', 
+  category: 'policy', 
+  schema_version: SCHEMA_VERSION, 
+  structural_sections: ['executive_summary','introduction','stance','arguments','counterarguments','conclusion'], 
+  color: 'emerald', 
+  description: 'Statement of an organization\'s or individual\'s position.' 
+},
+{ 
+  id: 'technical_report', 
+  name: 'Technical Report', 
+  category: 'academic', 
+  schema_version: SCHEMA_VERSION, 
+  structural_sections: ['abstract','introduction','system_overview','methodology','results','discussion','conclusion'], 
+  color: 'blue', 
+  description: 'Documentation of technical research or development.' 
+},
+{ 
+  id: 'guideline_sop', 
+  name: 'Guideline / SOP Document', 
+  category: 'policy', 
+  schema_version: SCHEMA_VERSION, 
+  structural_sections: ['purpose','scope','definitions','responsibilities','procedure','compliance','references'], 
+  color: 'emerald', 
+  description: 'Standard operating procedures or guidelines.' 
+},
+{ 
+  id: 'regulatory_impact_assessment', 
+  name: 'Regulatory Impact Assessment', 
+  category: 'policy', 
+  schema_version: SCHEMA_VERSION, 
+  structural_sections: ['executive_summary','problem_identification','objectives','options','impact_analysis','consultation','recommendation'], 
+  color: 'emerald', 
+  description: 'Evaluation of effects of proposed regulations.' 
+},
 
   /* ------------------------------------------------------------- */
   
