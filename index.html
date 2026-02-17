@@ -62,12 +62,36 @@
   padding: 0 !important;
   margin: 0 auto !important;
   box-sizing: border-box !important;
+  overflow-wrap: break-word !important; /* paksa word wrap */
 }
 
 /* Margin halaman (standar jurnal 1 inci) */
 .harvard-export .pdf-content {
-  margin: 2.54cm !important; /* 1 inci = 2,54 cm */
+  margin: 2.54cm !important;
   padding: 0 !important;
+}
+
+/* PASTIKAN SEMUA ELEMEN TIDAK MELEWATI LEBAR */
+.harvard-export * {
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+  word-wrap: break-word !important;
+}
+
+.harvard-export img,
+.harvard-export table,
+.harvard-export pre {
+  max-width: 100% !important;
+  height: auto !important;
+}
+
+.harvard-export table {
+  table-layout: fixed !important; /* paksa tabel menyesuaikan lebar */
+  word-wrap: break-word !important;
+}
+
+.harvard-export pre {
+  white-space: pre-wrap !important; /* bungkus teks panjang di kode */
 }
 
 /* Judul dokumen */
@@ -144,7 +168,7 @@
 }
 
 /* Nomor halaman (akan ditambahkan otomatis oleh html2pdf) */
-/* Tidak perlu CSS khusus, html2pdf.js sudah mengatur page breaks */
+/* Tidak perlu CSS khusus, html2pdf.js sudah mengatur page breaks */ 
     </style>
 </head>
 <body class="bg-slate-100 text-slate-900">
@@ -499,89 +523,268 @@ regulatory_impact_assessment: {
       /* ------------------------------------------------------------- */
 
 // 2. GUIDANCE ENGINE (Panduan Bilingual - EN & ID)
+/* --- AREA EDIT (PAK ANGGA): TAMBAH GUIDANCE BARU DI SINI --- */
 const GUIDANCE = {
   journal_article: {
-    _analogy: { en: 'A journal article is a courtroom argument.', id: 'Artikel jurnal ibarat argumen di pengadilan.' },
-    abstract: {
-      en: { what: 'Self-contained summary of the entire paper.', tip: 'Think of it as a movie trailer.' },
-      id: { what: 'Ringkasan mandiri seluruh makalah.', tip: 'Bayangkan seperti trailer film.' }
+    _analogy: { 
+      en: 'A journal article is a courtroom argument.', 
+      id: 'Artikel jurnal ibarat argumen di pengadilan.' 
+    },
+    abstract: { 
+      en: { 
+        what: 'Self-contained summary of the entire paper (Problem, Method, Result, Conclusion).', 
+        tip: 'Think of it as a movie trailer. It determines if people read the rest.', 
+        mistakes: 'Do not include citations, undefined abbreviations, or new information not in the paper.'
+      }, 
+      id: { 
+        what: 'Ringkasan mandiri seluruh makalah (Masalah, Metode, Hasil, Kesimpulan).', 
+        tip: 'Bayangkan seperti trailer film. Ini menentukan apakah orang akan membaca sisanya.', 
+        mistakes: 'Jangan masukkan kutipan (sitasi), singkatan yang belum dijelaskan, atau informasi baru.'
+      } 
+    },
+    introduction: { 
+      en: { 
+        what: 'State the problem, gap in existing knowledge, and your thesis/solution.', 
+        tip: 'Start broad and narrow down to your specific research question (The Funnel Method).',
+        mistakes: 'Avoid giving away the detailed results here. Do not ramble about general history.'
+      }, 
+      id: { 
+        what: 'Nyatakan masalah, celah pada pengetahuan yang ada, dan tesis/solusi Anda.', 
+        tip: 'Mulai dari hal umum dan menyempit ke pertanyaan penelitian spesifik (Metode Corong).',
+        mistakes: 'Hindari membeberkan hasil detail di sini. Jangan bertele-tele soal sejarah umum.'
+      } 
+    },
+    framework: { 
+      en: { what: 'The lens you use.', tip: 'Connect variables.' }, 
+      id: { what: 'Kacamata analisis.', tip: 'Hubungkan variabel.' } 
+    },
+    methodology: { 
+      en: { what: 'Recipe.', tip: 'Reproducible.' }, 
+      id: { what: 'Resep.', tip: 'Harus bisa diulang.' } 
+    },
+    findings: { 
+      en: { what: 'Data only.', tip: 'No opinion.' }, 
+      id: { what: 'Hanya data.', tip: 'Jangan beropini.' } 
+    },
+    discussion: { 
+      en: { what: 'Interpretation.', tip: 'Link to theory.' }, 
+      id: { what: 'Interpretasi.', tip: 'Hubungkan ke teori.' } 
+    },
+    conclusion: { 
+      en: { what: 'Takeaway.', tip: 'So what?' }, 
+      id: { what: 'Pesan utama.', tip: 'Lalu kenapa?' } 
     }
   },
-
-  /* --- AREA EDIT (PAK ANGGA): TAMBAH GUIDANCE BARU DI SINI --- */
-  
-  project_proposal: {
-    _analogy: { en: 'A proposal is a sales pitch.', id: 'Proposal adalah presentasi penjualan (pitching).' },
-    executive_summary: {
-      en: { what: 'Hook the funder immediately. Summarize the need and the solution.', tip: 'Write this last.' },
-      id: { what: 'Pikat pemberi dana segera. Rangkum kebutuhan dan solusinya.', tip: 'Tulis bagian ini terakhir.' }
+    project_proposal: {
+    _analogy: { 
+      en: 'A proposal is a sales pitch where trust is the currency.', 
+      id: 'Proposal adalah jualan di mana kepercayaan adalah mata uangnya.' 
     },
-    problem_statement: {
-      en: { what: 'Define the gap or pain point using data.', tip: 'Use statistics to prove urgency.' },
-      id: { what: 'Definisikan kesenjangan atau masalah menggunakan data.', tip: 'Gunakan statistik untuk membuktikan urgensi.' }
+    executive_summary: { 
+      en: { 
+        what: 'A standalone overview. Why this project, why now, why you, and how much?', 
+        tip: 'Write this last. It is the "elevator pitch"—if they only read this page, will they fund you?', 
+        mistakes: 'Do not just copy-paste the first paragraph of the introduction. Avoid vague ask amounts.'
+      }, 
+      id: { 
+        what: 'Gambaran umum mandiri. Mengapa proyek ini, mengapa sekarang, mengapa Anda, dan berapa biayanya?', 
+        tip: 'Tulis ini terakhir. Ini adalah "elevator pitch"—jika mereka hanya baca halaman ini, apakah akan didanai?', 
+        mistakes: 'Jangan cuma copy-paste paragraf awal pendahuluan. Hindari jumlah dana yang samar.'
+      } 
     },
-    objectives: {
-      en: { what: 'Specific, Measurable, Achievable goals.', tip: 'Use SMART criteria.' },
-      id: { what: 'Tujuan yang Spesifik, Terukur, Dapat Dicapai.', tip: 'Gunakan kriteria SMART.' }
+    problem_statement: { 
+      en: { 
+        what: 'A data-driven diagnosis of the urgency. Who is suffering and what is the gap?', 
+        tip: 'Use the "Inverted Pyramid": Global context -> Local context -> The specific gap your project fills.', 
+        mistakes: 'Do not frame the "lack of your solution" as the problem (e.g., "Problem is no gym" vs "Problem is obesity").'
+      }, 
+      id: { 
+        what: 'Diagnosis urgensi berbasis data. Siapa yang terdampak dan apa kesenjangannya?', 
+        tip: 'Gunakan "Piramida Terbalik": Konteks Global -> Lokal -> Kesenjangan spesifik yang diisi proyek Anda.', 
+        mistakes: 'Jangan bingkai "ketiadaan solusi Anda" sebagai masalah (cth: "Masalahnya gak ada gym" vs "Masalahnya obesitas").'
+      } 
     },
-    implementation_plan: {
-      en: { what: 'The step-by-step roadmap.', tip: 'Be realistic with timelines.' },
-      id: { what: 'Peta jalan langkah demi langkah.', tip: 'Bersikaplah realistis dengan jadwal waktu.' }
+    objectives: { 
+      en: { 
+        what: 'Tangible deliverables defined by SMART criteria (Specific, Measurable, Achievable, Relevant, Time-bound).', 
+        tip: 'Distinguish between "Outputs" (activities done) and "Outcomes" (impact achieved). Funders buy outcomes.', 
+        mistakes: 'Avoid vague verbs like "understand" or "raise awareness" without a metric (e.g., "reach 5000 people").'
+      }, 
+      id: { 
+        what: 'Hasil nyata yang didefinisikan kriteria SMART (Spesifik, Terukur, Dapat Dicapai, Relevan, Berbatas Waktu).', 
+        tip: 'Bedakan "Output" (kegiatan) dan "Outcome" (dampak). Pemberi dana membeli dampak.', 
+        mistakes: 'Hindari kata kerja samar seperti "memahami" atau "menyadarkan" tanpa metrik (cth: "menjangkau 5000 orang").'
+      } 
     },
-    budget: {
-      en: { what: 'Justification of costs.', tip: 'Ensure every dollar aligns with an objective.' },
-      id: { what: 'Justifikasi biaya.', tip: 'Pastikan setiap Rupiah selaras dengan tujuan.' }
+    implementation_plan: { 
+      en: { 
+        what: 'The chronological roadmap. Who does what, when, and where?', 
+        tip: 'Think of this as a narrative Gantt chart. Show that you have considered logistics and risks.', 
+        mistakes: 'Do not underestimate time buffers. Don\'t forget monitoring and evaluation phases.'
+      }, 
+      id: { 
+        what: 'Peta jalan kronologis. Siapa melakukan apa, kapan, dan di mana?', 
+        tip: 'Anggap ini narasi Gantt chart. Tunjukkan Anda sudah memikirkan logistik dan risiko.', 
+        mistakes: 'Jangan remehkan waktu cadangan (buffer). Jangan lupa fase monitoring dan evaluasi.'
+      } 
+    },
+    budget: { 
+      en: { 
+        what: 'Transparent financial breakdown linking money to activities.', 
+        tip: 'Every line item must correspond to an activity in the plan. Justification is key.', 
+        mistakes: 'Do not pad the budget arbitrarily. Don\'t forget administrative overheads allowed by the grant.'
+      }, 
+      id: { 
+        what: 'Rincian keuangan transparan yang menghubungkan uang dengan aktivitas.', 
+        tip: 'Setiap item biaya harus nyambung dengan aktivitas di rencana. Justifikasi adalah kunci.', 
+        mistakes: 'Jangan melebih-lebihkan anggaran sembarangan. Jangan lupa biaya operasional yang diizinkan.'
+      } 
     }
-  }, conference_paper: {
-  _analogy: { en: 'A conference paper is a snapshot of ongoing research.', id: 'Makalah konferensi adalah cuplikan penelitian yang sedang berlangsung.' },
-  abstract: {
-    en: { what: 'Summarize the problem, method, key result, and implication.', tip: 'Make it self-contained; readers decide to attend based on this.' },
-    id: { what: 'Ringkas masalah, metode, hasil utama, dan implikasi.', tip: 'Buatlah mandiri; pembaca memutuskan untuk hadir berdasarkan ini.' }
   },
-  introduction: {
-    en: { what: 'State the research question, motivation, and contribution.', tip: 'End with a clear outline of the paper.' },
-    id: { what: 'Nyatakan pertanyaan penelitian, motivasi, dan kontribusi.', tip: 'Akhiri dengan garis besar makalah yang jelas.' }
+  conference_paper: {
+    _analogy: { 
+      en: 'A conference paper is a snapshot of ongoing innovation.', 
+      id: 'Makalah konferensi adalah cuplikan inovasi yang sedang berjalan.' 
+    },
+    abstract: { 
+      en: { 
+        what: 'A teaser for your talk: Problem + Novel Method + Key Result + Implication.', 
+        tip: 'Use keywords relevant to the specific session track to ensure correct placement.', 
+        mistakes: 'Do not use "We will discuss..." -> State exactly what you found.'
+      }, 
+      id: { 
+        what: 'Teaser presentasi Anda: Masalah + Metode Baru + Hasil Utama + Implikasi.', 
+        tip: 'Gunakan kata kunci yang relevan dengan sesi/track agar penempatannya pas.', 
+        mistakes: 'Jangan pakai "Kami akan membahas..." -> Nyatakan persis apa yang ditemukan.'
+      } 
+    },
+    introduction: { 
+      en: { 
+        what: 'Context and Contribution. Why is this interesting to *this* specific community?', 
+        tip: 'Get to the "Novelty" quickly. Keep it punchier than a journal intro.', 
+        mistakes: 'Do not bore the audience with textbook definitions they already know.'
+      }, 
+      id: { 
+        what: 'Konteks dan Kontribusi. Mengapa ini menarik bagi komunitas *spesifik* ini?', 
+        tip: 'Segera masuk ke "Kebaruan". Buat lebih nendang daripada intro jurnal.', 
+        mistakes: 'Jangan bosankan audiens dengan definisi buku teks yang sudah mereka tahu.'
+      } 
+    },
+    related_work: { 
+      en: { 
+        what: 'Positioning. How does your method differ from the state-of-the-art?', 
+        tip: 'Group citations by approach/method, not just a chronological list. Be charitable but critical.', 
+        mistakes: 'Do not ignore work by the conference organizers or keynote speakers (know your audience).'
+      }, 
+      id: { 
+        what: 'Positioning. Bagaimana metode Anda beda dari yang tercanggih saat ini?', 
+        tip: 'Kelompokkan sitasi berdasarkan pendekatan, bukan cuma urutan waktu. Kritis tapi sopan.', 
+        mistakes: 'Jangan abaikan karya penyelenggara atau pembicara utama (kenali audiensmu).'
+      } 
+    },
+    method: { 
+      en: { 
+        what: 'The setup logic. Sufficient detail for a peer to understand the core innovation.', 
+        tip: 'Use diagrams or pseudocode to save space. Focus on the modified/new parts.', 
+        mistakes: 'Do not waste space on standard preprocessing steps unless you changed them.'
+      }, 
+      id: { 
+        what: 'Logika pengaturan. Detail cukup agar rekan sejawat paham inovasi intinya.', 
+        tip: 'Gunakan diagram atau pseudocode untuk hemat tempat. Fokus pada bagian yang baru.', 
+        mistakes: 'Jangan buang tempat jelaskan langkah standar kecuali Anda mengubahnya.'
+      } 
+    },
+    experiments: { 
+      en: { 
+        what: 'Validation. Does it work? How does it compare to baselines?', 
+        tip: 'Bold the best results in tables. Use charts for trends. Be honest about performance.', 
+        mistakes: 'Do not cherry-pick data. Admit where the model fails (failure analysis is valuable).'
+      }, 
+      id: { 
+        what: 'Validasi. Apakah berhasil? Bagaimana dibanding standar yang ada?', 
+        tip: 'Bold hasil terbaik di tabel. Pakai grafik untuk tren. Jujurlah soal performa.', 
+        mistakes: 'Jangan pilah-pilih data bagus aja. Akui di mana model gagal (analisis kegagalan itu berharga).'
+      } 
+    },
+    conclusion: { 
+      en: { 
+        what: 'Recap and Future Work.', 
+        tip: 'End with a punchy sentence about broader impact.', 
+        mistakes: 'Do not just repeat the abstract word-for-word.'
+      }, 
+      id: { 
+        what: 'Rekap dan Pekerjaan Masa Depan.', 
+        tip: 'Akhiri dengan kalimat kuat tentang dampak lebih luas.', 
+        mistakes: 'Jangan cuma mengulang abstrak kata demi kata.'
+      } 
+    }
   },
-  related_work: {
-    en: { what: 'Situate your work among existing literature.', tip: 'Highlight the gap you are filling.' },
-    id: { what: 'Letakkan karya Anda di antara literatur yang ada.', tip: 'Soroti celah yang Anda isi.' }
+  research_report: {
+    _analogy: { 
+      en: 'A research report is a briefing for decision-makers.', 
+      id: 'Laporan penelitian adalah briefing untuk pengambil keputusan.' 
+    },
+    executive_summary: { 
+      en: { 
+        what: 'The Bottom Line Up Front (BLUF). Problem, method, and key findings for the busy CEO/Minister.', 
+        tip: 'Use bullet points. No academic jargon. This might be the only page they read.', 
+        mistakes: 'Do not bury the lead result in the last paragraph.'
+      }, 
+      id: { 
+        what: 'Inti masalah di depan (BLUF). Masalah, metode, temuan kunci untuk Menteri/CEO sibuk.', 
+        tip: 'Gunakan poin-poin. Tanpa jargon akademik. Mungkin cuma ini yang mereka baca.', 
+        mistakes: 'Jangan sembunyikan hasil utama di paragraf terakhir.'
+      } 
+    },
+    background: { 
+      en: { 
+        what: 'The mandate. Who asked for this? What is the scope?', 
+        tip: 'Define the terms of reference clearly so boundaries are set.', 
+        mistakes: 'Do not go too far back in history (e.g., "Since the dawn of time...").'
+      }, 
+      id: { 
+        what: 'Mandatnya. Siapa yang minta? Apa ruang lingkupnya?', 
+        tip: 'Definisikan kerangka acuan jelas agar batasan tegas.', 
+        mistakes: 'Jangan mundur kejauhan sejarahnya (misal: "Sejak zaman dahulu kala...").'
+      } 
+    },
+    methodology: { 
+      en: { 
+        what: 'Data sources credibility. Interviews, surveys, or secondary data used.', 
+        tip: 'Focus on "Why trust this?" rather than deep mathematical proofs.', 
+        mistakes: 'Do not hide limitations or sample size issues.'
+      }, 
+      id: { 
+        what: 'Kredibilitas sumber data. Wawancara, survei, atau data sekunder.', 
+        tip: 'Fokus ke "Kenapa data ini bisa dipercaya?" bukan pembuktian matematika rumit.', 
+        mistakes: 'Jangan sembunyikan keterbatasan atau masalah jumlah sampel.'
+      } 
+    },
+    findings: { 
+      en: { 
+        what: 'The facts, categorized by theme.', 
+        tip: 'Use "Call-out boxes" for quotes or key stats. Visuals are crucial here.', 
+        mistakes: 'Do not mix analysis/opinion here yet. Just the facts.'
+      }, 
+      id: { 
+        what: 'Fakta-fakta, dikategorikan per tema.', 
+        tip: 'Gunakan "Kotak khusus" untuk kutipan atau statistik kunci. Visual sangat penting.', 
+        mistakes: 'Jangan campur analisis/opini dulu di sini. Fakta saja.'
+      } 
+    },
+    recommendations: { 
+      en: { 
+        what: 'Actionable advice derived directly from findings.', 
+        tip: 'Prioritize them (Short-term vs Long-term). Assign responsibility (Who does it?).', 
+        mistakes: 'Do not give generic advice like "Improve communication." Be specific.'
+      }, 
+      id: { 
+        what: 'Saran yang bisa ditindaklanjuti dari temuan.', 
+        tip: 'Prioritaskan (Jangka Pendek vs Panjang). Tunjuk tanggung jawab (Siapa yang mengerjakan?).', 
+        mistakes: 'Jangan kasih saran umum kayak "Tingkatkan komunikasi." Harus spesifik.'
+      } 
+    }
   },
-  method: {
-    en: { what: 'Describe your approach, data, and experimental setup.', tip: 'Provide enough detail for reproducibility.' },
-    id: { what: 'Jelaskan pendekatan, data, dan pengaturan eksperimen Anda.', tip: 'Berikan detail yang cukup untuk reproduksibilitas.' }
-  },
-  experiments: {
-    en: { what: 'Present results, comparisons, and ablation studies.', tip: 'Use tables/figures to summarize.' },
-    id: { what: 'Sajikan hasil, perbandingan, dan studi ablasi.', tip: 'Gunakan tabel/figur untuk meringkas.' }
-  },
-  conclusion: {
-    en: { what: 'Summarize findings and future work.', tip: 'Do not introduce new results.' },
-    id: { what: 'Ringkas temuan dan penelitian selanjutnya.', tip: 'Jangan memperkenalkan hasil baru.' }
-  }
-},
-research_report: {
-  _analogy: { en: 'A research report is a briefing for decision-makers.', id: 'Laporan penelitian adalah briefing untuk pengambil keputusan.' },
-  executive_summary: {
-    en: { what: 'Summarize the entire report: problem, methods, key findings, recommendations.', tip: 'Write last; keep to one page.' },
-    id: { what: 'Ringkas seluruh laporan: masalah, metode, temuan utama, rekomendasi.', tip: 'Tulis terakhir; tetap dalam satu halaman.' }
-  },
-  background: {
-    en: { what: 'Provide context, why the research was commissioned.', tip: 'Include relevant statistics.' },
-    id: { what: 'Berikan konteks, mengapa penelitian ini dipesan.', tip: 'Sertakan statistik yang relevan.' }
-  },
-  methodology: {
-    en: { what: 'Explain data sources, collection methods, and analysis.', tip: 'Be transparent about limitations.' },
-    id: { what: 'Jelaskan sumber data, metode pengumpulan, dan analisis.', tip: 'Bersikaplah transparan tentang keterbatasan.' }
-  },
-  findings: {
-    en: { what: 'Present the evidence without interpretation.', tip: 'Use bullet points for clarity.' },
-    id: { what: 'Sajikan bukti tanpa interpretasi.', tip: 'Gunakan poin-poin untuk kejelasan.' }
-  },
-  recommendations: {
-    en: { what: 'List actionable steps based on findings.', tip: 'Prioritize by impact/feasibility.' },
-    id: { what: 'Daftar langkah-langkah yang dapat ditindaklanjuti berdasarkan temuan.', tip: 'Prioritaskan berdasarkan dampak/kelayakan.' }
-  }
-},
 
 // === PANDUAN UNTUK TEMPLATE BARU ===
 working_paper: {
@@ -1088,7 +1291,7 @@ const GuidancePanel = ({ section, moduleId, lang, onRunAI, isProcessing, setLang
   const analogy = section.analogy?.[lang] || '';
   const tabs = [
     { id: 'what', label: lang === 'en' ? 'What to Write' : 'Apa yang Ditulis', icon: <PenTool className="w-3 h-3"/> },
-    { id: 'why', label: lang === 'en' ? 'Why It Matters' : 'Mengapa Penting', icon: <Info className="w-3 h-3"/> },
+    { id: 'tip', label: lang === 'en' ? 'Why It Matters' : 'Mengapa Penting', icon: <Info className="w-3 h-3"/> },
     { id: 'mistakes', label: lang === 'en' ? 'Avoid' : 'Hindari', icon: <AlertCircle className="w-3 h-3"/> },
     { id: 'coach', label: lang === 'en' ? 'AI Coach' : 'Pelatih AI', icon: <GraduationCap className="w-3 h-3"/> }
   ];
@@ -1406,24 +1609,33 @@ function App() {
   // Tambahkan class harvard-export ke clone
   clone.classList.add('harvard-export');
 
+  // Paksa semua elemen untuk menggunakan border-box
+  clone.style.boxSizing = 'border-box';
+
   // Buat container sementara di luar layar untuk rendering
   const container = document.createElement('div');
   container.style.position = 'absolute';
   container.style.left = '-9999px';
   container.style.top = '0';
-  container.style.width = '210mm'; // Lebar A4
+  container.style.width = '210mm'; // lebar A4
   container.style.backgroundColor = 'white';
+  container.style.overflow = 'hidden'; // cegah scrollbar
   container.appendChild(clone);
   document.body.appendChild(container);
 
   // Opsi html2pdf yang disesuaikan untuk gaya jurnal
   const opt = {
-    margin:        [0, 0, 0, 0], // margin sudah diatur via CSS, jadi 0 di sini
-    filename:     `${docData.title || 'dokumen'}.pdf`,
-    image:        { type: 'jpeg', quality: 0.98 },
-    html2canvas:  { scale: 2, letterRendering: true, useCORS: true },
-    jsPDF:        { unit: 'in', format: 'a4', orientation: 'portrait' }
-  };
+    margin: [0, 0, 0, 0],
+    filename: `${docData.title || 'dokumen'}.pdf`,
+    image: { type: 'jpeg', quality: 0.98 },
+    html2canvas: { 
+    scale: 2, 
+    letterRendering: true, 
+    useCORS: true,
+    logging: false // matikan log jika tidak perlu
+  },
+  jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' } // unit mm lebih umum
+};
 
   html2pdf().set(opt).from(clone).save().then(() => {
     document.body.removeChild(container);
