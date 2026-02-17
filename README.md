@@ -74,7 +74,7 @@ Penulis Teknis: Untuk menjaga konsistensi format dalam dokumen panjang.
 
 Dikonsep oleh Tim StructureFlow, dikustomisasi khusus untuk produktivitas Angga Conni Saputra.
 
-# StructureFlow (Angga C.S. Edition) – Custom Template Guide
+# StructureFlow – Custom Template Guide
 
 ---
 
