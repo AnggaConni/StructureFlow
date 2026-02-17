@@ -51,6 +51,100 @@
         @keyframes pulse-glow { 0% { box-shadow: 0 0 0 0 rgba(99, 102, 241, 0.4); } 70% { box-shadow: 0 0 0 6px rgba(99, 102, 241, 0); } 100% { box-shadow: 0 0 0 0 rgba(99, 102, 241, 0); } }
         .ai-thinking { background: linear-gradient(270deg, #3b82f6, #8b5cf6, #3b82f6); background-size: 200% 200%; animation: gradient-move 2s ease infinite; }
         @keyframes gradient-move { 0%{background-position:0% 50%} 50%{background-position:100% 50%} 100%{background-position:0% 50%} }
+        /* === GAYA PUBLIKASI HARVARD UNTUK EKSPOR PDF === */
+.harvard-export {
+  font-family: 'Garamond', 'Times New Roman', serif !important;
+  font-size: 12pt !important;
+  line-height: 1.7 !important;
+  color: #000 !important;
+  background: #fff !important;
+  max-width: 100% !important;
+  padding: 0 !important;
+  margin: 0 auto !important;
+  box-sizing: border-box !important;
+}
+
+/* Margin halaman (standar jurnal 1 inci) */
+.harvard-export .pdf-content {
+  margin: 2.54cm !important; /* 1 inci = 2,54 cm */
+  padding: 0 !important;
+}
+
+/* Judul dokumen */
+.harvard-export h1.document-title {
+  font-size: 28pt !important;
+  font-weight: 700 !important;
+  text-align: center !important;
+  margin: 0 0 0.8cm 0 !important;
+  line-height: 1.3 !important;
+  letter-spacing: -0.5px !important;
+  color: #1a1a1a !important;
+}
+
+/* Abstrak (jika ada) */
+.harvard-export .abstract {
+  font-size: 11pt !important;
+  font-style: italic !important;
+  margin: 1.5em 0 !important;
+  padding: 0 1em !important;
+  border-left: 3px solid #ccc !important;
+  color: #333 !important;
+}
+
+/* Heading level 1 (bab) */
+.harvard-export h2 {
+  font-size: 18pt !important;
+  font-weight: 700 !important;
+  margin-top: 1.5em !important;
+  margin-bottom: 0.5em !important;
+  color: #000 !important;
+  border-bottom: 1px solid #ddd !important;
+  padding-bottom: 0.3em !important;
+}
+
+/* Heading level 2 (sub-bab) */
+.harvard-export h3 {
+  font-size: 14pt !important;
+  font-weight: 600 !important;
+  margin-top: 1.2em !important;
+  margin-bottom: 0.3em !important;
+  color: #222 !important;
+}
+
+/* Paragraf */
+.harvard-export p {
+  text-align: justify !important;
+  margin-bottom: 0.7em !important;
+  orphans: 3 !important;
+  widows: 3 !important;
+}
+
+/* Daftar (bullet/number) */
+.harvard-export ul,
+.harvard-export ol {
+  margin-left: 2em !important;
+  margin-bottom: 0.7em !important;
+}
+
+/* Tabel dan gambar (jika ada) */
+.harvard-export table {
+  border-collapse: collapse !important;
+  width: 100% !important;
+  margin: 1em 0 !important;
+}
+.harvard-export th,
+.harvard-export td {
+  border: 1px solid #aaa !important;
+  padding: 0.4em !important;
+  text-align: left !important;
+}
+.harvard-export th {
+  background-color: #f5f5f5 !important;
+  font-weight: 600 !important;
+}
+
+/* Nomor halaman (akan ditambahkan otomatis oleh html2pdf) */
+/* Tidak perlu CSS khusus, html2pdf.js sudah mengatur page breaks */
     </style>
 </head>
 <body class="bg-slate-100 text-slate-900">
@@ -188,15 +282,77 @@ const SCHEMA_VERSION = '3.0.0';
 // 1. DUMMY DATA (Isi konten contoh - English Only)
 const DUMMY_DATA = {
   journal_article: {
-    title: 'The Impact of Digital Collaboration Tools',
+    title: 'Architecting Resilience: A Comprehensive Analysis of Serverless Digital Ecosystems for Governance Reform in Emerging Economies',
     sections: [
-      { key: 'abstract', content: `<h3>Abstract</h3><p>This study examines the relationship between enterprise digital collaboration tools and knowledge-worker productivity.</p>` },
-      { key: 'introduction', content: `<h3>1. Introduction</h3><p>The unprecedented shift to remote work during 2020–2021 compressed a decade of organizational experimentation.</p>` },
-      { key: 'framework', content: `<h3>2. Theoretical Framework</h3><p>Our framework synthesizes Media Synchronicity Theory and Cognitive Load Theory.</p>` },
-      { key: 'methodology', content: `<h3>3. Methodology</h3><p>A mixed-methods design combining survey (n=412) and interviews (n=24).</p>` },
-      { key: 'findings', content: `<h3>4. Findings</h3><p>Tool integration depth was found to be the primary predictor of deep work capacity.</p>` },
-      { key: 'discussion', content: `<h3>5. Discussion</h3><p>Results suggest organizations must move beyond tool adoption to tool governance.</p>` },
-      { key: 'conclusion', content: `<h3>6. Conclusion</h3><p>We propose a configuration model for remote ecosystems.</p>` }
+      { 
+        key: 'abstract', 
+        content: `<h3>Abstract</h3>
+        <p>The global landscape of digital governance is often marred by the failure of high-cost, monolithic infrastructure projects that fail to adapt to the local realities of developing nations. This research explores the "Serverless Democratization" paradigm, focusing on the utilization of low-cost, high-context digital tools—collectively termed the "Google Fullstack" (Apps Script, Sheets, and Cloud-native automation). Through a multi-year analysis of projects ranging from vaccine cold chain management to digital correspondence in Indonesian ministries, this paper argues that decentralized, agile development models provide a more resilient framework for institutional reform than traditional ERP systems. The study concludes that by lowering the technical barrier to entry, organizations can foster a culture of "Civic Tech" that is both sustainable and immune to the common pitfalls of bureaucratic IT procurement.</p>` 
+      },
+      { 
+        key: 'introduction', 
+        content: `<h3>1. Introduction: The Crisis of Complexity</h3>
+        <p>In the realm of public sector digital transformation, there exists a persistent "Complexity Trap." Organizations, particularly in the Global South, often equate "Modernization" with the acquisition of expensive, enterprise-grade software licenses and the construction of local data centers. However, historical data from UNESCO and UNDP initiatives suggest that these "Digital White Elephants" frequently collapse under the weight of their own maintenance requirements, lack of specialized personnel, and the rapid obsolescence of hardware.</p>
+        <p>This research is situated at the intersection of public policy administration and digital system architecture. It addresses a fundamental question: How can resource-constrained institutions achieve 100% digital maturity without a multi-million dollar budget? The introduction of serverless computing—specifically Function-as-a-Service (FaaS)—has fundamentally altered the cost-benefit analysis of digital reform. By shifting the burden of infrastructure security and uptime to global cloud providers, local administrators can refocus their energy on the business logic of governance: transparency, efficiency, and accountability.</p>
+        <p>Furthermore, this paper examines the role of the "Independent Consultant" as a bridge between high-level policy goals and ground-level technical execution. Drawing from over 12 years of experience in the Indonesian governance sector, we analyze how "Sub-Professional" staff and agile developers can bypass traditional bureaucratic bottlenecks to deliver functional tools (Minimum Viable Products) in days rather than years.</p>` 
+      },
+      { 
+        key: 'literature_review', 
+        content: `<h3>2. Literature Review: Frugal Innovation and the Evolution of Cloud</h3>
+        <p>The concept of <strong>Frugal Innovation</strong> (Radjou et al., 2012) serves as the foundational theory for this study. It posits that high-value solutions can be derived from minimal resources through creative improvisation and a deep understanding of local constraints. In the context of IT, this translates to the "Google Fullstack" approach—using pervasive tools like Google Sheets not merely as spreadsheets, but as relational database surrogates that are already whitelisted by government firewalls.</p>
+        <p>Historically, digital governance has moved through three distinct phases:
+        <ol>
+          <li><strong>The Monolithic Era (1990-2010):</strong> Heavy reliance on on-premise servers and proprietary software like SAP or Oracle. High cost, low agility.</li>
+          <li><strong>The Early Cloud Era (2010-2020):</strong> Migration of virtual machines to AWS or Azure (IaaS). Reduced hardware costs, but still requiring high DevOps expertise.</li>
+          <li><strong>The Serverless Era (2020-Present):</strong> The rise of "No-Ops" environments where code (like Google Apps Script) runs in response to events. This era marks the true democratization of digital tools.</li>
+        </ol>
+        <p>By reviewing the work of contemporary digital architects in the Indonesian public sector, it becomes clear that the most successful projects are those that embrace "Agile Governance." This involves small, iterative deployments that solve specific pain points—such as the "E-Persuratan" system—rather than attempting to build all-encompassing "Super-Apps" that are prone to catastrophic failure during the transition period.</p>` 
+      },
+      { 
+        key: 'framework', 
+        content: `<h3>3. Theoretical Framework: Behavioral Science and Information Warfare</h3>
+        <p>A digital system is only as effective as the human behavior it influences. Our framework synthesizes three core disciplines: <strong>Behavioral Psychology (COM-B Model)</strong>, <strong>Media Synchronicity Theory (MST)</strong>, and <strong>Strategic Communication (Information Warfare)</strong>.</p>
+        <p><strong>3.1 The COM-B Integration:</strong> 
+        The system must ensure that users have the <i>Capability</i> (a simple, familiar UI), the <i>Opportunity</i> (mobile-first accessibility), and the <i>Motivation</i> (immediate visible reduction in workload). If a digital correspondence tool requires 10 steps to sign a document when the manual process takes only 2, the system will fail regardless of its technical brilliance.</p>
+        <p><strong>3.2 Information Warfare and "Canary Traps" in Bureaucracy:</strong> 
+        In high-stakes governance environments, digital tools often serve a dual purpose: workflow automation and information security. We explore the use of "Canary Traps" within digital systems—deliberately placing unique, trackable data points in sensitive documents to identify the source of information leaks. This "Strategic Transparency" acts as a deterrent against internal sabotage and ensures that the "Chain of Custody" for government documents is immutable and auditable.</p>
+        <p><strong>3.3 The Paradox of Safety:</strong> 
+        We argue that many safety protocols in traditional IT are performative. A system that is "too secure to use" is, in fact, the most dangerous, as it drives users to use unencrypted personal apps (like WhatsApp) for official business. Our framework advocates for "Usable Security"—leveraging Google’s OAuth2 and 2FA to provide enterprise-grade protection that doesn't hinder the user experience.</p>` 
+      },
+      { 
+        key: 'methodology', 
+        content: `<h3>4. Methodology: Action Research and Fullstack Prototyping</h3>
+        <p>This research utilizes an <strong>Action Research</strong> methodology, characterized by a spiral of cycles: planning, acting, observing, and reflecting. The primary research "laboratory" consists of several real-world deployments across Indonesian NGOs and government agencies between 2022 and 2026.</p>
+        <p><strong>4.1 Technical Architecture of the "Dummy" Prototypes:</strong>
+        The research focuses on a serverless stack optimized for zero-cost maintenance:
+        <ul>
+          <li><strong>Logic Layer:</strong> Google Apps Script (V8 Engine) using <code>doGet()</code> and <code>doPost()</code> functions to handle web requests.</li>
+          <li><strong>Data Persistence:</strong> Google Sheets API as a NoSQL database. We utilize <i>A1 Notation</i> for rapid querying and <i>JSON-stringification</i> to store complex objects within single cells, bypassing the 5-million-cell limit of standard sheets.</li>
+          <li><strong>User Interface:</strong> A decoupled frontend built with Bootstrap 5, utilizing <code>google.script.run</code> for asynchronous communication between the client and the server.</li>
+        </ul>
+        <p><strong>4.2 Evaluation Metrics:</strong>
+        Systems were evaluated based on the <i>"Agility Index"</i> (time from requirement to deployment), <i>"Friction Coefficient"</i> (number of clicks per core task), and <i>"Maintenance Overhead"</i> (man-hours required per month to keep the system operational).</p>` 
+      },
+      { 
+        key: 'findings', 
+        content: `<h3>5. Findings: The Efficiency of Serverless Governance</h3>
+        <p>The implementation of serverless tools yielded significant empirical data across multiple sectors. In the "E-Persuratan" case study, the time required to route an official letter through three levels of approval dropped from 72 hours (manual/hybrid) to 4.5 minutes (fully digital). This represents a **94% increase in administrative velocity**.</p>
+        <p><strong>5.1 Cost-Effectiveness Analysis:</strong>
+        Compared to a standard vendor-based ERP deployment (estimated at $50,000 USD initial + $5,000/year maintenance), the Google Fullstack solution cost exactly $0 in licensing fees. The only "cost" was the human capital required for the 72-hour development sprint. This proves that for "Sub-Professional" tasks, high-cost procurement is economically irrational.</p>
+        <p><strong>5.2 Resilience in Remote Areas (The "Papua-Jambi" Effect):</strong>
+        Data from projects in Jayapura (UNDP Vaccine Cold Chain) and Jambi (Infrastructure Gini Ratio Research) showed that lightweight web apps performed significantly better on low-bandwidth 3G/4G connections than heavy Java-based government portals. The "Low-Text, High-Context" UI design reduced data consumption by 60%, ensuring that officials in remote disadvantaged regions remained part of the digital workflow.</p>` 
+      },
+      { 
+        key: 'discussion', 
+        content: `<h3>6. Discussion: The Philosophy of "Good Enough" and Divergent Thinking</h3>
+        <p>The findings challenge the "Perfectionist Fallacy" in digital development. We argue for the <strong>Philosophy of "Good Enough" Tech</strong>—where a tool that solves 90% of a problem today is infinitely more valuable than a tool that solves 100% of a problem next year. This is particularly relevant for "Divergent" thinkers (such as the primary subject of this case study) who prioritize output and functional iteration over rigid documentation.</p>
+        <p>Furthermore, the discussion addresses the "Information Warfare" aspect of digital transition. By making government processes digital and serverless, we create a "Digital Footprint" that is difficult to erase. This transparency acts as a strategic weapon against corruption (KKN). However, it also requires a shift in leadership mindset: from "Gatekeepers of Information" to "Facilitators of Data." The resistance to these tools is rarely technical; it is almost always a defense mechanism by individuals who benefit from the opacity of manual systems.</p>` 
+      },
+      { 
+        key: 'conclusion', 
+        content: `<h3>7. Conclusion: The Future is Serverless and Decentralized</h3>
+        <p>The path to governance reform does not lie in more servers, but in smarter code. Democratizing digital tools through serverless architectures allows for a bottom-up transformation where the workers themselves become the architects of their efficiency. As demonstrated by the success of the "E-Persuratan" and "Biodiversity" systems, the future belongs to agile, low-cost, and high-impact solutions. We recommend that international organizations (UN, GAVI, etc.) and government ministries pivot their digital strategies to prioritize "Civic Tech" ecosystems that empower independent consultants and sub-professional staff to build the future of governance, one script at a time.</p>` 
+      }
     ]
   },
   
@@ -1202,7 +1358,82 @@ function App() {
     document.body.removeChild(downloadLink);
   };
   
-  const handleUpdateSection = (idx, content) => {
+    const handleExportPDF = () => {
+  const originalElement = document.querySelector('.max-w-3xl');
+  if (!originalElement) {
+    alert('Tidak ada konten untuk diekspor.');
+    return;
+  }
+
+  // Clone elemen asli
+  const clone = originalElement.cloneNode(true);
+  
+  // Hapus elemen-elemen yang tidak diperlukan (UI, tombol, badge, dll)
+  const selectorsToRemove = [
+    '.no-print',
+    '.absolute.top-3.right-3',
+    '.absolute.-top-2\\.5',
+    '.flex-col.items-center.w-6',
+    'button',
+    '[class*="badge"]' // semua elemen dengan kata 'badge' di class
+  ];
+  
+  selectorsToRemove.forEach(selector => {
+    const elements = clone.querySelectorAll(selector);
+    elements.forEach(el => el.remove());
+  });
+
+  // Bersihkan juga elemen input judul: ubah menjadi teks biasa
+  const titleInput = clone.querySelector('input[type="text"]');
+  if (titleInput) {
+    const titleText = titleInput.value;
+    const titleElement = document.createElement('h1');
+    titleElement.className = 'document-title';
+    titleElement.textContent = titleText;
+    titleInput.parentNode.replaceChild(titleElement, titleInput);
+  }
+
+  // Bungkus konten dengan div yang memiliki margin
+  const contentWrapper = document.createElement('div');
+  contentWrapper.className = 'pdf-content';
+  
+  // Pindahkan semua anak clone ke dalam wrapper
+  while (clone.firstChild) {
+    contentWrapper.appendChild(clone.firstChild);
+  }
+  clone.appendChild(contentWrapper);
+  
+  // Tambahkan class harvard-export ke clone
+  clone.classList.add('harvard-export');
+
+  // Buat container sementara di luar layar untuk rendering
+  const container = document.createElement('div');
+  container.style.position = 'absolute';
+  container.style.left = '-9999px';
+  container.style.top = '0';
+  container.style.width = '210mm'; // Lebar A4
+  container.style.backgroundColor = 'white';
+  container.appendChild(clone);
+  document.body.appendChild(container);
+
+  // Opsi html2pdf yang disesuaikan untuk gaya jurnal
+  const opt = {
+    margin:        [0, 0, 0, 0], // margin sudah diatur via CSS, jadi 0 di sini
+    filename:     `${docData.title || 'dokumen'}.pdf`,
+    image:        { type: 'jpeg', quality: 0.98 },
+    html2canvas:  { scale: 2, letterRendering: true, useCORS: true },
+    jsPDF:        { unit: 'in', format: 'a4', orientation: 'portrait' }
+  };
+
+  html2pdf().set(opt).from(clone).save().then(() => {
+    document.body.removeChild(container);
+  }).catch(err => {
+    console.error('PDF export error:', err);
+    alert('Gagal mengekspor PDF.');
+    document.body.removeChild(container);
+  });
+};
+    const handleUpdateSection = (idx, content) => {
     const sections = [...docData.sections];
     sections[idx] = { ...sections[idx], content };
     setDocData({ ...docData, sections });
@@ -1270,7 +1501,7 @@ function App() {
           <div className="h-5 w-px bg-slate-700 mx-1"/>
           <button onClick={handleSaveJSON} className="p-2 bg-slate-700 hover:bg-slate-600 rounded-lg transition-colors" title="Simpan JSON"><Save className="w-4 h-4"/></button>
           <button onClick={handleExportDoc} className="p-2 bg-slate-700 hover:bg-slate-600 rounded-lg transition-colors" title="Unduh Word"><Download className="w-4 h-4 text-green-300"/></button>
-          <button onClick={() => window.print()} className="p-2 bg-blue-700 hover:bg-blue-600 rounded-lg transition-colors" title="Cetak/PDF"><Printer className="w-4 h-4"/></button>
+          <button onClick={handleExportPDF} className="p-2 bg-blue-700 hover:bg-blue-600 rounded-lg transition-colors" title="Cetak/PDF"><Printer className="w-4 h-4"/></button>
         </div>
       </div>
 
