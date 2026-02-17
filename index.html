@@ -95,7 +95,7 @@
                 description: 'Standard research paper structure.',
                 data: {
                     id: 'root',
-                    content: 'Title: Research Paper Draft',
+                    content: 'Research Paper Draft',
                     children: [
                         { id: 'j1', content: SAMPLE_CONTENT.academic.abstract, guidance_id: 'Rangkuman singkat (150-250 kata).', guidance_en: 'Brief summary (150-250 words).', children: [] },
                         { id: 'j2', content: SAMPLE_CONTENT.academic.intro, guidance_id: 'Latar belakang & gap penelitian.', guidance_en: 'Background & research gap.', children: [] },
@@ -114,7 +114,7 @@
                 description: 'Recommendation for stakeholders.',
                 data: {
                     id: 'root',
-                    content: 'Title: Policy Recommendation',
+                    content: 'Policy Recommendation',
                     children: [
                         { id: 'p1', content: SAMPLE_CONTENT.policy.exec_summary, guidance_id: 'Ringkasan inti & rekomendasi.', guidance_en: 'Core summary & recommendations.', children: [] },
                         { id: 'p2', content: SAMPLE_CONTENT.policy.intro, guidance_id: 'Urgensi masalah & data.', guidance_en: 'Urgency & data.', children: [] },
@@ -131,7 +131,7 @@
                 description: 'Optimized for web readers.',
                 data: {
                     id: 'root',
-                    content: 'Headline (H1)',
+                    content: 'SEO Article Headline',
                     children: [
                         { id: 'w1', content: '<p><strong>Intro / Hook</strong></p>', guidance_id: 'Paragraf pembuka yang menarik.', guidance_en: 'Engaging opening paragraph.', children: [] },
                         { id: 'w2', content: '<h3>Subheading (H2)</h3>', guidance_id: 'Poin utama pertama.', guidance_en: 'First key point.', children: [] },
@@ -623,6 +623,17 @@
                             
                             <div className="flex-1 overflow-y-auto p-8 custom-scrollbar print:overflow-visible">
                                 <div className="max-w-3xl mx-auto pb-20 print:pb-0">
+                                    {/* PROJECT TITLE INPUT */}
+                                    {rootId && nodes[rootId] && (
+                                        <input
+                                            type="text"
+                                            value={nodes[rootId].content.replace(/(<([^>]+)>)/gi, "")}
+                                            onChange={(e) => handleUpdateContent(rootId, e.target.value)}
+                                            className="w-full text-4xl font-extrabold text-red-500 mb-8 bg-transparent border-b-2 border-transparent hover:border-slate-200 focus:border-red-400 focus:outline-none transition-all placeholder:text-slate-300"
+                                            placeholder="Judul Project"
+                                        />
+                                    )}
+
                                     {cardList.length === 0 && (
                                         <div className="text-center py-20 text-slate-400">
                                             <p>No sections yet. Add one to start.</p>
