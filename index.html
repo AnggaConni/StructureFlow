@@ -1,0 +1,589 @@
+import React, { useState, useEffect, useRef } from 'react';
+import { 
+    Layout, Plus, Trash2, Edit3, Save, Upload, FileText, 
+    ArrowUp, ArrowDown, Globe, BookOpen, FilePlus, 
+    MoreVertical, ChevronLeft, Bold, Italic, List, 
+    Printer, PenTool, FolderOpen, GraduationCap, Scale, Globe as GlobeIcon, Mail, Sparkles
+} from 'lucide-react';
+
+// --- TEMPLATES DATA (WITH DUMMY CONTENT) ---
+const SAMPLE_CONTENT = {
+    academic: {
+        abstract: "<p><strong>Abstract</strong></p><p>This study investigates the impact of rising temperatures on urban agriculture yields. Using a mixed-method approach, we analyzed data from 50 community gardens. Findings suggest heat stress reduces crop viability by 15%.</p>",
+        intro: "<h3>1. Introduction</h3><p>Urban agriculture is critical for sustainable cities. However, climate change presents new challenges. <em>Research Gap:</em> Data on urban microclimates remains scarce.</p>",
+        methods: "<h3>2. Methodology</h3><ul><li>Data Collection: Sensors and yield logs.</li><li>Participants: 50 urban farmers.</li><li>Analysis: Linear regression.</li></ul>",
+    },
+    policy: {
+        exec_summary: "<p><strong>Executive Summary</strong></p><p>This brief recommends a ban on single-use plastics in coastal zones. Implementation is projected to reduce marine debris by 40%.</p>",
+        intro: "<h3>Context</h3><p>Coastal tourism generates 50% of marine waste. Current infrastructure is overwhelmed.</p>",
+    }
+};
+
+const TEMPLATES = {
+    journal: {
+        title: 'Academic Paper',
+        icon: <GraduationCap className="w-8 h-8 text-blue-400" />,
+        color: 'from-blue-500/20 to-blue-600/5',
+        border: 'group-hover:border-blue-500/50',
+        description: 'Standard research paper structure.',
+        data: {
+            id: 'root',
+            content: 'Title: Research Paper Draft',
+            children: [
+                { id: 'j1', content: SAMPLE_CONTENT.academic.abstract, guidance_id: 'Rangkuman singkat (150-250 kata).', guidance_en: 'Brief summary (150-250 words).', children: [] },
+                { id: 'j2', content: SAMPLE_CONTENT.academic.intro, guidance_id: 'Latar belakang & gap penelitian.', guidance_en: 'Background & research gap.', children: [] },
+                { id: 'j3', content: SAMPLE_CONTENT.academic.methods, guidance_id: 'Desain penelitian & metode.', guidance_en: 'Research design & methods.', children: [] },
+                { id: 'j4', content: '<h3>3. Results</h3><p>[Insert your findings here]</p>', guidance_id: 'Sajikan data fakta.', guidance_en: 'Present factual data.', children: [] },
+                { id: 'j5', content: '<h3>4. Discussion</h3><p>[Interpret your results here]</p>', guidance_id: 'Interpretasi hasil.', guidance_en: 'Interpret results.', children: [] },
+                { id: 'j6', content: '<h3>5. Conclusion</h3><p>[Summarize key points]</p>', guidance_id: 'Kesimpulan & saran.', guidance_en: 'Conclusion & suggestions.', children: [] }
+            ]
+        }
+    },
+    policy: {
+        title: 'Policy Brief',
+        icon: <Scale className="w-8 h-8 text-emerald-400" />,
+        color: 'from-emerald-500/20 to-emerald-600/5',
+        border: 'group-hover:border-emerald-500/50',
+        description: 'Recommendation for stakeholders.',
+        data: {
+            id: 'root',
+            content: 'Title: Policy Recommendation',
+            children: [
+                { id: 'p1', content: SAMPLE_CONTENT.policy.exec_summary, guidance_id: 'Ringkasan inti & rekomendasi.', guidance_en: 'Core summary & recommendations.', children: [] },
+                { id: 'p2', content: SAMPLE_CONTENT.policy.intro, guidance_id: 'Urgensi masalah & data.', guidance_en: 'Urgency & data.', children: [] },
+                { id: 'p3', content: '<h3>Critique</h3><p>[Analyze current policy]</p>', guidance_id: 'Kekurangan kebijakan saat ini.', guidance_en: 'Shortcomings of current policy.', children: [] },
+                { id: 'p4', content: '<h3>Recommendations</h3><p>[Propose solutions]</p>', guidance_id: 'Usulan konkret.', guidance_en: 'Concrete proposals.', children: [] }
+            ]
+        }
+    },
+    web: {
+        title: 'SEO Article',
+        icon: <GlobeIcon className="w-8 h-8 text-purple-400" />,
+        color: 'from-purple-500/20 to-purple-600/5',
+        border: 'group-hover:border-purple-500/50',
+        description: 'Optimized for web readers.',
+        data: {
+            id: 'root',
+            content: 'Headline (H1)',
+            children: [
+                { id: 'w1', content: '<p><strong>Intro / Hook</strong></p>', guidance_id: 'Paragraf pembuka yang menarik.', guidance_en: 'Engaging opening paragraph.', children: [] },
+                { id: 'w2', content: '<h3>Subheading (H2)</h3>', guidance_id: 'Poin utama pertama.', guidance_en: 'First key point.', children: [] },
+                { id: 'w3', content: '<h3>Subheading (H2)</h3>', guidance_id: 'Poin utama kedua.', guidance_en: 'Second key point.', children: [] },
+                { id: 'w4', content: '<p><strong>Conclusion / CTA</strong></p>', guidance_id: 'Kesimpulan & ajakan bertindak.', guidance_en: 'Conclusion & Call to Action.', children: [] }
+            ]
+        }
+    },
+    newsletter: {
+        title: 'Newsletter',
+        icon: <Mail className="w-8 h-8 text-orange-400" />,
+        color: 'from-orange-500/20 to-orange-600/5',
+        border: 'group-hover:border-orange-500/50',
+        description: 'Engaging email format.',
+        data: {
+            id: 'root',
+            content: 'Subject Line',
+            children: [
+                { id: 'n1', content: '<p>Hi [Name],</p>', guidance_id: 'Sapaan personal.', guidance_en: 'Personal greeting.', children: [] },
+                { id: 'n2', content: '<h3>Main Story</h3>', guidance_id: 'Cerita atau update utama.', guidance_en: 'Main story or update.', children: [] },
+                { id: 'n3', content: '<h3>Key Takeaway</h3>', guidance_id: 'Nilai yang didapat pembaca.', guidance_en: 'Value for the reader.', children: [] },
+                { id: 'n4', content: '<p><a href="#">Call to Action</a></p>', guidance_id: 'Link atau tombol.', guidance_en: 'Link or button.', children: [] }
+            ]
+        }
+    },
+    blank: {
+        title: 'Custom Blank',
+        icon: <Sparkles className="w-8 h-8 text-slate-400" />,
+        color: 'from-slate-500/20 to-slate-600/5',
+        border: 'group-hover:border-slate-500/50',
+        description: 'Start from scratch.',
+        data: {
+            id: 'root',
+            content: 'My Document',
+            children: [
+                { id: 'c1', content: '<p>Start writing here...</p>', guidance_id: 'Mulai tulisanmu di sini.', guidance_en: 'Start your writing here.', children: [] }
+            ]
+        }
+    }
+};
+
+// --- UTILS ---
+const generateId = () => Math.random().toString(36).substr(2, 9);
+
+// Helper to clean content for "Add New" mode
+const stripContent = (node) => {
+    // Keep H3 tags or strong tags for structure, but remove long text
+    // For simplicity, we just reset to a placeholder based on context or empty
+    let newContent = node.content;
+    
+    // Check if it's a sample content (dummy text)
+    if (newContent.length > 50) { 
+        // Heuristic: if content is long, it's likely dummy text. Reset it.
+        if (newContent.includes('<h3>')) {
+             // Keep the header but remove paragraph
+             newContent = newContent.split('</h3>')[0] + '</h3><p>[Write here...]</p>';
+        } else if (newContent.includes('<strong>')) {
+             newContent = newContent.split('</strong>')[0] + '</strong><p>[Write here...]</p>';
+        } else {
+             newContent = '<p>[Write here...]</p>';
+        }
+    }
+    
+    return {
+        ...node,
+        content: newContent,
+        children: node.children ? node.children.map(stripContent) : []
+    };
+};
+
+const normalizeData = (nestedNode, parentId = null) => {
+    let map = {};
+    const nodeId = nestedNode.id || generateId();
+    const node = {
+        id: nodeId,
+        content: nestedNode.content || '',
+        guidance_id: nestedNode.guidance_id || 'Tidak ada panduan khusus.',
+        guidance_en: nestedNode.guidance_en || 'No specific guidance.',
+        parentId: parentId,
+        children: []
+    };
+    map[nodeId] = node;
+    if (nestedNode.children) {
+        nestedNode.children.forEach(child => {
+            const { map: childMap, rootId: childRootId } = normalizeData(child, nodeId);
+            map = { ...map, ...childMap };
+            node.children.push(childRootId);
+        });
+    }
+    return { map, rootId: nodeId };
+};
+
+// --- COMPONENTS ---
+
+// 1. NATIVE RICH TEXT EDITOR
+const RichTextEditor = ({ initialContent, onSave, onCancel }) => {
+    const editorRef = useRef(null);
+
+    const execCmd = (command, value = null) => {
+        document.execCommand(command, false, value);
+        editorRef.current.focus();
+    };
+
+    return (
+        <div className="border border-blue-400 rounded-lg overflow-hidden bg-white shadow-md flex flex-col h-full animate-in fade-in duration-200">
+            <div className="bg-slate-50 border-b border-slate-200 p-2 flex gap-1 flex-wrap items-center">
+                <button onClick={() => execCmd('bold')} className="p-1.5 hover:bg-slate-200 rounded" title="Bold"><Bold className="w-4 h-4"/></button>
+                <button onClick={() => execCmd('italic')} className="p-1.5 hover:bg-slate-200 rounded" title="Italic"><Italic className="w-4 h-4"/></button>
+                <div className="w-px h-4 bg-slate-300 mx-1"></div>
+                <button onClick={() => execCmd('formatBlock', 'H3')} className="p-1.5 hover:bg-slate-200 rounded text-xs font-bold" title="Heading">H3</button>
+                <button onClick={() => execCmd('formatBlock', 'P')} className="p-1.5 hover:bg-slate-200 rounded text-xs" title="Paragraph">P</button>
+                <div className="w-px h-4 bg-slate-300 mx-1"></div>
+                <button onClick={() => execCmd('insertUnorderedList')} className="p-1.5 hover:bg-slate-200 rounded" title="List"><List className="w-4 h-4"/></button>
+            </div>
+            <div 
+                ref={editorRef}
+                className="flex-1 p-4 overflow-y-auto outline-none prose prose-sm max-w-none"
+                contentEditable
+                suppressContentEditableWarning
+                dangerouslySetInnerHTML={{ __html: initialContent }}
+                style={{ minHeight: '150px' }}
+            />
+            <div className="p-2 border-t bg-slate-50 flex justify-end gap-2">
+                <button onClick={onCancel} className="px-3 py-1 text-xs text-slate-600 hover:bg-slate-200 rounded">Cancel</button>
+                <button onClick={() => onSave(editorRef.current.innerHTML)} className="px-4 py-1 text-xs bg-blue-600 text-white rounded hover:bg-blue-700 font-medium">Done</button>
+            </div>
+        </div>
+    );
+};
+
+// 2. AESTHETIC LANDING PAGE
+const LandingPage = ({ onSelectTemplate, onImport }) => {
+    const [viewState, setViewState] = useState('main'); // 'main', 'new', 'tutorial'
+
+    const TemplateGrid = ({ isTutorial }) => (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full max-w-6xl animate-in slide-in-from-bottom-4 duration-500">
+            {Object.entries(TEMPLATES).map(([key, tpl]) => (
+                <button 
+                    key={key}
+                    onClick={() => onSelectTemplate(key, isTutorial)}
+                    className={`
+                        relative overflow-hidden p-6 rounded-2xl border border-slate-700/50 bg-slate-800/50 backdrop-blur-sm
+                        text-left transition-all duration-300 group hover:-translate-y-1 hover:shadow-2xl hover:shadow-blue-900/20
+                        bg-gradient-to-br ${tpl.color} ${tpl.border}
+                    `}
+                >
+                    <div className="relative z-10">
+                        <div className="mb-4 p-3 bg-slate-900/50 rounded-xl w-fit border border-slate-700 group-hover:scale-110 transition-transform duration-300">
+                            {tpl.icon}
+                        </div>
+                        <h3 className="font-bold text-xl mb-2 text-slate-100">{tpl.title}</h3>
+                        <p className="text-sm text-slate-400 group-hover:text-slate-300 transition-colors">{tpl.description}</p>
+                    </div>
+                </button>
+            ))}
+        </div>
+    );
+
+    return (
+        <div className="flex flex-col items-center justify-center min-h-screen bg-[#0f172a] text-white p-6 relative overflow-hidden">
+            {/* Background Gradient Accents */}
+            <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-blue-600/20 rounded-full blur-[120px] pointer-events-none"></div>
+            <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-emerald-600/10 rounded-full blur-[120px] pointer-events-none"></div>
+
+            {/* Header */}
+            <div className="text-center mb-12 relative z-10">
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-800/50 border border-slate-700/50 mb-4 backdrop-blur text-xs font-medium text-blue-400">
+                    <Sparkles className="w-3 h-3" /> StructureFlow v2.0
+                </div>
+                <h1 className="text-5xl font-extrabold flex items-center justify-center gap-4 mb-4 tracking-tight">
+                    <Layout className="w-12 h-12 text-blue-500" /> 
+                    <span>Structure<span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-emerald-400">Flow</span></span>
+                </h1>
+                <p className="text-slate-400 text-lg max-w-lg mx-auto leading-relaxed">
+                    Framework-based writing tool to organize your thoughts instantly.
+                </p>
+            </div>
+
+            {/* CONTENT AREA */}
+            <div className="w-full max-w-6xl relative z-10 min-h-[400px] flex flex-col items-center">
+                
+                {viewState === 'main' && (
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full animate-in fade-in zoom-in-95 duration-500">
+                        {/* 1. START NEW (Blank) */}
+                        <button 
+                            onClick={() => setViewState('new')}
+                            className="group relative p-8 rounded-3xl bg-slate-800 border border-slate-700 hover:border-blue-500/50 transition-all hover:shadow-2xl hover:shadow-blue-500/10 text-left flex flex-col items-start h-80 justify-between overflow-hidden"
+                        >
+                            <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                            <div className="p-4 bg-blue-500/10 rounded-2xl text-blue-400 mb-4 group-hover:bg-blue-500 group-hover:text-white transition-colors">
+                                <PenTool className="w-8 h-8" />
+                            </div>
+                            <div className="relative z-10">
+                                <h2 className="text-2xl font-bold text-white mb-2">Start New Project</h2>
+                                <p className="text-slate-400">Create a document from a blank template structure.</p>
+                            </div>
+                            <div className="mt-auto flex items-center gap-2 text-blue-400 font-medium group-hover:translate-x-2 transition-transform">
+                                Select Template <ChevronLeft className="w-4 h-4 rotate-180" />
+                            </div>
+                        </button>
+
+                        {/* 2. TUTORIAL (Dummy Data) */}
+                        <button 
+                            onClick={() => setViewState('tutorial')}
+                            className="group relative p-8 rounded-3xl bg-slate-800 border border-slate-700 hover:border-emerald-500/50 transition-all hover:shadow-2xl hover:shadow-emerald-500/10 text-left flex flex-col items-start h-80 justify-between overflow-hidden"
+                        >
+                            <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                            <div className="p-4 bg-emerald-500/10 rounded-2xl text-emerald-400 mb-4 group-hover:bg-emerald-500 group-hover:text-white transition-colors">
+                                <BookOpen className="w-8 h-8" />
+                            </div>
+                            <div className="relative z-10">
+                                <h2 className="text-2xl font-bold text-white mb-2">Tutorial & Examples</h2>
+                                <p className="text-slate-400">Learn by exploring pre-filled document examples.</p>
+                            </div>
+                            <div className="mt-auto flex items-center gap-2 text-emerald-400 font-medium group-hover:translate-x-2 transition-transform">
+                                Browse Examples <ChevronLeft className="w-4 h-4 rotate-180" />
+                            </div>
+                        </button>
+
+                        {/* 3. IMPORT */}
+                        <label className="group relative p-8 rounded-3xl bg-slate-800 border border-dashed border-slate-600 hover:border-purple-500 hover:bg-slate-800/80 transition-all cursor-pointer text-left flex flex-col items-start h-80 justify-between">
+                            <input type="file" onChange={onImport} className="hidden" accept=".json"/>
+                            <div className="p-4 bg-purple-500/10 rounded-2xl text-purple-400 mb-4 group-hover:bg-purple-500 group-hover:text-white transition-colors">
+                                <FolderOpen className="w-8 h-8" />
+                            </div>
+                            <div>
+                                <h2 className="text-2xl font-bold text-white mb-2">Load JSON</h2>
+                                <p className="text-slate-400">Continue working on a previously saved file.</p>
+                            </div>
+                            <div className="mt-auto flex items-center gap-2 text-purple-400 font-medium group-hover:translate-x-2 transition-transform">
+                                Upload File <Upload className="w-4 h-4" />
+                            </div>
+                        </label>
+                    </div>
+                )}
+
+                {/* TEMPLATE SELECTION VIEW */}
+                {(viewState === 'new' || viewState === 'tutorial') && (
+                    <div className="w-full flex flex-col items-center">
+                        <button 
+                            onClick={() => setViewState('main')}
+                            className="self-start mb-6 flex items-center gap-2 text-slate-400 hover:text-white transition-colors px-4 py-2 rounded-full hover:bg-slate-800"
+                        >
+                            <ChevronLeft className="w-5 h-5" /> Back to Menu
+                        </button>
+                        <h2 className="text-2xl font-bold mb-8">
+                            {viewState === 'new' ? 'Choose a Blank Structure' : 'Choose an Example to Explore'}
+                        </h2>
+                        <TemplateGrid isTutorial={viewState === 'tutorial'} />
+                    </div>
+                )}
+
+            </div>
+        </div>
+    );
+};
+
+// 3. MAIN APP
+export default function App() {
+    const [view, setView] = useState('landing');
+    const [nodes, setNodes] = useState({});
+    const [rootId, setRootId] = useState(null);
+    const [selectedNodeId, setSelectedNodeId] = useState(null);
+    const [editingId, setEditingId] = useState(null);
+    const [lang, setLang] = useState('en');
+
+    // --- ACTIONS ---
+    const handleSelectTemplate = (key, isTutorial) => {
+        const rawData = TEMPLATES[key].data;
+        
+        // If not tutorial (aka New Project), strip content
+        const dataToLoad = isTutorial ? rawData : stripContent(JSON.parse(JSON.stringify(rawData)));
+
+        const { map, rootId } = normalizeData(dataToLoad);
+        setNodes(map);
+        setRootId(rootId);
+        setSelectedNodeId(map[rootId].children[0] || null);
+        setView('workspace');
+    };
+
+    const handleImport = (e) => {
+        const reader = new FileReader();
+        reader.onload = (event) => {
+            try {
+                const parsed = JSON.parse(event.target.result);
+                setNodes(parsed);
+                const root = Object.values(parsed).find(n => !n.parentId);
+                if (root) {
+                    setRootId(root.id);
+                    setSelectedNodeId(root.children[0] || root.id);
+                    setView('workspace');
+                }
+            } catch(err) { alert('Invalid JSON'); }
+        };
+        reader.readAsText(e.target.files[0]);
+    };
+
+    const handleSaveJSON = () => {
+        const dataStr = JSON.stringify(nodes);
+        const link = document.createElement('a');
+        link.href = 'data:text/json;charset=utf-8,' + encodeURIComponent(dataStr);
+        link.download = `structure-flow-${Date.now()}.json`;
+        link.click();
+    };
+
+    const handleExportDoc = () => {
+        let html = `<html><head><style>body{font-family:Arial;}</style></head><body>`;
+        const buildHtml = (id) => {
+            const node = nodes[id];
+            if(node.parentId) html += `<div>${node.content}</div><br/>`;
+            if(node.children) node.children.forEach(buildHtml);
+        };
+        buildHtml(rootId);
+        html += `</body></html>`;
+        const blob = new Blob(['\ufeff', html], { type: 'application/msword' });
+        const link = document.createElement('a');
+        link.href = URL.createObjectURL(blob);
+        link.download = `document.doc`;
+        link.click();
+    };
+
+    const handlePrintPDF = () => {
+        window.print();
+    };
+
+    const handleAddSection = () => {
+        const newId = generateId();
+        const newNode = {
+            id: newId, content: '<p>New Section</p>', parentId: rootId, children: [],
+            guidance_id: 'Bagian baru.', guidance_en: 'New section.'
+        };
+        setNodes(prev => ({
+            ...prev,
+            [rootId]: { ...prev[rootId], children: [...prev[rootId].children, newId] },
+            [newId]: newNode
+        }));
+        setSelectedNodeId(newId);
+        setEditingId(newId);
+    };
+
+    const handleUpdateContent = (id, newContent) => {
+        setNodes(prev => ({ ...prev, [id]: { ...prev[id], content: newContent } }));
+    };
+
+    const handleMove = (id, dir) => {
+        if(id === rootId) return;
+        const parentId = nodes[id].parentId;
+        const parent = nodes[parentId];
+        const idx = parent.children.indexOf(id);
+        if (dir === 'up' && idx > 0) {
+            const newChildren = [...parent.children];
+            [newChildren[idx], newChildren[idx-1]] = [newChildren[idx-1], newChildren[idx]];
+            setNodes(prev => ({ ...prev, [parentId]: { ...parent, children: newChildren } }));
+        } else if (dir === 'down' && idx < parent.children.length - 1) {
+            const newChildren = [...parent.children];
+            [newChildren[idx], newChildren[idx+1]] = [newChildren[idx+1], newChildren[idx]];
+            setNodes(prev => ({ ...prev, [parentId]: { ...parent, children: newChildren } }));
+        }
+    };
+
+    const handleDelete = (id) => {
+        if (!confirm('Delete section?')) return;
+        const parentId = nodes[id].parentId;
+        setNodes(prev => {
+            const newNodes = { ...prev };
+            newNodes[parentId].children = newNodes[parentId].children.filter(c => c !== id);
+            delete newNodes[id];
+            return newNodes;
+        });
+        setSelectedNodeId(null);
+    };
+
+    if (view === 'landing') return <LandingPage onSelectTemplate={handleSelectTemplate} onImport={handleImport} />;
+
+    const activeNode = selectedNodeId ? nodes[selectedNodeId] : null;
+    const cardList = rootId && nodes[rootId] ? nodes[rootId].children : [];
+
+    return (
+        <div className="flex flex-col h-screen bg-slate-100 text-slate-800 font-sans overflow-hidden">
+            {/* TOP BAR */}
+            <div className="bg-slate-900 text-white p-3 flex justify-between items-center shadow-md z-30 no-print">
+                <div className="flex items-center gap-4">
+                    <button onClick={() => setView('landing')} className="text-slate-400 hover:text-white flex items-center gap-1 text-sm font-medium" title="Back to Menu">
+                        <ChevronLeft className="w-4 h-4" /> Menu
+                    </button>
+                    <div className="h-6 w-px bg-slate-700"></div>
+                    <div className="flex items-center gap-2 font-bold text-lg">
+                        <Layout className="text-blue-400" /> StructureFlow
+                    </div>
+                </div>
+                <div className="flex items-center gap-2">
+                    <button onClick={handleSaveJSON} className="p-2 bg-slate-700 hover:bg-slate-600 rounded-lg text-white transition-colors" title="Save JSON">
+                        <Save className="w-5 h-5"/>
+                    </button>
+                    
+                    <div className="relative">
+                        <button className="p-2 bg-slate-700 hover:bg-slate-600 rounded-lg text-white transition-colors relative overflow-hidden" title="Load JSON">
+                             <input type="file" onChange={handleImport} className="absolute inset-0 opacity-0 cursor-pointer"/>
+                             <Upload className="w-5 h-5"/>
+                        </button>
+                    </div>
+
+                    <div className="h-6 w-px bg-slate-700 mx-1"></div>
+                    
+                    <button onClick={handleExportDoc} className="p-2 bg-blue-600 hover:bg-blue-700 rounded-lg text-white transition-colors shadow-lg shadow-blue-900/20" title="Export to Word">
+                        <FileText className="w-5 h-5"/>
+                    </button>
+                    <button onClick={handlePrintPDF} className="p-2 bg-red-600 hover:bg-red-700 rounded-lg text-white transition-colors shadow-lg shadow-red-900/20" title="Print to PDF">
+                        <Printer className="w-5 h-5"/>
+                    </button>
+                </div>
+            </div>
+
+            {/* WORKSPACE */}
+            <div className="flex flex-1 overflow-hidden">
+                {/* LEFT: CONTENT */}
+                <div className="w-2/3 flex flex-col bg-slate-50 border-r relative print:w-full">
+                    <div className="p-4 border-b bg-white/80 backdrop-blur sticky top-0 z-20 flex justify-between items-center no-print">
+                        <span className="text-xs font-bold uppercase text-slate-500 tracking-wider">Document Structure</span>
+                        <button onClick={handleAddSection} className="text-xs bg-blue-600 text-white px-3 py-1.5 rounded-full flex items-center gap-1 hover:bg-blue-700 transition-shadow shadow-md shadow-blue-500/20">
+                            <Plus className="w-3 h-3"/> Add Section
+                        </button>
+                    </div>
+                    
+                    <div className="flex-1 overflow-y-auto p-8 custom-scrollbar print:overflow-visible">
+                        <div className="max-w-3xl mx-auto pb-20 print:pb-0">
+                            {cardList.length === 0 && (
+                                <div className="text-center py-20 text-slate-400">
+                                    <p>No sections yet. Add one to start.</p>
+                                </div>
+                            )}
+                            {cardList.map((id, index) => {
+                                const node = nodes[id];
+                                const isSelected = selectedNodeId === id;
+                                const isEditing = editingId === id;
+                                
+                                return (
+                                    <div key={id} className="flex gap-4 relative group/card print:break-inside-avoid">
+                                        {/* Visual Line */}
+                                        <div className="flex flex-col items-center w-8 pt-6 relative no-print">
+                                            <div className={`w-4 h-4 rounded-full border-2 z-10 transition-colors ${isSelected ? 'bg-blue-500 border-blue-500 shadow-lg shadow-blue-500/30' : 'bg-white border-slate-300'}`}></div>
+                                            {index < cardList.length - 1 && <div className="w-0.5 bg-slate-200 h-full absolute top-8 -bottom-6 left-1/2 -translate-x-1/2"></div>}
+                                        </div>
+
+                                        {/* Card */}
+                                        <div 
+                                            onClick={() => setSelectedNodeId(id)}
+                                            className={`flex-1 mb-6 rounded-xl border transition-all duration-300 relative ${isSelected ? 'border-blue-500 shadow-xl bg-white scale-[1.01]' : 'border-slate-200 bg-white hover:border-blue-300 hover:shadow-md'} print:border-0 print:shadow-none print:mb-4`}
+                                        >
+                                            <div className="p-5">
+                                                {isEditing ? (
+                                                    <RichTextEditor 
+                                                        initialContent={node.content}
+                                                        onSave={(val) => { handleUpdateContent(id, val); setEditingId(null); }}
+                                                        onCancel={() => setEditingId(null)}
+                                                    />
+                                                ) : (
+                                                    <div className="group/content" onDoubleClick={() => setEditingId(id)}>
+                                                        <div className="prose prose-sm max-w-none text-slate-700" dangerouslySetInnerHTML={{__html: node.content}} />
+                                                        
+                                                        {/* Hover Controls */}
+                                                        <div className={`absolute top-2 right-2 flex gap-1 bg-white p-1 rounded-lg border shadow-sm no-print ${isSelected ? 'opacity-100' : 'opacity-0 group-hover/card:opacity-100'} transition-all duration-200`}>
+                                                            <button onClick={(e) => { e.stopPropagation(); handleMove(id, 'up'); }} className="icon-btn" title="Move Up"><ArrowUp className="w-3 h-3"/></button>
+                                                            <button onClick={(e) => { e.stopPropagation(); handleMove(id, 'down'); }} className="icon-btn" title="Move Down"><ArrowDown className="w-3 h-3"/></button>
+                                                            <div className="w-px bg-slate-200 h-4 mx-1"></div>
+                                                            <button onClick={(e) => { e.stopPropagation(); setEditingId(id); }} className="icon-btn text-blue-600 hover:bg-blue-50" title="Edit"><Edit3 className="w-3 h-3"/></button>
+                                                            <button onClick={(e) => { e.stopPropagation(); handleDelete(id); }} className="icon-btn text-red-600 hover:bg-red-50" title="Delete"><Trash2 className="w-3 h-3"/></button>
+                                                        </div>
+                                                    </div>
+                                                )}
+                                            </div>
+                                        </div>
+                                    </div>
+                                );
+                            })}
+                        </div>
+                    </div>
+                </div>
+
+                {/* RIGHT: GUIDANCE */}
+                <div className="w-1/3 bg-white border-l shadow-2xl flex flex-col z-20 no-print">
+                    <div className="p-4 border-b flex justify-between items-center bg-slate-50">
+                        <span className="font-bold text-slate-700 flex gap-2 items-center"><BookOpen className="w-4 h-4 text-blue-500"/> Guidance</span>
+                        <button onClick={() => setLang(l => l === 'en' ? 'id' : 'en')} className="text-xs border border-slate-200 px-3 py-1.5 rounded-full bg-white hover:bg-slate-100 flex gap-2 font-medium transition-colors">
+                            <Globe className="w-3 h-3"/> {lang === 'en' ? 'English' : 'Bahasa'}
+                        </button>
+                    </div>
+                    <div className="p-6 overflow-y-auto flex-1 prose prose-sm">
+                        {activeNode ? (
+                            <div className="animate-in slide-in-from-right-4 fade-in duration-300">
+                                <h3 className="text-blue-600 mt-0 flex items-center gap-2">
+                                    {lang === 'en' ? 'Instructions' : 'Instruksi'}
+                                </h3>
+                                <div className="text-slate-600 text-base leading-relaxed">
+                                    {lang === 'en' ? activeNode.guidance_en : activeNode.guidance_id}
+                                </div>
+                                
+                                <div className="mt-8 p-5 bg-gradient-to-br from-yellow-50 to-orange-50 border border-yellow-100 rounded-xl text-yellow-900 shadow-sm">
+                                    <strong className="block mb-2 text-xs uppercase tracking-wider text-yellow-600">💡 {lang === 'en' ? 'Writing Tip' : 'Tips Menulis'}</strong>
+                                    {lang === 'en' 
+                                        ? 'Keep this section focused on one main idea. Use simple sentences to start.' 
+                                        : 'Fokuskan bagian ini pada satu ide utama. Gunakan kalimat sederhana untuk memulai.'}
+                                </div>
+                            </div>
+                        ) : (
+                            <div className="flex flex-col items-center justify-center h-full text-slate-400">
+                                <BookOpen className="w-12 h-12 mb-4 text-slate-200" />
+                                <p>Select a section on the left to view guidance.</p>
+                            </div>
+                        )}
+                    </div>
+                </div>
+            </div>
+
+            <style>{`
+                .btn-toolbar { @apply px-3 py-1.5 rounded text-xs flex items-center gap-2 transition-colors text-white font-medium; }
+                .icon-btn { @apply p-1.5 hover:bg-slate-100 rounded text-slate-500 transition-colors; }
+                @media print { .no-print { display: none !important; } .prose { max-width: 100% !important; } }
+            `}</style>
+        </div>
+    );
+}
