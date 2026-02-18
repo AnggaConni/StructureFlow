@@ -686,13 +686,70 @@ const DUMMY_DATA = {
   ] 
 },
 research_report: { 
-  title: 'Urban Mobility Transitions in Post-Pandemic Cities', 
+  title: 'Sustainable Urban Mobility Transitions in Post-Pandemic Cities: A Comparative Analysis for Policy Action', 
   sections: [
-    { key: 'executive_summary', content: `<h3>Executive Summary</h3><p>This report examines shifts in urban mobility patterns following the COVID-19 pandemic. Using data from 12 global cities, we identify a sustained increase in cycling and micro-mobility usage, and a decline in public transit ridership. Recommendations for urban planners are provided.</p>` },
-    { key: 'background', content: `<h3>1. Background</h3><p>The pandemic accelerated changes in how people move. Lockdowns led to a temporary drop in all travel, but as economies reopen, modal splits have shifted. This study investigates whether these changes are temporary or permanent.</p>` },
-    { key: 'methodology', content: `<h3>2. Methodology</h3><p>We collected anonymized mobile phone data, public transport usage statistics, and cycling counts from 12 cities across North America, Europe, and Asia. Data spans 2019–2023. We applied interrupted time series analysis.</p>` },
-    { key: 'findings', content: `<h3>3. Findings</h3><p>Cycling increased by an average of 42% compared to pre-pandemic levels. Public transit ridership remains 25% below 2019 levels. Car usage has returned to near pre-pandemic levels. Significant variation exists between cities.</p>` },
-    { key: 'recommendations', content: `<h3>4. Recommendations</h3><p>Cities should invest in protected cycling infrastructure, reconsider road space allocation, and explore integrated mobility-as-a-service platforms to boost public transit.</p>` }
+    { 
+      key: 'executive_summary', 
+      content: `
+        <h3>Executive Summary</h3>
+        <p>This report, commissioned by the UN-Habitat Urban Mobility Unit, investigates the structural shifts in urban mobility patterns following the COVID-19 pandemic across 15 cities in the Global South and North (2019–2024). Analyzing high-resolution mobility data, the study finds that while the global health crisis accelerated the adoption of active mobility, it also exacerbated existing inequities in transport access.</p>
+        <p><strong>Key Findings:</strong> (1) Cycling and e-mobility usage increased by a sustained average of 38%, but this growth is concentrated in higher-income demographics and districts with existing infrastructure. (2) Public transit ridership in developing economies has recovered to 85% of pre-pandemic levels, yet remains critically below targets for climate goals. (3) The "15-minute city" concept gained policy traction, but implementation remains uneven, with informal settlements largely excluded from planning.</p>
+        <p><strong>Policy Imperatives:</strong> The report recommends a three-pillar framework for member states: (A) Institutionalizing "pop-up" active mobility infrastructure into permanent urban fabric; (B) Implementing fare reform and service diversification to restore transit equity; and (C) Establishing data cooperatives to ensure mobility analytics serve public good, not just private platforms.</p>
+      ` 
+    },
+    { 
+      key: 'background', 
+      content: `
+        <h3>1. Background: The Pandemic as a Turning Point</h3>
+        <p>The COVID-19 pandemic disrupted urban transport systems globally, but its impact was not uniform. While lockdowns caused a 50-70% drop in mobility worldwide, the subsequent recovery revealed deep structural fissures. In cities across Africa, Asia, and Latin America, reliance on paratransit and informal transport left millions without reliable information or safety protocols. Conversely, in Europe and North America, the pandemic catalyzed a political shift toward active transport, with over 1,000 cities installing temporary cycling infrastructure.</p>
+        <p>This study, conducted under the auspices of the UN-Habitat flagship programme "Sustainable Transport for All," addresses a critical knowledge gap: Are these changes transient responses to a crisis, or do they signal a durable transformation? The answer is vital for aligning urban transport with the Sustainable Development Goals (SDGs), particularly SDG 11.2 (access to safe, affordable, accessible and sustainable transport for all).</p>
+      ` 
+    },
+    { 
+      key: 'methodology', 
+      content: `
+        <h3>2. Methodology: A Mixed-Methods, Multi-City Framework</h3>
+        <p>This research employed a multi-layered methodology designed to capture both quantitative trends and qualitative governance contexts across diverse economic settings.</p>
+        <p><strong>City Selection:</strong> 15 cities were selected based on geographic diversity, data availability, and policy activity: Bogotá, Nairobi, Jakarta, Medellín, Mumbai, Bangkok, Lagos, Mexico City (Global South); and Paris, Milan, London, Montreal, Sydney, Berlin, Lisbon (Global North).</p>
+        <p><strong>Quantitative Phase:</strong> We analyzed anonymized mobility data from three sources: (a) aggregated Google and Apple mobility reports (2020-2024); (b) public transport automatic fare collection (AFC) systems where available; and (c) cycling counter data from municipal open data portals. Interrupted time series (ITS) models were used to estimate trend changes post-March 2020, controlling for seasonal effects and lockdown stringency indices.</p>
+        <p><strong>Qualitative Phase:</strong> Semi-structured interviews were conducted with 45 urban transport planners, civil society advocates, and informal transport union leaders. These interviews explored the decision-making processes behind infrastructure changes and the perceived barriers to equitable recovery.</p>
+        <p><strong>Limitations:</strong> Data gaps persist in informal transport modes (e.g., motorcycle taxis, minibuses) which dominate in many Global South cities. The study partially addresses this through interview data and recommends investment in better informal sector data collection.</p>
+      ` 
+    },
+    { 
+      key: 'findings', 
+      content: `
+        <h3>3. Findings: The Great Divergence in Mobility Transitions</h3>
+        
+        <h4>3.1 The Active Mobility Boom (and its Inequity)</h4>
+        <p>Across all 15 cities, cycling and micro-mobility (e-scooters, e-bikes) trips increased by an average of 38% compared to 2019 baselines, a trend sustained through Q1 2024. Paris and Bogotá saw the most dramatic increases (over 50%), correlating with mayoral commitments to the "15-minute city" and investment in protected bike lanes. However, the boom is deeply unequal. In Nairobi and Jakarta, cycling remains a minority mode for the affluent, while the majority of low-income commuters returned to crowded, unsafe matatus and minibuses. The data shows new cycling infrastructure is 3x more likely to be built in high-income neighborhoods.</p>
+        
+        <h4>3.2 The Transit Ridership Gap and the Informal Sector</h4>
+        <p>Public transit ridership in Global North cities remains 20-30% below 2019 levels, driven by hybrid work and safety concerns. Conversely, in Global South cities like Lagos and Mumbai, transit ridership has nearly fully recovered, but this masks a crisis of quality. Ridership is returning to overcrowded, polluting, and unsafe systems. Notably, informal transport (shared taxis, motorcycle taxis) has not only recovered but expanded in many African cities, filling gaps left by formal transit. This sector remains largely unregulated, unsubsidized, and excluded from climate planning.</p>
+        
+        <h4>3.3 The Equity Paradox of Digitalization</h4>
+        <p>The pandemic accelerated the adoption of Mobility-as-a-Service (MaaS) apps and contactless payments. In Lisbon and Milan, integration boosted multimodal trips. However, in Mumbai and Mexico City, the shift to app-based payments excluded the unbanked and those without smartphones. The digital divide is hardening into a mobility divide.</p>
+        
+        <h4>3.4 Enabling Factors for Sustainable Transitions</h4>
+        <p>Cities that successfully shifted toward sustainable mobility shared three characteristics: (1) <strong>Political Leadership:</strong> Mayors who framed mobility as a public health and climate issue. (2) <strong>Bureaucratic Capacity:</strong> City departments able to rapidly implement "pop-up" projects and convert them to permanent infrastructure. (3) <strong>Civil Society Engagement:</strong> Advocacy groups that held governments accountable and ensured community voices were heard.</p>
+      ` 
+    },
+    { 
+      key: 'recommendations', 
+      content: `
+        <h3>4. Recommendations: A Policy Framework for Just and Sustainable Mobility</h3>
+        <p>Based on the findings, this report proposes a tiered action framework for national governments, local authorities, and international development partners.</p>
+        
+        <h4>4.1 For National Governments: Enable and Fund Equitable Transitions</h4>
+        <p><strong>Establish a "Active Mobility Fund":</strong> Provide dedicated, multi-year financing to cities for cycling and walking infrastructure, with a mandatory requirement that 40% of funds be spent in low-income and informal settlements. <strong>Integrate Informal Transport:</strong> Develop regulatory frameworks and financing mechanisms to support the transition to electric, safer informal fleets (e.g., "e-bajaj" conversion programs). <strong>Mandate Open Data Standards:</strong> Require mobility service providers (including ride-hail and micromobility companies) to share anonymized aggregate data with city authorities for public interest planning.</p>
+        
+        <h4>4.2 For Local Authorities: Implement with Speed and Justice</h4>
+        <p><strong>Permanent Infrastructure from Pop-Ups:</strong> Conduct audits of all temporary pandemic infrastructure and develop a 3-year plan to make successful interventions permanent, prioritizing connections to transit hubs. <strong>Fare Reform for Equity:</strong> Introduce social tariffs and capped integrated ticketing to make multi-modal trips affordable. Expand off-board fare payment to reduce dwell times and crowding. <strong>Co-Design with Communities:</strong> Establish citizen mobility boards, particularly including representatives from informal transport unions and disability advocates, to review and approve major infrastructure projects.</p>
+        
+        <h4>4.3 For International Community (UN, Development Banks, Donors):</h4>
+        <p><strong>Shift from Projects to Programs:</strong> Move beyond funding isolated pilot projects. Provide flexible, long-term budget support to cities with credible sustainable mobility plans. <strong>Invest in Data for the Informal Sector:</strong> Launch a multi-city initiative to develop low-cost, scalable methods for counting and surveying informal transport users. Without data, this sector remains invisible and unfunded. <strong>Create a "Just Transition" Observatory:</strong> Monitor and report on the equity impacts of the mobility transition, highlighting cities that are leaving vulnerable populations behind and amplifying best practices in inclusive planning.</p>
+      ` 
+    }
   ] 
 },
 working_paper: { 
@@ -2571,6 +2628,290 @@ policy_brief: {
       }
       }
       },
+      research_report: {
+  _analogy: { 
+    en: 'A Research Report is a <strong>Nutritional Analysis & Diet Plan</strong> for a Decision-Maker. If you serve them a fancy meal (fluff), they won\'t know if it\'s healthy. If you give them the lab results (data) and a clear diet plan (actions), they will trust and follow it.', 
+    id: 'Laporan Penelitian adalah <strong>Analisis Gizi & Rencana Diet</strong> untuk Pengambil Keputusan. Jika Anda menyajikan makanan mewah (omong kosong), mereka tidak tahu apakah itu sehat. Jika Anda berikan hasil lab (data) dan rencana diet yang jelas (tindakan), mereka akan percaya dan mengikutinya.' 
+  },
+  executive_summary: {
+    en: { 
+      what: `
+        <h4>The "Executive's One-Pager"</h4>
+        <p>This is the most important section. It is written last but read first. It must stand alone, as many executives will read only this.</p>
+        <strong>Must Include (BLUF):</strong>
+        <ul>
+          <li><strong>Bottom Line Up Front:</strong> State the core finding immediately.</li>
+          <li><strong>The "So What?":</strong> Why does this matter to the organization?</li>
+          <li><strong>The "Now What?":</strong> A single sentence summarizing the key recommendation.</li>
+        </ul>
+      `, 
+      tip: `
+        <div class="box-tip">
+          <strong>No Citations Here:</strong>
+          This is a summary of conclusions, not a methodology discussion. Save the data sources for the body.
+        </div>
+      `,
+      mistakes: `
+        <div class="box-warn">
+          <strong>The "Trailer" Mistake:</strong>
+          Don't tease the findings ("This report will explore..."). Actually *give* the findings. The summary must deliver value, not just describe the table of contents.
+        </div>
+      `
+    },
+    id: { 
+      what: `
+        <h4>"Ringkasan Eksekutif"</h4>
+        <p>Ini adalah bagian terpenting. Ditulis terakhir, tetapi dibaca pertama. Harus berdiri sendiri karena banyak eksekutif hanya membaca ini.</p>
+        <strong>Wajib Sertakan (BLUF):</strong>
+        <ul>
+          <li><strong>Kesimpulan di Awal:</strong> Nyatakan temuan inti segera.</li>
+          <li><strong>"Lalu Kenapa?":</strong> Mengapa ini penting bagi organisasi?</li>
+          <li><strong>"Lalu Apa?":</strong> Satu kalimat yang merangkum rekomendasi utama.</li>
+        </ul>
+      `, 
+      tip: `
+        <div class="box-tip">
+          <strong>Tanpa Sitasi di Sini:</strong>
+          Ini ringkasan kesimpulan, bukan diskusi metodologi. Simpan sumber data untuk bagian isi.
+        </div>
+      `,
+      mistakes: `
+        <div class="box-warn">
+          <strong>Kesalahan "Trailer Film":</strong>
+          Jangan menggoda temuan ("Laporan ini akan mengeksplorasi..."). Berikan temuannya *sekarang*. Ringkasan harus memberikan nilai, bukan hanya mendeskripsikan daftar isi.
+        </div>
+      `
+    }
+  },
+  background: {
+    en: { 
+      what: `
+        <h4>Setting the Stage</h4>
+        <p>You are writing for an intelligent reader who is *not* an expert in your specific niche. You need to bring them up to speed.</p>
+        <strong>Structure:</strong>
+        <ul>
+          <li><strong>The Context:</strong> What is the current state of the world?</li>
+          <li><strong>The Problem:</strong> What gap or inefficiency exists?</li>
+          <li><strong>The Question:</strong> What specific thing did we set out to answer?</li>
+        </ul>
+      `, 
+      tip: `
+        <div class="box-tip">
+          <strong>Cite Landmark Studies:</strong>
+          Show you've done your homework by referencing 1-2 key papers or reports that define the field.
+        </div>
+      `,
+      mistakes: `
+        <div class="box-warn">
+          <strong>The "Textbook" Mistake:</strong>
+          Don't write a history lesson. Keep it focused only on the context necessary to understand *your* research question.
+        </div>
+      `
+    },
+    id: { 
+      what: `
+        <h4>Mengatur Panggung</h4>
+        <p>Anda menulis untuk pembaca cerdas yang *bukan* ahli di niche spesifik Anda. Anda perlu menyamakan pemahaman mereka.</p>
+        <strong>Struktur:</strong>
+        <ul>
+          <li><strong>Konteks:</strong> Bagaimana keadaan dunia saat ini?</li>
+          <li><strong>Masalah:</strong> Kesenjangan atau inefisiensi apa yang ada?</li>
+          <li><strong>Pertanyaan:</strong> Hal spesifik apa yang ingin kami jawab?</li>
+        </ul>
+      `, 
+      tip: `
+        <div class="box-tip">
+          <strong>Kutip Studi Penting:</strong>
+          Tunjukkan bahwa Anda telah melakukan riset dengan mereferensikan 1-2 laporan kunci yang mendefinisikan bidang tersebut.
+        </div>
+      `,
+      mistakes: `
+        <div class="box-warn">
+          <strong>Kesalahan "Buku Teks":</strong>
+          Jangan menulis pelajaran sejarah. Pertahankan fokus hanya pada konteks yang diperlukan untuk memahami *pertanyaan penelitian Anda*.
+        </div>
+      `
+    }
+  },
+  methodology: {
+    en: { 
+      what: `
+        <h4>The "Recipe Card"</h4>
+        <p>This section is for replication and validation. A peer should be able to read this and understand exactly how you reached your conclusions.</p>
+        <strong>Be Specific:</strong>
+        <ul>
+          <li><strong>Data Sources:</strong> Where did the numbers come from? (e.g., "Smart-card data from Transjakarta, Jan 2022-Dec 2023").</li>
+          <li><strong>Sample Size:</strong> How many people/cities/observations?</li>
+          <li><strong>Time Frame:</strong> What period was analyzed?</li>
+          <li><strong>Analytical Tools:</strong> What model or formula was used? (e.g., "Interrupted Time Series Analysis").</li>
+        </ul>
+      `, 
+      tip: `
+        <div class="box-tip">
+          <strong>Transparency Over Perfection:</strong>
+          It's okay to mention limitations here. ("We lacked data from X region, so results may not apply globally.") It builds trust.
+        </div>
+      `,
+      mistakes: `
+        <div class="box-warn">
+          <strong>Vague Descriptions:</strong>
+          Avoid saying "Data was collected and analyzed." How? By magic? Be specific: "We used Python to analyze GPS traces from 10,000 users."
+        </div>
+      `
+    },
+    id: { 
+      what: `
+        <h4>"Kartu Resep"</h4>
+        <p>Bagian ini untuk replikasi dan validasi. Rekan peneliti harus bisa membaca ini dan memahami persis bagaimana Anda mencapai kesimpulan.</p>
+        <strong>Bersikaplah Spesifik:</strong>
+        <ul>
+          <li><strong>Sumber Data:</strong> Dari mana angka-angka itu berasal?</li>
+          <li><strong>Ukuran Sampel:</strong> Berapa banyak orang/kota/observasi?</li>
+          <li><strong>Kerangka Waktu:</strong> Periode apa yang dianalisis?</li>
+          <li><strong>Alat Analisis:</strong> Model atau rumus apa yang digunakan?</li>
+        </ul>
+      `, 
+      tip: `
+        <div class="box-tip">
+          <strong>Transparansi di Atas Kesempurnaan:</strong>
+          Tidak apa-apa untuk menyebutkan keterbatasan di sini. Itu membangun kepercayaan.
+        </div>
+      `,
+      mistakes: `
+        <div class="box-warn">
+          <strong>Deskripsi yang Samar:</strong>
+          Hindari mengatakan "Data dikumpulkan dan dianalisis." Bagaimana? Dengan sihir? Bersikaplah spesifik.
+        </div>
+      `
+    }
+  },
+  findings: {
+    en: { 
+      what: `
+        <h4>The "Show Me The Numbers" Section</h4>
+        <p>This is the core of the report. It presents the evidence without interpretation (save that for the recommendations).</p>
+        <strong>Structure:</strong>
+        <ul>
+          <li><strong>Lead with the key result.</strong> (e.g., "Cycling increased by 42%.")</li>
+          <li><strong>Provide the evidence.</strong> (e.g., "Counters at 12 locations show...")</li>
+          <li><strong>Note nuances and exceptions.</strong> (e.g., "However, City X saw only a 10% increase due to hilly terrain.")</li>
+        </ul>
+      `, 
+      tip: `
+        <div class="box-tip">
+          <strong>Visuals Help:</strong>
+          In a full document, this section should be supported by charts and graphs. In text, describe the trend the visual shows.
+        </div>
+      `,
+      mistakes: `
+        <div class="box-warn">
+          <strong>Cherry-Picking:</strong>
+          Don't just report the data that supports your hypothesis. Report all significant findings, especially the ones that contradict your initial assumptions.
+        </div>
+      `
+    },
+    id: { 
+      what: `
+        <h4>Bagian "Tunjukkan Angkanya"</h4>
+        <p>Ini adalah inti dari laporan. Menyajikan bukti tanpa interpretasi.</p>
+        <strong>Struktur:</strong>
+        <ul>
+          <li><strong>Mulai dengan hasil utama.</strong></li>
+          <li><strong>Berikan buktinya.</strong></li>
+          <li><strong>Catat nuansa dan pengecualian.</strong></li>
+        </ul>
+      `, 
+      tip: `
+        <div class="box-tip">
+          <strong>Visual Itu Membantu:</strong>
+          Dalam dokumen lengkap, bagian ini harus didukung oleh grafik. Dalam teks, jelaskan tren yang ditunjukkan visual.
+        </div>
+      `,
+      mistakes: `
+        <div class="box-warn">
+          <strong>Memilih Data:</strong>
+          Jangan hanya melaporkan data yang mendukung hipotesis Anda. Laporkan semua temuan signifikan, terutama yang bertentangan dengan asumsi awal Anda.
+        </div>
+      `
+    }
+  },
+  recommendations: {
+    en: { 
+      what: `
+        <h4>The "Action Plan"</h4>
+        <p>This translates the findings into actionable steps. It answers the question: "Based on this data, what should we *do*?"</p>
+        <strong>Be Action-Oriented:</strong>
+        <ul>
+          <li>Start each point with a verb: "Invest in...", "Revise...", "Reallocate...".</li>
+          <li>Link each recommendation back to a specific finding.</li>
+          <li>Prioritize them. What is step one?</li>
+        </ul>
+      `, 
+      tip: `
+        <div class="box-tip">
+          <strong>Make it Implementable:</strong>
+          Instead of "Improve public transit," say "Increase bus frequency on the B1 corridor from every 20 minutes to every 10 minutes during peak hours."
+        </div>
+      `,
+      mistakes: `
+        <div class="box-warn">
+          <strong>Vague Platitudes:</strong>
+          "We must strive for excellence" or "Collaboration is key." This is a report, not a motivational poster. Be specific.
+        </div>
+      `
+    },
+    id: { 
+      what: `
+        <h4>"Rencana Aksi"</h4>
+        <p>Ini menerjemahkan temuan menjadi langkah-langkah yang dapat ditindaklanjuti.</p>
+        <strong>Berorientasi pada Tindakan:</strong>
+        <ul>
+          <li>Mulai setiap poin dengan kata kerja.</li>
+          <li>Hubungkan setiap rekomendasi kembali ke temuan spesifik.</li>
+          <li>Prioritaskan mereka. Apa langkah pertamanya?</li>
+        </ul>
+      `, 
+      tip: `
+        <div class="box-tip">
+          <strong>Buatlah Dapat Diimplementasikan:</strong>
+          Alih-alih "Tingkatkan transportasi umum", katakan "Tambah frekuensi bus di koridor B1 dari setiap 20 menit menjadi setiap 10 menit pada jam sibuk."
+        </div>
+      `,
+      mistakes: `
+        <div class="box-warn">
+          <strong>Omong Kosong:</strong>
+          "Kita harus berjuang untuk keunggulan" atau "Kolaborasi adalah kunci." Ini laporan, bukan poster motivasi. Bersikaplah spesifik.
+        </div>
+      `
+    }
+  },
+  common_mistakes: {
+    en: { 
+      what: `
+        <h4>The "Kill Your EGO" Rule</h4>
+        <p>If a data point, anecdote, or paragraph does not directly support your findings or lead to a recommendation, delete it. The reader doesn't care how hard you worked; they care about what you discovered.</p>
+      `,
+      tip: `
+        <div class="box-tip">
+          <strong>The "Executive" Filter:</strong>
+          Before sending, imagine the CEO has 3 minutes to read this. Would they understand the point? If not, simplify.
+        </div>
+      `
+    },
+    id: { 
+      what: `
+        <h4>Aturan "Jangan ikuti egomu"</h4>
+        <p>Jika satu data, anekdot, atau paragraf tidak secara langsung mendukung temuan Anda atau mengarah ke rekomendasi, hapuslah. Pembaca tidak peduli seberapa keras Anda bekerja; mereka peduli pada apa yang Anda temukan.</p>
+      `,
+      tip: `
+        <div class="box-tip">
+          <strong>Filter "Eksekutif":</strong>
+          Sebelum mengirim, bayangkan Direktur Utama punya waktu 3 menit untuk membaca ini. Apakah mereka akan mengerti intinya? Jika tidak, sederhanakan.
+        </div>
+      `
+    }
+  }
+},
       policy_paper: {
       _analogy: { en: 'A policy paper is a deep dive into options.', id: 'Policy paper adalah analisis mendalam tentang pilihan-pilihan.' },
       executive_summary: {
@@ -3558,12 +3899,27 @@ const MODULE_REGISTRY_DEFINITION = [
   structural_sections: ['header_info', 'headline', 'lead_paragraph', 'body_quotes', 'boilerplate_about', 'media_contact'], 
   color: 'orange', 
   description: 'Official statement for media distribution.' 
+}, 
+  { 
+  id: 'conference_paper', 
+  name: 'Conference Paper', 
+  category: 'academic', 
+  schema_version: SCHEMA_VERSION, 
+  structural_sections: ['abstract','introduction','related_work','method','experiments','conclusion'], 
+  color: 'blue', 
+  description: 'Concise research contribution.' 
 },
+  { 
+  id: 'research_report', 
+  name: 'Research Report', 
+  category: 'academic', 
+  schema_version: SCHEMA_VERSION, 
+  structural_sections:  ['executive_summary','background','methodology','findings','recommendations'], 
+  color: 'blue', description: 'Commissioned investigation.' 
+
+}
 
   /* ------------------------------------------------------------- */
-  
-  { id: 'conference_paper', name: 'Conference Paper', category: 'academic', schema_version: SCHEMA_VERSION, structural_sections: ['abstract','introduction','related_work','method','experiments','conclusion'], color: 'blue', description: 'Concise research contribution.' },
-  { id: 'research_report', name: 'Research Report', category: 'academic', schema_version: SCHEMA_VERSION, structural_sections: ['executive_summary','background','methodology','findings','recommendations'], color: 'blue', description: 'Commissioned investigation.' }
 ];
 
 /* ═══════════════════════════════════════════════════════════════
