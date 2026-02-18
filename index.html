@@ -583,14 +583,113 @@ dissertation_thesis: {
   ] 
 },
 policy_brief: { 
-  title: 'Expanding Access to Early Childhood Education', 
+  title: 'Policy Brief: Mengubah Data Menjadi Dana — Integrasi Sains Warga dalam Alokasi Dana Desa untuk Penanganan Sampah Laut', 
   sections: [
-    { key: 'executive_summary', content: `<h3>Executive Summary</h3><p>Only 60% of low-income children have access to pre-K programs. This brief recommends a federal-state partnership to fund universal pre-K, estimating a net economic benefit of $8,000 per child over their lifetime.</p>` },
-    { key: 'key_recommendations', content: `<h3>Key Recommendations</h3><ul><li>Increase federal matching funds for state pre-K programs.</li><li>Establish quality standards and training requirements.</li><li>Integrate with existing childcare subsidies.</li></ul>` },
-    { key: 'context', content: `<h3>Context</h3><p>Research shows that early childhood education yields high returns, yet access remains unequal.</p>` },
-    { key: 'evidence', content: `<h3>Evidence</h3><p>Studies from Chicago and Boston show participants have higher graduation rates and earnings. Cost-benefit analyses suggest a benefit-cost ratio of 7:1.</p>` },
-    { key: 'implications', content: `<h3>Implications</h3><p>Universal pre-K could reduce achievement gaps and boost long-term productivity.</p>` },
-    { key: 'conclusion', content: `<h3>Conclusion</h3><p>Policymakers should act now to expand access.</p>` }
+    { 
+      key: 'executive_summary', 
+      content: `
+        <h3>Executive Summary</h3>
+        <p><strong>Masalah:</strong> Indonesia adalah penyumbang sampah laut terbesar kedua di dunia, namun kebijakan penanganan sampah di tingkat desa seringkali tidak efektif karena "kebutaan data". Pemerintah Desa mengalokasikan Dana Desa tanpa basis data yang jelas mengenai jenis dan sumber sampah lokal.</p>
+        <p><strong>Rekomendasi:</strong> Brief ini merekomendasikan Kementerian Desa (Kemendes PDTT) untuk mewajibkan <strong>"Audit Sampah Berbasis Warga"</strong> sebagai prasyarat pencairan Dana Desa untuk pos lingkungan. Dengan mengadopsi model <em>Citizen Science</em> (seperti pilot project "Nusantara Blue Guardians"), efisiensi anggaran dapat meningkat hingga 40%.</p>
+      ` 
+    },
+    { 
+      key: 'context_problem', 
+      content: `
+        <h3>1. Konteks & Masalah: Paradoks Anggaran Desa</h3>
+        <p>Sejak 2015, Pemerintah telah menyalurkan lebih dari Rp400 Triliun Dana Desa. Namun, riset lapangan di Indonesia Timur menunjukkan dua masalah kronis:</p>
+        <ul>
+          <li><strong>Inefisiensi Belanja:</strong> Desa sering membeli tong sampah mahal atau motor sampah yang berakhir mangkrak (rusak) karena tidak sesuai topografi wilayah.</li>
+          <li><strong>Data Nasional vs Realitas Lokal:</strong> Kebijakan nasional fokus pada "plastik sekali pakai", padahal di desa pesisir tertentu, 60% sampah adalah alat tangkap ikan (jaring hantu) yang butuh penanganan berbeda. Tanpa data lokal, solusi menjadi salah sasaran.</li>
+        </ul>
+      ` 
+    },
+    { 
+      key: 'critique', 
+      content: `
+        <h3>2. Kritik Kebijakan Eksisting</h3>
+        <p>Pendekatan <em>top-down</em> saat ini (seperti "Bank Sampah" yang diseragamkan) sering gagal karena:</p>
+        <ol>
+          <li>Tidak ada insentif bagi pemuda desa untuk terlibat (dianggap kerja bakti sukarela).</li>
+          <li>Pelaporan manual yang rentan dimanipulasi (ABS: Asal Bapak Senang).</li>
+          <li>Ketergantungan pada konsultan luar yang mahal dan tidak berkelanjutan.</li>
+        </ol>
+      ` 
+    },
+    { 
+      key: 'evidence_table', 
+      content: `
+        <h3>3. Bukti Studi Kasus: Pilot Project "Nusantara Blue Guardians"</h3>
+        <p>Perbandingan efektivitas antara metode konvensional vs metode berbasis data (Citizen Science) di 3 desa pilot di Maluku:</p>
+        
+        <table border="1" cellpadding="8" style="border-collapse: collapse; width: 100%; text-align: left;">
+          <thead style="background-color: #f2f2f2;">
+            <tr>
+              <th>Indikator</th>
+              <th>Metode Lama (Kerja Bakti)</th>
+              <th>Metode Baru (Citizen Science App)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Akurasi Data</strong></td>
+              <td>Estimasi mata ("Kira-kira 1 truk")</td>
+              <td>Timbangan digital & GPS Tagging (Kg/m2)</td>
+            </tr>
+            <tr>
+              <td><strong>Biaya Operasional</strong></td>
+              <td>Rp 5.000.000 / kegiatan</td>
+              <td>Rp 2.500.000 / kegiatan</td>
+            </tr>
+            <tr>
+              <td><strong>Partisipasi Pemuda</strong></td>
+              <td>Rendah (< 10 orang)</td>
+              <td>Tinggi (> 50 orang) karena gamifikasi</td>
+            </tr>
+            <tr>
+              <td><strong>Output Kebijakan</strong></td>
+              <td>Sampah dibakar/dikubur</td>
+              <td>Perdes Larangan Plastik Sachet</td>
+            </tr>
+          </tbody>
+        </table>
+        <p><em>Sumber: Laporan Monitoring Nusantara Blue Guardians, 2024.</em></p>
+      ` 
+    },
+    { 
+      key: 'policy_recommendations', 
+      content: `
+        <h3>4. Rekomendasi Kebijakan</h3>
+        <p>Untuk mereplikasi kesuksesan ini secara nasional, kami mendesak para pembuat kebijakan untuk:</p>
+        
+        <div style="background:#e8f4fd; padding:15px; border-left: 5px solid #2196F3; margin-bottom: 10px;">
+          <strong>A. Mandat Data (Data-Driven Mandate)</strong><br>
+          Kemendes PDTT harus merevisi Permendesa tentang Prioritas Penggunaan Dana Desa. Masukkan klausul: <em>"Pengadaan infrastruktur sampah harus didasari oleh Audit Sampah minimal 3 bulan."</em>
+        </div>
+
+        <div style="background:#e8f4fd; padding:15px; border-left: 5px solid #2196F3; margin-bottom: 10px;">
+          <strong>B. Insentif Kader Digital (Green Jobs)</strong><br>
+          Legalisasi alokasi Dana Desa untuk membayar honor "Kader Data Lingkungan" (pemuda desa) setara dengan Kader Posyandu. Ini menciptakan lapangan kerja hijau bagi pemuda.
+        </div>
+
+        <div style="background:#e8f4fd; padding:15px; border-left: 5px solid #2196F3;">
+          <strong>C. Adopsi Teknologi Terbuka</strong><br>
+          Dinas Pemberdayaan Masyarakat Desa (DPMD) harus mengadopsi platform terbuka (seperti "LautKita") sebagai standar pelaporan, menggantikan laporan kertas manual.
+        </div>
+      ` 
+    },
+    { 
+      key: 'implications', 
+      content: `
+        <h3>5. Implikasi</h3>
+        <p>Jika kebijakan ini diterapkan di 1.000 desa pesisir prioritas, diproyeksikan:</p>
+        <ul>
+          <li><strong>Ekonomi:</strong> Penghematan anggaran negara hingga Rp 50 Miliar per tahun dari efisiensi pengadaan alat.</li>
+          <li><strong>Sosial:</strong> Penyerapan 5.000 tenaga kerja pemuda desa sebagai "Data Auditor".</li>
+          <li><strong>Lingkungan:</strong> Reduksi kebocoran sampah ke laut sebesar 30% dalam 2 tahun pertama.</li>
+        </ul>
+      ` 
+    }
   ] 
 },
 policy_paper: { 
@@ -1507,32 +1606,59 @@ dissertation_thesis: {
   }
 },
 policy_brief: {
-  _analogy: { en: 'A policy brief is a call to action for busy policymakers.', id: 'Policy brief adalah ajakan bertindak untuk pembuat kebijakan yang sibuk.' },
-  executive_summary: {
-    en: { what: 'State the problem, key recommendation, and main evidence.', tip: 'One paragraph max.' },
-    id: { what: 'Nyatakan masalah, rekomendasi utama, dan bukti utama.', tip: 'Maksimal satu paragraf.' }
+  _analogy: { 
+      en: 'A Policy Brief is a "Menu" for a hungry decision-maker. They don\'t want the recipe (methodology), they just want to know what to order (solution) and how much it costs.', 
+      id: 'Policy Brief itu ibarat "Buku Menu" untuk pejabat yang lapar. Mereka tidak mau tahu resepnya (metodologi), mereka cuma mau tahu apa yang harus dipesan (solusi) dan berapa harganya.' 
+    },
+    executive_summary: { 
+      en: { 
+        what: 'The "Bottom Line Up Front" (BLUF). It summarizes the Problem, the Recommendation, and the Benefit in 1-2 paragraphs.', 
+        tip: 'Policymakers scan this in 30 seconds. Use bold text for the recommendation. Do not just summarize the background; summarize the ACTION.', 
+        mistakes: 'Using academic jargon. Being vague ("we need to collaborate") instead of specific ("allocate 5% budget").'
+      }, 
+      id: { 
+        what: 'Inti sari di depan (BLUF). Merangkum Masalah, Rekomendasi, dan Manfaat dalam 1-2 paragraf.', 
+        tip: 'Pejabat memindai ini dalam 30 detik. Gunakan huruf tebal untuk rekomendasi. Jangan cuma rangkum latar belakang; rangkum AKSINYA.', 
+        mistakes: 'Pakai jargon akademis. Samar ("perlu kolaborasi") bukannya spesifik ("alokasikan 5% anggaran").'
+      } 
+    },
+    context_problem: { 
+      en: { 
+        what: 'Convince them the current system is broken. Use urgency.', 
+        tip: 'Focus on the "Pain Points" of the government (e.g., wasted budget, public complaints).', 
+        mistakes: 'Giving a history lesson. They don\'t care about history; they care about today\'s crisis.'
+      }, 
+      id: { 
+        what: 'Yakinkan mereka sistem saat ini rusak. Gunakan urgensi.', 
+        tip: 'Fokus pada "Titik Sakit" pemerintah (misal: anggaran terbuang, komplain warga).', 
+        mistakes: 'Memberi pelajaran sejarah. Mereka tak peduli sejarah; mereka peduli krisis hari ini.'
+      } 
+    },
+    evidence_table: { 
+      en: { 
+        what: 'The "Killer Fact". A chart, table, or infographic that proves your solution works better than the status quo.', 
+        tip: 'Comparison tables (Before vs After, or Us vs Them) are the most effective visual tool.', 
+        mistakes: 'Complex charts that need a PhD to understand. Keep it clean and high-contrast.'
+      }, 
+      id: { 
+        what: '"Fakta Pamungkas". Grafik, tabel, atau infografis yang membuktikan solusi Anda lebih baik dari status quo.', 
+        tip: 'Tabel perbandingan (Sebelum vs Sesudah, atau Cara Lama vs Cara Baru) adalah alat visual paling efektif.', 
+        mistakes: 'Grafik rumit yang butuh gelar S3 untuk paham. Buat bersih dan kontras.'
+      } 
+    },
+    policy_recommendations: { 
+      en: { 
+        what: 'The core of the document. Specific, actionable steps defined by "Who does What".', 
+        tip: 'Start with a verb (Mandate, Allocate, Repeal). Break it down into Legal, Fiscal, and Technical steps.', 
+        mistakes: 'Being passive ("It is recommended that..."). Be directive ("The Ministry must...").'
+      }, 
+      id: { 
+        what: 'Jantung dokumen. Langkah spesifik dan dapat ditindaklanjuti, didefinisikan dengan "Siapa melakukan Apa".', 
+        tip: 'Mulai dengan kata kerja (Wajibkan, Alokasikan, Cabut). Pecah jadi langkah Legal, Fiskal, dan Teknis.', 
+        mistakes: 'Pasif ("Direkomendasikan agar..."). Harus direktif ("Kementerian harus...").'
+      } 
+    }
   },
-  key_recommendations: {
-    en: { what: 'List 3–5 actionable recommendations.', tip: 'Make them specific and feasible.' },
-    id: { what: 'Daftar 3–5 rekomendasi yang dapat ditindaklanjuti.', tip: 'Buatlah spesifik dan layak.' }
-  },
-  context: {
-    en: { what: 'Briefly describe the policy issue and its importance.', tip: 'Use a hook to grab attention.' },
-    id: { what: 'Jelaskan secara singkat masalah kebijakan dan pentingnya.', tip: 'Gunakan kalimat pembuka yang menarik.' }
-  },
-  evidence: {
-    en: { what: 'Present data, research, or case studies supporting your recommendations.', tip: 'Highlight 2–3 key facts.' },
-    id: { what: 'Sajikan data, penelitian, atau studi kasus yang mendukung rekomendasi Anda.', tip: 'Sorot 2–3 fakta kunci.' }
-  },
-  implications: {
-    en: { what: 'Discuss costs, benefits, and trade-offs.', tip: 'Be honest about uncertainties.' },
-    id: { what: 'Bahas biaya, manfaat, dan trade-off.', tip: 'Jujurlah tentang ketidakpastian.' }
-  },
-  conclusion: {
-    en: { what: 'Reiterate the call to action.', tip: 'Keep it short.' },
-    id: { what: 'Ulangi ajakan bertindak.', tip: 'Tetap singkat.' }
-  }
-},
 policy_paper: {
   _analogy: { en: 'A policy paper is a deep dive into options.', id: 'Policy paper adalah analisis mendalam tentang pilihan-pilihan.' },
   executive_summary: {
@@ -1767,7 +1893,7 @@ const MODULE_REGISTRY_DEFINITION = [
   name: 'Policy Brief', 
   category: 'policy', 
   schema_version: SCHEMA_VERSION, 
-  structural_sections: ['executive_summary','key_recommendations','context','evidence','implications','conclusion'], 
+  structural_sections: ['executive_summary','context_problem','critique','evidence_table','policy_recommendations','implications'], 
   color: 'emerald', 
   description: 'Concise summary of policy issue and recommendations.' 
 },
