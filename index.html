@@ -725,254 +725,526 @@ const GUIDANCE = {
     },
     executive_summary: { 
       en: { 
-        what: 'This is the "Sales Pitch" of your proposal. It serves as a standalone document that summarizes the entire project. It must answer the "Wh-questions": Who are you? What is the problem? What is your solution? How much money do you need? And most importantly, what is the return on investment (Impact)? Think of this as the only page a busy Minister or CEO will read.', 
-        tip: 'Write this section LAST. Even though it appears first, you cannot summarize a project you haven\'t detailed yet. Use the "Hook" technique: Start with a startling statistic or a compelling story to grab attention immediately. Ensure the funding amount is explicitly stated in bold.', 
-        mistakes: 'Do not use this section as an "Introduction" or "Background". It is a summary, not a preface. Do not be vague about the request (e.g., avoiding the exact dollar amount). Do not copy-paste the first paragraph of the Situational Analysis. Keep it under 2 pages.'
+        what: `This section is the strategic “front page” of your proposal. It must function as a fully standalone document that communicates the essence of your project in a concise, compelling, and decision-oriented format. Assume this is the only page a busy Minister, CEO, or donor will read before deciding whether to proceed.
+
+Your sales pitch must clearly answer the core “Wh-questions” in a structured yet persuasive flow:
+
+1. Who are you?
+Briefly introduce your organization, team, or consortium. Establish credibility by highlighting relevant experience, proven track records, partnerships, and unique strengths that position you to deliver results. Focus on authority and trustworthiness.
+
+2. What is the problem?
+Define the problem clearly and strategically. Use concise evidence, data, or observable consequences to demonstrate urgency and scale. Explain why this issue matters now, and what risks emerge if it remains unaddressed. Avoid lengthy background; focus on clarity and relevance.
+
+3. What is your solution?
+Present your proposed intervention in a simple, outcome-focused manner. Explain how it directly addresses the identified problem. Emphasize innovation, feasibility, scalability, and alignment with policy or institutional priorities. Make it clear why your approach is different, practical, and implementable.
+
+4. How much investment is required?
+State the funding amount transparently. Briefly outline how resources will be allocated (e.g., capacity building, digital systems, infrastructure, research, pilot implementation). Show that the budget is proportional, strategic, and efficient.
+
+5. What is the Return on Investment (Impact)?
+This is the most critical part. Describe measurable outcomes and long-term benefits. Clarify how the project generates value—whether through cost savings, increased productivity, strengthened institutions, improved public trust, social stability, or economic growth. If possible, quantify impact (e.g., number of beneficiaries, efficiency gains, policy improvements).
+
+The tone must be confident, forward-looking, and solution-driven. Every sentence should move the reader toward one conclusion: this project is necessary, credible, financially sound, and impactful.`,
+        tip: `Write this section LAST. Although it sits at the front, you cannot effectively summarize a project that hasn't been fully detailed yet.
+
+Use the "Hook & Anchor" technique:
+- The Hook: Start with a startling statistic or a compelling narrative that immediately grabs attention (e.g., "Every minute, one truckload of plastic enters our ocean").
+- The Anchor: End with a solid, verifiable impact statement that grounds the proposal in reality (e.g., "This $85k investment will remove 10 tons of debris and create 500 green jobs").
+
+Format matters. Use bold text for key figures (amounts, dates, outputs) so skimmers can catch the main points in 5 seconds.`,
+        mistakes: `1. The "Cut & Paste" Error: Do not simply copy the first paragraph of your Introduction. This section needs its own unique, punchy flow.
+2. The Mystery Novel Approach: Do not hide the budget request or the specific solution until the end. Be direct upfront.
+3. Overloading with Jargon: Keep it accessible. Avoid technical acronyms that might confuse a high-level generalist reader.
+4. Vagueness: Avoid phrases like "we hope to support..." instead say "we will implement...".`
       }, 
       id: { 
-        what: 'Ini adalah "Sales Pitch" proposal Anda. Bagian ini berfungsi sebagai dokumen mandiri yang merangkum keseluruhan proyek. Harus menjawab: Siapa Anda? Apa masalahnya? Apa solusinya? Berapa dana yang dibutuhkan? Dan yang terpenting, apa dampak (ROI) yang didapat donor? Anggap ini satu-satunya halaman yang dibaca Menteri atau CEO yang sibuk.', 
-        tip: 'Tulis bagian ini TERAKHIR. Meski muncul di awal, Anda tidak bisa merangkum proyek yang belum Anda detailkan. Gunakan teknik "Hook": Mulai dengan statistik mengejutkan atau cerita yang kuat untuk menarik perhatian. Pastikan jumlah dana ditulis tebal dan jelas.', 
-        mistakes: 'Jangan gunakan bagian ini sebagai "Pendahuluan" atau "Latar Belakang". Ini adalah ringkasan, bukan pembukaan. Jangan samar mengenai permintaan dana (harus ada angka pasti). Jangan copy-paste paragraf pertama Analisis Situasi. Jaga agar tidak lebih dari 2 halaman.'
+        what: `Bagian ini adalah "halaman depan" strategis dari proposal Anda. Ia harus berfungsi sebagai dokumen mandiri yang mengomunikasikan esensi proyek Anda dalam format yang ringkas, menarik, dan berorientasi pada keputusan. Asumsikan ini adalah satu-satunya halaman yang akan dibaca oleh Menteri, CEO, atau donor yang sibuk sebelum memutuskan untuk lanjut.
+
+Sales pitch Anda harus menjawab "Pertanyaan-W" inti dalam alur yang terstruktur namun persuasif:
+
+1. Siapa Anda?
+Perkenalkan organisasi, tim, atau konsorsium Anda secara singkat. Bangun kredibilitas dengan menonjolkan pengalaman relevan, rekam jejak terbukti, kemitraan, dan kekuatan unik yang memposisikan Anda untuk memberikan hasil. Fokus pada otoritas dan kepercayaan.
+
+2. Apa masalahnya?
+Definisikan masalah dengan jelas dan strategis. Gunakan bukti ringkas, data, atau konsekuensi yang dapat diamati untuk menunjukkan urgensi dan skala. Jelaskan mengapa masalah ini penting sekarang, dan risiko apa yang muncul jika tidak ditangani. Hindari latar belakang yang panjang; fokus pada kejelasan dan relevansi.
+
+3. Apa solusi Anda?
+Sajikan intervensi yang Anda usulkan dengan cara yang sederhana dan berfokus pada hasil. Jelaskan bagaimana hal itu secara langsung mengatasi masalah yang diidentifikasi. Tekankan inovasi, kelayakan, skalabilitas, dan keselarasan dengan kebijakan atau prioritas institusional. Jelaskan mengapa pendekatan Anda berbeda, praktis, dan dapat diterapkan.
+
+4. Berapa investasi yang dibutuhkan?
+Nyatakan jumlah dana secara transparan. Uraikan secara singkat bagaimana sumber daya akan dialokasikan (misalnya, pengembangan kapasitas, sistem digital, infrastruktur, penelitian, percontohan). Tunjukkan bahwa anggaran tersebut proporsional, strategis, dan efisien.
+
+5. Apa Return on Investment (Dampak)-nya?
+Ini adalah bagian paling kritis. Jelaskan hasil yang terukur dan manfaat jangka panjang. Perjelas bagaimana proyek menghasilkan nilai—baik melalui penghematan biaya, peningkatan produktivitas, penguatan institusi, peningkatan kepercayaan publik, stabilitas sosial, atau pertumbuhan ekonomi. Jika memungkinkan, kuantifikasi dampak (misalnya, jumlah penerima manfaat, peningkatan efisiensi, perbaikan kebijakan).
+
+Nada tulisan harus percaya diri, berpandangan ke depan, dan didorong oleh solusi. Setiap kalimat harus menggerakkan pembaca menuju satu kesimpulan: proyek ini perlu, kredibel, sehat secara finansial, dan berdampak.`,
+        tip: `Tulis bagian ini TERAKHIR. Meskipun letaknya di depan, Anda tidak bisa merangkum proyek yang belum didetailkan sepenuhnya.
+
+Gunakan teknik "Kail & Jangkar" (Hook & Anchor):
+- Kail: Mulai dengan statistik mengejutkan atau narasi kuat yang langsung menarik perhatian (misal: "Tiap menit, satu truk plastik masuk ke laut kita").
+- Jangkar: Akhiri dengan pernyataan dampak yang solid dan terverifikasi (misal: "Investasi $85rb ini akan mengangkat 10 ton sampah dan menciptakan 500 lapangan kerja hijau").
+
+Format itu penting. Gunakan teks tebal untuk angka-angka kunci (dana, tanggal, output) agar pembaca cepat bisa menangkap poin utama dalam 5 detik.`,
+        mistakes: `1. Kesalahan "Copy Paste": Jangan cuma menyalin paragraf pertama Pendahuluan. Bagian ini butuh alur yang unik dan nendang.
+2. Pendekatan Novel Misteri: Jangan sembunyikan permintaan dana atau solusi spesifik sampai akhir kalimat. Langsung to the point.
+3. Terlalu Banyak Jargon: Jaga agar tetap mudah dibaca. Hindari akronim teknis yang membingungkan pembaca umum level tinggi.
+4. Keragu-raguan: Hindari frasa "kami berharap bisa mendukung..." ganti dengan "kami akan melaksanakan...".`
       } 
     },
     situational_analysis: { 
       en: { 
-        what: 'A rigorous, data-driven diagnosis of the problem landscape. You must prove the problem exists using hard evidence, not just feelings. Use the "Inverted Pyramid" structure: Start with the Global Context (SDGs, Climate Change), narrow down to National Priorities (RPJMN), and land firmly on the Specific Local Gap that your project will fix.', 
-        tip: 'Data is your currency here. Use charts, graphs, or bold statistics (e.g., "70% of coral reefs are damaged"). Explicitly align your problem with the Donor\'s strategic goals—show them you are solving THEIR problem. Include a Stakeholder Analysis to show you know the political terrain.', 
-        mistakes: 'Do not define the problem as "the lack of your solution" (e.g., saying "The problem is there is no app" is wrong; the problem is "inefficient data collection"). Do not rely on anecdotal evidence or data older than 5 years. Do not ignore existing efforts by the government.',
+        what: `This section acts as the rigorous, data-driven diagnostic foundation of your proposal. You are not just describing a situation; you are building a compelling legal case that a crisis exists and demands immediate intervention. A strong situational analysis moves from the general to the specific using the "Inverted Pyramid" structure:
+
+1. The Macro Context (Global/National):
+Begin with the big picture to establish relevance. Cite specific Sustainable Development Goals (SDGs), National Medium-Term Development Plans (RPJMN), or international climate commitments. This proves your project is not an isolated effort but a crucial piece of a larger global or national puzzle.
+
+2. The Meso Context (Regional/Sectoral):
+Narrow down to the specific region or sector. What is the state of ocean literacy in Eastern Indonesia specifically? Use comparative data. For example, "While Java has 50% waste collection coverage, Maluku only has 10%." This highlights inequality and urgency.
+
+3. The Micro Context (The Specific Gap):
+This is where you identify the "bleeding wound." What exactly is broken in the target community? Is it a lack of infrastructure? A lack of knowledge? A cultural barrier? Use hard data from local surveys or credible proxies.
+
+4. Stakeholder Mapping:
+Demonstrate your political intelligence. Who holds the power? Who are the potential spoilers? Analyze the ecosystem:
+- Beneficiaries: Who gets helped?
+- Allies: Local NGOs, progressive leaders.
+- Blockers: Waste syndicates, corrupt officials, or cultural resistance.
+
+5. The "Null Hypothesis" (Consequences of Inaction):
+Conclude by explaining what happens if this project is NOT funded. Will the coral reefs die in 5 years? Will youth unemployment rise? Paint a clear picture of the cost of doing nothing.`,
+        tip: `Data is your currency, but stories are your vehicle.
+- Visuals: If possible, refer to charts or graphs (e.g., "See Annex A for waste composition data").
+- Quotes: Use a direct quote from a community member to humanize the statistics.
+- Alignment: Explicitly use the donor's language. If they care about "Gender," highlight how the problem disproportionately affects women.`,
+        mistakes: `1. Defining the Problem as "Lack of Your Solution": Don't say "The problem is there is no app." Say "The problem is inefficient data collection leading to poor policy." The app is the solution, not the problem's absence.
+2. Using Outdated Data: Citing a World Bank report from 2010 in a 2024 proposal kills credibility immediately.
+3. Ignoring Existing Efforts: Failing to mention what the government or other NGOs are already doing makes you look ignorant or arrogant.`
       }, 
       id: { 
-        what: 'Diagnosis masalah yang ketat dan berbasis data. Anda harus membuktikan masalah itu ada menggunakan bukti keras, bukan perasaan. Gunakan struktur "Piramida Terbalik": Mulai dari Konteks Global (SDGs, Perubahan Iklim), mengerucut ke Prioritas Nasional (RPJMN), dan mendarat di Celah Lokal Spesifik yang akan diperbaiki proyek Anda.', 
-        tip: 'Data adalah mata uang di sini. Gunakan grafik atau statistik tebal (cth: "70% terumbu karang rusak"). Secara eksplisit, hubungkan masalah ini dengan tujuan strategis Donor—tunjukkan Anda menyelesaikan masalah MEREKA. Sertakan Analisis Pemangku Kepentingan untuk menunjukkan Anda paham medan politiknya.', 
-        mistakes: 'Jangan mendefinisikan masalah sebagai "ketiadaan solusi Anda" (cth: bilang "Masalahnya tidak ada aplikasi" itu salah; masalahnya adalah "pengumpulan data tidak efisien"). Jangan pakai bukti anekdot atau data >5 tahun. Jangan abaikan upaya pemerintah yang sudah ada.'
+        what: `Bagian ini berfungsi sebagai fondasi diagnostik yang ketat dan berbasis data untuk proposal Anda. Anda tidak sekadar mendeskripsikan situasi; Anda sedang membangun kasus hukum yang meyakinkan bahwa krisis itu nyata dan menuntut intervensi segera. Analisis situasi yang kuat bergerak dari umum ke khusus menggunakan struktur "Piramida Terbalik":
+
+1. Konteks Makro (Global/Nasional):
+Mulailah dengan gambaran besar untuk membangun relevansi. Kutip Tujuan Pembangunan Berkelanjutan (SDGs), RPJMN, atau komitmen iklim internasional yang spesifik. Ini membuktikan proyek Anda bukan upaya terisolasi, tapi kepingan penting dari teka-teki global/nasional yang lebih besar.
+
+2. Konteks Meso (Regional/Sektoral):
+Kerucutkan ke wilayah atau sektor spesifik. Bagaimana kondisi literasi laut di Indonesia Timur secara khusus? Gunakan data perbandingan. Contoh: "Sementara Jawa punya cakupan sampah 50%, Maluku hanya 10%." Ini menonjolkan ketimpangan dan urgensi.
+
+3. Konteks Mikro (Celah Spesifik):
+Di sinilah Anda mengidentifikasi "luka yang berdarah". Apa sebenarnya yang rusak di komunitas target? Apakah kurang infrastruktur? Kurang pengetahuan? Hambatan budaya? Gunakan data keras dari survei lokal atau proksi yang kredibel.
+
+4. Pemetaan Pemangku Kepentingan (Stakeholder):
+Tunjukkan kecerdasan politik Anda. Siapa pemegang kekuasaan? Siapa pengacau potensial? Analisis ekosistemnya:
+- Penerima Manfaat: Siapa yang dibantu?
+- Sekutu: NGO lokal, pemimpin progresif.
+- Penghambat: Sindikat sampah, pejabat korup, atau resistensi budaya.
+
+5. "Hipotesis Nol" (Konsekuensi Tanpa Aksi):
+Tutup dengan menjelaskan apa yang terjadi jika proyek ini TIDAK didanai. Apakah terumbu karang mati dalam 5 tahun? Pengangguran naik? Lukiskan gambaran jelas tentang "biaya dari tidak melakukan apa-apa".`,
+        tip: `Data adalah mata uang Anda, tapi cerita adalah kendaraan Anda.
+- Visual: Jika memungkinkan, rujuk ke grafik (cth: "Lihat Lampiran A untuk data komposisi sampah").
+- Kutipan: Gunakan kutipan langsung dari warga untuk memanusiakan statistik.
+- Penyelarasan: Gunakan bahasa donor secara eksplisit. Jika mereka peduli "Gender", soroti bagaimana masalah ini membebani perempuan secara tidak proporsional.`,
+        mistakes: `1. Mendefinisikan Masalah sebagai "Ketiadaan Solusi Anda": Jangan bilang "Masalahnya tidak ada aplikasi." Bilang "Masalahnya adalah pengumpulan data tidak efisien yang berujung pada kebijakan buruk." Aplikasi itu solusi, bukan masalah.
+2. Menggunakan Data Kadaluarsa: Mengutip laporan Bank Dunia tahun 2010 di proposal tahun 2024 membunuh kredibilitas seketika.
+3. Mengabaikan Upaya yang Ada: Gagal menyebutkan apa yang sudah dilakukan pemerintah atau NGO lain membuat Anda terlihat tidak tahu atau arogan.`
       } 
     },
     methodology: { 
       en: { 
-        what: 'The theoretical and strategic framework of your intervention. This explains "How" and "Why" you chose a specific approach over others. Are you using Citizen Science? Participatory Action Research (PAR)? Behavioral Nudging? You must also explain how you address cross-cutting issues like Gender Equality and Social Inclusion (GESI).', 
-        tip: 'This section establishes your authority/expertise. Use diagrams or workflows to visualize your model. When discussing GESI, don\'t just count women; explain how the project empowers them explicitly (e.g., leadership roles, not just participants). Explain why your method is innovative or more effective than the status quo.', 
-        mistakes: 'Do not confuse Methodology with the Implementation Plan. Methodology is the "Strategy/Philosophy"; Plan is the "Schedule". Do not treat Gender as a checkbox—donors can smell tokenism. Do not be too academic; keep it practical and applicable.',
+        what: `This section explains the "Theory of Change" or the architectural logic of your intervention. It answers the question: "Why do you believe this specific set of activities will lead to the desired results?" It bridges the gap between the Problem (Section 2) and the Solution (Section 4).
+
+Your methodology should cover three key dimensions:
+
+1. The Strategic Framework:
+What established model are you using? Are you using "Participatory Action Research (PAR)"? "Citizen Science"? "Behavioral Nudging"? Explaining the theoretical framework proves you are an expert, not just an executor. Explain why this model is superior to traditional top-down approaches.
+
+2. Innovation & Value Add:
+What makes your approach different?
+- Is it a new technology (e.g., offline-first PWA)?
+- Is it a new process (e.g., integrating Customary Law/Adat with modern science)?
+- Is it a new partnership model?
+Highlight the "Secret Sauce" that only your organization can bring.
+
+3. Cross-Cutting Issues (GESI):
+You must explicitly address Gender Equality and Social Inclusion (GESI). Donors require this. Do not just treat it as a checkbox. Explain:
+- How will you ensure women's participation? (e.g., timing workshops to fit domestic schedules).
+- How will you include marginalized groups? (e.g., disability-friendly app UI).
+- How does the project challenge structural inequalities?
+
+4. Sustainability Logic:
+Briefly touch upon the logic of how this method leads to lasting change. For example, "By training local trainers (ToT), we ensure knowledge remains in the village after we leave."`,
+        tip: `Visuals are powerful here. If you can, describe a diagram or a flowchart (e.g., "Figure 1: The Data-to-Action Cycle").
+Show, don't just tell. Instead of saying "we are inclusive," say "we have a mandatory 50% quota for female leadership roles in the Blue Guardian committee."`,
+        mistakes: `1. Confusing Methodology with Activities: Methodology is the "Philosophy/Strategy" (e.g., Citizen Science). Activities are the "Tasks" (e.g., holding a workshop). Don't just list tasks here.
+2. Tokenism in Gender: Writing one sentence saying "women will be invited" is not enough. You need a strategy for empowerment.
+3. Too Academic: Avoid writing a thesis. Keep the theory practical and directly applicable to the project's success.`
       }, 
       id: { 
-        what: 'Kerangka teoritis dan strategis intervensi Anda. Ini menjelaskan "Bagaimana" dan "Mengapa" Anda memilih pendekatan tertentu. Apakah pakai Citizen Science? Participatory Action Research (PAR)? Behavioral Nudging? Anda juga harus menjelaskan isu lintas sektoral seperti Kesetaraan Gender dan Inklusi Sosial (GESI).', 
-        tip: 'Bagian ini membangun otoritas/keahlian Anda. Gunakan diagram atau alur kerja. Saat bahas GESI, jangan cuma menghitung jumlah wanita; jelaskan bagaimana proyek memberdayakan mereka (cth: peran kepemimpinan, bukan cuma peserta). Jelaskan kenapa metode Anda inovatif atau lebih baik dari cara lama.', 
-        mistakes: 'Jangan tertukar antara Metodologi dengan Rencana Implementasi. Metodologi itu "Strategi/Filosofi"; Implementasi itu "Jadwal". Jangan jadikan Gender sekadar checklist—donor tahu mana yang basa-basi. Jangan terlalu akademis; buat praktis.'
+        what: `Bagian ini menjelaskan "Teori Perubahan" atau logika arsitektur intervensi Anda. Ini menjawab pertanyaan: "Mengapa Anda yakin rangkaian kegiatan ini akan menghasilkan dampak yang diinginkan?" Ini menjembatani Masalah (Bab 2) dan Solusi (Bab 4).
+
+Metodologi Anda harus mencakup tiga dimensi kunci:
+
+1. Kerangka Strategis:
+Model mapan apa yang Anda pakai? "Participatory Action Research (PAR)"? "Citizen Science"? "Behavioral Nudging"? Menjelaskan kerangka teori membuktikan Anda ahli, bukan sekadar pelaksana. Jelaskan kenapa model ini lebih unggul dari pendekatan top-down tradisional.
+
+2. Inovasi & Nilai Tambah:
+Apa yang membuat pendekatan Anda beda?
+- Apakah teknologi baru (cth: aplikasi offline-first)?
+- Apakah proses baru (cth: integrasi Hukum Adat dengan sains modern)?
+- Apakah model kemitraan baru?
+Soroti "Bumbu Rahasia" yang hanya bisa dibawa oleh organisasi Anda.
+
+3. Isu Lintas Sektoral (GESI):
+Anda wajib membahas Kesetaraan Gender & Inklusi Sosial (GESI). Donor menuntut ini. Jangan jadikan sekadar checklist. Jelaskan:
+- Cara memastikan partisipasi perempuan? (cth: waktu workshop disesuaikan jadwal domestik).
+- Cara merangkul kaum marjinal? (cth: UI aplikasi ramah disabilitas).
+- Bagaimana proyek menantang ketimpangan struktural?
+
+4. Logika Keberlanjutan:
+Singgung sedikit logika bagaimana metode ini membawa perubahan awet. Cth: "Dengan melatih pelatih lokal (ToT), ilmu tetap tinggal di desa setelah kami pergi."`,
+        tip: `Visual sangat kuat di sini. Jika bisa, deskripsikan diagram atau alur (cth: "Gambar 1: Siklus Data-ke-Aksi").
+Tunjukkan, jangan cuma bilang. Daripada bilang "kami inklusif", bilang "kami punya kuota wajib 50% peran kepemimpinan perempuan di komite Blue Guardian."`,
+        mistakes: `1. Menukar Metodologi dengan Aktivitas: Metodologi itu "Filosofi/Strategi" (cth: Citizen Science). Aktivitas itu "Tugas" (cth: gelar workshop). Jangan cuma buat daftar tugas di sini.
+2. Tokenisme Gender: Menulis satu kalimat "perempuan akan diundang" tidak cukup. Anda butuh strategi pemberdayaan.
+3. Terlalu Akademis: Jangan tulis tesis. Jaga teori tetap praktis dan bisa diterapkan langsung untuk kesuksesan proyek.`
       } 
     },
     technical_implementation: { 
       en: { 
-        what: 'The detailed, chronological battle plan. This section breaks the project down into manageable Phases (e.g., Preparation, Execution, Evaluation) and Activities. It specifies Who is responsible, What resources are needed, When it happens, and Where it takes place. It transforms abstract ideas into concrete actions.', 
-        tip: 'Think of this as a narrative Gantt Chart. Be hyper-realistic. Include a "Mobilization Phase" (permits, recruitment) at the start and a "Reporting Phase" at the end. Add "buffer time" for unforeseen delays. Donors check this to see if you can actually deliver within the 18-month timeframe.', 
-        mistakes: 'Do not forget the boring stuff: getting permits, recruiting staff, and auditing. Do not cram too many activities into a short time. Do not be vague about locations (e.g., say "3 villages in Maluku" instead of just "Indonesia").',
+        what: `This is the "Engine Room" of your proposal. It translates abstract strategies into a concrete, chronological battle plan. Donors review this section to assess feasibility: "Can they actually pull this off in 18 months?"
+
+Structure this section by Phases or Work Packages (WPs) to show logical progression:
+
+Phase 1: Mobilization & Inception (Months 1-3)
+- Crucial but often ignored. Includes hiring staff, securing permits, setting up the office, and refining the baseline data.
+- Output: Inception Report, Team hired.
+
+Phase 2: Development & Preparation (Months 4-6)
+- Developing the curriculum, building the app, procuring equipment.
+- Output: App Beta Version, Training Modules finalized.
+
+Phase 3: Execution & Deployment (Months 7-15)
+- The core activities. Trainings, workshops, data collection, advocacy events.
+- Output: 500 youth trained, 5 reports produced.
+
+Phase 4: Monitoring, Evaluation & Closing (Months 16-18)
+- Analyzing data, final audits, dissemination of results, handover of assets.
+- Output: Final Report, Audit Report, Asset Transfer.
+
+For each phase, specify:
+- Who is responsible? (e.g., Project Manager, Field Coordinator).
+- Where does it happen? (e.g., 3 pilot villages).
+- What are the deliverables?`,
+        tip: `Think of this as a narrative Gantt Chart.
+- Be Realistic: Always add a "buffer" for delays. Donors prefer realistic timelines over optimistic ones that will inevitably fail.
+- Detail Matters: Don't just say "Training." Say "5-day intensive bootcamp for 50 people in Makassar."
+- Resources: Mention what resources (tablets, boats, hall rental) are needed for these activities, linking it to the budget.`,
+        mistakes: `1. Ignoring the Setup Phase: Projects never start at full speed on Day 1. Failing to plan for recruitment/permits leads to immediate delays.
+2. The "Hockey Stick" Schedule: Cramming 80% of activities into the last 3 months. Distribute work evenly.
+3. Vague Geographies: Be specific. "Indonesia" is too big. "Coastal villages in North Minahasa" is credible.`
       }, 
       id: { 
-        what: 'Rencana tempur kronologis yang detail. Bagian ini memecah proyek menjadi Fase (Persiapan, Eksekusi, Evaluasi) dan Aktivitas. Menjelaskan Siapa yang bertanggung jawab, Apa sumber dayanya, Kapan terjadi, dan Di mana lokasinya. Mengubah ide abstrak menjadi aksi nyata.', 
-        tip: 'Anggap ini narasi Gantt Chart. Harus super realistis. Masukkan "Fase Mobilisasi" (izin, rekrutmen) di awal dan "Fase Pelaporan" di akhir. Tambahkan "waktu cadangan" untuk penundaan. Donor cek ini untuk melihat apakah Anda benar-benar bisa mengirim hasil dalam 18 bulan.', 
-        mistakes: 'Jangan lupakan hal membosankan: urus izin, rekrut staf, dan audit. Jangan jejalkan terlalu banyak aktivitas di waktu singkat. Jangan samar soal lokasi (cth: tulis "3 desa di Maluku" jangan cuma "Indonesia").'
+        what: `Ini adalah "Ruang Mesin" proposal Anda. Ini menerjemahkan strategi abstrak menjadi rencana tempur kronologis yang konkret. Donor meninjau bagian ini untuk menilai kelayakan: "Bisakah mereka benar-benar melakukan ini dalam 18 bulan?"
+
+Strukturkan bagian ini berdasarkan Fase atau Paket Kerja (WP) untuk menunjukkan progresi logis:
+
+Fase 1: Mobilisasi & Insepsi (Bulan 1-3)
+- Krusial tapi sering diabaikan. Termasuk rekrut staf, urus izin, sewa kantor, dan pemurnian data dasar.
+- Output: Laporan Insepsi, Tim lengkap.
+
+Fase 2: Pengembangan & Persiapan (Bulan 4-6)
+- Bikin kurikulum, coding aplikasi, belanja alat.
+- Output: Aplikasi Versi Beta, Modul Pelatihan final.
+
+Fase 3: Eksekusi & Penyebaran (Bulan 7-15)
+- Aktivitas inti. Pelatihan, workshop, ambil data, advokasi.
+- Output: 500 pemuda terlatih, 5 laporan terbit.
+
+Fase 4: Monev & Penutupan (Bulan 16-18)
+- Analisis data, audit akhir, diseminasi hasil, serah terima aset.
+- Output: Laporan Akhir, Laporan Audit, Transfer Aset.
+
+Untuk tiap fase, sebutkan:
+- Siapa tanggung jawab? (cth: PM, Koordinator Lapangan).
+- Di mana lokasinya? (cth: 3 desa pilot).
+- Apa serah-terimanya?`,
+        tip: `Anggap ini narasi Gantt Chart.
+- Realistis: Selalu beri "buffer" (waktu cadangan) untuk penundaan. Donor lebih suka jadwal realistis daripada optimis yang pasti gagal.
+- Detail Itu Penting: Jangan cuma tulis "Pelatihan". Tulis "Bootcamp intensif 5 hari untuk 50 orang di Makassar".
+- Sumber Daya: Sebutkan alat apa (tablet, perahu, sewa aula) yang dibutuhkan, hubungkan dengan budget.`,
+        mistakes: `1. Mengabaikan Fase Persiapan: Proyek tidak pernah ngebut di Hari ke-1. Gagal merencanakan rekrutmen/izin bikin langsung telat.
+2. Jadwal "Hockey Stick": Menumpuk 80% aktivitas di 3 bulan terakhir. Sebar beban kerja merata.
+3. Lokasi Samar: Harus spesifik. "Indonesia" itu terlalu besar. "Desa pesisir di Minahasa Utara" itu kredibel.`
       } 
     },
     risk_management: { 
       en: { 
-        what: 'A structured matrix identifying potential threats that could derail your project. Categories usually include Political, Technical, Social, and Financial risks. For each risk, you must assess the Likelihood and Impact, and provide a concrete Mitigation Strategy (Plan B).', 
-        tip: 'Admitting risks makes you look mature, honest, and prepared—not weak. Focus on "Externalities" (things outside your control, like elections or disasters). Show the donor that even if things go wrong, you have a plan to keep the project money safe and the objectives on track.', 
-        mistakes: 'Never write "No risks are expected"—this screams amateurism. Do not ignore political cycles (e.g., Pilkada). Do not list risks that are actually just poor planning (e.g., "Staff might quit" is a management issue, "Civil unrest" is a risk).',
+        what: `A proposal without risks is a lie. This section demonstrates your maturity and foresight. It shows the donor that you have anticipated potential pitfalls and have a "Plan B" ready to protect their investment.
+
+Present this as a structured Risk Matrix covering four categories:
+
+1. Political & Legal Risks:
+- Risk: Elections causing leadership changes in villages.
+- Mitigation: Secure MOUs with the institution (Pemdes), not the individual. Build broad coalitions.
+
+2. Operational & Technical Risks:
+- Risk: App failure in no-signal zones; Boat breakdown.
+- Mitigation: Offline-first architecture; Renting local boats with backup availability.
+
+3. Financial Risks:
+- Risk: Currency fluctuation (IDR vs USD) or inflation.
+- Mitigation: Maintaining a contingency fund (if allowed) or front-loading hardware purchases.
+
+4. Social & Safety Risks:
+- Risk: Community resistance; Accidents at sea.
+- Mitigation: Involving Adat leaders early; Mandatory life vests and insurance for volunteers.
+
+For each risk, assess the Probability (Low/Med/High) and Impact (Low/Med/High).`,
+        tip: `Focus on "Externalities"—things outside your control. You cannot control the weather or elections, but you can control how you react to them.
+Admitting risk increases trust. It shows you are not naive about the challenges of working in remote Indonesia.`,
+        mistakes: `1. "No Risks Expected": Writing this is the fastest way to get rejected. It screams amateurism.
+2. Internal Risks as External: "Staff might quit" or "Laptop might break" are management issues, not project risks. Have a HR/IT policy for that.
+3. Weak Mitigation: "We will monitor the situation" is not a mitigation. "We will switch to paper surveys" is a mitigation.`
       }, 
       id: { 
-        what: 'Matriks terstruktur yang mengidentifikasi ancaman potensial bagi proyek. Kategori biasanya mencakup risiko Politik, Teknis, Sosial, dan Keuangan. Untuk setiap risiko, nilai Kemungkinan dan Dampaknya, serta berikan Strategi Mitigasi (Rencana B) yang konkret.', 
-        tip: 'Mengakui risiko membuat Anda terlihat dewasa, jujur, dan siap—bukan lemah. Fokus pada "Eksternalitas" (hal di luar kendali, seperti pemilu/bencana). Tunjukkan pada donor bahwa jika ada masalah, Anda punya rencana menyelamatkan uang dan tujuan proyek.', 
-        mistakes: 'Jangan pernah tulis "Tidak ada risiko"—itu amatir. Jangan abaikan siklus politik (Pilkada). Jangan tulis risiko yang sebenarnya cuma perencanaan buruk (cth: "Staf keluar" itu isu manajemen, "Kerusuhan" itu risiko).'
+        what: `Proposal tanpa risiko adalah kebohongan. Bagian ini menunjukkan kedewasaan dan pandangan jauh ke depan Anda. Ini menunjukkan pada donor bahwa Anda sudah antisipasi lubang masalah dan punya "Rencana B" untuk melindungi uang mereka.
+
+Sajikan ini sebagai Matriks Risiko terstruktur mencakup empat kategori:
+
+1. Risiko Politik & Legal:
+- Risiko: Pilkada bikin ganti pemimpin desa.
+- Mitigasi: Ikat MOU dengan institusi (Pemdes), bukan orangnya. Bangun koalisi luas.
+
+2. Risiko Operasional & Teknis:
+- Risiko: Aplikasi mati di area tanpa sinyal; Perahu mogok.
+- Mitigasi: Arsitektur offline-first; Sewa perahu lokal dengan cadangan.
+
+3. Risiko Finansial:
+- Risiko: Fluktuasi kurs (IDR vs USD) atau inflasi.
+- Mitigasi: Dana kontingensi (jika boleh) atau beli alat di awal (front-loading).
+
+4. Risiko Sosial & Keselamatan:
+- Risiko: Resistensi warga; Kecelakaan di laut.
+- Mitigasi: Libatkan tokoh Adat di awal; Wajib pelampung dan asuransi relawan.
+
+Untuk tiap risiko, nilai Probabilitas (Rendah/Sedang/Tinggi) dan Dampak (Rendah/Sedang/Tinggi).`,
+        tip: `Fokus pada "Eksternalitas"—hal di luar kendali Anda. Anda tak bisa kendalikan cuaca/pemilu, tapi bisa kendalikan reaksi Anda.
+Mengakui risiko menaikkan kepercayaan. Ini bukti Anda tidak naif soal tantangan kerja di pelosok Indonesia.`,
+        mistakes: `1. "Tidak Ada Risiko": Menulis ini adalah cara tercepat untuk ditolak. Ini teriakan amatir.
+2. Risiko Internal dianggap Eksternal: "Staf mungkin resign" atau "Laptop rusak" itu isu manajemen, bukan risiko proyek. Siapkan kebijakan HR/IT untuk itu.
+3. Mitigasi Lemah: "Kami akan pantau situasi" bukan mitigasi. "Kami akan beralih ke survei kertas" itu mitigasi.`
       } 
     },
     logframe: { 
       en: { 
-        what: 'The "Contract of Success". A logical framework table that connects Inputs -> Activities -> Outputs -> Outcomes -> Impact. It defines the Key Performance Indicators (KPIs) and the Means of Verification (how you prove it). This is the standard ruler by which your success will be measured.', 
-        tip: 'Distinguish clearly between Output (what you did, e.g., "Training held") and Outcome (what changed, e.g., "Trainees got jobs"). Donors buy Outcomes. Ensure your indicators are SMART (Specific, Measurable, Achievable, Relevant, Time-bound). Ensure verification is affordable (don\'t promise a national census if you can\'t afford it).', 
-        mistakes: 'Do not use vague verbs like "understand," "aware," or "empowered" without a metric. Do not confuse Output and Outcome. Do not promise Impacts that take 10 years to appear for a 1-year project.',
+        what: `The Logical Framework (LogFrame) is the "Contract of Success." It is the ruler against which your project will be audited. It connects the hierarchy of change:
+Input -> Activity -> Output -> Outcome -> Impact.
+
+You must define clear Key Performance Indicators (KPIs) and Means of Verification (MoV).
+
+1. Impact (Long-Term Goal):
+The broader change (e.g., "Reduced marine plastic leakage in Eastern Indonesia").
+KPI: % reduction in debris; Local budget allocation increase.
+
+2. Outcome (Medium-Term Effect):
+Behavioral or institutional change (e.g., "Villages adopt data-driven waste policies").
+KPI: # of Village Regulations (Perdes) passed; # of citations of your data in gov reports.
+
+3. Outputs (Direct Deliverables):
+The immediate results of activities (e.g., "Youth trained," "App developed").
+KPI: 500 youth certified; 1 App launched; 5 reports published.
+
+Ensure your indicators are SMART: Specific, Measurable, Achievable, Relevant, Time-bound.`,
+        tip: `Donors buy OUTCOMES, not Outputs.
+- Output: "We held a training." (So what?)
+- Outcome: "Trainees used the skills to secure a job." (That's value!)
+- MoV Reality Check: Can you afford to verify the data? Don't promise a "National Census" if you only have budget for a "Sample Survey."`,
+        mistakes: `1. Vague Verbs: Avoid "understand," "aware," or "empowered." How do you measure awareness? Use "pass a test," "attend," or "advocate" instead.
+2. Outcome/Output Confusion: "App downloaded" is an Output. "App used to report crime" is an Outcome.
+3. Overpromising Impact: Don't promise to "End Poverty" with $85k. Promise to "Increase income for 50 households."`
       }, 
       id: { 
-        what: '"Kontrak Keberhasilan". Tabel kerangka logis yang menghubungkan Input -> Aktivitas -> Output -> Outcome -> Impact. Mendefinisikan Indikator Kinerja Utama (KPI) dan Alat Verifikasi (bukti). Ini adalah penggaris standar untuk mengukur kesuksesan Anda.', 
-        tip: 'Bedakan dengan jelas antara Output (apa yang Anda buat, cth: "Pelatihan digelar") dan Outcome (apa yang berubah, cth: "Peserta dapat kerja"). Donor membeli Outcome. Pastikan indikator SMART. Pastikan verifikasi terjangkau biayanya.', 
-        mistakes: 'Jangan gunakan kata kerja abstrak seperti "memahami", "sadar", atau "berdaya" tanpa metrik. Jangan tertukar Output dan Outcome. Jangan menjanjikan Dampak 10 tahun untuk proyek 1 tahun.'
+        what: `Kerangka Logis (LogFrame) adalah "Kontrak Keberhasilan". Ini adalah penggaris yang dipakai untuk mengaudit proyek Anda. Menghubungkan hierarki perubahan:
+Input -> Aktivitas -> Output -> Outcome -> Impact.
+
+Anda harus definisikan Indikator Kinerja Utama (KPI) dan Alat Verifikasi (MoV) yang jelas.
+
+1. Impact (Tujuan Jangka Panjang):
+Perubahan luas (cth: "Berkurangnya kebocoran plastik di Indonesia Timur").
+KPI: % pengurangan sampah; Kenaikan alokasi anggaran daerah.
+
+2. Outcome (Efek Jangka Menengah):
+Perubahan perilaku/institusi (cth: "Desa adopsi kebijakan sampah berbasis data").
+KPI: # Perdes disahkan; # sitasi data Anda di laporan pemda.
+
+3. Outputs (Serah Terima Langsung):
+Hasil langsung aktivitas (cth: "Pemuda dilatih", "Aplikasi jadi").
+KPI: 500 pemuda bersertifikat; 1 Aplikasi rilis; 5 laporan terbit.
+
+Pastikan indikator SMART: Spesifik, Terukur, Dapat Dicapai, Relevan, Berbatas Waktu.`,
+        tip: `Donor membeli OUTCOME, bukan Output.
+- Output: "Kami gelar pelatihan." (Terus kenapa?)
+- Outcome: "Peserta pakai skill untuk dapat kerja." (Itu baru nilai!)
+- Cek Realita MoV: Mampukah Anda biayai verifikasinya? Jangan janji "Sensus Nasional" kalau budget cuma cukup "Survei Sampel".`,
+        mistakes: `1. Kata Kerja Samar: Hindari "memahami", "sadar", "berdaya". Gimana ukur sadar? Gunakan "lulus tes", "hadir", atau "mengadvokasi".
+2. Bingung Outcome/Output: "Aplikasi diunduh" itu Output. "Aplikasi dipakai lapor kejahatan" itu Outcome.
+3. Janji Surga: Jangan janji "Hapus Kemiskinan" dengan $85rb. Janjikan "Naikkan income 50 KK".`
       } 
     },
     visibility_strategy: { 
       en: { 
-        what: 'Your plan for public communication and ensuring the Donor gets credit. Donors need PR and visibility to justify their spending to their taxpayers/investors. How will you display their logo? How many "eyeballs" (impressions) will see the project on social media? What deliverables (videos, reports) will be public?', 
-        tip: 'Treat the donor as a partner. Quantify your reach (e.g., "1 million impressions on TikTok"). Budget for high-quality photography and videography—grainy phone photos are not enough for international reports. Create a unique hashtag.', 
-        mistakes: 'Do not ignore the donor\'s branding guidelines (colors, logo placement). Do not forget to budget for communication materials. Do not assume "good work speaks for itself"—you need to shout about it.',
+        what: `Donors are also investors; they need Public Relations (PR) and visibility to justify their spending to their taxpayers or board members. This section details how you will ensure the donor gets credit and how the project's lessons will be shared.
+
+1. Branding & Identity:
+- Where will the donor's logo appear? (e.g., Volunteer vests, App splash screen, Banners, Report covers).
+- Compliance: Explicitly state you will follow their "Branding Guidelines" (colors, safe space, etc.).
+
+2. Digital & Social Media Campaign:
+- Define targets: "1 Million Impressions," "5,000 Engagements."
+- Channels: Instagram/TikTok for youth; LinkedIn/Twitter for policy influence.
+- Content: "Before & After" cleanup photos, Human interest stories of the 'Blue Guardians.'
+
+3. Knowledge Products & Dissemination:
+- What stays behind? White papers, Policy Briefs, Documentaries.
+- Events: Launch event, Closing town hall, Webinars.
+
+4. Target Audiences:
+- Who needs to see this? (Local Gov, General Public, Other NGOs).`,
+        tip: `Treat the donor as a partner, not an ATM.
+- Budget for It: High-quality photos require a professional photographer. Drone shots look great in annual reports. Budget specifically for "Communication & Documentation."
+- The "Human Story": Donors love stories of individual transformation. Promise to produce "5 Case Studies of Changemakers."`,
+        mistakes: `1. "Build it and they will come": Assuming people will know about your good work without promotion. You need to shout about it.
+2. Ignoring Guidelines: Stretching a donor's logo or putting it on a trash bin is a major offense.
+3. Zero Budget: Expecting the Project Manager to also be the Photographer, Writer, and Social Media Manager. It fails.`
       }, 
       id: { 
-        what: 'Rencana komunikasi publik dan memastikan Donor mendapat kredit. Donor butuh PR dan visibilitas untuk justifikasi pengeluaran ke pembayar pajak/investor mereka. Bagaimana logo dipajang? Berapa "pasang mata" (impresi) yang melihat proyek di medsos? Aset apa (video, laporan) yang akan dipublikasi?', 
-        tip: 'Anggap donor sebagai mitra. Kuantifikasi jangkauan (cth: "1 juta impresi TikTok"). Anggarkan foto/video berkualitas tinggi—foto HP buram tidak cukup untuk laporan internasional. Buat hashtag unik.', 
-        mistakes: 'Jangan abaikan pedoman branding donor (warna, posisi logo). Jangan lupa anggarkan biaya materi komunikasi. Jangan berasumsi "kerja bagus akan terdengar sendiri"—Anda harus mempromosikannya.'
+        what: `Donor juga investor; mereka butuh PR dan visibilitas untuk menjustifikasi pengeluaran ke pembayar pajak atau dewan direksi. Bagian ini merinci bagaimana Anda memastikan donor dapat kredit dan bagaimana pelajaran proyek dibagikan.
+
+1. Branding & Identitas:
+- Di mana logo donor muncul? (cth: Rompi relawan, Layar buka Aplikasi, Spanduk, Sampul laporan).
+- Kepatuhan: Nyatakan eksplisit akan ikuti "Pedoman Branding" mereka (warna, posisi, dll).
+
+2. Kampanye Digital & Medsos:
+- Target: "1 Juta Impresi", "5.000 Engagement".
+- Kanal: IG/TikTok untuk pemuda; LinkedIn/Twitter untuk pengaruh kebijakan.
+- Konten: Foto "Before & After", Cerita humanis para 'Blue Guardians'.
+
+3. Produk Pengetahuan & Diseminasi:
+- Apa yang tertinggal? Kertas Putih, Ringkasan Kebijakan, Dokumenter.
+- Acara: Event peluncuran, Town hall penutupan, Webinar.
+
+4. Target Audiens:
+- Siapa yang perlu lihat? (Pemda, Publik Umum, NGO lain).`,
+        tip: `Perlakukan donor sebagai mitra, bukan ATM.
+- Anggarkan: Foto bagus butuh fotografer pro. Shot drone terlihat keren di laporan tahunan. Anggarkan khusus untuk "Komunikasi & Dokumentasi".
+- "Cerita Manusia": Donor suka cerita transformasi individu. Janjikan buat "5 Studi Kasus Pembawa Perubahan".`,
+        mistakes: `1. "Kerja bagus pasti viral": Asumsi orang akan tahu kerja bagus Anda tanpa promosi. Anda harus teriakkan itu.
+2. Abaikan Pedoman: Menarik/gepengkan logo donor atau taruh di tempat sampah adalah pelanggaran berat.
+3. Budget Nol: Berharap PM juga jadi Fotografer, Penulis, dan Admin Medsos. Pasti gagal.`
       } 
     },
     budget_narrative: { 
       en: { 
-        what: 'The "Receipts" and detailed justification. This narrative explains the Excel budget lines. It connects every dollar requested to a specific project activity. It proves "Value for Money"—that you are efficient, not just cheap. It explains why you need specific staff, equipment, or travel funds.', 
-        tip: 'Be transparent. If you pay high salaries, justify it by the quality of talent required. If you need 10 laptops, explain exactly who uses them. Avoid lump sums like "Miscellaneous" or "Contingency" unless allowed. Break down travel costs (X people * Y days * Z cost).', 
-        mistakes: 'Do not simply copy the budget table text. Do not ask for 100% program costs and 0% overhead/admin—this looks unrealistic and unsustainable. Do not inflate costs arbitrarily. Do not forget tax implications.',
+        what: `This is the "Justification of Costs." While the Excel sheet shows the numbers, this narrative explains the logic behind them. It connects every dollar requested to a specific project activity. It proves "Value for Money"—that you are efficient, not just cheap.
+
+Structure it by budget lines (usually A, B, C, D):
+
+A. Personnel (Staffing):
+- Why do you need a Project Manager at $1,500/mo? Explain their qualifications and responsibilities.
+- Justify the "Field Coordinators"—working in remote areas requires intense supervision.
+
+B. Program Activities:
+- Explain the unit costs. "The training cost is based on $20/pax for food, venue, and kit for 5 days."
+- Travel: "Boat rental is high because target villages are 4 hours apart."
+
+C. Equipment & Technology:
+- Why buy 10 tablets? Why rent a server? Explain that volunteers don't own smartphones, necessitating communal devices.
+
+D. Administrative & Overhead:
+- Transparency on rent, utilities, and audit fees. Donors typically cap this at 7-10%.
+
+The goal is to show that the budget is LEAN but REALISTIC.`,
+        tip: `Don't be afraid of salaries. Donors know that "if you pay peanuts, you get monkeys." Justify that high-quality talent ensures project success and sustainability.
+- Unit Costs: Always reference market rates (e.g., "Standard UN rate for per diem").
+- Contribution: Mention if you have "In-Kind" contribution (e.g., "Office space provided by local partner"). It makes the deal sweeter.`,
+        mistakes: `1. Math Errors: If the narrative says $10k and Excel says $12k, you lose trust immediately.
+2. Lump Sums: "Miscellaneous: $5,000." No donor accepts this. Break it down.
+3. All Program, No Admin: Asking for 100% program funds implies you have no office, electricity, or management. It looks suspicious and unsustainable.`
       }, 
       id: { 
-        what: '"Bon Belanja" dan justifikasi detail. Narasi ini menjelaskan baris anggaran Excel. Menghubungkan setiap dolar dengan aktivitas proyek. Membuktikan "Value for Money"—bahwa Anda efisien, bukan murahan. Menjelaskan kenapa butuh staf, alat, atau biaya perjalanan tertentu.', 
-        tip: 'Transparan. Jika gaji tinggi, justifikasi dengan kualitas talenta. Jika butuh 10 laptop, jelaskan siapa yang pakai. Hindari "Lain-lain" atau "Dana Tak Terduga" kecuali dibolehkan. Rinci biaya travel (X orang * Y hari * Z harga).', 
-        mistakes: 'Jangan cuma copy teks tabel budget. Jangan minta 100% biaya program dan 0% admin—ini terlihat tidak realistis. Jangan melebih-lebihkan harga. Jangan lupa pajak.'
+        what: `Ini adalah "Justifikasi Biaya". Sementara Excel menunjukkan angka, narasi ini menjelaskan logika di baliknya. Ini menghubungkan setiap dolar dengan aktivitas proyek. Membuktikan "Value for Money"—bahwa Anda efisien, bukan murahan.
+
+Strukturkan berdasarkan lini anggaran (biasanya A, B, C, D):
+
+A. Personel (Staf):
+- Kenapa butuh PM dengan gaji $1.500/bln? Jelaskan kualifikasi dan tanggung jawabnya.
+- Justifikasi "Koordinator Lapangan"—kerja di pelosok butuh supervisi ketat.
+
+B. Aktivitas Program:
+- Jelaskan biaya satuan. "Biaya training berbasis $20/org untuk makan, venue, dan kit selama 5 hari."
+- Travel: "Sewa perahu mahal karena jarak antar desa 4 jam."
+
+C. Alat & Teknologi:
+- Kenapa beli 10 tablet? Kenapa sewa server? Jelaskan bahwa relawan tak punya HP, jadi butuh alat komunal.
+
+D. Admin & Overhead:
+- Transparansi sewa kantor, listrik, biaya audit. Donor biasanya batasi ini 7-10%.
+
+Tujuannya menunjukkan budget itu RAMPING tapi REALISTIS.`,
+        tip: `Jangan takut soal gaji. Donor tahu "ada harga ada rupa". Justifikasi bahwa talenta berkualitas menjamin sukses dan keberlanjutan proyek.
+- Biaya Satuan: Selalu rujuk harga pasar (cth: "Standar uang harian PBB").
+- Kontribusi: Sebutkan jika ada kontribusi "In-Kind" (cth: "Kantor disediakan mitra lokal"). Ini nilai plus.`,
+        mistakes: `1. Salah Hitung: Jika narasi bilang $10k tapi Excel $12k, kepercayaan hilang seketika.
+2. Gelondongan: "Lain-lain: $5.000". Gak ada donor terima ini. Pecah detailnya.
+3. Semua Program, Tanpa Admin: Minta 100% dana program mengisyaratkan Anda tak punya kantor, listrik, atau manajemen. Terlihat mencurigakan dan tak sustainable.`
       } 
     },
     sustainability: { 
       en: { 
-        what: 'The "Exit Strategy". Donors want to know what happens when the grant money runs out. Will the project die? You must define Financial Sustainability (who pays next?), Institutional Sustainability (who runs it next?), and Technical Sustainability (is the knowledge transferred?).', 
-        tip: 'The goal is independence, not perpetual dependency. Show a path to self-sufficiency, such as integration into local government budgets (Dana Desa), creating a business model, or permanent policy changes. You are planting a perennial tree, not an annual flower.', 
-        mistakes: 'Do not say "We will look for another donor"—that is not sustainability. Do not say "The project ends when funding ends". Do not be vague about who owns the assets (laptops, servers) after the project closes.',
+        what: `The "Exit Strategy." Donors are terrified of projects that collapse the moment the funding stops. You must convince them that you are building a permanent asset, not a temporary event. Address three pillars of sustainability:
+
+1. Financial Sustainability:
+- Who pays next? Do not say "another donor."
+- Better answers: "Integration into Village Fund (Dana Desa)," "Selling verified plastic credits," "Subscription fee from resorts."
+
+2. Institutional Sustainability:
+- Who runs it next?
+- Strategy: MOUs with local government to adopt the program. Creating a local "Youth Association" that is legally registered.
+
+3. Technical Sustainability:
+- Does the knowledge stay?
+- Strategy: Training of Trainers (ToT). The "LautKita" app code is open-source. Manuals are left in the village library.
+
+Conclude with a vision of the post-project landscape: "Even without further funding, the 5 data hubs will continue to operate using Village Funds."`,
+        tip: `You are planting a perennial tree (lives for years), not an annual flower (dies in winter).
+- Policy is Key: The strongest sustainability is changing a law or regulation (Perdes). Once it's law, the budget follows automatically.
+- Ownership: Emphasize that the "Community owns the data," not the NGO.`,
+        mistakes: `1. "We will apply for Phase 2 funding": That is dependency, not sustainability.
+2. "The project ends when funding ends": Immediate rejection.
+3. Vague Asset Handover: Be clear. "Laptops will be donated to the Village Office," not "Laptops will be kept by staff."`
       }, 
       id: { 
-        what: '"Strategi Keluar". Donor ingin tahu apa yang terjadi saat uang hibah habis. Apakah proyek mati? Anda harus definisikan Keberlanjutan Finansial (siapa bayar nanti?), Institusional (siapa urus nanti?), dan Teknis (apakah ilmu sudah ditransfer?).', 
-        tip: 'Tujuannya kemandirian, bukan ketergantungan abadi. Tunjukkan jalan menuju swasembada, misal integrasi ke Dana Desa, model bisnis, atau kebijakan permanen. Anda menanam pohon tahunan, bukan bunga musiman.', 
-        mistakes: 'Jangan bilang "Kami akan cari donor lain"—itu bukan sustainability. Jangan bilang "Proyek selesai saat dana habis". Jangan samar soal siapa pemilik aset (laptop, server) setelah proyek tutup.'
-      } 
-    }
-  },
-  conference_paper: {
-    _analogy: { 
-      en: 'A conference paper is a snapshot of ongoing innovation.', 
-      id: 'Makalah konferensi adalah cuplikan inovasi yang sedang berjalan.' 
-    },
-    abstract: { 
-      en: { 
-        what: 'A teaser for your talk: Problem + Novel Method + Key Result + Implication.', 
-        tip: 'Use keywords relevant to the specific session track to ensure correct placement.', 
-        mistakes: 'Do not use "We will discuss..." -> State exactly what you found.'
-      }, 
-      id: { 
-        what: 'Teaser presentasi Anda: Masalah + Metode Baru + Hasil Utama + Implikasi.', 
-        tip: 'Gunakan kata kunci yang relevan dengan sesi/track agar penempatannya pas.', 
-        mistakes: 'Jangan pakai "Kami akan membahas..." -> Nyatakan persis apa yang ditemukan.'
-      } 
-    },
-    introduction: { 
-      en: { 
-        what: 'Context and Contribution. Why is this interesting to *this* specific community?', 
-        tip: 'Get to the "Novelty" quickly. Keep it punchier than a journal intro.', 
-        mistakes: 'Do not bore the audience with textbook definitions they already know.'
-      }, 
-      id: { 
-        what: 'Konteks dan Kontribusi. Mengapa ini menarik bagi komunitas *spesifik* ini?', 
-        tip: 'Segera masuk ke "Kebaruan". Buat lebih nendang daripada intro jurnal.', 
-        mistakes: 'Jangan bosankan audiens dengan definisi buku teks yang sudah mereka tahu.'
-      } 
-    },
-    related_work: { 
-      en: { 
-        what: 'Positioning. How does your method differ from the state-of-the-art?', 
-        tip: 'Group citations by approach/method, not just a chronological list. Be charitable but critical.', 
-        mistakes: 'Do not ignore work by the conference organizers or keynote speakers (know your audience).'
-      }, 
-      id: { 
-        what: 'Positioning. Bagaimana metode Anda beda dari yang tercanggih saat ini?', 
-        tip: 'Kelompokkan sitasi berdasarkan pendekatan, bukan cuma urutan waktu. Kritis tapi sopan.', 
-        mistakes: 'Jangan abaikan karya penyelenggara atau pembicara utama (kenali audiensmu).'
-      } 
-    },
-    method: { 
-      en: { 
-        what: 'The setup logic. Sufficient detail for a peer to understand the core innovation.', 
-        tip: 'Use diagrams or pseudocode to save space. Focus on the modified/new parts.', 
-        mistakes: 'Do not waste space on standard preprocessing steps unless you changed them.'
-      }, 
-      id: { 
-        what: 'Logika pengaturan. Detail cukup agar rekan sejawat paham inovasi intinya.', 
-        tip: 'Gunakan diagram atau pseudocode untuk hemat tempat. Fokus pada bagian yang baru.', 
-        mistakes: 'Jangan buang tempat jelaskan langkah standar kecuali Anda mengubahnya.'
-      } 
-    },
-    experiments: { 
-      en: { 
-        what: 'Validation. Does it work? How does it compare to baselines?', 
-        tip: 'Bold the best results in tables. Use charts for trends. Be honest about performance.', 
-        mistakes: 'Do not cherry-pick data. Admit where the model fails (failure analysis is valuable).'
-      }, 
-      id: { 
-        what: 'Validasi. Apakah berhasil? Bagaimana dibanding standar yang ada?', 
-        tip: 'Bold hasil terbaik di tabel. Pakai grafik untuk tren. Jujurlah soal performa.', 
-        mistakes: 'Jangan pilah-pilih data bagus aja. Akui di mana model gagal (analisis kegagalan itu berharga).'
-      } 
-    },
-    conclusion: { 
-      en: { 
-        what: 'Recap and Future Work.', 
-        tip: 'End with a punchy sentence about broader impact.', 
-        mistakes: 'Do not just repeat the abstract word-for-word.'
-      }, 
-      id: { 
-        what: 'Rekap dan Pekerjaan Masa Depan.', 
-        tip: 'Akhiri dengan kalimat kuat tentang dampak lebih luas.', 
-        mistakes: 'Jangan cuma mengulang abstrak kata demi kata.'
-      } 
-    }
-  },
-  research_report: {
-    _analogy: { 
-      en: 'A research report is a briefing for decision-makers.', 
-      id: 'Laporan penelitian adalah briefing untuk pengambil keputusan.' 
-    },
-    executive_summary: { 
-      en: { 
-        what: 'The Bottom Line Up Front (BLUF). Problem, method, and key findings for the busy CEO/Minister.', 
-        tip: 'Use bullet points. No academic jargon. This might be the only page they read.', 
-        mistakes: 'Do not bury the lead result in the last paragraph.'
-      }, 
-      id: { 
-        what: 'Inti masalah di depan (BLUF). Masalah, metode, temuan kunci untuk Menteri/CEO sibuk.', 
-        tip: 'Gunakan poin-poin. Tanpa jargon akademik. Mungkin cuma ini yang mereka baca.', 
-        mistakes: 'Jangan sembunyikan hasil utama di paragraf terakhir.'
-      } 
-    },
-    background: { 
-      en: { 
-        what: 'The mandate. Who asked for this? What is the scope?', 
-        tip: 'Define the terms of reference clearly so boundaries are set.', 
-        mistakes: 'Do not go too far back in history (e.g., "Since the dawn of time...").'
-      }, 
-      id: { 
-        what: 'Mandatnya. Siapa yang minta? Apa ruang lingkupnya?', 
-        tip: 'Definisikan kerangka acuan jelas agar batasan tegas.', 
-        mistakes: 'Jangan mundur kejauhan sejarahnya (misal: "Sejak zaman dahulu kala...").'
-      } 
-    },
-    methodology: { 
-      en: { 
-        what: 'Data sources credibility. Interviews, surveys, or secondary data used.', 
-        tip: 'Focus on "Why trust this?" rather than deep mathematical proofs.', 
-        mistakes: 'Do not hide limitations or sample size issues.'
-      }, 
-      id: { 
-        what: 'Kredibilitas sumber data. Wawancara, survei, atau data sekunder.', 
-        tip: 'Fokus ke "Kenapa data ini bisa dipercaya?" bukan pembuktian matematika rumit.', 
-        mistakes: 'Jangan sembunyikan keterbatasan atau masalah jumlah sampel.'
-      } 
-    },
-    findings: { 
-      en: { 
-        what: 'The facts, categorized by theme.', 
-        tip: 'Use "Call-out boxes" for quotes or key stats. Visuals are crucial here.', 
-        mistakes: 'Do not mix analysis/opinion here yet. Just the facts.'
-      }, 
-      id: { 
-        what: 'Fakta-fakta, dikategorikan per tema.', 
-        tip: 'Gunakan "Kotak khusus" untuk kutipan atau statistik kunci. Visual sangat penting.', 
-        mistakes: 'Jangan campur analisis/opini dulu di sini. Fakta saja.'
-      } 
-    },
-    recommendations: { 
-      en: { 
-        what: 'Actionable advice derived directly from findings.', 
-        tip: 'Prioritize them (Short-term vs Long-term). Assign responsibility (Who does it?).', 
-        mistakes: 'Do not give generic advice like "Improve communication." Be specific.'
-      }, 
-      id: { 
-        what: 'Saran yang bisa ditindaklanjuti dari temuan.', 
-        tip: 'Prioritaskan (Jangka Pendek vs Panjang). Tunjuk tanggung jawab (Siapa yang mengerjakan?).', 
-        mistakes: 'Jangan kasih saran umum kayak "Tingkatkan komunikasi." Harus spesifik.'
+        what: `"Strategi Keluar" (Exit Strategy). Donor takut pada proyek yang rubuh begitu dana setop. Anda harus yakinkan mereka bahwa Anda membangun aset permanen, bukan event sesaat. Bahas tiga pilar keberlanjutan:
+
+1. Keberlanjutan Finansial:
+- Siapa bayar nanti? Jangan bilang "donor lain".
+- Jawaban lebih baik: "Integrasi ke Dana Desa", "Jual kredit plastik", "Iuran dari resor wisata".
+
+2. Keberlanjutan Institusional:
+- Siapa yang urus nanti?
+- Strategi: MOU dengan Pemda untuk adopsi program. Membentuk "Asosiasi Pemuda" lokal berbadan hukum.
+
+3. Keberlanjutan Teknis:
+- Apakah ilmunya tertinggal?
+- Strategi: Training of Trainers (ToT). Kode aplikasi open-source. Manual ditinggal di perpustakaan desa.
+
+Tutup dengan visi pasca-proyek: "Bahkan tanpa dana tambahan, 5 hub data akan terus operasi pakai Dana Desa."`,
+        tip: `Anda menanam pohon beringin (hidup tahunan), bukan bunga musiman.
+- Kebijakan itu Kunci: Keberlanjutan terkuat adalah ubah aturan (Perdes). Sekali jadi hukum, anggaran otomatis ikut.
+- Kepemilikan: Tekankan "Warga memiliki datanya", bukan NGO.`,
+        mistakes: `1. "Kami akan ajukan dana Fase 2": Itu ketergantungan, bukan sustainability.
+2. "Proyek selesai saat dana habis": Penolakan langsung.
+3. Serah Terima Aset Samar: Harus jelas. "Laptop dihibahkan ke Kantor Desa", bukan "Laptop disimpan staf".`
       } 
     }
   },
