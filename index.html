@@ -384,15 +384,158 @@ const DUMMY_DATA = {
   /* ID harus sama dengan di Module Registry nanti */
   
   project_proposal: { 
-    title: 'Project Alpha: Community Resilience Initiative', 
-    sections: [
-        { key: 'executive_summary', content: `<h3>Executive Summary</h3><p>This proposal seeks funding to implement a community-based resilience program aimed at urban youth.</p>` },
-        { key: 'problem_statement', content: `<h3>1. Problem Statement</h3><p>Current statistics indicate a 15% rise in youth unemployment, leading to decreased community engagement.</p>` },
-        { key: 'objectives', content: `<h3>2. Objectives</h3><p>Our primary objective is to train 500 youths in digital literacy within 12 months.</p>` },
-        { key: 'implementation_plan', content: `<h3>3. Implementation Plan</h3><p>Phase 1 involves curriculum development (Month 1-2). Phase 2 is recruitment (Month 3).</p>` },
-        { key: 'budget', content: `<h3>4. Budget Overview</h3><p>The total requested amount is $50,000, allocated primarily for trainers and equipment.</p>` }
-    ] 
-  },
+  title: 'Nusantara Blue Guardians: Empowering Coastal Youth through Data-Driven Ocean Literacy', 
+  sections: [
+    { 
+      key: 'executive_summary', 
+      content: `
+        <h3>1. Executive Summary</h3>
+        <p><strong>Project Title:</strong> Nusantara Blue Guardians<br>
+        <strong>Duration:</strong> 18 Months<br>
+        <strong>Location:</strong> Pilot in 3 Provinces (North Sulawesi, Maluku, West Nusa Tenggara)<br>
+        <strong>Total Budget Request:</strong> $85,000 USD</p>
+        
+        <p>Indonesia, the world's largest archipelagic state, stands at a critical juncture. While the nation contributes significantly to global marine biodiversity, it also ranks as a major source of marine plastic debris. Current interventions often suffer from a "top-down" approach, relying on external consultants and generalized data that fails to reflect the hyper-local reality of coastal villages.</p>
+        
+        <p>The <strong>Nusantara Blue Guardians</strong> initiative proposes a paradigm shift: turning coastal youth from passive observers into active <em>Citizen Scientists</em>. By combining <strong>Contextual Ocean Ethics</strong> (reviving local maritime wisdom) with <strong>Modern Digital Tools</strong> (a custom offline-first data app), we aim to bridge the gap between national policy and village-level execution.</p>
+        
+        <p><strong>Core Objectives:</strong></p>
+        <ul>
+          <li><strong>Empower:</strong> Train 500 NEET (Not in Education, Employment, or Training) youth as certified "Blue Guardians."</li>
+          <li><strong>Digitize:</strong> Deploy "LautKita," a low-bandwidth Progressive Web App (PWA) for granular marine debris auditing.</li>
+          <li><strong>Influence:</strong> Generate 5 "Village Ocean State Reports" to secure ongoing allocation from the Village Fund (Dana Desa).</li>
+        </ul>
+      ` 
+    },
+    { 
+      key: 'situational_analysis', 
+      content: `
+        <h3>2. Situational Analysis & Rationale</h3>
+        
+        <h4>2.1 The Problem: Data Scarcity & Youth Disengagement</h4>
+        <p>Despite strong national commitments (e.g., reducing marine debris by 70% by 2025), implementation at the district level is hampered by:</p>
+        <ul>
+          <li><strong>The "Data Vacuum":</strong> Dinas Lingkungan Hidup (Local Environmental Agencies) often lack budget for regular monitoring. They rely on estimated national averages rather than actual local data, leading to inefficient resource allocation.</li>
+          <li><strong>The "Scientific Disconnect":</strong> Ocean literacy materials are often direct translations of Western textbooks. They discuss "ocean acidification" in abstract terms but fail to address immediate local threats like blast fishing or plastic sachets, making conservation seem like an "elite" concern.</li>
+        </ul>
+
+        <h4>2.2 Policy Alignment</h4>
+        <p>This project directly supports:</p>
+        <ul>
+          <li><strong>UN SDG 14.1:</strong> Prevent and significantly reduce marine pollution.</li>
+          <li><strong>RPJMN (Indonesian National Medium-Term Development Plan):</strong> Strengthening the "Poros Maritim Dunia" identity.</li>
+        </ul>
+      ` 
+    },
+    { 
+      key: 'methodology', 
+      content: `
+        <h3>3. Methodology: The "Data-to-Action" Loop</h3>
+        <p>We utilize a <strong>Participatory Action Research (PAR)</strong> approach, ensuring the community owns the data they collect. The methodology follows a three-step cycle:</p>
+        
+        <div style="background:#eef; padding:15px; margin:10px 0; border-left: 5px solid #0056b3;">
+          <p><strong>Step 1: Calibration (Social & Tech)</strong><br>
+          We do not just "drop" technology. We first calibrate the social understanding through "Ocean Ethics" workshops that blend modern science with local customary law (<em>Hukum Adat</em>, e.g., <em>Sasi</em> in Maluku).</p>
+          
+          <p><strong>Step 2: Collection (Citizen Science)</strong><br>
+          Youth use the "LautKita" app to conduct rigorous beach audits. The app uses gamification to ensure consistent data quality (e.g., distinguishing between branded plastics vs. generic waste).</p>
+          
+          <p><strong>Step 3: Advocacy (Data Diplomacy)</strong><br>
+          Raw data is useless without interpretation. We train youth to visualize this data and present it to Village Heads (Kepala Desa) to advocate for waste management budgets.</p>
+        </div>
+      ` 
+    },
+    { 
+      key: 'technical_implementation', 
+      content: `
+        <h3>4. Detailed Implementation Plan</h3>
+        
+        <h4>Phase 1: Foundation & Tech Development (Months 1-4)</h4>
+        <ul>
+          <li><strong>Activity 1.1: "LautKita" App Development.</strong> Building an offline-first PWA. Key features: GPS tagging accuracy <5m, image recognition assistance for debris categorization, and auto-sync when Wi-Fi is available.</li>
+          <li><strong>Activity 1.2: Curriculum Design.</strong> Developing the "Blue Guardian" handbook, integrating localized marine ecology modules.</li>
+        </ul>
+
+        <h4>Phase 2: Train-the-Trainers (ToT) (Months 5-6)</h4>
+        <ul>
+          <li><strong>Activity 2.1: Recruitment.</strong> Selecting 50 "Regional Coordinators" based on leadership potential, not just academic grades.</li>
+          <li><strong>Activity 2.2: The Bootcamp.</strong> A 5-day intensive workshop on data integrity, community organizing, and safety protocols.</li>
+        </ul>
+
+        <h4>Phase 3: Mass Deployment (Months 7-15)</h4>
+        <ul>
+          <li><strong>Activity 3.1: Village Activation.</strong> Each Coordinator trains 10 local volunteers (Total: 500 youth).</li>
+          <li><strong>Activity 3.2: Monthly "Data Dives".</strong> Synchronized coastal cleanup and auditing events across all pilot sites to create comparable datasets.</li>
+        </ul>
+
+        <h4>Phase 4: Synthesis & Policy Advocacy (Months 16-18)</h4>
+        <ul>
+          <li><strong>Activity 4.1: Data Visualization Workshop.</strong> Teaching youth how to turn spreadsheets into infographics.</li>
+          <li><strong>Activity 4.2: Town Halls (Musrenbangdes).</strong> Youth present their "Village Ocean Reports" formally to local government to influence the next fiscal year's budget planning.</li>
+        </ul>
+      ` 
+    },
+    { 
+      key: 'logframe', 
+      content: `
+        <h3>5. Logical Framework (LogFrame) & Indicators</h3>
+        <table border="1" cellpadding="10" style="border-collapse: collapse; width: 100%; border-color: #ddd;">
+          <tr style="background-color: #f2f2f2;">
+            <th>Hierarchy</th>
+            <th>Indicators (KPIs)</th>
+            <th>Means of Verification</th>
+          </tr>
+          <tr>
+            <td><strong>Impact</strong> (Long Term)</td>
+            <td>Increased resilience of coastal communities against marine pollution.</td>
+            <td>Local government budget allocation for waste management increases by 20% in target villages.</td>
+          </tr>
+          <tr>
+            <td><strong>Outcome</strong> (Medium Term)</td>
+            <td>Establishment of a reliable, community-sourced marine database.</td>
+            <td>5 "Village Ocean Reports" formally accepted by Dinas Lingkungan Hidup.</td>
+          </tr>
+          <tr>
+            <td><strong>Outputs</strong> (Short Term)</td>
+            <td>
+              1. 500 Youth trained.<br>
+              2. 10 Tons of debris removed & audited.<br>
+              3. App deployed with >1,000 unique data points.
+            </td>
+            <td>Training attendance lists, App database logs, Weigh station receipts.</td>
+          </tr>
+        </table>
+      ` 
+    },
+    { 
+      key: 'budget_narrative', 
+      content: `
+        <h3>6. Budget Narrative & Justification</h3>
+        <p><strong>Total Request: $85,000 USD</strong></p>
+        
+        <h4>A. Personnel (30% - $25,500)</h4>
+        <p>This project is human-capital intensive. The budget covers a full-time Project Manager, a Technical Lead (for App maintenance), and stipends for 5 Regional Field Coordinators. <em>Note: We pay above minimum wage to ensure retention of high-quality talent.</em></p>
+        
+        <h4>B. Program Activities (40% - $34,000)</h4>
+        <p>Includes logistics for the "ToT Bootcamp" (accommodation, transport for 50 people), safety gear (gloves, boots) for 500 volunteers, and local transport for monthly audits. Also covers the "Town Hall" meeting costs (snacks/venue) for advocacy sessions.</p>
+        
+        <h4>C. Technology & Data (15% - $12,750)</h4>
+        <p>Covers server hosting (cloud), domain registration, and procurement of 10 ruggedized tablets for communal use in villages where youth do not own smartphones.</p>
+        
+        <h4>D. Monitoring & Overhead (15% - $12,750)</h4>
+        <p>Independent external audit (required by law for NGOs), bank fees, and administrative overhead (office rent/utilities).</p>
+      ` 
+    },
+    { 
+      key: 'sustainability', 
+      content: `
+        <h3>7. Sustainability & Exit Strategy</h3>
+        <p><strong>Technical Sustainability:</strong> The "LautKita" app code will be open-sourced on GitHub. Local university partners (e.g., UNHAS, UNPATTI) have signed MOUs to maintain the server post-project.</p>
+        <p><strong>Financial Sustainability:</strong> By integrating the waste management plan into the <em>Village Fund (Dana Desa)</em>, the operational costs for waste collection will be absorbed by the local government budget, removing dependency on external grants.</p>
+      ` 
+    }
+  ] 
+},
     conference_paper: { 
   title: 'Adaptive Attention Mechanisms in Transformer Architectures', 
   sections: [
@@ -582,62 +725,110 @@ const GUIDANCE = {
     },
     executive_summary: { 
       en: { 
-        what: 'A standalone overview. Why this project, why now, why you, and how much?', 
-        tip: 'Write this last. It is the "elevator pitch"—if they only read this page, will they fund you?', 
-        mistakes: 'Do not just copy-paste the first paragraph of the introduction. Avoid vague ask amounts.'
+        what: 'This is the "Sales Pitch" of your proposal. It serves as a standalone document that summarizes the entire project. It must answer the "Wh-questions": Who are you? What is the problem? What is your solution? How much money do you need? And most importantly, what is the return on investment (Impact)? Think of this as the only page a busy Minister or CEO will read.', 
+        tip: 'Write this section LAST. Even though it appears first, you cannot summarize a project you haven\'t detailed yet. Use the "Hook" technique: Start with a startling statistic or a compelling story to grab attention immediately. Ensure the funding amount is explicitly stated in bold.', 
+        mistakes: 'Do not use this section as an "Introduction" or "Background". It is a summary, not a preface. Do not be vague about the request (e.g., avoiding the exact dollar amount). Do not copy-paste the first paragraph of the Situational Analysis. Keep it under 2 pages.'
       }, 
       id: { 
-        what: 'Gambaran umum mandiri. Mengapa proyek ini, mengapa sekarang, mengapa Anda, dan berapa biayanya?', 
-        tip: 'Tulis ini terakhir. Ini adalah "elevator pitch"—jika mereka hanya baca halaman ini, apakah akan didanai?', 
-        mistakes: 'Jangan cuma copy-paste paragraf awal pendahuluan. Hindari jumlah dana yang samar.'
+        what: 'Ini adalah "Sales Pitch" proposal Anda. Bagian ini berfungsi sebagai dokumen mandiri yang merangkum keseluruhan proyek. Harus menjawab: Siapa Anda? Apa masalahnya? Apa solusinya? Berapa dana yang dibutuhkan? Dan yang terpenting, apa dampak (ROI) yang didapat donor? Anggap ini satu-satunya halaman yang dibaca Menteri atau CEO yang sibuk.', 
+        tip: 'Tulis bagian ini TERAKHIR. Meski muncul di awal, Anda tidak bisa merangkum proyek yang belum Anda detailkan. Gunakan teknik "Hook": Mulai dengan statistik mengejutkan atau cerita yang kuat untuk menarik perhatian. Pastikan jumlah dana ditulis tebal dan jelas.', 
+        mistakes: 'Jangan gunakan bagian ini sebagai "Pendahuluan" atau "Latar Belakang". Ini adalah ringkasan, bukan pembukaan. Jangan samar mengenai permintaan dana (harus ada angka pasti). Jangan copy-paste paragraf pertama Analisis Situasi. Jaga agar tidak lebih dari 2 halaman.'
       } 
     },
-    problem_statement: { 
+    situational_analysis: { 
       en: { 
-        what: 'A data-driven diagnosis of the urgency. Who is suffering and what is the gap?', 
-        tip: 'Use the "Inverted Pyramid": Global context -> Local context -> The specific gap your project fills.', 
-        mistakes: 'Do not frame the "lack of your solution" as the problem (e.g., "Problem is no gym" vs "Problem is obesity").'
+        what: 'A rigorous, data-driven diagnosis of the problem landscape. You must prove the problem exists using hard evidence, not just feelings. Use the "Inverted Pyramid" structure: Start with the Global Context (SDGs, Climate Change), narrow down to National Priorities (RPJMN), and land firmly on the Specific Local Gap that your project will fix.', 
+        tip: 'Data is your currency here. Use charts, graphs, or bold statistics (e.g., "70% of coral reefs are damaged"). Explicitly align your problem with the Donor\'s strategic goals—show them you are solving THEIR problem. Include a Stakeholder Analysis to show you know the political terrain.', 
+        mistakes: 'Do not define the problem as "the lack of your solution" (e.g., saying "The problem is there is no app" is wrong; the problem is "inefficient data collection"). Do not rely on anecdotal evidence or data older than 5 years. Do not ignore existing efforts by the government.',
       }, 
       id: { 
-        what: 'Diagnosis urgensi berbasis data. Siapa yang terdampak dan apa kesenjangannya?', 
-        tip: 'Gunakan "Piramida Terbalik": Konteks Global -> Lokal -> Kesenjangan spesifik yang diisi proyek Anda.', 
-        mistakes: 'Jangan bingkai "ketiadaan solusi Anda" sebagai masalah (cth: "Masalahnya gak ada gym" vs "Masalahnya obesitas").'
+        what: 'Diagnosis masalah yang ketat dan berbasis data. Anda harus membuktikan masalah itu ada menggunakan bukti keras, bukan perasaan. Gunakan struktur "Piramida Terbalik": Mulai dari Konteks Global (SDGs, Perubahan Iklim), mengerucut ke Prioritas Nasional (RPJMN), dan mendarat di Celah Lokal Spesifik yang akan diperbaiki proyek Anda.', 
+        tip: 'Data adalah mata uang di sini. Gunakan grafik atau statistik tebal (cth: "70% terumbu karang rusak"). Secara eksplisit, hubungkan masalah ini dengan tujuan strategis Donor—tunjukkan Anda menyelesaikan masalah MEREKA. Sertakan Analisis Pemangku Kepentingan untuk menunjukkan Anda paham medan politiknya.', 
+        mistakes: 'Jangan mendefinisikan masalah sebagai "ketiadaan solusi Anda" (cth: bilang "Masalahnya tidak ada aplikasi" itu salah; masalahnya adalah "pengumpulan data tidak efisien"). Jangan pakai bukti anekdot atau data >5 tahun. Jangan abaikan upaya pemerintah yang sudah ada.'
       } 
     },
-    objectives: { 
+    methodology: { 
       en: { 
-        what: 'Tangible deliverables defined by SMART criteria (Specific, Measurable, Achievable, Relevant, Time-bound).', 
-        tip: 'Distinguish between "Outputs" (activities done) and "Outcomes" (impact achieved). Funders buy outcomes.', 
-        mistakes: 'Avoid vague verbs like "understand" or "raise awareness" without a metric (e.g., "reach 5000 people").'
+        what: 'The theoretical and strategic framework of your intervention. This explains "How" and "Why" you chose a specific approach over others. Are you using Citizen Science? Participatory Action Research (PAR)? Behavioral Nudging? You must also explain how you address cross-cutting issues like Gender Equality and Social Inclusion (GESI).', 
+        tip: 'This section establishes your authority/expertise. Use diagrams or workflows to visualize your model. When discussing GESI, don\'t just count women; explain how the project empowers them explicitly (e.g., leadership roles, not just participants). Explain why your method is innovative or more effective than the status quo.', 
+        mistakes: 'Do not confuse Methodology with the Implementation Plan. Methodology is the "Strategy/Philosophy"; Plan is the "Schedule". Do not treat Gender as a checkbox—donors can smell tokenism. Do not be too academic; keep it practical and applicable.',
       }, 
       id: { 
-        what: 'Hasil nyata yang didefinisikan kriteria SMART (Spesifik, Terukur, Dapat Dicapai, Relevan, Berbatas Waktu).', 
-        tip: 'Bedakan "Output" (kegiatan) dan "Outcome" (dampak). Pemberi dana membeli dampak.', 
-        mistakes: 'Hindari kata kerja samar seperti "memahami" atau "menyadarkan" tanpa metrik (cth: "menjangkau 5000 orang").'
+        what: 'Kerangka teoritis dan strategis intervensi Anda. Ini menjelaskan "Bagaimana" dan "Mengapa" Anda memilih pendekatan tertentu. Apakah pakai Citizen Science? Participatory Action Research (PAR)? Behavioral Nudging? Anda juga harus menjelaskan isu lintas sektoral seperti Kesetaraan Gender dan Inklusi Sosial (GESI).', 
+        tip: 'Bagian ini membangun otoritas/keahlian Anda. Gunakan diagram atau alur kerja. Saat bahas GESI, jangan cuma menghitung jumlah wanita; jelaskan bagaimana proyek memberdayakan mereka (cth: peran kepemimpinan, bukan cuma peserta). Jelaskan kenapa metode Anda inovatif atau lebih baik dari cara lama.', 
+        mistakes: 'Jangan tertukar antara Metodologi dengan Rencana Implementasi. Metodologi itu "Strategi/Filosofi"; Implementasi itu "Jadwal". Jangan jadikan Gender sekadar checklist—donor tahu mana yang basa-basi. Jangan terlalu akademis; buat praktis.'
       } 
     },
-    implementation_plan: { 
+    technical_implementation: { 
       en: { 
-        what: 'The chronological roadmap. Who does what, when, and where?', 
-        tip: 'Think of this as a narrative Gantt chart. Show that you have considered logistics and risks.', 
-        mistakes: 'Do not underestimate time buffers. Don\'t forget monitoring and evaluation phases.'
+        what: 'The detailed, chronological battle plan. This section breaks the project down into manageable Phases (e.g., Preparation, Execution, Evaluation) and Activities. It specifies Who is responsible, What resources are needed, When it happens, and Where it takes place. It transforms abstract ideas into concrete actions.', 
+        tip: 'Think of this as a narrative Gantt Chart. Be hyper-realistic. Include a "Mobilization Phase" (permits, recruitment) at the start and a "Reporting Phase" at the end. Add "buffer time" for unforeseen delays. Donors check this to see if you can actually deliver within the 18-month timeframe.', 
+        mistakes: 'Do not forget the boring stuff: getting permits, recruiting staff, and auditing. Do not cram too many activities into a short time. Do not be vague about locations (e.g., say "3 villages in Maluku" instead of just "Indonesia").',
       }, 
       id: { 
-        what: 'Peta jalan kronologis. Siapa melakukan apa, kapan, dan di mana?', 
-        tip: 'Anggap ini narasi Gantt chart. Tunjukkan Anda sudah memikirkan logistik dan risiko.', 
-        mistakes: 'Jangan remehkan waktu cadangan (buffer). Jangan lupa fase monitoring dan evaluasi.'
+        what: 'Rencana tempur kronologis yang detail. Bagian ini memecah proyek menjadi Fase (Persiapan, Eksekusi, Evaluasi) dan Aktivitas. Menjelaskan Siapa yang bertanggung jawab, Apa sumber dayanya, Kapan terjadi, dan Di mana lokasinya. Mengubah ide abstrak menjadi aksi nyata.', 
+        tip: 'Anggap ini narasi Gantt Chart. Harus super realistis. Masukkan "Fase Mobilisasi" (izin, rekrutmen) di awal dan "Fase Pelaporan" di akhir. Tambahkan "waktu cadangan" untuk penundaan. Donor cek ini untuk melihat apakah Anda benar-benar bisa mengirim hasil dalam 18 bulan.', 
+        mistakes: 'Jangan lupakan hal membosankan: urus izin, rekrut staf, dan audit. Jangan jejalkan terlalu banyak aktivitas di waktu singkat. Jangan samar soal lokasi (cth: tulis "3 desa di Maluku" jangan cuma "Indonesia").'
       } 
     },
-    budget: { 
+    risk_management: { 
       en: { 
-        what: 'Transparent financial breakdown linking money to activities.', 
-        tip: 'Every line item must correspond to an activity in the plan. Justification is key.', 
-        mistakes: 'Do not pad the budget arbitrarily. Don\'t forget administrative overheads allowed by the grant.'
+        what: 'A structured matrix identifying potential threats that could derail your project. Categories usually include Political, Technical, Social, and Financial risks. For each risk, you must assess the Likelihood and Impact, and provide a concrete Mitigation Strategy (Plan B).', 
+        tip: 'Admitting risks makes you look mature, honest, and prepared—not weak. Focus on "Externalities" (things outside your control, like elections or disasters). Show the donor that even if things go wrong, you have a plan to keep the project money safe and the objectives on track.', 
+        mistakes: 'Never write "No risks are expected"—this screams amateurism. Do not ignore political cycles (e.g., Pilkada). Do not list risks that are actually just poor planning (e.g., "Staff might quit" is a management issue, "Civil unrest" is a risk).',
       }, 
       id: { 
-        what: 'Rincian keuangan transparan yang menghubungkan uang dengan aktivitas.', 
-        tip: 'Setiap item biaya harus nyambung dengan aktivitas di rencana. Justifikasi adalah kunci.', 
-        mistakes: 'Jangan melebih-lebihkan anggaran sembarangan. Jangan lupa biaya operasional yang diizinkan.'
+        what: 'Matriks terstruktur yang mengidentifikasi ancaman potensial bagi proyek. Kategori biasanya mencakup risiko Politik, Teknis, Sosial, dan Keuangan. Untuk setiap risiko, nilai Kemungkinan dan Dampaknya, serta berikan Strategi Mitigasi (Rencana B) yang konkret.', 
+        tip: 'Mengakui risiko membuat Anda terlihat dewasa, jujur, dan siap—bukan lemah. Fokus pada "Eksternalitas" (hal di luar kendali, seperti pemilu/bencana). Tunjukkan pada donor bahwa jika ada masalah, Anda punya rencana menyelamatkan uang dan tujuan proyek.', 
+        mistakes: 'Jangan pernah tulis "Tidak ada risiko"—itu amatir. Jangan abaikan siklus politik (Pilkada). Jangan tulis risiko yang sebenarnya cuma perencanaan buruk (cth: "Staf keluar" itu isu manajemen, "Kerusuhan" itu risiko).'
+      } 
+    },
+    logframe: { 
+      en: { 
+        what: 'The "Contract of Success". A logical framework table that connects Inputs -> Activities -> Outputs -> Outcomes -> Impact. It defines the Key Performance Indicators (KPIs) and the Means of Verification (how you prove it). This is the standard ruler by which your success will be measured.', 
+        tip: 'Distinguish clearly between Output (what you did, e.g., "Training held") and Outcome (what changed, e.g., "Trainees got jobs"). Donors buy Outcomes. Ensure your indicators are SMART (Specific, Measurable, Achievable, Relevant, Time-bound). Ensure verification is affordable (don\'t promise a national census if you can\'t afford it).', 
+        mistakes: 'Do not use vague verbs like "understand," "aware," or "empowered" without a metric. Do not confuse Output and Outcome. Do not promise Impacts that take 10 years to appear for a 1-year project.',
+      }, 
+      id: { 
+        what: '"Kontrak Keberhasilan". Tabel kerangka logis yang menghubungkan Input -> Aktivitas -> Output -> Outcome -> Impact. Mendefinisikan Indikator Kinerja Utama (KPI) dan Alat Verifikasi (bukti). Ini adalah penggaris standar untuk mengukur kesuksesan Anda.', 
+        tip: 'Bedakan dengan jelas antara Output (apa yang Anda buat, cth: "Pelatihan digelar") dan Outcome (apa yang berubah, cth: "Peserta dapat kerja"). Donor membeli Outcome. Pastikan indikator SMART. Pastikan verifikasi terjangkau biayanya.', 
+        mistakes: 'Jangan gunakan kata kerja abstrak seperti "memahami", "sadar", atau "berdaya" tanpa metrik. Jangan tertukar Output dan Outcome. Jangan menjanjikan Dampak 10 tahun untuk proyek 1 tahun.'
+      } 
+    },
+    visibility_strategy: { 
+      en: { 
+        what: 'Your plan for public communication and ensuring the Donor gets credit. Donors need PR and visibility to justify their spending to their taxpayers/investors. How will you display their logo? How many "eyeballs" (impressions) will see the project on social media? What deliverables (videos, reports) will be public?', 
+        tip: 'Treat the donor as a partner. Quantify your reach (e.g., "1 million impressions on TikTok"). Budget for high-quality photography and videography—grainy phone photos are not enough for international reports. Create a unique hashtag.', 
+        mistakes: 'Do not ignore the donor\'s branding guidelines (colors, logo placement). Do not forget to budget for communication materials. Do not assume "good work speaks for itself"—you need to shout about it.',
+      }, 
+      id: { 
+        what: 'Rencana komunikasi publik dan memastikan Donor mendapat kredit. Donor butuh PR dan visibilitas untuk justifikasi pengeluaran ke pembayar pajak/investor mereka. Bagaimana logo dipajang? Berapa "pasang mata" (impresi) yang melihat proyek di medsos? Aset apa (video, laporan) yang akan dipublikasi?', 
+        tip: 'Anggap donor sebagai mitra. Kuantifikasi jangkauan (cth: "1 juta impresi TikTok"). Anggarkan foto/video berkualitas tinggi—foto HP buram tidak cukup untuk laporan internasional. Buat hashtag unik.', 
+        mistakes: 'Jangan abaikan pedoman branding donor (warna, posisi logo). Jangan lupa anggarkan biaya materi komunikasi. Jangan berasumsi "kerja bagus akan terdengar sendiri"—Anda harus mempromosikannya.'
+      } 
+    },
+    budget_narrative: { 
+      en: { 
+        what: 'The "Receipts" and detailed justification. This narrative explains the Excel budget lines. It connects every dollar requested to a specific project activity. It proves "Value for Money"—that you are efficient, not just cheap. It explains why you need specific staff, equipment, or travel funds.', 
+        tip: 'Be transparent. If you pay high salaries, justify it by the quality of talent required. If you need 10 laptops, explain exactly who uses them. Avoid lump sums like "Miscellaneous" or "Contingency" unless allowed. Break down travel costs (X people * Y days * Z cost).', 
+        mistakes: 'Do not simply copy the budget table text. Do not ask for 100% program costs and 0% overhead/admin—this looks unrealistic and unsustainable. Do not inflate costs arbitrarily. Do not forget tax implications.',
+      }, 
+      id: { 
+        what: '"Bon Belanja" dan justifikasi detail. Narasi ini menjelaskan baris anggaran Excel. Menghubungkan setiap dolar dengan aktivitas proyek. Membuktikan "Value for Money"—bahwa Anda efisien, bukan murahan. Menjelaskan kenapa butuh staf, alat, atau biaya perjalanan tertentu.', 
+        tip: 'Transparan. Jika gaji tinggi, justifikasi dengan kualitas talenta. Jika butuh 10 laptop, jelaskan siapa yang pakai. Hindari "Lain-lain" atau "Dana Tak Terduga" kecuali dibolehkan. Rinci biaya travel (X orang * Y hari * Z harga).', 
+        mistakes: 'Jangan cuma copy teks tabel budget. Jangan minta 100% biaya program dan 0% admin—ini terlihat tidak realistis. Jangan melebih-lebihkan harga. Jangan lupa pajak.'
+      } 
+    },
+    sustainability: { 
+      en: { 
+        what: 'The "Exit Strategy". Donors want to know what happens when the grant money runs out. Will the project die? You must define Financial Sustainability (who pays next?), Institutional Sustainability (who runs it next?), and Technical Sustainability (is the knowledge transferred?).', 
+        tip: 'The goal is independence, not perpetual dependency. Show a path to self-sufficiency, such as integration into local government budgets (Dana Desa), creating a business model, or permanent policy changes. You are planting a perennial tree, not an annual flower.', 
+        mistakes: 'Do not say "We will look for another donor"—that is not sustainability. Do not say "The project ends when funding ends". Do not be vague about who owns the assets (laptops, servers) after the project closes.',
+      }, 
+      id: { 
+        what: '"Strategi Keluar". Donor ingin tahu apa yang terjadi saat uang hibah habis. Apakah proyek mati? Anda harus definisikan Keberlanjutan Finansial (siapa bayar nanti?), Institusional (siapa urus nanti?), dan Teknis (apakah ilmu sudah ditransfer?).', 
+        tip: 'Tujuannya kemandirian, bukan ketergantungan abadi. Tunjukkan jalan menuju swasembada, misal integrasi ke Dana Desa, model bisnis, atau kebijakan permanen. Anda menanam pohon tahunan, bukan bunga musiman.', 
+        mistakes: 'Jangan bilang "Kami akan cari donor lain"—itu bukan sustainability. Jangan bilang "Proyek selesai saat dana habis". Jangan samar soal siapa pemilik aset (laptop, server) setelah proyek tutup.'
       } 
     }
   },
@@ -1088,7 +1279,7 @@ const MODULE_REGISTRY_DEFINITION = [
       category: 'academic', // Kategori: 'academic', 'policy', atau 'media'
       schema_version: SCHEMA_VERSION, 
       // Urutan bagian-bagian dokumen
-      structural_sections: ['executive_summary','problem_statement','objectives','implementation_plan','budget'], 
+      structural_sections: ['executive_summary','situational_analysis','methodology','technical_implementation','logframe','budget_narrative','sustainability'], 
       color: 'blue', 
       description: 'Proposal pendanaan proyek standar.' 
   }, { 
