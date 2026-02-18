@@ -720,6 +720,57 @@ dissertation_thesis: {
     { key: 'references', content: `<h3>References</h3><p>[1] Rochet, J.-C., & Tirole, J. (2003). Platform competition...<br>[2] etc.</p>` }
   ] 
 },
+press_release: {
+  title: 'PRESS RELEASE: Launch of Zero-Cost Digital Governance Tool',
+  sections: [
+    { 
+      key: 'header_info', 
+      content: `
+        <p><strong>FOR IMMEDIATE RELEASE</strong></p>
+        <p><strong>Jakarta, Indonesia — February 18, 2026</strong></p>
+      ` 
+    },
+    { 
+      key: 'headline', 
+      content: `
+        <h2>Former UN Consultant Launches "Zero-Cost" Digital Tool to Cut Bureaucracy in Remote Villages</h2>
+        <p><em>New open-source initiative "StructureFlow" aims to digitize 1,000 villages without using state budget.</em></p>
+      ` 
+    },
+    { 
+      key: 'lead_paragraph', 
+      content: `
+        <p><strong>JAKARTA</strong> — In a move to accelerate digital transformation in Indonesia's underdeveloped regions, independent governance consultant Angga Conni Saputra today announced the release of a serverless administration toolkit designed specifically for areas with low internet bandwidth.</p>
+        <p>The toolkit, developed based on years of field experience with the Ministry of Villages and UN agencies, addresses the critical failure of expensive "Smart City" projects that often malfunction in rural settings due to maintenance costs.</p>
+      ` 
+    },
+    { 
+      key: 'body_quotes', 
+      content: `
+        <p>"We are seeing a 'Digital Divide' where expensive vendor apps fail after one year because villages cannot afford the server fees," said <strong>Angga C. Saputra</strong>, Lead Architect of the initiative.</p>
+        <p>"This project proves that effective digital governance doesn't need to cost billions. By using Google's existing ecosystem, we can bring administrative time down from days to minutes, at zero recurring cost to the taxpayer."</p>
+      ` 
+    },
+    { 
+      key: 'boilerplate_about', 
+      content: `
+        <h3>About the Initiative</h3>
+        <p>StructureFlow is a civic-tech initiative focused on "Frugal Innovation" for the public sector. Founded by Angga C. Saputra, a specialist in governance reform with over 12 years of experience working with Indonesian Ministries and International NGOs, the initiative aims to democratize access to digital administrative tools.</p>
+      ` 
+    },
+    { 
+      key: 'media_contact', 
+      content: `
+        <h3>Media Contact</h3>
+        <p><strong>Name:</strong> Angga Conni Saputra<br>
+        <strong>Email:</strong> [Your Email Here]<br>
+        <strong>LinkedIn:</strong> linkedin.com/in/angga-conni-saputra<br>
+        <strong>Website:</strong> [Your Portfolio URL]</p>
+      ` 
+    }
+  ]
+},
+
 policy_brief: { 
   title: 'Policy Brief: Mengubah Data Menjadi Dana — Integrasi Sains Warga dalam Alokasi Dana Desa untuk Penanganan Sampah Laut', 
   sections: [
@@ -2234,10 +2285,296 @@ policy_brief: {
       } 
     }
   },
-policy_paper: {
-  _analogy: { en: 'A policy paper is a deep dive into options.', id: 'Policy paper adalah analisis mendalam tentang pilihan-pilihan.' },
-  executive_summary: {
-    en: {
+  press_release: {
+  _analogy: { 
+    en: 'A Press Release is a <strong>Pre-cooked Meal</strong> for a journalist. If you give them raw ingredients (confusing text), they won\'t cook it. If you give them a ready-to-serve story, they will publish it.', 
+    id: 'Siaran Pers adalah <strong>Makanan Siap Saji</strong> untuk wartawan. Jika Anda beri bahan mentah (teks membingungkan), mereka malas masak. Jika Anda beri cerita matang, mereka akan terbitkan.' 
+  },
+  header_info: {
+    en: { 
+      what: `
+        <h4>The Protocol</h4>
+        <p>This tells the editor the status of the news. Standard format is mandatory.</p>
+        <strong>Choose One:</strong>
+        <ul>
+          <li><strong>FOR IMMEDIATE RELEASE:</strong> Can be published right now.</li>
+          <li><strong>EMBARGOED UNTIL [DATE]:</strong> Do not publish before this specific time.</li>
+        </ul>
+      `, 
+      tip: `
+        <div class="box-tip">
+          <strong>Dateline is Crucial:</strong>
+          Start with "CITY, Country – Month Day, Year". This confirms the news is current and relevant to their geography.
+        </div>
+      `,
+      mistakes: `
+        <div class="box-warn">
+          <strong>Don't be Creative Here:</strong>
+          Journalists scan this in 1 second. If they don't see "FOR IMMEDIATE RELEASE", they might delete it.
+        </div>
+      `
+    },
+    id: { 
+      what: `
+        <h4>Protokol Berita</h4>
+        <p>Memberitahu editor status berita ini. Format standar bersifat wajib.</p>
+        <strong>Pilih Satu:</strong>
+        <ul>
+          <li><strong>UNTUK DISIARKAN SEGERA (FOR IMMEDIATE RELEASE):</strong> Boleh terbit sekarang.</li>
+          <li><strong>EMBARGO SAMPAI [TANGGAL]:</strong> Jangan terbit sebelum waktu ini.</li>
+        </ul>
+      `, 
+      tip: `
+        <div class="box-tip">
+          <strong>Baris Tanggal (Dateline):</strong>
+          Mulai dengan "KOTA, Negara – Tanggal Bulan, Tahun". Ini konfirmasi bahwa berita itu terkini dan relevan secara lokasi.
+        </div>
+      `,
+      mistakes: `
+        <div class="box-warn">
+          <strong>Jangan Kreatif di Sini:</strong>
+          Wartawan memindai ini dalam 1 detik. Jika tidak melihat tulisan standar, mereka mungkin menghapusnya.
+        </div>
+      `
+    }
+  },
+  headline: {
+    en: { 
+      what: `
+        <h4>The "Click" Factor</h4>
+        <p>If the headline is boring, the email is deleted. It must be punchy, active, and newsworthy.</p>
+        <strong>Formula:</strong> [Actor] + [Action Verb] + [Direct Object] + [Benefit/Context].
+      `, 
+      tip: `
+        <div class="box-tip">
+          <strong>Max 10-12 Words:</strong>
+          Use the sub-headline (italic) to add context. <br>
+          <em>Bad:</em> "Announcement regarding new software." <br>
+          <em>Good:</em> "Ministry Launches AI Tool to Cut Waiting Times by 50%."
+        </div>
+      `,
+      mistakes: `
+        <div class="box-warn">
+          <strong>Avoid "Excited to Announce":</strong>
+          Nobody cares that you are excited. They care about *what* happened. Focus on the event, not your feelings.
+        </div>
+      `
+    },
+    id: { 
+      what: `
+        <h4>Faktor "Klik"</h4>
+        <p>Jika judul membosankan, email dihapus. Harus menonjol, aktif, dan bernilai berita.</p>
+        <strong>Rumus:</strong> [Subjek] + [Kata Kerja Aktif] + [Objek] + [Manfaat/Konteks].
+      `, 
+      tip: `
+        <div class="box-tip">
+          <strong>Maksimal 10-12 Kata:</strong>
+          Gunakan sub-judul (miring) untuk tambah konteks. <br>
+          <em>Buruk:</em> "Pengumuman terkait software baru." <br>
+          <em>Bagus:</em> "Kementerian Luncurkan Alat AI untuk Pangkas Waktu Antrean hingga 50%."
+        </div>
+      `,
+      mistakes: `
+        <div class="box-warn">
+          <strong>Hindari "Dengan Bangga Mengumumkan":</strong>
+          Tidak ada yang peduli Anda bangga. Mereka peduli *apa* yang terjadi. Fokus pada peristiwanya.
+        </div>
+      `
+    }
+  },
+  lead_paragraph: {
+    en: { 
+      what: `
+        <h4>The "Inverted Pyramid"</h4>
+        <p>The first paragraph must contain the entire story. Assume the reader stops reading after this.</p>
+        <strong>Must Answer (5W+1H):</strong>
+        <ul>
+          <li><strong>Who:</strong> Angga C.S.</li>
+          <li><strong>What:</strong> Launched a digital tool.</li>
+          <li><strong>When:</strong> Today.</li>
+          <li><strong>Where:</strong> Jakarta.</li>
+          <li><strong>Why:</strong> To solve rural inefficiency.</li>
+        </ul>
+      `, 
+      tip: `
+        <div class="box-tip">
+          <strong>No Fluff:</strong>
+          Get straight to the point. Journalists cut from the bottom up. Your lead must be uncuttable.
+        </div>
+      `,
+      mistakes: `
+        <div class="box-warn">
+          <strong>Burying the Lead:</strong>
+          Don't start with "In today's modern era...". Start with the news.
+        </div>
+      `
+    },
+    id: { 
+      what: `
+        <h4>"Piramida Terbalik"</h4>
+        <p>Paragraf pertama harus memuat SELURUH cerita. Asumsikan pembaca berhenti baca setelah ini.</p>
+        <strong>Wajib Jawab (5W+1H):</strong>
+        <ul>
+          <li><strong>Who (Siapa):</strong> Angga C.S.</li>
+          <li><strong>What (Apa):</strong> Luncurkan alat digital.</li>
+          <li><strong>When (Kapan):</strong> Hari ini.</li>
+          <li><strong>Where (Di mana):</strong> Jakarta.</li>
+          <li><strong>Why (Kenapa):</strong> Atasi inefisiensi desa.</li>
+        </ul>
+      `, 
+      tip: `
+        <div class="box-tip">
+          <strong>Tanpa Basa-basi:</strong>
+          Langsung ke inti. Wartawan memotong berita dari bawah ke atas. Lead Anda harus "anti-potong".
+        </div>
+      `,
+      mistakes: `
+        <div class="box-warn">
+          <strong>Mengubur Berita (Burying the Lead):</strong>
+          Jangan mulai dengan "Di era modern ini...". Mulailah dengan beritanya.
+        </div>
+      `
+    }
+  },
+  body_quotes: {
+    en: { 
+      what: `
+        <h4>The "Human Element"</h4>
+        <p>News is facts; Quotes are opinions. This is the only place you can be subjective/emotional.</p>
+        <strong>Purpose of a Quote:</strong>
+        To add credibility, emotion, or vision. Use generic words like "delighted" sparingly. Use strong words like "critical", "transformative", "urgent".
+      `, 
+      tip: `
+        <div class="box-tip">
+          <strong>Sound Like a Human:</strong>
+          Read the quote out loud. Does it sound like a real person talking? <br>
+          <em>"We are leveraging synergistic paradigms..."</em> (Robot). <br>
+          <em>"We built this because the old system was broken..."</em> (Human).
+        </div>
+      `,
+      mistakes: `
+        <div class="box-warn">
+          <strong>The "Double Quote":</strong>
+          Don't put two people quoting each other. Pick one spokesperson (The CEO or Expert).
+        </div>
+      `
+    },
+    id: { 
+      what: `
+        <h4>Elemen Manusia</h4>
+        <p>Berita adalah fakta; Kutipan adalah opini. Ini satu-satunya tempat Anda boleh subjektif/emosional.</p>
+        <strong>Tujuan Kutipan:</strong>
+        Menambah kredibilitas, emosi, atau visi. Hindari kata standar "senang". Gunakan kata kuat "kritis", "transformatif", "mendesak".
+      `, 
+      tip: `
+        <div class="box-tip">
+          <strong>Berdialoglah:</strong>
+          Baca kutipan dengan lantang. Apakah terdengar seperti manusia bicara? <br>
+          <em>"Kami mengutilisasi paradigma sinergis..."</em> (Robot). <br>
+          <em>"Kami buat ini karena sistem lama sudah rusak..."</em> (Manusia).
+        </div>
+      `,
+      mistakes: `
+        <div class="box-warn">
+          <strong>Kutipan Ganda:</strong>
+          Jangan masukkan dua orang saling mengutip. Pilih satu juru bicara (CEO atau Ahli).
+        </div>
+      `
+    }
+  },
+  boilerplate_about: {
+    en: { 
+      what: `
+        <h4>The "About Us" Footer</h4>
+        <p>Standardized background info. Journalists save this to their database for future reference.</p>
+        <strong>Include:</strong>
+        <ul>
+          <li>What is the organization?</li>
+          <li>Where is it based?</li>
+          <li>What is the mission?</li>
+        </ul>
+      `, 
+      tip: `
+        <div class="box-tip">
+          <strong>Keep it Static:</strong>
+          This text should rarely change. It builds brand consistency.
+        </div>
+      `,
+      mistakes: `
+        <div class="box-warn">
+          <strong>Too Long:</strong>
+          Keep it under 100 words. It's a footnote, not a biography.
+        </div>
+      `
+    },
+    id: { 
+      what: `
+        <h4>Footer "Tentang Kami"</h4>
+        <p>Info latar belakang standar. Wartawan menyimpan ini di database mereka untuk referensi masa depan.</p>
+        <strong>Cakup:</strong>
+        <ul>
+          <li>Apa organisasinya?</li>
+          <li>Di mana basisnya?</li>
+          <li>Apa misinya?</li>
+        </ul>
+      `, 
+      tip: `
+        <div class="box-tip">
+          <strong>Jaga Tetap Statis:</strong>
+          Teks ini harus jarang berubah. Ini membangun konsistensi brand.
+        </div>
+      `,
+      mistakes: `
+        <div class="box-warn">
+          <strong>Kepanjangan:</strong>
+          Jaga di bawah 100 kata. Ini catatan kaki, bukan biografi.
+        </div>
+      `
+    }
+  },
+  media_contact: {
+    en: { 
+      what: `
+        <h4>The "Call Me" Card</h4>
+        <p>If a journalist wants an interview, who do they call? This person MUST be responsive.</p>
+      `, 
+      tip: `
+        <div class="box-tip">
+          <strong>Add a Linktree/Portfolio:</strong>
+          Give them a link where they can download high-res photos or logos without asking you.
+        </div>
+      `,
+      mistakes: `
+        <div class="box-warn">
+          <strong>Missing Phone Number:</strong>
+          Email is too slow for breaking news. Include a WhatsApp/Mobile number.
+        </div>
+      `
+    },
+    id: { 
+      what: `
+        <h4>Kartu Kontak</h4>
+        <p>Jika wartawan ingin wawancara, siapa yang dihubungi? Orang ini WAJIB responsif (cepat balas).</p>
+      `, 
+      tip: `
+        <div class="box-tip">
+          <strong>Tambah Linktree/Portofolio:</strong>
+          Beri link di mana mereka bisa unduh foto resolusi tinggi atau logo tanpa perlu minta dulu.
+        </div>
+      `,
+      mistakes: `
+        <div class="box-warn">
+          <strong>Lupa Nomor HP:</strong>
+          Email terlalu lambat untuk berita hangat. Sertakan nomor WhatsApp/Seluler.
+        </div>
+      `
+      }
+      }
+      },
+      policy_paper: {
+      _analogy: { en: 'A policy paper is a deep dive into options.', id: 'Policy paper adalah analisis mendalam tentang pilihan-pilihan.' },
+      executive_summary: {
+      en: {
       what: `
         <p>This is your <strong>"Decision Snapshot"</strong>. Senior policymakers, advisors, or donors may only read this section before forming an opinion.</p>
 
@@ -2272,11 +2609,11 @@ policy_paper: {
           </ul>
         </div>
       `
-    }
-  },
+      }
+      },
 
-  introduction: {
-    en: {
+      introduction: {
+      en: {
       what: `
         <p>The introduction sets the stage. It provides the necessary <strong>context</strong> and explains <strong>why this issue matters now</strong>.</p>
         
@@ -2304,11 +2641,11 @@ policy_paper: {
           </ul>
         </div>
       `
-    }
-  },
+      }
+      },
 
-  problem_definition: {
-    en: {
+      problem_definition: {
+      en: {
       what: `
         <p>This section diagnoses the "disease" before you propose a "cure". It must be <strong>evidence-based</strong> and specific.</p>
 
@@ -2335,11 +2672,11 @@ policy_paper: {
           </ul>
         </div>
       `
-    }
-  },
+      }
+      },
 
-  policy_options: {
-    en: {
+      policy_options: {
+      en: {
       what: `
         <p>Here you present the possible courses of action. You must present <strong>distinct, viable alternatives</strong>.</p>
 
@@ -2366,7 +2703,7 @@ policy_paper: {
           </ul>
         </div>
       `
-    }
+      }
   },
 
   comparative_analysis: {
@@ -2789,13 +3126,13 @@ regulatory_impact_assessment: {
     id: { what: 'Nyatakan opsi yang dipilih dan justifikasi.', tip: 'Sebutkan langkah selanjutnya.' }
   }
 },
-newsletter: {
-  _analogy: { 
-    en: 'A newsletter is a <strong>Coffee Chat</strong>, not a University Lecture. It is a privileged invitation into someone\'s inbox. Treat it with intimacy, brevity, and high value.', 
-    id: 'Newsletter itu ibarat <strong>Ngopi Santai</strong>, bukan Kuliah Umum. Ini adalah undangan eksklusif masuk ke inbox orang. Perlakukan dengan keakraban, ringkas, dan bernilai tinggi.' 
-  },
-  editorial_note: {
-    en: { 
+      newsletter: {
+      _analogy: { 
+      en: 'A newsletter is a <strong>Coffee Chat</strong>, not a University Lecture. It is a privileged invitation into someone\'s inbox. Treat it with intimacy, brevity, and high value.', 
+      id: 'Newsletter itu ibarat <strong>Ngopi Santai</strong>, bukan Kuliah Umum. Ini adalah undangan eksklusif masuk ke inbox orang. Perlakukan dengan keakraban, ringkas, dan bernilai tinggi.' 
+      },
+      editorial_note: {
+      en: { 
       what: `
         <h4>The "Hook" & Personal Connection</h4>
         <p>This section determines if the reader scrolls down or closes the email. It is not an abstract; it is a personal letter.</p>
@@ -2818,8 +3155,8 @@ newsletter: {
           Never use "We at the organization believe...". Instead use "I believe...". People connect with people, not logos.
         </div>
       `
-    },
-    id: { 
+      },
+      id: { 
       what: `
         <h4>"Kail Pancing" & Koneksi Personal</h4>
         <p>Bagian ini menentukan apakah pembaca akan lanjut *scroll* atau menutup email. Ini bukan abstrak laporan; ini surat pribadi.</p>
@@ -2842,10 +3179,10 @@ newsletter: {
           Jangan tulis "Kami selaku manajemen...". Gunakan "Saya merasa...". Orang terhubung dengan manusia, bukan dengan logo instansi.
         </div>
       `
-    }
-  },
-  feature_story: {
-    en: { 
+      }
+      },
+      feature_story: {
+      en: { 
       what: `
         <h4>The "Meat": One Big Idea</h4>
         <p>This is the core value. Do not try to cover everything. Pick <strong>ONE</strong> specific insight or tutorial.</p>
@@ -2869,8 +3206,8 @@ newsletter: {
           If it's longer than 800 words, it's a blog post or white paper. Link to it instead. Keep the newsletter version punchy.
         </div>
       `
-    },
-    id: { 
+      },
+      id: { 
       what: `
         <h4>"Dagingnya": Satu Ide Besar</h4>
         <p>Ini adalah nilai inti. Jangan bahas semuanya. Pilih <strong>SATU</strong> wawasan atau tutorial spesifik.</p>
@@ -2895,9 +3232,9 @@ newsletter: {
         </div>
       `
     }
-  },
-  visual_insight: {
-    en: { 
+      },
+      visual_insight: {
+      en: { 
       what: `
         <h4>Stop the Scroll with Visuals</h4>
         <p>Humans process images 60,000x faster than text. Use this section to explain a complex concept instantly.</p>
@@ -2920,8 +3257,8 @@ newsletter: {
           Remember, 60% of people read email on phones. If the text in your image is tiny, delete it.
         </div>
       `
-    },
-    id: { 
+      },
+      id: { 
       what: `
         <h4>Hentikan Scroll dengan Visual</h4>
         <p>Manusia memproses gambar 60.000x lebih cepat dari teks. Gunakan bagian ini untuk menjelaskan konsep rumit secara instan.</p>
@@ -2944,10 +3281,10 @@ newsletter: {
           Ingat, 60% orang baca email di HP. Jika teks di gambar Anda harus di-zoom biar terbaca, ganti visualnya.
         </div>
       `
-    }
-  },
-  curated_links: {
-    en: { 
+      }
+      },
+      curated_links: {
+      en: { 
       what: `
         <h4>Curation as a Service</h4>
         <p>Your reader is busy. Save them time by filtering the noise. You are the filter.</p>
@@ -2969,8 +3306,8 @@ newsletter: {
           Always test your clicks before sending. Nothing kills credibility faster than a 404 Error.
         </div>
       `
-    },
-    id: { 
+      },
+      id: { 
       what: `
         <h4>Kurasi sebagai Layanan</h4>
         <p>Pembaca Anda sibuk. Hemat waktu mereka dengan menyaring informasi. Andalah filternya.</p>
@@ -2992,10 +3329,10 @@ newsletter: {
           Selalu tes klik sebelum kirim. Tidak ada yang membunuh kredibilitas lebih cepat daripada link yang error.
         </div>
       `
-    }
-  },
-  community_corner: {
-    en: { 
+      }
+      },
+      community_corner: {
+      en: { 
       what: `
         <h4>From Broadcasting to Conversation</h4>
         <p>Turn a one-way channel into a two-way community. Make the reader feel seen.</p>
@@ -3018,8 +3355,8 @@ newsletter: {
           If someone replies, YOU MUST REPLY BACK. Even if it's just "Thanks!". That is how you build superfans.
         </div>
       `
-    },
-    id: { 
+      },
+      id: { 
       what: `
         <h4>Dari Siaran Menjadi Percakapan</h4>
         <p>Ubah kanal satu arah menjadi komunitas dua arah. Buat pembaca merasa dianggap.</p>
@@ -3042,10 +3379,10 @@ newsletter: {
           Jika ada yang membalas, ANDA WAJIB BALAS. Meski cuma "Makasih!". Begitulah cara membangun superfans.
         </div>
       `
-    }
-  },
-  call_to_action: {
-    en: { 
+      }
+      },
+      call_to_action: {
+      en: { 
       what: `
         <h4>The "Ask"</h4>
         <p>You have given value. Now, clarify the next step. What is the business goal of this email?</p>
@@ -3065,8 +3402,8 @@ newsletter: {
           Avoid "If you have time...". Be direct: "Click here to download." Confidence converts.
         </div>
       `
-    },
-    id: { 
+      },
+      id: { 
       what: `
         <h4>Permintaan (The Ask)</h4>
         <p>Anda sudah memberi nilai/ilmu. Sekarang, perjelas langkah selanjutnya. Apa tujuan bisnis email ini?</p>
@@ -3212,6 +3549,15 @@ const MODULE_REGISTRY_DEFINITION = [
   structural_sections: ['editorial_note', 'feature_story', 'visual_insight', 'curated_links', 'community_corner', 'call_to_action'], 
   color: 'orange', 
   description: 'Regular updates to engage stakeholders and build authority.' 
+},
+{ 
+  id: 'press_release', 
+  name: 'Press Release / Siaran Pers', 
+  category: 'media', 
+  schema_version: SCHEMA_VERSION, 
+  structural_sections: ['header_info', 'headline', 'lead_paragraph', 'body_quotes', 'boilerplate_about', 'media_contact'], 
+  color: 'orange', 
+  description: 'Official statement for media distribution.' 
 },
 
   /* ------------------------------------------------------------- */
