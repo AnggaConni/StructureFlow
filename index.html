@@ -831,15 +831,230 @@ policy_brief: {
   ] 
 },
 policy_paper: { 
-  title: 'Reforming the Renewable Energy Subsidy Framework', 
+  title: 'Reforming the Renewable Energy Subsidy Framework',
+
   sections: [
-    { key: 'executive_summary', content: `<h3>Executive Summary</h3><p>Current renewable energy subsidies are inefficient and regressive. This paper analyzes three reform options: a carbon tax with rebate, a clean energy standard, and technology-neutral auctions. We recommend a phased transition to technology-neutral auctions combined with a carbon price floor.</p>` },
-    { key: 'problem_definition', content: `<h3>1. Problem Definition</h3><p>Subsidies vary widely by technology, leading to market distortions and high costs to consumers.</p>` },
-    { key: 'policy_options', content: `<h3>2. Policy Options</h3><p>Option A: Carbon tax with revenue recycling. Option B: Clean energy standard. Option C: Technology-neutral auctions.</p>` },
-    { key: 'analysis', content: `<h3>3. Analysis</h3><p>We evaluate each option on cost-effectiveness, equity, and political feasibility. Auctions score highest on cost but require careful design.</p>` },
-    { key: 'recommendations', content: `<h3>4. Recommendations</h3><p>Implement auctions for all new renewable capacity, with set-asides for emerging technologies. Phase out production tax credits over five years.</p>` },
-    { key: 'implementation', content: `<h3>5. Implementation</h3><p>Create an independent agency to run auctions. Coordinate with states.</p>` }
-  ] 
+
+    {
+      key: 'executive_summary',
+      content: `
+      <h2>Executive Summary</h2>
+      <p>
+      Renewable energy subsidies have accelerated deployment but now generate fiscal inefficiencies,
+      regressive distributional effects, and market distortions. This policy paper evaluates three
+      reform pathways: (1) a carbon tax with revenue recycling, (2) a clean energy standard (CES),
+      and (3) technology-neutral competitive auctions.
+      </p>
+
+      <ul>
+        <li><strong>Problem:</strong> Fragmented and technology-specific subsidies distort competition.</li>
+        <li><strong>Finding:</strong> Technology-neutral auctions deliver the highest cost efficiency.</li>
+        <li><strong>Risk:</strong> Political resistance and design complexity.</li>
+        <li><strong>Recommendation:</strong> Gradual transition toward auctions combined with a carbon price floor.</li>
+      </ul>
+
+      <p>
+      A phased reform over five years is recommended to ensure fiscal sustainability,
+      investor certainty, and social equity.
+      </p>
+      `
+    },
+
+    {
+      key: 'introduction',
+      content: `
+      <h2>1. Introduction</h2>
+      <p>
+      Governments worldwide have used subsidies to accelerate renewable energy deployment.
+      While effective in early market formation, long-term reliance on production tax credits
+      and feed-in tariffs has created structural inefficiencies.
+      </p>
+
+      <h3>Purpose of This Paper</h3>
+      <ul>
+        <li>Assess current subsidy distortions</li>
+        <li>Evaluate reform alternatives</li>
+        <li>Recommend a politically feasible transition pathway</li>
+      </ul>
+      `
+    },
+
+    {
+      key: 'problem_definition',
+      content: `
+      <h2>2. Problem Definition</h2>
+
+      <h3>2.1 Market Distortions</h3>
+      <p>
+      Subsidies vary widely by technology, leading to misallocation of capital
+      and higher consumer costs.
+      </p>
+
+      <h3>2.2 Fiscal Burden</h3>
+      <ul>
+        <li>Escalating budgetary commitments</li>
+        <li>Long-term subsidy lock-in</li>
+        <li>Limited sunset mechanisms</li>
+      </ul>
+
+      <h3>2.3 Equity Concerns</h3>
+      <p>
+      Higher-income households capture disproportionate benefits through rooftop
+      solar incentives and tax-based credits.
+      </p>
+      `
+    },
+
+    {
+      key: 'policy_options',
+      content: `
+      <h2>3. Policy Options</h2>
+
+      <h3>Option A: Carbon Tax with Revenue Recycling</h3>
+      <ul>
+        <li>Economy-wide carbon pricing</li>
+        <li>Revenue returned via rebates or tax cuts</li>
+        <li>Strong efficiency signal</li>
+      </ul>
+
+      <h3>Option B: Clean Energy Standard (CES)</h3>
+      <ul>
+        <li>Mandated percentage of clean generation</li>
+        <li>Tradable compliance credits</li>
+        <li>Technology flexibility</li>
+      </ul>
+
+      <h3>Option C: Technology-Neutral Auctions</h3>
+      <ul>
+        <li>Competitive bidding for capacity</li>
+        <li>Lowest-cost allocation</li>
+        <li>Transparent procurement mechanism</li>
+      </ul>
+      `
+    },
+
+    {
+      key: 'comparative_analysis',
+      content: `
+      <h2>4. Comparative Analysis</h2>
+
+      <h3>Evaluation Criteria</h3>
+      <ul>
+        <li>Cost-effectiveness</li>
+        <li>Equity</li>
+        <li>Political feasibility</li>
+        <li>Administrative complexity</li>
+      </ul>
+
+      <h3>Findings</h3>
+      <p>
+      Auctions score highest on cost efficiency, while carbon taxes
+      provide superior economic signals but face political resistance.
+      CES offers moderate feasibility but lower price transparency.
+      </p>
+      `
+    },
+
+    {
+      key: 'economic_modeling',
+      content: `
+      <h2>5. Economic Modeling & Fiscal Impact</h2>
+      <p>
+      Simulation results indicate that transitioning to auctions
+      could reduce subsidy expenditures by 18–25% over a decade.
+      </p>
+
+      <ul>
+        <li>Reduced consumer electricity prices</li>
+        <li>Improved capital allocation efficiency</li>
+        <li>Lower long-term fiscal liabilities</li>
+      </ul>
+      `
+    },
+
+    {
+      key: 'risk_assessment',
+      content: `
+      <h2>6. Risk Assessment</h2>
+
+      <ul>
+        <li>Regulatory capture risk</li>
+        <li>Underbidding and project non-completion</li>
+        <li>Political backlash from incumbent industries</li>
+      </ul>
+
+      <p>
+      Mitigation requires robust prequalification standards
+      and performance guarantees.
+      </p>
+      `
+    },
+
+    {
+      key: 'recommendations',
+      content: `
+      <h2>7. Policy Recommendations</h2>
+
+      <ul>
+        <li>Adopt technology-neutral auctions for all new capacity</li>
+        <li>Introduce a carbon price floor</li>
+        <li>Phase out production tax credits over five years</li>
+        <li>Create set-asides for emerging technologies</li>
+      </ul>
+      `
+    },
+
+    {
+      key: 'implementation',
+      content: `
+      <h2>8. Implementation Roadmap</h2>
+
+      <h3>Phase 1 (Year 1–2)</h3>
+      <ul>
+        <li>Legislative reform</li>
+        <li>Institutional setup</li>
+      </ul>
+
+      <h3>Phase 2 (Year 3–5)</h3>
+      <ul>
+        <li>Gradual subsidy phase-out</li>
+        <li>Scaling competitive auctions</li>
+      </ul>
+      `
+    },
+
+    {
+      key: 'monitoring_evaluation',
+      content: `
+      <h2>9. Monitoring & Evaluation</h2>
+
+      <ul>
+        <li>Annual cost-per-MWh tracking</li>
+        <li>Equity impact analysis</li>
+        <li>Market concentration indicators</li>
+      </ul>
+
+      <p>
+      Independent review mechanisms should ensure transparency and
+      adaptive learning.
+      </p>
+      `
+    },
+
+    {
+      key: 'conclusion',
+      content: `
+      <h2>10. Conclusion</h2>
+      <p>
+      Renewable energy subsidy reform is necessary to ensure fiscal
+      sustainability, economic efficiency, and social equity.
+      A phased transition to technology-neutral auctions combined
+      with a carbon price floor offers the most balanced solution.
+      </p>
+      `
+    }
+
+  ]
 },
 white_paper: { 
   title: 'Zero-Trust Architecture for Cloud Security', 
@@ -1938,28 +2153,190 @@ policy_brief: {
 policy_paper: {
   _analogy: { en: 'A policy paper is a deep dive into options.', id: 'Policy paper adalah analisis mendalam tentang pilihan-pilihan.' },
   executive_summary: {
-    en: { what: 'Summarize the problem, options analyzed, and recommended course.', tip: 'Include key numbers.' },
-    id: { what: 'Ringkas masalah, opsi yang dianalisis, dan arah yang direkomendasikan.', tip: 'Sertakan angka-angka kunci.' }
+    en: {
+      what: `
+        <p>This is your <strong>"Decision Snapshot"</strong>. Senior policymakers, advisors, or donors may only read this section before forming an opinion.</p>
+
+        <p>The executive summary must function as a <strong>complete and self-contained version of the paper</strong>. 
+        A reader should understand the problem, the policy choices, your analysis, and your final recommendation 
+        without reading the rest of the document.</p>
+
+        <h4>Structure it clearly:</h4>
+        <ul>
+          <li><strong>The Core Problem:</strong> What exactly is failing? Who is affected? Why is it urgent now?</li>
+          <li><strong>Policy Options Assessed:</strong> Present at least two serious alternatives plus a "No Action" baseline.</li>
+          <li><strong>Comparative Insight:</strong> Briefly explain how the options differ in cost, impact, and feasibility.</li>
+          <li><strong>Final Recommendation:</strong> State clearly which option you endorse and why.</li>
+        </ul>
+
+        <p>Ideal length: <strong>250–400 words</strong>. Every sentence must add value.</p>
+      `,
+      tip: `
+        <div class="box-tip">
+          <strong>Write it last.</strong> After finishing your analysis, distill the strongest arguments into clear, decisive language.
+        </div>
+        <p>Include 2–3 quantitative indicators (%, cost figures, beneficiaries) to strengthen credibility.</p>
+      `,
+      mistakes: `
+        <div class="box-warn">
+          <strong>Common Mistakes:</strong>
+          <ul>
+            <li>Writing background history instead of conclusions.</li>
+            <li>Being descriptive instead of analytical.</li>
+            <li>Failing to state the recommendation clearly.</li>
+            <li>Using vague phrases like “This paper explores…” instead of taking a position.</li>
+          </ul>
+        </div>
+      `
+    }
   },
-  problem_definition: {
-    en: { what: 'Define the issue with evidence.', tip: 'Use data to show magnitude.' },
-    id: { what: 'Definisikan masalah dengan bukti.', tip: 'Gunakan data untuk menunjukkan besaran.' }
+
+  comparative_analysis: {
+    en: {
+      what: `
+        <p>This section is the <strong>"Analytical Core"</strong> of your policy paper. 
+        Its purpose is not to describe options, but to systematically compare them.</p>
+
+        <p>You must apply the <strong>same evaluation criteria</strong> to every option 
+        in order to ensure fairness and analytical rigor.</p>
+
+        <h4>Recommended Criteria:</h4>
+        <ul>
+          <li><strong>Cost-effectiveness:</strong> Fiscal burden and efficiency per unit outcome.</li>
+          <li><strong>Policy effectiveness:</strong> Likelihood of achieving stated objectives.</li>
+          <li><strong>Equity impact:</strong> Distributional consequences across income or regions.</li>
+          <li><strong>Political feasibility:</strong> Legislative support and stakeholder alignment.</li>
+          <li><strong>Administrative feasibility:</strong> Institutional capacity required.</li>
+        </ul>
+
+        <h4>Comparison Matrix Example:</h4>
+        <table border="1" cellpadding="6">
+          <tr>
+            <th>Criteria</th>
+            <th>Option A</th>
+            <th>Option B</th>
+            <th>No Action</th>
+          </tr>
+          <tr>
+            <td>Annual Cost</td><td></td><td></td><td></td>
+          </tr>
+          <tr>
+            <td>Emission Reduction (%)</td><td></td><td></td><td></td>
+          </tr>
+          <tr>
+            <td>Equity Impact</td><td></td><td></td><td></td>
+          </tr>
+        </table>
+
+        <p>After the matrix, interpret the results. Explain trade-offs and justify which criteria matter most.</p>
+      `,
+      tip: `
+        <div class="box-tip">
+          <strong>Comparison is about trade-offs.</strong> A policy that is cheaper may be less equitable. 
+          Make trade-offs explicit instead of hiding them.
+        </div>
+        <p>Whenever possible, use quantitative indicators instead of qualitative adjectives.</p>
+      `,
+      mistakes: `
+        <div class="box-warn">
+          <ul>
+            <li>Changing criteria between options.</li>
+            <li>Repeating description instead of evaluating.</li>
+            <li>Avoiding difficult trade-offs.</li>
+            <li>Declaring a winner without evidence.</li>
+          </ul>
+        </div>
+      `
+    }
   },
-  policy_options: {
-    en: { what: 'Describe each option clearly.', tip: 'Include a “no action” baseline.' },
-    id: { what: 'Jelaskan setiap opsi dengan jelas.', tip: 'Sertakan opsi “tanpa tindakan” sebagai dasar.' }
-  },
-  analysis: {
-    en: { what: 'Evaluate options against criteria (cost, effectiveness, equity, feasibility).', tip: 'Use a comparison matrix.' },
-    id: { what: 'Evaluasi opsi berdasarkan kriteria (biaya, efektivitas, kesetaraan, kelayakan).', tip: 'Gunakan matriks perbandingan.' }
-  },
-  recommendations: {
-    en: { what: 'State your preferred option and justify.', tip: 'Address implementation challenges.' },
-    id: { what: 'Nyatakan opsi pilihan Anda dan beri justifikasi.', tip: 'Bahasa tantangan implementasi.' }
-  },
+
   implementation: {
-    en: { what: 'Outline steps, timeline, and responsible actors.', tip: 'Mention monitoring mechanisms.' },
-    id: { what: 'Gariskan langkah, jadwal, dan aktor yang bertanggung jawab.', tip: 'Sebutkan mekanisme pemantauan.' }
+    en: {
+      what: `
+        <p>This is your <strong>"From Paper to Practice"</strong> section. 
+        Even the best recommendation fails without operational clarity.</p>
+
+        <p>Translate your chosen policy into <strong>sequenced, actionable steps</strong>.</p>
+
+        <h4>Structure by Phases:</h4>
+        <ol>
+          <li><strong>Legal Preparation:</strong> Required regulatory or legislative changes.</li>
+          <li><strong>Institutional Setup:</strong> Assign responsible agencies and governance mechanisms.</li>
+          <li><strong>Budget Allocation:</strong> Funding sources and fiscal planning.</li>
+          <li><strong>Rollout:</strong> Timeline for gradual implementation.</li>
+          <li><strong>Adjustment Phase:</strong> Mechanism for mid-course corrections.</li>
+        </ol>
+
+        <p>Each phase should specify:</p>
+        <ul>
+          <li>Responsible actor</li>
+          <li>Timeframe</li>
+          <li>Budget implications</li>
+          <li>Legal authority</li>
+        </ul>
+      `,
+      tip: `
+        <div class="box-tip">
+          <strong>Think operationally.</strong> If a civil servant reads this, 
+          they should know exactly what to do next.
+        </div>
+      `,
+      mistakes: `
+        <div class="box-warn">
+          <ul>
+            <li>Only repeating the recommendation without steps.</li>
+            <li>No timeline.</li>
+            <li>No responsible institution.</li>
+            <li>Ignoring budget constraints.</li>
+          </ul>
+        </div>
+      `
+    }
+  },
+
+  monitoring_evaluation: {
+    en: {
+      what: `
+        <p>This section ensures <strong>accountability and measurable success</strong>. 
+        Policies must define how progress will be tracked over time.</p>
+
+        <p>Indicators must be <strong>SMART</strong>: Specific, Measurable, Achievable, Relevant, Time-bound.</p>
+
+        <h4>KPI Table Template:</h4>
+        <table border="1" cellpadding="6">
+          <tr>
+            <th>Indicator</th>
+            <th>Baseline</th>
+            <th>Target (Year X)</th>
+            <th>Reporting Frequency</th>
+          </tr>
+          <tr>
+            <td>Cost per MWh</td>
+            <td></td>
+            <td></td>
+            <td>Annual</td>
+          </tr>
+        </table>
+
+        <p>Also clarify which agency collects data and publishes reports.</p>
+      `,
+      tip: `
+        <div class="box-tip">
+          <strong>What gets measured gets managed.</strong>
+        </div>
+        <p>Always define a baseline before projecting improvements.</p>
+      `,
+      mistakes: `
+        <div class="box-warn">
+          <ul>
+            <li>Using vague outcomes like “increase awareness”.</li>
+            <li>No measurable baseline.</li>
+            <li>No reporting mechanism.</li>
+            <li>Too many indicators without prioritization.</li>
+          </ul>
+        </div>
+      `
+    }
   }
 },
 white_paper: {
@@ -2178,7 +2555,8 @@ const MODULE_REGISTRY_DEFINITION = [
   name: 'Policy Paper', 
   category: 'policy', 
   schema_version: SCHEMA_VERSION, 
-  structural_sections: ['executive_summary','problem_definition','policy_options','analysis','recommendations','implementation'], 
+  structural_sections: ['executive_summary','introduction','problem_definition','policy_options','comparative_analysis',
+  'economic_modeling','risk_assessment','recommendations','implementation','monitoring_evaluation','conclusion'], 
   color: 'emerald', 
   description: 'Detailed analysis of policy options.' 
 },
