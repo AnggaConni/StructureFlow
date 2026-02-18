@@ -45,130 +45,195 @@
         .prose-card strong{color:#111827;font-weight:600}
         .prose-card em{color:#4b5563}
         .prose-card blockquote{border-left:3px solid #6366f1;padding:.5em 1em;background:#f5f3ff;margin:1em 0;border-radius:0 6px 6px 0;font-style:italic;color:#4338ca}
-        
+        .prose-card table { width: 100%; border-collapse: collapse; margin: 1em 0; }
+        .prose-card th, .prose-card td { border: 1px solid #cbd5e1; padding: 8px; text-align: left; }
+        .prose-card th { background-color: #f1f5f9; font-weight: bold; }
+
         /* AI Specific Styles */
         .ai-glow { animation: pulse-glow 2s infinite; }
         @keyframes pulse-glow { 0% { box-shadow: 0 0 0 0 rgba(99, 102, 241, 0.4); } 70% { box-shadow: 0 0 0 6px rgba(99, 102, 241, 0); } 100% { box-shadow: 0 0 0 0 rgba(99, 102, 241, 0); } }
         .ai-thinking { background: linear-gradient(270deg, #3b82f6, #8b5cf6, #3b82f6); background-size: 200% 200%; animation: gradient-move 2s ease infinite; }
         @keyframes gradient-move { 0%{background-position:0% 50%} 50%{background-position:100% 50%} 100%{background-position:0% 50%} }
         /* === GAYA PUBLIKASI HARVARD UNTUK EKSPOR PDF === */
-.harvard-export {
-  font-family: 'Garamond', 'Times New Roman', serif !important;
-  font-size: 12pt !important;
-  line-height: 1.7 !important;
-  color: #000 !important;
-  background: #fff !important;
-  max-width: 100% !important;
-  padding: 0 !important;
-  margin: 0 auto !important;
-  box-sizing: border-box !important;
-  overflow-wrap: break-word !important; /* paksa word wrap */
+        .harvard-export {
+        font-family: 'Garamond', 'Times New Roman', serif !important;
+        font-size: 12pt !important;
+        line-height: 1.7 !important;
+        color: #000 !important;
+        background: #fff !important;
+        max-width: 100% !important;
+        padding: 0 !important;
+        margin: 0 auto !important;
+        box-sizing: border-box !important;
+        overflow-wrap: break-word !important; /* paksa word wrap */
 }
 
-/* Margin halaman (standar jurnal 1 inci) */
-.harvard-export .pdf-content {
-  margin: 2.54cm !important;
-  padding: 0 !important;
+        /* Margin halaman (standar jurnal 1 inci) */
+        .harvard-export .pdf-content {
+        margin: 2.54cm !important;
+        padding: 0 !important;
 }
 
-/* PASTIKAN SEMUA ELEMEN TIDAK MELEWATI LEBAR */
-.harvard-export * {
-  max-width: 100% !important;
-  box-sizing: border-box !important;
-  word-wrap: break-word !important;
+        /* PASTIKAN SEMUA ELEMEN TIDAK MELEWATI LEBAR */
+        .harvard-export * {
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+        word-wrap: break-word !important;
 }
 
-.harvard-export img,
-.harvard-export table,
-.harvard-export pre {
-  max-width: 100% !important;
-  height: auto !important;
+        .harvard-export img,
+        .harvard-export table,
+        .harvard-export pre {
+        max-width: 100% !important;
+        height: auto !important;
 }
 
-.harvard-export table {
-  table-layout: fixed !important; /* paksa tabel menyesuaikan lebar */
-  word-wrap: break-word !important;
+        .harvard-export table {
+        table-layout: fixed !important; /* paksa tabel menyesuaikan lebar */
+        word-wrap: break-word !important;
 }
 
-.harvard-export pre {
-  white-space: pre-wrap !important; /* bungkus teks panjang di kode */
+        .harvard-export pre {
+        white-space: pre-wrap !important; /* bungkus teks panjang di kode */
 }
 
-/* Judul dokumen */
-.harvard-export h1.document-title {
-  font-size: 28pt !important;
-  font-weight: 700 !important;
-  text-align: center !important;
-  margin: 0 0 0.8cm 0 !important;
-  line-height: 1.3 !important;
-  letter-spacing: -0.5px !important;
-  color: #1a1a1a !important;
+        /* Judul dokumen */
+        .harvard-export h1.document-title {
+        font-size: 28pt !important;
+        font-weight: 700 !important;
+        text-align: center !important;
+        margin: 0 0 0.8cm 0 !important;
+        line-height: 1.3 !important;
+        letter-spacing: -0.5px !important;
+        color: #1a1a1a !important;
 }
 
-/* Abstrak (jika ada) */
-.harvard-export .abstract {
-  font-size: 11pt !important;
-  font-style: italic !important;
-  margin: 1.5em 0 !important;
-  padding: 0 1em !important;
-  border-left: 3px solid #ccc !important;
-  color: #333 !important;
+        /* Abstrak (jika ada) */
+        .harvard-export .abstract {
+        font-size: 11pt !important;
+        font-style: italic !important;
+        margin: 1.5em 0 !important;
+        padding: 0 1em !important;
+        border-left: 3px solid #ccc !important;
+        color: #333 !important;
 }
 
-/* Heading level 1 (bab) */
-.harvard-export h2 {
-  font-size: 18pt !important;
-  font-weight: 700 !important;
-  margin-top: 1.5em !important;
-  margin-bottom: 0.5em !important;
-  color: #000 !important;
-  border-bottom: 1px solid #ddd !important;
-  padding-bottom: 0.3em !important;
+        /* Heading level 1 (bab) */
+        .harvard-export h2 {
+        font-size: 18pt !important;
+        font-weight: 700 !important;
+        margin-top: 1.5em !important;
+        margin-bottom: 0.5em !important;
+        color: #000 !important;
+        border-bottom: 1px solid #ddd !important;
+        padding-bottom: 0.3em !important;
 }
 
-/* Heading level 2 (sub-bab) */
-.harvard-export h3 {
-  font-size: 14pt !important;
-  font-weight: 600 !important;
-  margin-top: 1.2em !important;
-  margin-bottom: 0.3em !important;
-  color: #222 !important;
+        /* Heading level 2 (sub-bab) */
+        .harvard-export h3 {
+        font-size: 14pt !important;
+        font-weight: 600 !important;
+        margin-top: 1.2em !important;
+        margin-bottom: 0.3em !important;
+        color: #222 !important;
 }
 
-/* Paragraf */
-.harvard-export p {
-  text-align: justify !important;
-  margin-bottom: 0.7em !important;
-  orphans: 3 !important;
-  widows: 3 !important;
+        /* Paragraf */  
+        .harvard-export p {
+        text-align: justify !important;
+        margin-bottom: 0.7em !important;
+        orphans: 3 !important;
+        widows: 3 !important;
 }
 
-/* Daftar (bullet/number) */
-.harvard-export ul,
-.harvard-export ol {
-  margin-left: 2em !important;
-  margin-bottom: 0.7em !important;
+        /* Daftar (bullet/number) */
+        .harvard-export ul,
+        .harvard-export ol {
+        margin-left: 2em !important;
+        margin-bottom: 0.7em !important;
 }
 
-/* Tabel dan gambar (jika ada) */
-.harvard-export table {
-  border-collapse: collapse !important;
-  width: 100% !important;
-  margin: 1em 0 !important;
+        /* Tabel dan gambar (jika ada) */
+        .harvard-export table {
+        border-collapse: collapse !important;
+        width: 100% !important;
+        margin: 1em 0 !important;
 }
-.harvard-export th,
-.harvard-export td {
-  border: 1px solid #aaa !important;
-  padding: 0.4em !important;
-  text-align: left !important;
+        .harvard-export th,
+        .harvard-export td {
+        border: 1px solid #aaa !important;
+        padding: 0.4em !important;
+        text-align: left !important;
 }
-.harvard-export th {
-  background-color: #f5f5f5 !important;
-  font-weight: 600 !important;
+        .harvard-export th {
+        background-color: #f5f5f5 !important;
+        font-weight: 600 !important;
 }
 
 /* Nomor halaman (akan ditambahkan otomatis oleh html2pdf) */
 /* Tidak perlu CSS khusus, html2pdf.js sudah mengatur page breaks */ 
+
+        /* --- TAMBAHAN CSS UNTUK EDITOR (TABEL & WARNA) --- */
+.prose-card table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1em 0;
+}
+.prose-card th, .prose-card td {
+    border: 1px solid #cbd5e1; /* Warna garis abu-abu */
+    padding: 8px;
+    text-align: left;
+}
+.prose-card th {
+    background-color: #f1f5f9; /* Warna header tabel agak abu */
+    font-weight: bold;
+}
+/* Agar warna background teks terlihat jelas */
+.prose-card span[style*="background-color"] {
+    padding: 0 2px;
+    border-radius: 2px;
+}
+    /* --- CSS BARU UNTUK GUIDANCE CANTIK --- */
+.guidance-content h4 {
+    font-weight: 700;
+    color: #1e3a8a; /* Biru tua */
+    margin-top: 1em;
+    margin-bottom: 0.5em;
+    font-size: 0.95rem;
+}
+.guidance-content ul, .guidance-content ol {
+    margin-left: 1.2em;
+    margin-bottom: 1em;
+    list-style-type: disc; /* Agar bullet point muncul */
+}
+.guidance-content li {
+    margin-bottom: 0.4em;
+    line-height: 1.6;
+}
+.guidance-content strong {
+    color: #0f172a;
+    font-weight: 600;
+}
+/* Kotak Tips Biru */
+.box-tip {
+    background-color: #eff6ff;
+    border-left: 4px solid #3b82f6;
+    padding: 12px;
+    border-radius: 6px;
+    margin: 10px 0;
+    font-size: 0.9em;
+    color: #1e40af;
+}
+/* Kotak Peringatan Merah */
+.box-warn {
+    background-color: #fef2f2;
+    border-left: 4px solid #ef4444;
+    padding: 12px;
+    border-radius: 6px;
+    margin: 10px 0;
+    font-size: 0.9em;
+    color: #991b1b;
+}
     </style>
 </head>
 <body class="bg-slate-100 text-slate-900">
@@ -186,7 +251,8 @@ import {
     AlertCircle, Lightbulb, Library, Layers, Cpu, X,
     ChevronDown, ChevronRight, Star, Zap, Info,
     Brain, MessageSquare, Undo, Lock, Unlock, AlertTriangle, Loader2, Download,
-    RefreshCw, Terminal
+    RefreshCw, Terminal, 
+    Table, Palette // Pastikan Table dan Palette tetap ada
 } from 'lucide-react';
 
 /* ═══════════════════════════════════════════════════════════════
@@ -769,241 +835,67 @@ regulatory_impact_assessment: {
 const GUIDANCE = {
   journal_article: {
     _analogy: { 
-      en: 'A journal article is a courtroom argument. You are the lawyer, the data is your evidence, and the reviewers are the jury. You must prove your case beyond a reasonable doubt.', 
-      id: 'Artikel jurnal ibarat argumen di pengadilan. Anda pengacaranya, data adalah barang bukti, dan reviewer adalah jurinya. Anda harus membuktikan kasus Anda tanpa keraguan.' 
+      en: 'A journal article is a courtroom argument...', 
+      id: 'Artikel jurnal ibarat argumen di pengadilan...' 
     },
     abstract: { 
       en: { 
-        what: `The Abstract is the "Movie Trailer" of your research. In 150–250 words, it must provide a complete, standalone summary of the entire paper. For many readers (and editors), this is the ONLY part they will ever read. If the trailer is boring, nobody buys the ticket to read the full paper.
-
-Structure it strictly (one or two sentences per part):
-1. Context/Hook: What is the broad issue? (e.g., "Plastic pollution threatens global marine biodiversity.")
-2. The Gap: What is missing in current knowledge? (e.g., "However, data on microplastics in Indonesian remote islands is non-existent.")
-3. Objective: What did this study do? (e.g., "This study analyzes sediment samples from 5 remote Maluku islands.")
-4. Methodology: How did you do it? (e.g., "Using Fourier-transform infrared spectroscopy (FTIR)...")
-5. Results: What did you find? Be specific! (e.g., "We found average concentrations of 500 particles/kg, mostly polyethylene.")
-6. Conclusion/Implication: So what? (e.g., "These findings suggest currents transport waste from urban centers, necessitating regional policy shifts.")`,
-        tip: `Write the Abstract LAST. You cannot summarize a paper that hasn't been written. 
-Check the journal's word count limit religiously (usually 200 or 250 words). 
-Ensure keywords are optimized for search engines (SEO)—if your title doesn't have the word "Climate Change," maybe your abstract should.`,
-        mistakes: `1. Citations in Abstract: Never cite other authors here unless absolutely necessary (e.g., if you are refuting a specific famous theory).
-2. Undefined Abbreviations: Don't use "SEM" or "PAR" without spelling them out first, unless they are standard (like DNA).
-3. Vague Results: "Results were discussed" is a waste of words. Say "Results showed a 20% increase."
-4. New Information: Do not put anything in the abstract that is not in the main text.`
+        what: `
+          <p>The Abstract is the <strong>"Movie Trailer"</strong> of your research. In 150–250 words, it must provide a complete summary.</p>
+          <h4>Structure it strictly:</h4>
+          <ul>
+            <li><strong>Context/Hook:</strong> What is the broad issue?</li>
+            <li><strong>The Gap:</strong> What is missing in current knowledge?</li>
+            <li><strong>Objective:</strong> What did this study do?</li>
+            <li><strong>Methodology:</strong> How did you do it?</li>
+            <li><strong>Results:</strong> What did you find? Be specific!</li>
+            <li><strong>Conclusion:</strong> So what?</li>
+          </ul>
+        `,
+        tip: `
+          <div class="box-tip">
+            <strong>Pro Tip:</strong> Write the Abstract LAST. You cannot summarize a paper that hasn't been written yet.
+          </div>
+          <p>Check the journal's word count limit religiously (usually 200 or 250 words).</p>
+        `,
+        mistakes: `
+          <h4>Common Pitfalls:</h4>
+          <ul>
+            <li><strong>Citations:</strong> Never cite other authors here unless absolutely necessary.</li>
+            <li><strong>Undefined Abbreviations:</strong> Don't use "SEM" without spelling it out first.</li>
+            <li><strong>Vague Results:</strong> Avoid "Results were discussed". Say "Results showed a 20% increase".</li>
+          </ul>
+        `
       }, 
       id: { 
-        what: `Abstrak adalah "Trailer Film" dari riset Anda. Dalam 150–250 kata, ia harus menyajikan ringkasan lengkap dan mandiri dari seluruh makalah. Bagi banyak pembaca (dan editor), ini adalah SATU-SATUNYA bagian yang akan mereka baca. Jika trailernya membosankan, tidak ada yang mau baca makalah lengkapnya.
-
-Strukturkan secara ketat (satu atau dua kalimat per bagian):
-1. Konteks/Hook: Apa isu besarnya? (cth: "Polusi plastik mengancam biodiversitas laut global.")
-2. Celah (The Gap): Apa yang hilang dari pengetahuan saat ini? (cth: "Namun, data mikroplastik di pulau terluar Indonesia belum ada.")
-3. Tujuan: Apa yang studi ini lakukan? (cth: "Studi ini menganalisis sampel sedimen dari 5 pulau terluar Maluku.")
-4. Metodologi: Bagaimana caranya? (cth: "Menggunakan spektroskopi FTIR...")
-5. Hasil: Apa temuannya? Harus spesifik! (cth: "Ditemukan konsentrasi rata-rata 500 partikel/kg, didominasi polietilena.")
-6. Kesimpulan/Implikasi: Lalu kenapa? (cth: "Temuan ini menyarankan arus membawa sampah dari kota, menuntut perubahan kebijakan regional.")`,
-        tip: `Tulis Abstrak TERAKHIR. Anda tidak bisa meringkas makalah yang belum ditulis.
-Cek batas jumlah kata jurnal dengan religius (biasanya 200 atau 250 kata).
-Pastikan kata kunci dimaksimalkan untuk mesin pencari (SEO)—jika judul Anda tidak ada kata "Perubahan Iklim", mungkin abstrak harus ada.`,
-        mistakes: `1. Sitasi di Abstrak: Jangan pernah mengutip penulis lain di sini kecuali sangat terpaksa.
-2. Singkatan Tanpa Penjelasan: Jangan pakai "SEM" atau "PAR" tanpa dipanjangkan dulu, kecuali sudah standar (seperti DNA).
-3. Hasil Samar: "Hasil didiskusikan" itu buang-buang kata. Tulis "Hasil menunjukkan kenaikan 20%."
-4. Info Baru: Jangan masukkan apa pun di abstrak yang tidak ada di teks utama.`
-      } 
-    },
-    introduction: { 
-      en: { 
-        what: `The Introduction sets the stage. It must answer "Why do we care?" and "What do we already know?" leading inevitably to "What don't we know yet?" (The Gap). Use the "Funnel Method": start broad and narrow down to your specific research question.
-
-1. The Hook (Broad Context): Start with the general topic that appeals to a wide audience. (e.g., "Teacher retention is a global crisis.")
-2. The "State of the Art" (Literature Review): Briefly summarize what recent major studies have found. Group them by themes, not just a list of names. (e.g., "Studies A and B focus on salary, while C focuses on workload.")
-3. The Gap (Problem Statement): Point out what is missing. Is the existing research outdated? Did they ignore a specific region (e.g., Global South)? Did they use a flawed method? Use transition words like "However," "Despite," or "Although."
-4. The Solution (Objective): Clearly state your Research Question (RQ) or Hypothesis. "Therefore, this study aims to..."
-5. Roadmap: Briefly outline how the paper is organized.`,
-        tip: `A good Introduction is an argument, not a history lesson. Every paragraph should lead the reader closer to your specific Research Question.
-Cite heavily here. Show the editor you have read the relevant, up-to-date (last 5-10 years) literature in their journal.`,
-        mistakes: `1. The "Dawn of Man" Opening: Don't start with "Since the beginning of time..." It's cliché.
-2. The Mystery Reveal: Don't hide your research question until the findings. State it clearly on page 2 or 3.
-3. Over-citation of One Author: Don't just cite your professor or yourself. It looks biased.
-4. No Gap: If you can't articulate what is MISSING in current science, you have no justification for publication.`
-      }, 
-      id: { 
-        what: `Pendahuluan menyiapkan panggung. Harus menjawab "Kenapa kita peduli?" dan "Apa yang sudah kita tahu?", yang berujung pada "Apa yang belum kita tahu?" (Celah Riset). Gunakan "Metode Corong": mulai dari hal luas, menyempit ke pertanyaan riset spesifik Anda.
-
-1. Pancingan (Konteks Luas): Mulai dengan topik umum yang menarik audiens luas. (cth: "Retensi guru adalah krisis global.")
-2. "State of the Art" (Tinjauan Literatur): Rangkum singkat temuan studi besar terbaru. Kelompokkan berdasarkan tema, jangan cuma daftar nama. (cth: "Studi A dan B fokus pada gaji, sementara C fokus pada beban kerja.")
-3. Celah (Masalah): Tunjuk apa yang kurang. Apakah riset ada sudah kadaluarsa? Apakah mereka abaikan wilayah tertentu (misal: Global South)? Apakah metodenya cacat? Gunakan kata transisi "Namun," "Meskipun," atau "Walaupun."
-4. Solusi (Tujuan): Nyatakan Pertanyaan Riset (RQ) atau Hipotesis dengan jelas. "Oleh karena itu, studi ini bertujuan untuk..."
-5. Peta Jalan: Rangkum singkat sistematika penulisan.`,
-        tip: `Pendahuluan yang baik adalah argumen, bukan pelajaran sejarah. Setiap paragraf harus menuntun pembaca makin dekat ke Pertanyaan Riset Anda.
-Banyak sitasi di sini. Tunjukkan pada editor bahwa Anda membaca literatur relevan dan terbaru (5-10 tahun terakhir) di jurnal mereka.`,
-        mistakes: `1. Pembukaan "Zaman Batu": Jangan mulai dengan "Sejak awal peradaban..." Itu klise.
-2. Rahasia Detektif: Jangan sembunyikan pertanyaan riset sampai akhir. Nyatakan jelas di halaman 2 atau 3.
-3. Sitasi Berlebihan Satu Orang: Jangan cuma kutip dosen pembimbing atau diri sendiri. Terlihat bias.
-4. Tanpa Celah: Jika Anda tak bisa jelaskan apa yang HILANG di sains saat ini, Anda tak punya alasan untuk terbit.`
-      } 
-    },
-    framework: { 
-      en: { 
-        what: `The Theoretical or Conceptual Framework is the "Lens" through which you view your data. It explains the relationships between concepts. It is not just a glossary of terms; it is a map.
-
-- For Quantitative: This is usually a "Conceptual Framework" showing independent (X) and dependent (Y) variables and hypothesized relationships (arrows).
-- For Qualitative: This is a "Theoretical Framework" (e.g., Foucault's Power Dynamics, Bourdieu's Capital) that sensitizes you to certain patterns in the data.
-
-You must explain WHY you chose this framework. How does it help answer your Research Question better than other frameworks?`,
-        tip: `If you propose a new model, draw it! A diagram (Figure 1) is worth a thousand words here.
-Don't just name-drop a famous theory (e.g., "We used Grounded Theory") without explaining how you actually applied it.`,
-        mistakes: `1. The "Dictionary" Mistake: Just listing definitions of terms without connecting them.
-2. Disconnected Framework: Using a framework here that you never mention again in the Discussion. The framework must return in the end to help interpret results.
-3. Outdated Theory: Using a theory from 1950 that has been debunked, unless you are revisiting it historically.`
-      }, 
-      id: { 
-        what: `Kerangka Teori atau Konseptual adalah "Kacamata" yang Anda gunakan untuk melihat data. Ini menjelaskan hubungan antar konsep. Ini bukan sekadar glosarium istilah; ini adalah peta.
-
-- Untuk Kuantitatif: Biasanya "Kerangka Konseptual" yang menunjukkan variabel independen (X) dan dependen (Y) serta hubungan hipotesis (panah).
-- Untuk Kualitatif: Ini "Kerangka Teori" (misal: Dinamika Kekuasaan Foucault, Modal Bourdieu) yang membuat Anda peka terhadap pola tertentu dalam data.
-
-Anda harus jelaskan KENAPA memilih kerangka ini. Bagaimana ia membantu menjawab Pertanyaan Riset lebih baik dari kerangka lain?`,
-        tip: `Jika Anda usulkan model baru, gambarlah! Diagram (Gambar 1) bernilai seribu kata di sini.
-Jangan cuma asal sebut teori terkenal (cth: "Kami pakai Grounded Theory") tanpa jelaskan bagaimana cara pakainya.`,
-        mistakes: `1. Kesalahan "Kamus": Cuma buat daftar definisi istilah tanpa menghubungkannya.
-2. Kerangka Terputus: Pakai kerangka di sini tapi tidak pernah disebut lagi di Diskusi. Kerangka harus kembali di akhir untuk bantu interpretasi hasil.
-3. Teori Kadaluarsa: Pakai teori tahun 1950 yang sudah dibantah, kecuali Anda meninjaunya secara historis.`
-      } 
-    },
-    methodology: { 
-      en: { 
-        what: `The Methodology is the "Recipe". It must be detailed enough that another scientist could replicate your study exactly. Reproducibility is the gold standard of science.
-
-Cover these 3 pillars:
-1. Participants/Sampling: Who? How many? Why them? (e.g., "Purposive sampling of 50 teachers.")
-2. Data Collection: How? What tools? (e.g., "Semi-structured interviews lasting 60 mins," or "Survey utilizing Likert scale 1-5.") Mention validity and reliability checks (Cronbach's alpha, triangulation).
-3. Data Analysis: How did you process the mess? (e.g., "Thematic analysis using NVivo," or "Multiple regression using SPSS.")
-
-Also, explicitly mention ETHICS. Did you get consent? Was it anonymous?`,
-        tip: `Use the past tense (e.g., "We measured," not "We will measure").
-Justify your choices. Don't just say "we used a survey." Say "we used a survey because the population is too large for interviews."`,
-        mistakes: `1. The "Black Box": Saying "data was analyzed" without explaining HOW.
-2. Ignoring Bias: failing to mention potential limitations or biases in your sampling.
-3. Missing Details: Forgetting to state the dates of data collection or the language used.`
-      }, 
-      id: { 
-        what: `Metodologi adalah "Resep Masakan". Harus cukup detail agar ilmuwan lain bisa mengulang studi Anda persis sama. Reproducibility adalah standar emas sains.
-
-Cakup 3 pilar ini:
-1. Partisipan/Sampling: Siapa? Berapa banyak? Kenapa mereka? (cth: "Purposive sampling terhadap 50 guru.")
-2. Pengumpulan Data: Bagaimana? Alat apa? (cth: "Wawancara semi-struktur 60 menit," atau "Survei skala Likert 1-5.") Sebutkan cek validitas dan reliabilitas (Cronbach's alpha, triangulasi).
-3. Analisis Data: Bagaimana memproses data mentah? (cth: "Analisis tematik pakai NVivo," atau "Regresi berganda pakai SPSS.")
-
-Juga, sebutkan ETIKA secara eksplisit. Ada persetujuan (consent)? Anonim?`,
-        tip: `Gunakan kata kerja lampau (cth: "Kami mengukur", bukan "Kami akan mengukur").
-Justifikasi pilihan Anda. Jangan cuma bilang "kami pakai survei." Bilang "kami pakai survei karena populasi terlalu besar untuk wawancara."`,
-        mistakes: `1. "Kotak Hitam": Bilang "data dianalisis" tanpa jelaskan CARANYA.
-2. Abaikan Bias: Gagal menyebutkan potensi keterbatasan atau bias dalam sampling Anda.
-3. Detail Hilang: Lupa sebutkan tanggal pengambilan data atau bahasa yang digunakan.`
-      } 
-    },
-    findings: { 
-      en: { 
-        what: `The Findings section is for "Data Only." It is a neutral report of what you found. Do not interpret yet (save that for Discussion). Do not cite other authors here.
-
-Structure:
-- Organize logically (e.g., by Research Question 1, then RQ 2).
-- Use visual aids: Tables for exact numbers, Graphs for trends.
-- Use the "Sandwich Method":
-  - Top Bun: Introduce the table/graph ("Table 1 shows...").
-  - Meat: The Visual itself.
-  - Bottom Bun: Highlight the key numbers in text ("As shown, 70% of respondents agreed...").
-
-Report negative results too! If your hypothesis failed, that is scientifically valuable.`,
-        tip: `Be concise. Don't repeat every single number from the table in the text; just highlight the most significant ones.
-Use subheadings to guide the reader.`,
-        mistakes: `1. Interpreting too early: Saying "The score was low, which suggests bad teaching..." (Stop at "The score was low." Save the "suggests" for Discussion).
-2. Data Dumping: Pasting raw SPSS output or interview transcripts without cleaning/summarizing.
-3. Redundancy: Repeating the same data in text, table, and figure.`
-      }, 
-      id: { 
-        what: `Bagian Temuan adalah untuk "Hanya Data". Ini laporan netral apa yang Anda temukan. Jangan interpretasi dulu (simpan untuk Diskusi). Jangan kutip penulis lain di sini.
-
-Struktur:
-- Organisasi logis (misal: per Pertanyaan Riset 1, lalu RQ 2).
-- Gunakan bantuan visual: Tabel untuk angka persis, Grafik untuk tren.
-- Gunakan "Metode Sandwich":
-  - Roti Atas: Kenalkan tabel/grafik ("Tabel 1 menunjukkan...").
-  - Daging: Visual itu sendiri.
-  - Roti Bawah: Soroti angka kunci dalam teks ("Seperti terlihat, 70% responden setuju...").
-
-Laporkan hasil negatif juga! Jika hipotesis gagal, itu berharga secara ilmiah.`,
-        tip: `Ringkas. Jangan ulang setiap angka dari tabel ke dalam teks; soroti saja yang paling signifikan.
-Gunakan sub-judul untuk menuntun pembaca.`,
-        mistakes: `1. Interpretasi terlalu dini: Bilang "Skor rendah, yang menyarankan pengajaran buruk..." (Stop di "Skor rendah." Simpan "menyarankan" untuk Diskusi).
-2. Muntah Data: Paste output mentah SPSS atau transkrip wawancara tanpa dibersihkan/dirangkum.
-3. Redundansi: Mengulang data yang sama di teks, tabel, dan gambar.`
-      } 
-    },
-    discussion: { 
-      en: { 
-        what: `The Discussion is the "So What?". This is where you earn your PhD. You must interpret the findings and link them back to the Introduction and Theory.
-
-Answer these questions:
-1. Meaning: What do the results mean?
-2. Comparison: Do your results agree or disagree with previous studies (Smith, 2020)? If you disagree, explain why (e.g., "Maybe because our sample was urban, while Smith's was rural").
-3. Mechanism: Why did this happen? Use your Theoretical Framework to explain the mechanism.
-4. Implications: What does this mean for policy, practice, or future theory?
-
-Be honest about LIMITATIONS. Sample size too small? Just one region? Admitting this increases credibility.`,
-        tip: `Do not just repeat the Results. "The score was 50" is a Result. "The score was 50, which is surprisingly high compared to global averages" is Discussion.
-Use "hedging" language: "This suggests," "It implies," rather than "This proves." Science rarely proves anything 100%.`,
-        mistakes: `1. New Results: Do not introduce new numbers here that weren't in the Findings.
-2. Speculation: Don't make claims your data doesn't support.
-3. Ignoring Conflict: If your data contradicts a major theory, don't hide it. embrace it—that's the most interesting part!`
-      }, 
-      id: { 
-        what: `Diskusi adalah "Lalu Kenapa?". Di sinilah nilai utama keilmuan Anda. Anda harus interpretasi temuan dan hubungkan balik ke Pendahuluan dan Teori.
-
-Jawab pertanyaan ini:
-1. Makna: Apa arti hasil ini?
-2. Perbandingan: Apakah hasil Anda setuju atau bantah studi sebelumnya (Smith, 2020)? Jika beda, jelaskan kenapa (cth: "Mungkin karena sampel kami kota, Smith desa").
-3. Mekanisme: Kenapa ini terjadi? Gunakan Kerangka Teori untuk jelaskan mekanismenya.
-4. Implikasi: Apa artinya bagi kebijakan, praktik, atau teori masa depan?
-
-Jujurlah soal KETERBATASAN. Sampel terlalu kecil? Cuma satu wilayah? Mengakui ini menaikkan kredibilitas.`,
-        tip: `Jangan cuma ulang Hasil. "Skornya 50" itu Hasil. "Skornya 50, yang mana sangat tinggi dibanding rata-rata global" itu Diskusi.
-Gunakan bahasa "hati-hati": "Ini menyarankan," "Ini mengimplikasikan," daripada "Ini membuktikan." Sains jarang membuktikan sesuatu 100%.`,
-        mistakes: `1. Hasil Baru: Jangan masukkan angka baru di sini yang tidak ada di Temuan.
-2. Spekulasi: Jangan buat klaim yang tidak didukung data.
-3. Abaikan Konflik: Jika data Anda bantah teori besar, jangan sembunyikan. Rangkul itu—itu bagian paling menarik!`
-      } 
-    },
-    conclusion: { 
-      en: { 
-        what: `The Conclusion is the "Mic Drop." It is not just a summary; it is a synthesis. Zoom out from the specifics back to the big picture.
-
-Structure:
-1. Restate the main answer to your Research Question (in different words).
-2. Synthesize the main points—show how they fit together.
-3. Practical Contribution: Who should use this info? Teachers? Policymakers?
-4. Future Research: What is the next logical step for science?
-5. Final Closing Statement: Leave the reader with a strong, lasting thought.`,
-        tip: `Keep it short. Usually 1-2 paragraphs.
-Make sure your conclusion matches your introduction. If you promised to solve X, ensure you conclude about X.`,
-        mistakes: `1. "More research is needed": This is a weak ending. Be specific: "Future research should focus on X variable."
-2. Introducing new arguments: The trial is over. No new evidence allowed.
-3. Just summarizing: Don't just list what you did. Explain what it amounts to.`
-      }, 
-      id: { 
-        what: `Kesimpulan adalah "Mic Drop". Bukan sekadar ringkasan; ini sintesis. Zoom out dari hal spesifik kembali ke gambaran besar.
-
-Struktur:
-1. Nyatakan ulang jawaban utama Pertanyaan Riset (dengan kata beda).
-2. Sintesis poin utama—tunjukkan bagaimana mereka saling terkait.
-3. Kontribusi Praktis: Siapa yang harus pakai info ini? Guru? Pembuat kebijakan?
-4. Riset Masa Depan: Apa langkah logis sains berikutnya?
-5. Pernyataan Penutup Akhir: Tinggalkan pembaca dengan pemikiran kuat yang membekas.`,
-        tip: `Buat singkat. Biasanya 1-2 paragraf.
-Pastikan kesimpulan cocok dengan pendahuluan. Jika janji selesaikan X, pastikan simpulkan soal X.`,
-        mistakes: `1. "Lebih banyak riset dibutuhkan": Ini ending lemah. Spesifiklah: "Riset depan harus fokus ke variabel X."
-2. Argumen baru: Sidang sudah selesai. Tak boleh ada bukti baru.
-3. Cuma meringkas: Jangan cuma daftar apa yang Anda buat. Jelaskan apa maknanya secara total.`
+        what: `
+          <p>Abstrak adalah <strong>"Trailer Film"</strong> dari riset Anda. Dalam 150–250 kata, ia harus menyajikan ringkasan lengkap.</p>
+          <h4>Struktur Wajib (1-2 kalimat per poin):</h4>
+          <ul>
+            <li><strong>Konteks:</strong> Apa isu besarnya?</li>
+            <li><strong>Celah (Gap):</strong> Apa yang hilang dari pengetahuan saat ini?</li>
+            <li><strong>Tujuan:</strong> Apa yang studi ini lakukan?</li>
+            <li><strong>Metodologi:</strong> Bagaimana caranya? (Alat/Metode)</li>
+            <li><strong>Hasil:</strong> Apa temuannya? (Harus angka/fakta spesifik!)</li>
+            <li><strong>Implikasi:</strong> Kenapa ini penting?</li>
+          </ul>
+        `,
+        tip: `
+          <div class="box-tip">
+            <strong>Tips Pro:</strong> Tulis Abstrak TERAKHIR. Anda tidak bisa meringkas makalah yang belum ditulis.
+          </div>
+          <p>Pastikan kata kunci dimaksimalkan untuk SEO agar mudah ditemukan di Google Scholar.</p>
+        `,
+        mistakes: `
+          <div class="box-warn">
+            <strong>Hindari Hal Ini:</strong>
+            <ul>
+              <li><strong>Sitasi:</strong> Jangan mengutip orang lain di sini.</li>
+              <li><strong>Singkatan:</strong> Jangan pakai singkatan aneh tanpa penjelasan.</li>
+              <li><strong>Hasil Samar:</strong> Jangan tulis "Hasil didiskusikan". Tulis "Hasil menunjukkan kenaikan 20%".</li>
+            </ul>
+          </div>
+        `
       } 
     }
   },
@@ -2033,21 +1925,139 @@ const AIMonitor = ({ status }) => {
 
 const RichTextEditor = ({ initialContent, onSave, onCancel }) => {
   const editorRef = useRef(null);
-  const execCmd = (cmd, val = null) => { document.execCommand(cmd, false, val); editorRef.current.focus(); };
+
+  // --- EDITOR COMMANDS ---
+  const execCmd = (cmd, val = null) => {
+    document.execCommand(cmd, false, val);
+    editorRef.current.focus();
+  };
+
+  // --- LOGIC 1: INSERT TABEL (Versi Cantik + Header Abu-abu) ---
+  const insertTable = () => {
+    const tableHTML = `
+      <table style="width:100%; border-collapse:collapse; margin: 10px 0;">
+        <thead>
+          <tr>
+            <th style="background-color:#f1f5f9; border:1px solid #cbd5e1; padding:8px;">Header 1</th>
+            <th style="background-color:#f1f5f9; border:1px solid #cbd5e1; padding:8px;">Header 2</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="border:1px solid #cbd5e1; padding:8px;">Data 1</td>
+            <td style="border:1px solid #cbd5e1; padding:8px;">Data 2</td>
+          </tr>
+        </tbody>
+      </table>
+      <p>&nbsp;</p> 
+    `;
+    execCmd('insertHTML', tableHTML);
+  };
+
+  // --- LOGIC 2: TAMBAH BARIS (ROW) ---
+  const addRow = () => {
+    const selection = window.getSelection();
+    if (!selection.rangeCount) return;
+    
+    let node = selection.getRangeAt(0).startContainer;
+    while (node && node.nodeName !== 'TR') { node = node.parentNode; }
+
+    if (node && node.nodeName === 'TR') {
+      const newRow = node.cloneNode(true);
+      // Bersihkan isi tapi pertahankan style border/padding
+      Array.from(newRow.cells).forEach(cell => cell.innerHTML = '&nbsp;');
+      node.parentNode.insertBefore(newRow, node.nextSibling);
+    } else {
+      alert("⚠️ Klik baris tabel dulu untuk menambah baris.");
+    }
+  };
+
+  // --- LOGIC 3: TAMBAH KOLOM (COLUMN) ---
+  const addCol = () => {
+    const selection = window.getSelection();
+    if (!selection.rangeCount) return;
+
+    let cell = selection.getRangeAt(0).startContainer;
+    while (cell && cell.nodeName !== 'TD' && cell.nodeName !== 'TH') { cell = cell.parentNode; }
+
+    if (cell && (cell.nodeName === 'TD' || cell.nodeName === 'TH')) {
+      const cellIndex = cell.cellIndex;
+      const row = cell.parentNode;
+      const table = row.closest('table');
+      
+      for (let i = 0; i < table.rows.length; i++) {
+        const thisRow = table.rows[i];
+        // Clone agar style (background header/border) ikut tercopy
+        const newCell = thisRow.cells[cellIndex].cloneNode(true);
+        newCell.innerHTML = '&nbsp;';
+        thisRow.insertBefore(newCell, thisRow.cells[cellIndex].nextSibling);
+      }
+    } else {
+      alert("⚠️ Klik kolom tabel dulu untuk menambah kolom.");
+    }
+  };
+
   return (
-    <div className="border-2 border-blue-400 rounded-xl overflow-hidden bg-white flex flex-col shadow-lg anim-scale">
+    <div className="border-2 border-blue-400 rounded-xl overflow-hidden bg-white flex flex-col shadow-lg anim-scale relative z-50">
+      
+      {/* --- TOOLBAR --- */}
       <div className="bg-slate-50 border-b p-2 flex gap-1 items-center flex-wrap">
-        <button onClick={() => execCmd('bold')} className="p-1.5 hover:bg-slate-200 rounded" title="Bold"><Bold className="w-3.5 h-3.5"/></button>
-        <button onClick={() => execCmd('italic')} className="p-1.5 hover:bg-slate-200 rounded" title="Italic"><Italic className="w-3.5 h-3.5"/></button>
+        
+        {/* Group Formatting Text */}
+        <button onClick={() => execCmd('bold')} className="p-1.5 hover:bg-slate-200 rounded text-slate-700" title="Bold"><Bold className="w-3.5 h-3.5"/></button>
+        <button onClick={() => execCmd('italic')} className="p-1.5 hover:bg-slate-200 rounded text-slate-700" title="Italic"><Italic className="w-3.5 h-3.5"/></button>
         <div className="w-px h-4 bg-slate-300 mx-1"/>
-        <button onClick={() => execCmd('formatBlock','H3')} className="px-2 py-1 hover:bg-slate-200 rounded text-xs font-bold">H3</button>
-        <button onClick={() => execCmd('formatBlock','P')} className="px-2 py-1 hover:bg-slate-200 rounded text-xs">¶</button>
+        <button onClick={() => execCmd('formatBlock','H3')} className="px-2 py-1 hover:bg-slate-200 rounded text-xs font-bold text-slate-700">H3</button>
+        <button onClick={() => execCmd('formatBlock','P')} className="px-2 py-1 hover:bg-slate-200 rounded text-xs text-slate-700">¶</button>
         <div className="w-px h-4 bg-slate-300 mx-1"/>
-        <button onClick={() => execCmd('insertUnorderedList')} className="p-1.5 hover:bg-slate-200 rounded"><List className="w-3.5 h-3.5"/></button>
-        <button onClick={() => execCmd('insertOrderedList')} className="p-1.5 hover:bg-slate-200 rounded text-xs font-mono">1.</button>
+        <button onClick={() => execCmd('insertUnorderedList')} className="p-1.5 hover:bg-slate-200 rounded text-slate-700"><List className="w-3.5 h-3.5"/></button>
+        
+        <div className="w-px h-4 bg-slate-300 mx-1"/>
+
+        {/* --- GROUP TABEL (LENGKAP) --- */}
+        <div className="flex bg-blue-50 rounded border border-blue-100 p-0.5 gap-0.5">
+            {/* 1. Insert Table */}
+            <button onClick={insertTable} className="p-1.5 hover:bg-blue-100 text-blue-600 rounded" title="Buat Tabel Baru">
+                <Table className="w-3.5 h-3.5"/>
+            </button>
+            {/* 2. Add Row */}
+            <button onClick={addRow} className="p-1.5 hover:bg-blue-100 text-blue-600 rounded" title="Tambah Baris ke Bawah">
+                <ArrowDown className="w-3.5 h-3.5"/>
+            </button>
+            {/* 3. Add Col */}
+            <button onClick={addCol} className="p-1.5 hover:bg-blue-100 text-blue-600 rounded" title="Tambah Kolom ke Kanan">
+                <ChevronRight className="w-3.5 h-3.5"/>
+            </button>
+        </div>
+
+        <div className="w-px h-4 bg-slate-300 mx-1"/>
+
+        {/* --- GROUP WARNA (STABILO) --- */}
+        <div className="relative flex items-center group">
+            <label htmlFor="colorPicker" className="p-1.5 hover:bg-yellow-100 text-yellow-600 rounded cursor-pointer flex items-center gap-1" title="Highlight Color">
+                <Palette className="w-3.5 h-3.5"/>
+            </label>
+            <input 
+                id="colorPicker"
+                type="color" 
+                className="opacity-0 w-0 h-0 absolute"
+                onChange={(e) => execCmd('hiliteColor', e.target.value)} 
+            />
+        </div>
+
       </div>
-      <div ref={editorRef} className="p-4 outline-none prose-card text-sm" contentEditable suppressContentEditableWarning
-        dangerouslySetInnerHTML={{ __html: initialContent }} style={{ minHeight: '140px' }}/>
+
+      {/* --- EDITOR AREA --- */}
+      <div 
+        ref={editorRef} 
+        className="p-4 outline-none prose-card text-sm overflow-y-auto" 
+        contentEditable 
+        suppressContentEditableWarning
+        dangerouslySetInnerHTML={{ __html: initialContent }} 
+        style={{ minHeight: '200px', maxHeight: '400px' }}
+      />
+
+      {/* --- FOOTER --- */}
       <div className="p-2 border-t bg-slate-50 flex justify-end gap-2">
         <button onClick={onCancel} className="px-3 py-1.5 text-xs text-slate-600 hover:bg-slate-100 rounded-lg">Batal</button>
         <button onClick={() => onSave(editorRef.current.innerHTML)} className="px-4 py-1.5 text-xs bg-blue-600 text-white rounded-lg hover:bg-blue-700 font-semibold">Simpan</button>
@@ -2068,68 +2078,78 @@ const GuidancePanel = ({ section, moduleId, lang, onRunAI, isProcessing, setLang
 
   const g = section.guidance?.[lang] || {};
   const analogy = section.analogy?.[lang] || '';
+  
   const tabs = [
     { id: 'what', label: lang === 'en' ? 'What to Write' : 'Apa yang Ditulis', icon: <PenTool className="w-3 h-3"/> },
-    { id: 'tip', label: lang === 'en' ? 'Why It Matters' : 'Mengapa Penting', icon: <Info className="w-3 h-3"/> },
-    { id: 'mistakes', label: lang === 'en' ? 'Avoid' : 'Hindari', icon: <AlertCircle className="w-3 h-3"/> },
+    { id: 'tip', label: lang === 'en' ? 'Pro Tips' : 'Tips Pro', icon: <Info className="w-3 h-3"/> },
+    { id: 'mistakes', label: lang === 'en' ? 'Mistakes' : 'Kesalahan', icon: <AlertCircle className="w-3 h-3"/> },
     { id: 'coach', label: lang === 'en' ? 'AI Coach' : 'Pelatih AI', icon: <GraduationCap className="w-3 h-3"/> }
   ];
 
   return (
-    <div className="flex flex-col h-full anim-right">
+    <div className="flex flex-col h-full anim-right bg-white">
+      {/* Header Panel */}
       <div className="p-4 border-b bg-slate-50">
         <div className="flex justify-between items-start mb-2">
-            <div className="text-xs font-bold uppercase tracking-wider text-slate-400">
+            <div className="text-xs font-bold uppercase tracking-wider text-slate-500">
             {section.sectionKey?.replace(/_/g,' ')}
             </div>
         </div>
         
         {analogy && (
-          <div className="text-xs text-indigo-600 italic leading-relaxed bg-indigo-50 rounded-lg p-2 border border-indigo-100">
-            💡 {analogy}
+          <div className="text-xs text-indigo-700 italic leading-relaxed bg-indigo-50 rounded-lg p-3 border border-indigo-100 shadow-sm">
+            <span className="font-bold not-italic">💡 Analogi:</span> {analogy}
           </div>
         )}
       </div>
 
-      <div className="flex border-b bg-white">
+      {/* Tabs */}
+      <div className="flex border-b bg-white sticky top-0 z-10">
         {tabs.map(t => (
           <button key={t.id} onClick={() => setTab(t.id)}
-            className={`flex-1 py-2 text-xs font-medium flex items-center justify-center gap-1 transition-colors border-b-2 ${
-              tab === t.id ? 'border-blue-500 text-blue-600 bg-blue-50/50' : 'border-transparent text-slate-500 hover:text-slate-700'
+            className={`flex-1 py-3 text-xs font-medium flex flex-col sm:flex-row items-center justify-center gap-1.5 transition-colors border-b-2 ${
+              tab === t.id ? 'border-blue-500 text-blue-600 bg-blue-50/40' : 'border-transparent text-slate-500 hover:text-slate-700 hover:bg-slate-50'
             }`}>
-            {t.icon} <span className="hidden sm:inline">{t.label}</span>
+            {t.icon} <span>{t.label}</span>
           </button>
         ))}
       </div>
 
-      <div className="p-4 overflow-y-auto flex-1 custom-scrollbar">
+      {/* Content Area */}
+      <div className="p-5 overflow-y-auto flex-1 custom-scrollbar">
         {tab === 'coach' ? (
           <div className="flex flex-col gap-4">
-            <div className="bg-purple-50 border border-purple-100 rounded-xl p-3">
-              <div className="flex items-center gap-2 mb-2">
-                <div className="p-1 bg-purple-200 rounded-lg"><GraduationCap className="w-4 h-4 text-purple-700"/></div>
-                <h4 className="font-bold text-sm text-purple-900">Writing Coach</h4>
+            <div className="bg-gradient-to-br from-purple-50 to-white border border-purple-100 rounded-xl p-4 shadow-sm">
+              <div className="flex items-center gap-2 mb-3">
+                <div className="p-1.5 bg-purple-100 rounded-lg"><GraduationCap className="w-5 h-5 text-purple-600"/></div>
+                <h4 className="font-bold text-sm text-purple-900">AI Writing Coach</h4>
               </div>
-              <p className="text-xs text-purple-800 mb-3">
+              <p className="text-xs text-slate-600 mb-4 leading-relaxed">
                 {lang === 'en' 
-                    ? "I can analyze your draft against the section goals and provide specific structural feedback." 
-                    : "Saya akan menganalisis draf Anda dan memberikan masukan struktural yang spesifik."}
+                    ? "I will analyze your current draft specifically for this section's goals and provide structural feedback." 
+                    : "Saya akan menganalisis draf Anda khusus untuk tujuan bagian ini dan memberikan masukan struktural."}
               </p>
               <button onClick={onRunAI} disabled={isProcessing}
-                className={`w-full py-2 rounded-lg text-xs font-bold text-white transition-all ${isProcessing ? 'bg-slate-400' : 'bg-purple-600 hover:bg-purple-700 shadow-md shadow-purple-200'}`}>
-                {isProcessing ? (lang === 'en' ? 'Analyzing...' : 'Menganalisis...') : (lang === 'en' ? 'Analyze My Draft' : 'Analisis Draf Saya')}
+                className={`w-full py-2.5 rounded-lg text-xs font-bold text-white transition-all shadow-md flex items-center justify-center gap-2 ${isProcessing ? 'bg-slate-400 cursor-not-allowed' : 'bg-purple-600 hover:bg-purple-700 hover:shadow-lg hover:-translate-y-0.5'}`}>
+                {isProcessing ? <Loader2 className="w-3 h-3 animate-spin"/> : <Sparkles className="w-3 h-3"/>}
+                {isProcessing ? (lang === 'en' ? 'Analyzing...' : 'Sedang Menganalisis...') : (lang === 'en' ? 'Analyze My Draft' : 'Analisis Draf Saya')}
               </button>
             </div>
             
             {section.aiFeedback && (
-               <div className="prose-card text-sm p-3 bg-white border border-slate-200 rounded-xl shadow-sm animate-in fade-in slide-in-from-bottom-2">
-                 <div className="text-xs font-bold text-slate-400 uppercase mb-2">Coach Feedback</div>
-                 <div className="whitespace-pre-line leading-relaxed">{section.aiFeedback}</div>
+               <div className="prose-card text-sm p-4 bg-white border border-slate-200 rounded-xl shadow-md animate-in fade-in slide-in-from-bottom-4">
+                 <div className="flex items-center gap-2 mb-3 pb-2 border-b border-slate-100">
+                    <Sparkles className="w-4 h-4 text-purple-500"/>
+                    <span className="text-xs font-bold text-slate-500 uppercase">Hasil Analisis</span>
+                 </div>
+                 <div className="whitespace-pre-line leading-relaxed text-slate-700" dangerouslySetInnerHTML={{ __html: section.aiFeedback }} />
                </div>
             )}
           </div>
         ) : (
-          <p className="text-sm leading-relaxed text-slate-700">{g[tab]}</p>
+          /* --- INI BAGIAN PENTING: RENDER HTML DARI DATA GUIDANCE --- */
+          <div className="text-sm text-slate-700 guidance-content animate-in fade-in duration-300" 
+               dangerouslySetInnerHTML={{ __html: g[tab] || (lang === 'en' ? '<p class="text-slate-400 italic">No guidance available.</p>' : '<p class="text-slate-400 italic">Panduan belum tersedia.</p>') }} />
         )}
       </div>
     </div>
