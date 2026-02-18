@@ -670,52 +670,242 @@ regulatory_impact_assessment: {
 const GUIDANCE = {
   journal_article: {
     _analogy: { 
-      en: 'A journal article is a courtroom argument.', 
-      id: 'Artikel jurnal ibarat argumen di pengadilan.' 
+      en: 'A journal article is a courtroom argument. You are the lawyer, the data is your evidence, and the reviewers are the jury. You must prove your case beyond a reasonable doubt.', 
+      id: 'Artikel jurnal ibarat argumen di pengadilan. Anda pengacaranya, data adalah barang bukti, dan reviewer adalah jurinya. Anda harus membuktikan kasus Anda tanpa keraguan.' 
     },
     abstract: { 
       en: { 
-        what: 'Self-contained summary of the entire paper (Problem, Method, Result, Conclusion).', 
-        tip: 'Think of it as a movie trailer. It determines if people read the rest.', 
-        mistakes: 'Do not include citations, undefined abbreviations, or new information not in the paper.'
+        what: `The Abstract is the "Movie Trailer" of your research. In 150–250 words, it must provide a complete, standalone summary of the entire paper. For many readers (and editors), this is the ONLY part they will ever read. If the trailer is boring, nobody buys the ticket to read the full paper.
+
+Structure it strictly (one or two sentences per part):
+1. Context/Hook: What is the broad issue? (e.g., "Plastic pollution threatens global marine biodiversity.")
+2. The Gap: What is missing in current knowledge? (e.g., "However, data on microplastics in Indonesian remote islands is non-existent.")
+3. Objective: What did this study do? (e.g., "This study analyzes sediment samples from 5 remote Maluku islands.")
+4. Methodology: How did you do it? (e.g., "Using Fourier-transform infrared spectroscopy (FTIR)...")
+5. Results: What did you find? Be specific! (e.g., "We found average concentrations of 500 particles/kg, mostly polyethylene.")
+6. Conclusion/Implication: So what? (e.g., "These findings suggest currents transport waste from urban centers, necessitating regional policy shifts.")`,
+        tip: `Write the Abstract LAST. You cannot summarize a paper that hasn't been written. 
+Check the journal's word count limit religiously (usually 200 or 250 words). 
+Ensure keywords are optimized for search engines (SEO)—if your title doesn't have the word "Climate Change," maybe your abstract should.`,
+        mistakes: `1. Citations in Abstract: Never cite other authors here unless absolutely necessary (e.g., if you are refuting a specific famous theory).
+2. Undefined Abbreviations: Don't use "SEM" or "PAR" without spelling them out first, unless they are standard (like DNA).
+3. Vague Results: "Results were discussed" is a waste of words. Say "Results showed a 20% increase."
+4. New Information: Do not put anything in the abstract that is not in the main text.`
       }, 
       id: { 
-        what: 'Ringkasan mandiri seluruh makalah (Masalah, Metode, Hasil, Kesimpulan).', 
-        tip: 'Bayangkan seperti trailer film. Ini menentukan apakah orang akan membaca sisanya.', 
-        mistakes: 'Jangan masukkan kutipan (sitasi), singkatan yang belum dijelaskan, atau informasi baru.'
+        what: `Abstrak adalah "Trailer Film" dari riset Anda. Dalam 150–250 kata, ia harus menyajikan ringkasan lengkap dan mandiri dari seluruh makalah. Bagi banyak pembaca (dan editor), ini adalah SATU-SATUNYA bagian yang akan mereka baca. Jika trailernya membosankan, tidak ada yang mau baca makalah lengkapnya.
+
+Strukturkan secara ketat (satu atau dua kalimat per bagian):
+1. Konteks/Hook: Apa isu besarnya? (cth: "Polusi plastik mengancam biodiversitas laut global.")
+2. Celah (The Gap): Apa yang hilang dari pengetahuan saat ini? (cth: "Namun, data mikroplastik di pulau terluar Indonesia belum ada.")
+3. Tujuan: Apa yang studi ini lakukan? (cth: "Studi ini menganalisis sampel sedimen dari 5 pulau terluar Maluku.")
+4. Metodologi: Bagaimana caranya? (cth: "Menggunakan spektroskopi FTIR...")
+5. Hasil: Apa temuannya? Harus spesifik! (cth: "Ditemukan konsentrasi rata-rata 500 partikel/kg, didominasi polietilena.")
+6. Kesimpulan/Implikasi: Lalu kenapa? (cth: "Temuan ini menyarankan arus membawa sampah dari kota, menuntut perubahan kebijakan regional.")`,
+        tip: `Tulis Abstrak TERAKHIR. Anda tidak bisa meringkas makalah yang belum ditulis.
+Cek batas jumlah kata jurnal dengan religius (biasanya 200 atau 250 kata).
+Pastikan kata kunci dimaksimalkan untuk mesin pencari (SEO)—jika judul Anda tidak ada kata "Perubahan Iklim", mungkin abstrak harus ada.`,
+        mistakes: `1. Sitasi di Abstrak: Jangan pernah mengutip penulis lain di sini kecuali sangat terpaksa.
+2. Singkatan Tanpa Penjelasan: Jangan pakai "SEM" atau "PAR" tanpa dipanjangkan dulu, kecuali sudah standar (seperti DNA).
+3. Hasil Samar: "Hasil didiskusikan" itu buang-buang kata. Tulis "Hasil menunjukkan kenaikan 20%."
+4. Info Baru: Jangan masukkan apa pun di abstrak yang tidak ada di teks utama.`
       } 
     },
     introduction: { 
       en: { 
-        what: 'State the problem, gap in existing knowledge, and your thesis/solution.', 
-        tip: 'Start broad and narrow down to your specific research question (The Funnel Method).',
-        mistakes: 'Avoid giving away the detailed results here. Do not ramble about general history.'
+        what: `The Introduction sets the stage. It must answer "Why do we care?" and "What do we already know?" leading inevitably to "What don't we know yet?" (The Gap). Use the "Funnel Method": start broad and narrow down to your specific research question.
+
+1. The Hook (Broad Context): Start with the general topic that appeals to a wide audience. (e.g., "Teacher retention is a global crisis.")
+2. The "State of the Art" (Literature Review): Briefly summarize what recent major studies have found. Group them by themes, not just a list of names. (e.g., "Studies A and B focus on salary, while C focuses on workload.")
+3. The Gap (Problem Statement): Point out what is missing. Is the existing research outdated? Did they ignore a specific region (e.g., Global South)? Did they use a flawed method? Use transition words like "However," "Despite," or "Although."
+4. The Solution (Objective): Clearly state your Research Question (RQ) or Hypothesis. "Therefore, this study aims to..."
+5. Roadmap: Briefly outline how the paper is organized.`,
+        tip: `A good Introduction is an argument, not a history lesson. Every paragraph should lead the reader closer to your specific Research Question.
+Cite heavily here. Show the editor you have read the relevant, up-to-date (last 5-10 years) literature in their journal.`,
+        mistakes: `1. The "Dawn of Man" Opening: Don't start with "Since the beginning of time..." It's cliché.
+2. The Mystery Reveal: Don't hide your research question until the findings. State it clearly on page 2 or 3.
+3. Over-citation of One Author: Don't just cite your professor or yourself. It looks biased.
+4. No Gap: If you can't articulate what is MISSING in current science, you have no justification for publication.`
       }, 
       id: { 
-        what: 'Nyatakan masalah, celah pada pengetahuan yang ada, dan tesis/solusi Anda.', 
-        tip: 'Mulai dari hal umum dan menyempit ke pertanyaan penelitian spesifik (Metode Corong).',
-        mistakes: 'Hindari membeberkan hasil detail di sini. Jangan bertele-tele soal sejarah umum.'
+        what: `Pendahuluan menyiapkan panggung. Harus menjawab "Kenapa kita peduli?" dan "Apa yang sudah kita tahu?", yang berujung pada "Apa yang belum kita tahu?" (Celah Riset). Gunakan "Metode Corong": mulai dari hal luas, menyempit ke pertanyaan riset spesifik Anda.
+
+1. Pancingan (Konteks Luas): Mulai dengan topik umum yang menarik audiens luas. (cth: "Retensi guru adalah krisis global.")
+2. "State of the Art" (Tinjauan Literatur): Rangkum singkat temuan studi besar terbaru. Kelompokkan berdasarkan tema, jangan cuma daftar nama. (cth: "Studi A dan B fokus pada gaji, sementara C fokus pada beban kerja.")
+3. Celah (Masalah): Tunjuk apa yang kurang. Apakah riset ada sudah kadaluarsa? Apakah mereka abaikan wilayah tertentu (misal: Global South)? Apakah metodenya cacat? Gunakan kata transisi "Namun," "Meskipun," atau "Walaupun."
+4. Solusi (Tujuan): Nyatakan Pertanyaan Riset (RQ) atau Hipotesis dengan jelas. "Oleh karena itu, studi ini bertujuan untuk..."
+5. Peta Jalan: Rangkum singkat sistematika penulisan.`,
+        tip: `Pendahuluan yang baik adalah argumen, bukan pelajaran sejarah. Setiap paragraf harus menuntun pembaca makin dekat ke Pertanyaan Riset Anda.
+Banyak sitasi di sini. Tunjukkan pada editor bahwa Anda membaca literatur relevan dan terbaru (5-10 tahun terakhir) di jurnal mereka.`,
+        mistakes: `1. Pembukaan "Zaman Batu": Jangan mulai dengan "Sejak awal peradaban..." Itu klise.
+2. Rahasia Detektif: Jangan sembunyikan pertanyaan riset sampai akhir. Nyatakan jelas di halaman 2 atau 3.
+3. Sitasi Berlebihan Satu Orang: Jangan cuma kutip dosen pembimbing atau diri sendiri. Terlihat bias.
+4. Tanpa Celah: Jika Anda tak bisa jelaskan apa yang HILANG di sains saat ini, Anda tak punya alasan untuk terbit.`
       } 
     },
     framework: { 
-      en: { what: 'The lens you use.', tip: 'Connect variables.' }, 
-      id: { what: 'Kacamata analisis.', tip: 'Hubungkan variabel.' } 
+      en: { 
+        what: `The Theoretical or Conceptual Framework is the "Lens" through which you view your data. It explains the relationships between concepts. It is not just a glossary of terms; it is a map.
+
+- For Quantitative: This is usually a "Conceptual Framework" showing independent (X) and dependent (Y) variables and hypothesized relationships (arrows).
+- For Qualitative: This is a "Theoretical Framework" (e.g., Foucault's Power Dynamics, Bourdieu's Capital) that sensitizes you to certain patterns in the data.
+
+You must explain WHY you chose this framework. How does it help answer your Research Question better than other frameworks?`,
+        tip: `If you propose a new model, draw it! A diagram (Figure 1) is worth a thousand words here.
+Don't just name-drop a famous theory (e.g., "We used Grounded Theory") without explaining how you actually applied it.`,
+        mistakes: `1. The "Dictionary" Mistake: Just listing definitions of terms without connecting them.
+2. Disconnected Framework: Using a framework here that you never mention again in the Discussion. The framework must return in the end to help interpret results.
+3. Outdated Theory: Using a theory from 1950 that has been debunked, unless you are revisiting it historically.`
+      }, 
+      id: { 
+        what: `Kerangka Teori atau Konseptual adalah "Kacamata" yang Anda gunakan untuk melihat data. Ini menjelaskan hubungan antar konsep. Ini bukan sekadar glosarium istilah; ini adalah peta.
+
+- Untuk Kuantitatif: Biasanya "Kerangka Konseptual" yang menunjukkan variabel independen (X) dan dependen (Y) serta hubungan hipotesis (panah).
+- Untuk Kualitatif: Ini "Kerangka Teori" (misal: Dinamika Kekuasaan Foucault, Modal Bourdieu) yang membuat Anda peka terhadap pola tertentu dalam data.
+
+Anda harus jelaskan KENAPA memilih kerangka ini. Bagaimana ia membantu menjawab Pertanyaan Riset lebih baik dari kerangka lain?`,
+        tip: `Jika Anda usulkan model baru, gambarlah! Diagram (Gambar 1) bernilai seribu kata di sini.
+Jangan cuma asal sebut teori terkenal (cth: "Kami pakai Grounded Theory") tanpa jelaskan bagaimana cara pakainya.`,
+        mistakes: `1. Kesalahan "Kamus": Cuma buat daftar definisi istilah tanpa menghubungkannya.
+2. Kerangka Terputus: Pakai kerangka di sini tapi tidak pernah disebut lagi di Diskusi. Kerangka harus kembali di akhir untuk bantu interpretasi hasil.
+3. Teori Kadaluarsa: Pakai teori tahun 1950 yang sudah dibantah, kecuali Anda meninjaunya secara historis.`
+      } 
     },
     methodology: { 
-      en: { what: 'Recipe.', tip: 'Reproducible.' }, 
-      id: { what: 'Resep.', tip: 'Harus bisa diulang.' } 
+      en: { 
+        what: `The Methodology is the "Recipe". It must be detailed enough that another scientist could replicate your study exactly. Reproducibility is the gold standard of science.
+
+Cover these 3 pillars:
+1. Participants/Sampling: Who? How many? Why them? (e.g., "Purposive sampling of 50 teachers.")
+2. Data Collection: How? What tools? (e.g., "Semi-structured interviews lasting 60 mins," or "Survey utilizing Likert scale 1-5.") Mention validity and reliability checks (Cronbach's alpha, triangulation).
+3. Data Analysis: How did you process the mess? (e.g., "Thematic analysis using NVivo," or "Multiple regression using SPSS.")
+
+Also, explicitly mention ETHICS. Did you get consent? Was it anonymous?`,
+        tip: `Use the past tense (e.g., "We measured," not "We will measure").
+Justify your choices. Don't just say "we used a survey." Say "we used a survey because the population is too large for interviews."`,
+        mistakes: `1. The "Black Box": Saying "data was analyzed" without explaining HOW.
+2. Ignoring Bias: failing to mention potential limitations or biases in your sampling.
+3. Missing Details: Forgetting to state the dates of data collection or the language used.`
+      }, 
+      id: { 
+        what: `Metodologi adalah "Resep Masakan". Harus cukup detail agar ilmuwan lain bisa mengulang studi Anda persis sama. Reproducibility adalah standar emas sains.
+
+Cakup 3 pilar ini:
+1. Partisipan/Sampling: Siapa? Berapa banyak? Kenapa mereka? (cth: "Purposive sampling terhadap 50 guru.")
+2. Pengumpulan Data: Bagaimana? Alat apa? (cth: "Wawancara semi-struktur 60 menit," atau "Survei skala Likert 1-5.") Sebutkan cek validitas dan reliabilitas (Cronbach's alpha, triangulasi).
+3. Analisis Data: Bagaimana memproses data mentah? (cth: "Analisis tematik pakai NVivo," atau "Regresi berganda pakai SPSS.")
+
+Juga, sebutkan ETIKA secara eksplisit. Ada persetujuan (consent)? Anonim?`,
+        tip: `Gunakan kata kerja lampau (cth: "Kami mengukur", bukan "Kami akan mengukur").
+Justifikasi pilihan Anda. Jangan cuma bilang "kami pakai survei." Bilang "kami pakai survei karena populasi terlalu besar untuk wawancara."`,
+        mistakes: `1. "Kotak Hitam": Bilang "data dianalisis" tanpa jelaskan CARANYA.
+2. Abaikan Bias: Gagal menyebutkan potensi keterbatasan atau bias dalam sampling Anda.
+3. Detail Hilang: Lupa sebutkan tanggal pengambilan data atau bahasa yang digunakan.`
+      } 
     },
     findings: { 
-      en: { what: 'Data only.', tip: 'No opinion.' }, 
-      id: { what: 'Hanya data.', tip: 'Jangan beropini.' } 
+      en: { 
+        what: `The Findings section is for "Data Only." It is a neutral report of what you found. Do not interpret yet (save that for Discussion). Do not cite other authors here.
+
+Structure:
+- Organize logically (e.g., by Research Question 1, then RQ 2).
+- Use visual aids: Tables for exact numbers, Graphs for trends.
+- Use the "Sandwich Method":
+  - Top Bun: Introduce the table/graph ("Table 1 shows...").
+  - Meat: The Visual itself.
+  - Bottom Bun: Highlight the key numbers in text ("As shown, 70% of respondents agreed...").
+
+Report negative results too! If your hypothesis failed, that is scientifically valuable.`,
+        tip: `Be concise. Don't repeat every single number from the table in the text; just highlight the most significant ones.
+Use subheadings to guide the reader.`,
+        mistakes: `1. Interpreting too early: Saying "The score was low, which suggests bad teaching..." (Stop at "The score was low." Save the "suggests" for Discussion).
+2. Data Dumping: Pasting raw SPSS output or interview transcripts without cleaning/summarizing.
+3. Redundancy: Repeating the same data in text, table, and figure.`
+      }, 
+      id: { 
+        what: `Bagian Temuan adalah untuk "Hanya Data". Ini laporan netral apa yang Anda temukan. Jangan interpretasi dulu (simpan untuk Diskusi). Jangan kutip penulis lain di sini.
+
+Struktur:
+- Organisasi logis (misal: per Pertanyaan Riset 1, lalu RQ 2).
+- Gunakan bantuan visual: Tabel untuk angka persis, Grafik untuk tren.
+- Gunakan "Metode Sandwich":
+  - Roti Atas: Kenalkan tabel/grafik ("Tabel 1 menunjukkan...").
+  - Daging: Visual itu sendiri.
+  - Roti Bawah: Soroti angka kunci dalam teks ("Seperti terlihat, 70% responden setuju...").
+
+Laporkan hasil negatif juga! Jika hipotesis gagal, itu berharga secara ilmiah.`,
+        tip: `Ringkas. Jangan ulang setiap angka dari tabel ke dalam teks; soroti saja yang paling signifikan.
+Gunakan sub-judul untuk menuntun pembaca.`,
+        mistakes: `1. Interpretasi terlalu dini: Bilang "Skor rendah, yang menyarankan pengajaran buruk..." (Stop di "Skor rendah." Simpan "menyarankan" untuk Diskusi).
+2. Muntah Data: Paste output mentah SPSS atau transkrip wawancara tanpa dibersihkan/dirangkum.
+3. Redundansi: Mengulang data yang sama di teks, tabel, dan gambar.`
+      } 
     },
     discussion: { 
-      en: { what: 'Interpretation.', tip: 'Link to theory.' }, 
-      id: { what: 'Interpretasi.', tip: 'Hubungkan ke teori.' } 
+      en: { 
+        what: `The Discussion is the "So What?". This is where you earn your PhD. You must interpret the findings and link them back to the Introduction and Theory.
+
+Answer these questions:
+1. Meaning: What do the results mean?
+2. Comparison: Do your results agree or disagree with previous studies (Smith, 2020)? If you disagree, explain why (e.g., "Maybe because our sample was urban, while Smith's was rural").
+3. Mechanism: Why did this happen? Use your Theoretical Framework to explain the mechanism.
+4. Implications: What does this mean for policy, practice, or future theory?
+
+Be honest about LIMITATIONS. Sample size too small? Just one region? Admitting this increases credibility.`,
+        tip: `Do not just repeat the Results. "The score was 50" is a Result. "The score was 50, which is surprisingly high compared to global averages" is Discussion.
+Use "hedging" language: "This suggests," "It implies," rather than "This proves." Science rarely proves anything 100%.`,
+        mistakes: `1. New Results: Do not introduce new numbers here that weren't in the Findings.
+2. Speculation: Don't make claims your data doesn't support.
+3. Ignoring Conflict: If your data contradicts a major theory, don't hide it. embrace it—that's the most interesting part!`
+      }, 
+      id: { 
+        what: `Diskusi adalah "Lalu Kenapa?". Di sinilah nilai utama keilmuan Anda. Anda harus interpretasi temuan dan hubungkan balik ke Pendahuluan dan Teori.
+
+Jawab pertanyaan ini:
+1. Makna: Apa arti hasil ini?
+2. Perbandingan: Apakah hasil Anda setuju atau bantah studi sebelumnya (Smith, 2020)? Jika beda, jelaskan kenapa (cth: "Mungkin karena sampel kami kota, Smith desa").
+3. Mekanisme: Kenapa ini terjadi? Gunakan Kerangka Teori untuk jelaskan mekanismenya.
+4. Implikasi: Apa artinya bagi kebijakan, praktik, atau teori masa depan?
+
+Jujurlah soal KETERBATASAN. Sampel terlalu kecil? Cuma satu wilayah? Mengakui ini menaikkan kredibilitas.`,
+        tip: `Jangan cuma ulang Hasil. "Skornya 50" itu Hasil. "Skornya 50, yang mana sangat tinggi dibanding rata-rata global" itu Diskusi.
+Gunakan bahasa "hati-hati": "Ini menyarankan," "Ini mengimplikasikan," daripada "Ini membuktikan." Sains jarang membuktikan sesuatu 100%.`,
+        mistakes: `1. Hasil Baru: Jangan masukkan angka baru di sini yang tidak ada di Temuan.
+2. Spekulasi: Jangan buat klaim yang tidak didukung data.
+3. Abaikan Konflik: Jika data Anda bantah teori besar, jangan sembunyikan. Rangkul itu—itu bagian paling menarik!`
+      } 
     },
     conclusion: { 
-      en: { what: 'Takeaway.', tip: 'So what?' }, 
-      id: { what: 'Pesan utama.', tip: 'Lalu kenapa?' } 
+      en: { 
+        what: `The Conclusion is the "Mic Drop." It is not just a summary; it is a synthesis. Zoom out from the specifics back to the big picture.
+
+Structure:
+1. Restate the main answer to your Research Question (in different words).
+2. Synthesize the main points—show how they fit together.
+3. Practical Contribution: Who should use this info? Teachers? Policymakers?
+4. Future Research: What is the next logical step for science?
+5. Final Closing Statement: Leave the reader with a strong, lasting thought.`,
+        tip: `Keep it short. Usually 1-2 paragraphs.
+Make sure your conclusion matches your introduction. If you promised to solve X, ensure you conclude about X.`,
+        mistakes: `1. "More research is needed": This is a weak ending. Be specific: "Future research should focus on X variable."
+2. Introducing new arguments: The trial is over. No new evidence allowed.
+3. Just summarizing: Don't just list what you did. Explain what it amounts to.`
+      }, 
+      id: { 
+        what: `Kesimpulan adalah "Mic Drop". Bukan sekadar ringkasan; ini sintesis. Zoom out dari hal spesifik kembali ke gambaran besar.
+
+Struktur:
+1. Nyatakan ulang jawaban utama Pertanyaan Riset (dengan kata beda).
+2. Sintesis poin utama—tunjukkan bagaimana mereka saling terkait.
+3. Kontribusi Praktis: Siapa yang harus pakai info ini? Guru? Pembuat kebijakan?
+4. Riset Masa Depan: Apa langkah logis sains berikutnya?
+5. Pernyataan Penutup Akhir: Tinggalkan pembaca dengan pemikiran kuat yang membekas.`,
+        tip: `Buat singkat. Biasanya 1-2 paragraf.
+Pastikan kesimpulan cocok dengan pendahuluan. Jika janji selesaikan X, pastikan simpulkan soal X.`,
+        mistakes: `1. "Lebih banyak riset dibutuhkan": Ini ending lemah. Spesifiklah: "Riset depan harus fokus ke variabel X."
+2. Argumen baru: Sidang sudah selesai. Tak boleh ada bukti baru.
+3. Cuma meringkas: Jangan cuma daftar apa yang Anda buat. Jelaskan apa maknanya secara total.`
+      } 
     }
   },
     project_proposal: {
