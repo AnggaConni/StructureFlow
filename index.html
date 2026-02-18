@@ -2191,6 +2191,100 @@ policy_paper: {
     }
   },
 
+  introduction: {
+    en: {
+      what: `
+        <p>The introduction sets the stage. It provides the necessary <strong>context</strong> and explains <strong>why this issue matters now</strong>.</p>
+        
+        <p>It should hook the reader and provide a roadmap for the rest of the paper.</p>
+
+        <h4>Key Elements:</h4>
+        <ul>
+          <li><strong>Context/Background:</strong> Briefly describe the landscape (legal, social, economic).</li>
+          <li><strong>Significance:</strong> Why is this a policy priority? What happens if we ignore it?</li>
+          <li><strong>Scope:</strong> What is covered in this paper (and what is not).</li>
+          <li><strong>Roadmap:</strong> A brief sentence outlining how the paper is organized.</li>
+        </ul>
+      `,
+      tip: `
+        <div class="box-tip">
+          <strong>Keep it concise.</strong> Don't write a history textbook. Only provide enough background to understand the specific problem at hand.
+        </div>
+      `,
+      mistakes: `
+        <div class="box-warn">
+          <ul>
+            <li>Starting too broadly (e.g., "Since the dawn of time...").</li>
+            <li>Getting bogged down in technical definitions too early.</li>
+            <li>Failing to state the purpose of the paper.</li>
+          </ul>
+        </div>
+      `
+    }
+  },
+
+  problem_definition: {
+    en: {
+      what: `
+        <p>This section diagnoses the "disease" before you propose a "cure". It must be <strong>evidence-based</strong> and specific.</p>
+
+        <p>You define the nature, scope, and severity of the issue.</p>
+
+        <h4>Focus on:</h4>
+        <ul>
+          <li><strong>Data & Evidence:</strong> Use statistics to quantify the problem (e.g., "40% of rural clinics lack...").</li>
+          <li><strong>Root Causes:</strong> Distinguish between symptoms (what we see) and underlying causes (why it happens).</li>
+          <li><strong>Stakeholders:</strong> Who is suffering? Who benefits from the status quo?</li>
+        </ul>
+      `,
+      tip: `
+        <div class="box-tip">
+          <strong>Use the "5 Whys" technique.</strong> Drill down to the fundamental structural or systemic issues.
+        </div>
+      `,
+      mistakes: `
+        <div class="box-warn">
+          <ul>
+            <li>Defining the problem as "a lack of my solution" (Circular logic).</li>
+            <li>Relying on anecdotes instead of data.</li>
+            <li>Ignoring existing efforts or laws already in place.</li>
+          </ul>
+        </div>
+      `
+    }
+  },
+
+  policy_options: {
+    en: {
+      what: `
+        <p>Here you present the possible courses of action. You must present <strong>distinct, viable alternatives</strong>.</p>
+
+        <h4>Required Options:</h4>
+        <ol>
+          <li><strong>Option 1: Status Quo (No Action).</strong> What happens if we do nothing? This serves as your baseline.</li>
+          <li><strong>Option 2: Moderate/Incremental Change.</strong> A realistic fix within current constraints.</li>
+          <li><strong>Option 3: Structural/Radical Change.</strong> A comprehensive overhaul or new system.</li>
+        </ol>
+
+        <p>Describe each option neutrally before analyzing them.</p>
+      `,
+      tip: `
+        <div class="box-tip">
+          <strong>Mutually Exclusive.</strong> Ensure options are distinct enough that a decision maker must choose between them (though some hybrid elements may exist).
+        </div>
+      `,
+      mistakes: `
+        <div class="box-warn">
+          <ul>
+            <li>Creating "Strawman" options (weak options designed only to make your preferred choice look good).</li>
+            <li>Vague descriptions without operational details.</li>
+            <li>Listing too many options (stick to 3-4 strong ones).</li>
+          </ul>
+        </div>
+      `
+    }
+  },
+
   comparative_analysis: {
     en: {
       what: `
@@ -2244,6 +2338,97 @@ policy_paper: {
             <li>Repeating description instead of evaluating.</li>
             <li>Avoiding difficult trade-offs.</li>
             <li>Declaring a winner without evidence.</li>
+          </ul>
+        </div>
+      `
+    }
+  },
+
+  economic_modeling: {
+    en: {
+      what: `
+        <p>For complex policies, a dedicated economic analysis validates the financial viability. This goes deeper than the general comparison.</p>
+
+        <h4>Key Components:</h4>
+        <ul>
+          <li><strong>Cost-Benefit Analysis (CBA):</strong> Monetize benefits where possible (e.g., healthcare savings) vs. implementation costs.</li>
+          <li><strong>Fiscal Impact:</strong> Impact on the government budget (tax revenue, direct spending).</li>
+          <li><strong>Assumptions:</strong> Clearly state the variables used (inflation rate, adoption rate, etc.).</li>
+        </ul>
+      `,
+      tip: `
+        <div class="box-tip">
+          <strong>Be transparent.</strong> If your model relies on a high adoption rate to be profitable, state that clearly as a sensitivity factor.
+        </div>
+      `,
+      mistakes: `
+        <div class="box-warn">
+          <ul>
+            <li>Ignoring "Opportunity Costs" (what else could this money do?).</li>
+            <li>Underestimating maintenance or operational costs (OpEx) vs capital costs (CapEx).</li>
+            <li>Using unrealistic multipliers.</li>
+          </ul>
+        </div>
+      `
+    }
+  },
+
+  risk_assessment: {
+    en: {
+      what: `
+        <p>No policy is risk-free. This section demonstrates foresight by anticipating potential failures and proposing <strong>mitigation strategies</strong>.</p>
+
+        <h4>Categorize Risks:</h4>
+        <ul>
+          <li><strong>Political:</strong> Opposition from interest groups or public backlash.</li>
+          <li><strong>Operational:</strong> Lack of staff, technology failure, or corruption.</li>
+          <li><strong>Unintended Consequences:</strong> Creating new problems while solving the old one.</li>
+        </ul>
+
+        <p>Use a <strong>Risk Matrix</strong>: Assess likelihood (High/Low) vs. Impact (High/Low).</p>
+      `,
+      tip: `
+        <div class="box-tip">
+          <strong>Focus on Mitigation.</strong> Listing risks is depressing; listing solutions to those risks is leadership.
+        </div>
+      `,
+      mistakes: `
+        <div class="box-warn">
+          <ul>
+            <li>Assuming best-case scenarios only.</li>
+            <li>Ignoring implementation capacity risks.</li>
+            <li>Vague mitigation strategies like "monitor closely."</li>
+          </ul>
+        </div>
+      `
+    }
+  },
+
+  recommendations: {
+    en: {
+      what: `
+        <p>Based on the Comparative Analysis and Risk Assessment, state your final verdict clearly.</p>
+
+        <p>This is not a summary of options, but a <strong>persuasive argument</strong> for one specific path.</p>
+
+        <h4>Content:</h4>
+        <ul>
+          <li><strong>The Choice:</strong> Explicitly name the selected option.</li>
+          <li><strong>The Justification:</strong> Why does this option win? (e.g., "While Option B is cheaper, Option A is the only one that meets the equity target").</li>
+          <li><strong>Key Conditions:</strong> Prerequisites for success.</li>
+        </ul>
+      `,
+      tip: `
+        <div class="box-tip">
+          <strong>Be decisive.</strong> Avoid "Option A and B are both good." Pick one, or propose a phased hybrid.
+        </div>
+      `,
+      mistakes: `
+        <div class="box-warn">
+          <ul>
+            <li>Introducing new evidence not discussed in the analysis.</li>
+            <li>Contradicting your own analysis matrix.</li>
+            <li>Being apologetic or unsure.</li>
           </ul>
         </div>
       `
@@ -2337,7 +2522,37 @@ policy_paper: {
         </div>
       `
     }
+  },
+
+  conclusion: {
+    en: {
+      what: `
+        <p>The conclusion brings the paper to a close. It synthesizes the main points and reinforces the urgency of action.</p>
+
+        <h4>Structure:</h4>
+        <ul>
+          <li><strong>Synthesis:</strong> Briefly remind the reader of the problem and why your solution is the answer.</li>
+          <li><strong>Bigger Picture:</strong> Connect this specific policy to broader national goals or values.</li>
+          <li><strong>Call to Action:</strong> A final, strong statement encouraging immediate steps.</li>
+        </ul>
+      `,
+      tip: `
+        <div class="box-tip">
+          <strong>No new info.</strong> Do not introduce new data or arguments here. Use this space for impact and tone.
+        </div>
+      `,
+      mistakes: `
+        <div class="box-warn">
+          <ul>
+            <li>Simply copy-pasting the Executive Summary.</li>
+            <li>Ending abruptly without a closing thought.</li>
+            <li>Being overly emotional vs. professional.</li>
+          </ul>
+        </div>
+      `
+    }
   }
+
 },
 white_paper: {
   _analogy: { en: 'A white paper is a persuasive technical brief.', id: 'White paper adalah brief teknis yang persuasif.' },
