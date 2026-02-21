@@ -2432,34 +2432,60 @@ policy_brief: {
   },
   cv_resume: {
     _analogy: { 
-      en: 'A CV is a movie trailer, not a Wikipedia page. Its only job is to get you the interview.', 
-      id: 'CV itu ibarat trailer film, bukan halaman Wikipedia. Satu-satunya tugas CV adalah membuat Anda diundang wawancara.' 
+      en: 'A CV is a movie trailer, not a Wikipedia page. Its only job is to get you the interview. Every word must fight for its place on the page.', 
+      id: 'CV itu ibarat trailer film, bukan halaman Wikipedia. Satu-satunya tugas CV adalah membuat Anda diundang wawancara. Setiap kata harus punya nilai jual yang kuat.' 
     },
     header_contact: {
       en: { 
-        what: 'Name, professional title, and contact links (LinkedIn, Portfolio).', 
-        tip: 'Do not include marital status, religion, or full home address.',
+        what: `
+          <h4>The "Digital Handshake"</h4>
+          <p>This is the first thing a recruiter sees. It must be clean, modern, and perfectly linked.</p>
+          <ul>
+            <li><strong>Name:</strong> Largest font on the page.</li>
+            <li><strong>Professional Title:</strong> Tailor this to the job you are applying for (e.g., "Strategic Communications Lead").</li>
+            <li><strong>Contact Info:</strong> City/Country, Phone, Email.</li>
+            <li><strong>Links:</strong> LinkedIn URL (customized), Portfolio/GitHub (if applicable).</li>
+          </ul>
+        `, 
+        tip: `
+          <div class="box-tip">
+            <strong>The "One-Click" Rule:</strong> Ensure your email and LinkedIn URLs are clickable hyperlinks in the PDF. Recruiters hate copying and pasting.
+          </div>
+        `,
         mistakes: `
           <div class="box-warn">
-            <strong>Avoid:</strong>
+            <strong>Avoid (Instant Rejection by ATS/Global HR):</strong>
             <ul>
-              <li><strong>Unprofessional Emails:</strong> e.g., coolguy99@email.com.</li>
-              <li><strong>Full Physical Address:</strong> City and Country are enough. Don't risk your privacy.</li>
-              <li><strong>Photos:</strong> Unless specifically requested (common in some EU/Asian countries, but bad for ATS in US/UK/Global NGOs).</li>
+              <li><strong>Personal Data:</strong> Marital status, religion, age, or full home address.</li>
+              <li><strong>Photos:</strong> Do not include a photo unless applying in specific countries that require it. Photos confuse ATS parsers and introduce unconscious bias.</li>
+              <li><strong>Unprofessional Emails:</strong> Only use variations of your actual name (e.g., firstname.lastname@gmail.com).</li>
             </ul>
           </div>
         `
       },
       id: { 
-        what: 'Nama, gelar profesional, dan tautan kontak (LinkedIn, Portofolio).', 
-        tip: 'Jangan masukkan status pernikahan, agama, atau alamat rumah lengkap.',
+        what: `
+          <h4>"Jabat Tangan Digital"</h4>
+          <p>Ini adalah hal pertama yang dilihat rekruter. Harus bersih, modern, dan tautannya berfungsi.</p>
+          <ul>
+            <li><strong>Nama:</strong> Font paling besar di halaman.</li>
+            <li><strong>Gelar Profesional:</strong> Sesuaikan dengan lowongan (misal: "Manajer Produk | Konsultan Independen").</li>
+            <li><strong>Kontak:</strong> Kota/Negara, No. HP, Email.</li>
+            <li><strong>Tautan:</strong> URL LinkedIn (yang sudah di-kustom), Portofolio/GitHub.</li>
+          </ul>
+        `, 
+        tip: `
+          <div class="box-tip">
+            <strong>Aturan "Sekali Klik":</strong> Pastikan email dan URL LinkedIn Anda bisa diklik langsung di PDF. Rekruter sangat malas melakukan copy-paste.
+          </div>
+        `,
         mistakes: `
           <div class="box-warn">
-            <strong>Hindari:</strong>
+            <strong>Hindari (Bisa Langsung Ditolak Sistem ATS):</strong>
             <ul>
-              <li><strong>Email Tidak Profesional:</strong> misal: anak_gaul99@email.com.</li>
-              <li><strong>Alamat Lengkap:</strong> Cukup tulis Kota dan Negara (misal: Jakarta, Indonesia). Jaga privasi Anda.</li>
-              <li><strong>Foto:</strong> Kecuali diwajibkan oleh instansi (Banyak sistem ATS global/NGO menolak CV dengan foto untuk menghindari bias).</li>
+              <li><strong>Data Pribadi:</strong> Status pernikahan, agama, umur, atau alamat rumah lengkap.</li>
+              <li><strong>Foto:</strong> Jangan sertakan foto kecuali diwajibkan. Foto membuat sistem ATS kebingungan membaca teks dan memicu bias HRD.</li>
+              <li><strong>Email Alay:</strong> Gunakan hanya variasi nama asli Anda (misal: angga.conni@gmail.com).</li>
             </ul>
           </div>
         `
@@ -2467,27 +2493,53 @@ policy_brief: {
     },
     professional_summary: {
       en: { 
-        what: 'A 3-4 sentence pitch highlighting your unique value proposition and total years of experience, 1000 - 2200 characters.', 
-        tip: 'Use strong adjectives. Highlight your "T-shaped" skills (deep in one area, broad in others).',
+        what: `
+          <h4>The "Elevator Pitch"</h4>
+          <p>A 3-4 sentence narrative highlighting your unique value proposition, total years of experience, and overarching career goal. (1000 - 2200 characters).</p>
+          <ul>
+            <li><strong>Sentence 1 (Identity):</strong> Who are you and how many years of experience do you have?</li>
+            <li><strong>Sentence 2 (Expertise):</strong> What is your "superpower" or niche? (e.g., Frugal Innovation, Serverless Architecture).</li>
+            <li><strong>Sentence 3 (Impact):</strong> What is the biggest problem you solve for organizations?</li>
+            <li><strong>Sentence 4 (Goal):</strong> What are you looking to achieve in your next role?</li>
+          </ul>
+        `, 
+        tip: `
+          <div class="box-tip">
+            <strong>The "T-Shaped" Professional:</strong> Highlight that you have deep expertise in one specific area (e.g., Digital Governance) but broad capabilities across others (e.g., Behavioral Science, Communications).
+          </div>
+        `,
         mistakes: `
           <div class="box-warn">
             <strong>Avoid:</strong>
             <ul>
-              <li><strong>The "Objective" Statement:</strong> Don't write what you want ("Seeking a role to grow"). Write what you offer to them.</li>
-              <li><strong>Fluff Words:</strong> Avoid "Hardworking team player". Let your experience prove that.</li>
+              <li><strong>The "Objective" Statement:</strong> Don't write what *you* want ("Seeking a role to grow my skills"). Write what you offer to *them*.</li>
+              <li><strong>Fluff Words:</strong> Avoid vague adjectives like "Hardworking," "Team player," or "Detail-oriented." Let your experience section prove these traits.</li>
             </ul>
           </div>
         `
       },
       id: { 
-        what: 'Gagasan singkat 3-4 kalimat yang menonjolkan nilai unik Anda dan total pengalaman 1000 sampai 2200 karakter.', 
-        tip: 'Gunakan kata sifat yang kuat. Tonjolkan keahlian unik Anda.',
+        what: `
+          <h4>"Elevator Pitch" (Gagasan Utama)</h4>
+          <p>Narasi 3-4 kalimat yang menonjolkan nilai jual unik Anda, total pengalaman, dan tujuan karier (1000 sampai 2200 karakter).</p>
+          <ul>
+            <li><strong>Kalimat 1 (Identitas):</strong> Siapa Anda dan berapa tahun pengalaman Anda?</li>
+            <li><strong>Kalimat 2 (Keahlian):</strong> Apa "kekuatan super" atau niche Anda? (misal: Inovasi Frugal, Arsitektur Serverless).</li>
+            <li><strong>Kalimat 3 (Dampak):</strong> Masalah terbesar apa yang biasa Anda pecahkan untuk instansi?</li>
+            <li><strong>Kalimat 4 (Tujuan):</strong> Apa yang ingin Anda capai di peran selanjutnya?</li>
+          </ul>
+        `, 
+        tip: `
+          <div class="box-tip">
+            <strong>Profil "T-Shaped":</strong> Tonjolkan bahwa Anda punya keahlian mendalam di satu bidang (misal: Tata Kelola Digital) namun punya wawasan luas di bidang lain (Sains Perilaku, Komunikasi).
+          </div>
+        `,
         mistakes: `
           <div class="box-warn">
             <strong>Hindari:</strong>
             <ul>
-              <li><strong>Pernyataan "Tujuan":</strong> Jangan tulis apa yang Anda cari ("Mencari posisi untuk berkembang"). Tulis nilai apa yang Anda tawarkan ke perusahaan.</li>
-              <li><strong>Kata Klise:</strong> Hindari "Pekerja keras yang bisa bekerja dalam tim". Biarkan bukti pengalaman Anda yang menunjukkannya.</li>
+              <li><strong>Pernyataan "Tujuan Pribadi":</strong> Jangan tulis apa yang *Anda* inginkan ("Mencari peran untuk belajar"). Tulis apa yang bisa Anda *berikan* untuk perusahaan.</li>
+              <li><strong>Kata Klise (Fluff):</strong> Hindari kata sifat kosong seperti "Pekerja keras," "Bisa kerja tim," atau "Teliti." Biarkan bagian pengalaman yang membuktikan itu.</li>
             </ul>
           </div>
         `
@@ -2495,27 +2547,49 @@ policy_brief: {
     },
     core_competencies: {
       en: { 
-        what: 'A bulleted list of hard skills, software, and methodologies.', 
-        tip: 'Match these keywords exactly with the job description for ATS optimization.',
+        what: `
+          <h4>The "Keyword Optimizer"</h4>
+          <p>A highly scannable, bulleted list of hard skills, software, frameworks, and methodologies. This section exists to pass the ATS (Applicant Tracking System) bots.</p>
+          <ul>
+            <li><strong>Group by Category:</strong> E.g., Methodologies, Technical Stack, Domain Expertise.</li>
+            <li><strong>Exact Matches:</strong> Copy the exact phrasing used in the job description (e.g., if they ask for "Data Analysis", write "Data Analysis", not "Analyzing Data").</li>
+          </ul>
+        `, 
+        tip: `
+          <div class="box-tip">
+            <strong>The 70% Match Rule:</strong> Customize this section for *every* application to ensure at least a 70% keyword overlap with the specific job posting.
+          </div>
+        `,
         mistakes: `
           <div class="box-warn">
             <strong>Avoid:</strong>
             <ul>
-              <li><strong>Listing Soft Skills:</strong> "Communication" or "Leadership" belong in the Experience section, not as bullet points.</li>
-              <li><strong>Basic Tech:</strong> Don't list "Microsoft Word" or "Internet". It is assumed.</li>
+              <li><strong>Listing Soft Skills:</strong> "Communication" or "Leadership" belong in the Experience section as actionable proof, not as floating bullet points.</li>
+              <li><strong>Basic Tech:</strong> Don't list "Microsoft Word," "Email," or "Internet." At a professional level, these are assumed baseline skills.</li>
             </ul>
           </div>
         `
       },
       id: { 
-        what: 'Daftar keahlian teknis, perangkat lunak, dan metodologi.', 
-        tip: 'Samakan kata kuncinya persis dengan lowongan kerja agar lolos sistem ATS.',
+        what: `
+          <h4>"Optimasi Kata Kunci"</h4>
+          <p>Daftar padat keahlian teknis, *software*, *framework*, dan metodologi. Bagian ini dibuat khusus agar CV Anda lolos disaring oleh bot ATS (Applicant Tracking System).</p>
+          <ul>
+            <li><strong>Kelompokkan:</strong> Misal: Metodologi, *Technical Stack*, Domain Keahlian.</li>
+            <li><strong>Pencocokan Persis:</strong> Salin frasa persis dari deskripsi lowongan (jika mereka minta "Analisis Data", tulis "Analisis Data", jangan "Menganalisa Data").</li>
+          </ul>
+        `, 
+        tip: `
+          <div class="box-tip">
+            <strong>Aturan Kecocokan 70%:</strong> Kustomisasi bagian ini untuk *setiap* lamaran agar minimal 70% kata kuncinya sama persis dengan deskripsi lowongan tersebut.
+          </div>
+        `,
         mistakes: `
           <div class="box-warn">
             <strong>Hindari:</strong>
             <ul>
-              <li><strong>Mencantumkan Soft Skills:</strong> "Komunikasi" atau "Kepemimpinan" harus dibuktikan di deskripsi pengalaman, bukan cuma ditulis di daftar peluru.</li>
-              <li><strong>Keahlian Dasar:</strong> Jangan tulis "Bisa Microsoft Word" atau "Internet". Itu sudah dianggap kewajiban mutlak.</li>
+              <li><strong>Menulis Soft Skills:</strong> "Komunikasi" atau "Kepemimpinan" harus dibuktikan dengan tindakan di bagian Pengalaman, bukan ditaruh jadi daftar peluru.</li>
+              <li><strong>Teknologi Dasar:</strong> Jangan sebutkan "Microsoft Word" atau "Internet". Di level manajerial, itu sudah dianggap keterampilan wajib mutlak.</li>
             </ul>
           </div>
         `
@@ -2523,27 +2597,53 @@ policy_brief: {
     },
     work_experience: {
       en: { 
-        what: 'Reverse-chronological list of jobs. Use the STAR method: Situation, Task, Action, Result.', 
-        tip: 'Start every bullet point with a strong action verb (e.g., Architected, Managed, Spearheaded). Include numbers!',
+        what: `
+          <h4>The "Impact Ledger" (Google's XYZ Method)</h4>
+          <p>List jobs in reverse-chronological order. Do not list responsibilities; list accomplishments using Google's preferred formula: <strong>"Accomplished [X] as measured by [Y], by doing [Z]."</strong></p>
+          <ul>
+            <li><strong>[X] The Result:</strong> Start with the impact (e.g., Reduced routing time).</li>
+            <li><strong>[Y] The Metric:</strong> The quantitative proof (e.g., by 94%).</li>
+            <li><strong>[Z] The Action:</strong> The skills/tools you used (e.g., by developing a serverless Apps Script architecture).</li>
+          </ul>
+          <p><em>Example: "Reduced administrative routing time by 94% (from 72 hours to 4.5 mins) by architecting a serverless E-Persuratan application using Google Apps Script."</em></p>
+        `, 
+        tip: `
+          <div class="box-tip">
+            <strong>Action Verbs Only:</strong> Start every single bullet point with a strong, past-tense action verb (e.g., Architected, Spearheaded, Orchestrated, Analyzed, Deployed).
+          </div>
+        `,
         mistakes: `
           <div class="box-warn">
             <strong>Avoid:</strong>
             <ul>
-              <li><strong>Listing Job Duties:</strong> "Responsible for managing a team" (Weak) vs "Managed a team of 10, increasing output by 20%" (Strong).</li>
-              <li><strong>No Metrics:</strong> A bullet point without a number (%, $, time) is a missed opportunity. Prove your impact.</li>
+              <li><strong>The "Job Description" Trap:</strong> Writing "Responsible for managing a team." Nobody cares what you were supposed to do. They care what you *actually did*.</li>
+              <li><strong>Zero Metrics:</strong> A bullet point without a number (%, $, time, volume) is a weak argument. Quantify everything.</li>
             </ul>
           </div>
         `
       },
       id: { 
-        what: 'Daftar pekerjaan dari yang terbaru. Gunakan metode STAR: Situasi, Tugas, Aksi, Hasil.', 
-        tip: 'Mulai setiap poin dengan kata kerja aksi (Merancang, Mengelola, Memimpin). Wajib sertakan angka/persentase!',
+        what: `
+          <h4>"Buku Besar Dampak" (Metode XYZ ala Google)</h4>
+          <p>Daftar pekerjaan dari yang terbaru. Jangan tulis tugas harian; tulis *pencapaian* menggunakan formula yang disukai HRD Google: <strong>"Mencapai [X] yang diukur dengan [Y], dengan melakukan [Z]."</strong></p>
+          <ul>
+            <li><strong>[X] Hasil:</strong> Mulai dengan dampak (misal: Memangkas waktu birokrasi).</li>
+            <li><strong>[Y] Metrik:</strong> Bukti angka (misal: hingga 94%).</li>
+            <li><strong>[Z] Aksi:</strong> Alat/keahlian yang dipakai (misal: dengan membangun arsitektur *serverless* Google Apps Script).</li>
+          </ul>
+          <p><em>Contoh: "Memangkas waktu disposisi surat hingga 94% (dari 72 jam menjadi 4,5 menit) dengan merancang aplikasi E-Persuratan serverless menggunakan Google Apps Script."</em></p>
+        `, 
+        tip: `
+          <div class="box-tip">
+            <strong>Wajib Kata Kerja Aksi:</strong> Awali setiap poin peluru dengan kata kerja aktif yang kuat (misal: Merancang, Memimpin, Orkestrasi, Menganalisis, Mengeksekusi).
+          </div>
+        `,
         mistakes: `
           <div class="box-warn">
             <strong>Hindari:</strong>
             <ul>
-              <li><strong>Menulis Deskripsi Pekerjaan (Job Desc):</strong> "Bertanggung jawab mengelola tim" (Lemah) vs "Mengelola 10 staf dan meningkatkan efisiensi 20%" (Kuat).</li>
-              <li><strong>Tanpa Metrik:</strong> Poin tanpa angka (%, Rupiah, Waktu) adalah peluang yang terbuang. Buktikan dampak Anda dengan angka konkret.</li>
+              <li><strong>Jebakan "Job Desc":</strong> Menulis "Bertanggung jawab mengelola tim." Rekruter tidak peduli apa *tugas* Anda. Mereka peduli apa *hasil* dari tugas Anda.</li>
+              <li><strong>Nol Metrik:</strong> Poin tanpa angka (%, Rupiah, Waktu, Skala) adalah argumen yang lemah. Kuantifikasi semuanya.</li>
             </ul>
           </div>
         `
@@ -2551,27 +2651,49 @@ policy_brief: {
     },
     education: {
       en: { 
-        what: 'Degrees, universities, and graduation years.', 
-        tip: 'If you have a Master\'s, you can keep the descriptions brief. Mention thesis topics if relevant.',
+        what: `
+          <h4>The "Academic Foundation"</h4>
+          <p>List Degrees, Universities, and Graduation Years in reverse-chronological order.</p>
+          <ul>
+            <li>If you have a Master's degree, keep the Bachelor's description brief.</li>
+            <li>Highlight thesis topics or capstone projects *only* if they are highly relevant to the role you are targeting (e.g., your thesis on ministerial organizational effectiveness).</li>
+          </ul>
+        `, 
+        tip: `
+          <div class="box-tip">
+            <strong>Omit Dates to Avoid Ageism:</strong> If you graduated more than 10-15 years ago, you can choose to omit the graduation year to prevent unconscious age bias.
+          </div>
+        `,
         mistakes: `
           <div class="box-warn">
             <strong>Avoid:</strong>
             <ul>
-              <li><strong>High School:</strong> Do not include high school if you have a University degree.</li>
-              <li><strong>Low GPA:</strong> Only include GPA if it is outstanding (e.g., > 3.5) or if specifically requested.</li>
+              <li><strong>High School:</strong> Do not include high school if you hold a University degree. It wastes valuable space.</li>
+              <li><strong>Low/Average GPA:</strong> Only include your GPA if it is exceptional (e.g., Cum Laude / > 3.5) or if the job posting strictly requires it.</li>
             </ul>
           </div>
         `
       },
       id: { 
-        what: 'Gelar, universitas, dan tahun kelulusan.', 
-        tip: 'Sebutkan topik tesis atau IPK hanya jika sangat relevan dengan pekerjaan yang dituju.',
+        what: `
+          <h4>"Fondasi Akademik"</h4>
+          <p>Tuliskan Gelar, Universitas, dan Tahun Lulus (dari yang paling baru).</p>
+          <ul>
+            <li>Jika Anda punya gelar S2, persingkat deskripsi S1 Anda.</li>
+            <li>Sebutkan topik tesis atau tugas akhir *hanya* jika itu sangat relevan dengan pekerjaan yang dilamar (misal: tesis Anda tentang efektivitas organisasi kementerian).</li>
+          </ul>
+        `, 
+        tip: `
+          <div class="box-tip">
+            <strong>Hapus Tahun Lulus (Opsi Anti-Bias):</strong> Jika Anda lulus lebih dari 10-15 tahun yang lalu, Anda bisa membuang tahun kelulusan untuk menghindari bias umur (ageism) dari pihak HRD.
+          </div>
+        `,
         mistakes: `
           <div class="box-warn">
             <strong>Hindari:</strong>
             <ul>
-              <li><strong>Riwayat SMA/SMP:</strong> Jangan masukkan riwayat sekolah menengah jika Anda sudah sarjana atau pascasarjana.</li>
-              <li><strong>IPK Pas-pasan:</strong> Tulis IPK hanya jika sangat memuaskan (> 3.5) atau jika diminta secara spesifik oleh lowongan.</li>
+              <li><strong>Riwayat SMA/SMP:</strong> Jangan masukkan riwayat sekolah menengah jika Anda sudah sarjana. Itu membuang ruang berharga.</li>
+              <li><strong>IPK Pas-pasan:</strong> Tulis IPK *hanya* jika nilainya sangat memuaskan (Cum Laude / > 3.5) atau jika diminta secara spesifik oleh lowongan.</li>
             </ul>
           </div>
         `
@@ -2579,27 +2701,49 @@ policy_brief: {
     },
     publications_and_achievements: {
       en: { 
-        what: 'Books, papers, fellowships, or major awards.', 
-        tip: 'Keep it curated. Only list the top 3-5 most impressive items.',
+        what: `
+          <h4>The "Authority Builders"</h4>
+          <p>This is where you prove you are a thought leader. List Books, Papers, Patents, major Fellowships, or high-level awards.</p>
+          <ul>
+            <li>Provide standard citations (e.g., APA style) for books.</li>
+            <li>Always include ISBN numbers or hyperlinks to the actual work or publisher.</li>
+          </ul>
+        `, 
+        tip: `
+          <div class="box-tip">
+            <strong>Quality over Quantity:</strong> Keep it curated. Only list the top 3-5 most impressive and relevant items.
+          </div>
+        `,
         mistakes: `
           <div class="box-warn">
             <strong>Avoid:</strong>
             <ul>
-              <li><strong>Irrelevant Hobbies:</strong> Don't list hobbies unless they directly demonstrate a professional competency.</li>
-              <li><strong>Messy Formatting:</strong> Ensure publications follow a standard citation format (like APA).</li>
+              <li><strong>Irrelevant Hobbies/Certificates:</strong> Don't list a "Basic First Aid" certificate if applying for a Tech Lead role, unless applying to a medical NGO.</li>
+              <li><strong>Messy Formatting:</strong> Inconsistent citation formats signal poor attention to detail.</li>
             </ul>
           </div>
         `
       },
       id: { 
-        what: 'Buku, karya ilmiah, beasiswa, atau penghargaan besar.', 
-        tip: 'Kurasi dengan baik. Tuliskan hanya 3-5 yang paling mengesankan.',
+        what: `
+          <h4>"Pembangun Otoritas"</h4>
+          <p>Di sinilah Anda membuktikan bahwa Anda adalah seorang pakar. Cantumkan Buku, Jurnal, Paten, Beasiswa bergengsi, atau Penghargaan tingkat tinggi.</p>
+          <ul>
+            <li>Gunakan format sitasi standar (seperti APA Style) untuk buku.</li>
+            <li>Selalu sertakan nomor ISBN atau *hyperlink* yang mengarah langsung ke karya/penerbit tersebut.</li>
+          </ul>
+        `, 
+        tip: `
+          <div class="box-tip">
+            <strong>Kualitas di Atas Kuantitas:</strong> Kurasi dengan ketat. Tuliskan hanya 3-5 pencapaian yang paling mengesankan dan relevan dengan posisi yang dituju.
+          </div>
+        `,
         mistakes: `
           <div class="box-warn">
             <strong>Hindari:</strong>
             <ul>
-              <li><strong>Pencapaian Tidak Relevan:</strong> Jangan masukkan juara lomba hobi jika tidak ada hubungannya dengan keahlian profesional yang dituju.</li>
-              <li><strong>Format Berantakan:</strong> Pastikan publikasi buku/jurnal ditulis dengan standar sitasi yang rapi (seperti APA Style) dan cantumkan ISBN/tautan bila ada.</li>
+              <li><strong>Sertifikat/Hobi Tidak Nyambung:</strong> Jangan masukkan sertifikat "Pertolongan Pertama" jika melamar jadi Tech Lead, kecuali melamar ke instansi medis.</li>
+              <li><strong>Format Berantakan:</strong> Format sitasi yang tidak konsisten menunjukkan bahwa Anda tidak teliti.</li>
             </ul>
           </div>
         `
@@ -4793,7 +4937,7 @@ function App() {
   });
 };
 
-  // --- FUNGSI BARU: PRINT VIA JENDELA BARU (DI-UPGRADE & FIX MARGIN) ---
+  // --- FUNGSI BARU: PRINT TEMPLATE VIA JENDELA BARU (PILIH STYLE DOKUMEN - TATA NASKAH DINAS) ---
   const handlePrintToWindow = () => {
     if (!docData || !docData.sections) {
       alert('Tidak ada dokumen untuk diprint.');
