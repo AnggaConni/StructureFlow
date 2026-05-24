@@ -265,11 +265,11 @@ import {
 ═══════════════════════════════════════════════════════════════ */
 
 const AI_BRIDGE = {
-    // 1. Prioritas Model (Sesuai kesuksesan Horizon Pro)
+    // 1. Prioritas Model (Graceful Degradation)
     models: [
-        'gemini-2.5-flash',      // UTAMA
-        'gemini-2.0-flash-exp',  // CADANGAN 1
-        'gemini-1.5-flash'       // CADANGAN 2
+        'gemini-3.1-flash',      // UTAMA: Uji performa dan kapabilitas terbaru
+        'gemini-2.5-flash',      // CADANGAN 1: Fallback utama yang terbukti andal
+        'gemini-1.5-flash'       // CADANGAN 2: Penjaga gawang terakhir
     ],
 
     hasKey: (key) => !!key && key.length > 10,
@@ -295,17 +295,17 @@ const AI_BRIDGE = {
         throw new Error(`Semua model gagal. Error terakhir: ${lastError?.message}`);
     },
 
-    // Fungsi Panggilan API (Menggunakan Prompt Dinamis)
+// Fungsi Panggilan API (Diperbarui dengan Debugger)
     async _callModel(model, prompt, apiKey) {
+        console.log(`%c [AI BRIDGE] Mencoba memanggil: ${model}`, 'color: #3b82f6; font-weight: bold;');
+        
         const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`;
         
         const response = await fetch(url, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
-                contents: [{ 
-                    parts: [{ text: prompt }] // Prompt sudah mengandung instruksi bahasa dari fungsi di bawah
-                }],
+                contents: [{ parts: [{ text: prompt }] }],
                 generationConfig: {
                     temperature: 0.7,
                     maxOutputTokens: 8192
@@ -315,10 +315,12 @@ const AI_BRIDGE = {
 
         if (!response.ok) {
             const errData = await response.json().catch(() => ({}));
+            console.error(`[AI BRIDGE] Error pada model ${model}:`, errData.error?.message);
             throw new Error(errData.error?.message || `HTTP Error ${response.status}`);
         }
 
         const data = await response.json();
+        console.log(`%c [AI BRIDGE] Sukses menggunakan: ${model}`, 'color: #22c55e; font-weight: bold;');
         return data.candidates?.[0]?.content?.parts?.[0]?.text || "";
     },
 
