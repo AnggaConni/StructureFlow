@@ -239,7 +239,7 @@
 <body class="bg-slate-100 text-slate-900">
 <div id="root"></div>
 
-<script type="text/babel" data-type="module">
+<script type="text/babel" data-type="module" data-presets="react">
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { createRoot } from 'react-dom/client';
 import {
@@ -450,6 +450,11 @@ const DUMMY_DATA = {
         key: 'abstract', 
         content: `<h3>Abstract</h3>
         <p>The global landscape of digital governance is often marred by the failure of high-cost, monolithic infrastructure projects that fail to adapt to the local realities of developing nations. This research explores the "Serverless Democratization" paradigm, focusing on the utilization of low-cost, high-context digital tools—collectively termed the "Google Fullstack" (Apps Script, Sheets, and Cloud-native automation). Through a multi-year analysis of projects ranging from vaccine cold chain management to digital correspondence in Indonesian ministries, this paper argues that decentralized, agile development models provide a more resilient framework for institutional reform than traditional ERP systems. The study concludes that by lowering the technical barrier to entry, organizations can foster a culture of "Civic Tech" that is both sustainable and immune to the common pitfalls of bureaucratic IT procurement.</p>` 
+      },
+      { 
+        key: 'keywords', 
+        content: `<h3>Keywords</h3>
+        <p><em>Serverless Architecture, Digital Governance, Frugal Innovation, Civic Tech, Global South, Public Policy Reform</em></p>` 
       },
       { 
         key: 'introduction', 
@@ -1466,6 +1471,56 @@ const GUIDANCE = {
           </div>
         `
       } 
+    },
+    keywords: {
+      en: {
+        what: `
+          <p>Keywords act as the <strong>"Search Tags"</strong> for your paper. They help indexing services (like Google Scholar) find your work.</p>
+          <h4>Rules:</h4>
+          <ul>
+            <li>Usually between 4 to 6 words or short phrases.</li>
+            <li>List them in alphabetical order (depending on journal rules).</li>
+          </ul>
+        `,
+        tip: `
+          <div class="box-tip">
+            <strong>SEO Pro Tip:</strong> Do not just repeat words that are already in your Title. Use synonyms or related concepts to broaden your search visibility.
+          </div>
+        `,
+        mistakes: `
+          <div class="box-warn">
+            <strong>Avoid:</strong>
+            <ul>
+              <li><strong>Generic Terms:</strong> Words like "Study", "Analysis", or "Policy" are too broad.</li>
+              <li><strong>Invented Jargon:</strong> Stick to established terms researchers actually search for.</li>
+            </ul>
+          </div>
+        `
+      },
+      id: {
+        what: `
+          <p>Kata Kunci berfungsi sebagai <strong>"Tag Pencarian"</strong>. Ini membantu mesin pencari (seperti Google Scholar) menemukan makalah Anda.</p>
+          <h4>Aturan Main:</h4>
+          <ul>
+            <li>Biasanya terdiri dari 4 hingga 6 kata atau frasa pendek.</li>
+            <li>Pisahkan dengan koma dan urutkan secara alfabetis (opsional).</li>
+          </ul>
+        `,
+        tip: `
+          <div class="box-tip">
+            <strong>Tips SEO Jurnal:</strong> Jangan sekadar mengulang kata yang sudah ada di Judul. Gunakan sinonim atau konsep terkait untuk memperluas jangkauan pencarian.
+          </div>
+        `,
+        mistakes: `
+          <div class="box-warn">
+            <strong>Hindari:</strong>
+            <ul>
+              <li><strong>Kata Terlalu Umum:</strong> Menggunakan kata "Studi", "Analisis", atau "Kebijakan" tidak ada gunanya karena terlalu luas.</li>
+              <li><strong>Jargon Buatan Sendiri:</strong> Gunakan istilah baku yang memang sering dicari oleh peneliti lain.</li>
+            </ul>
+          </div>
+        `
+      }
     },
     introduction: {
       en: {
@@ -4192,7 +4247,7 @@ const MODULE_REGISTRY_DEFINITION = [
       name: 'Journal Article', 
       category: 'academic', 
       schema_version: SCHEMA_VERSION, 
-      structural_sections: ['abstract','introduction','framework','methodology','findings','discussion','conclusion'], 
+      structural_sections: ['abstract','keywords','introduction','framework','methodology','findings','discussion','conclusion'], 
       color: 'blue', 
       description: 'Full empirical research paper.' 
   },
@@ -4842,7 +4897,7 @@ function App() {
   const handleExportDoc = () => {
     const preHtml = `<html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'><head><meta charset='utf-8'><title>${docData.title}</title><style>body { font-family: 'Calibri', sans-serif; }</style></head><body><h1>${docData.title}</h1>`;
     const contentHtml = docData.sections.map(s => `<div class="section">${s.content}</div><br/>`).join('');
-    const fullHtml = preHtml + contentHtml + "</body></html>";
+    const fullHtml = preHtml + contentHtml + "</" + "body></html>";
     const url = 'data:application/vnd.ms-word;charset=utf-8,' + encodeURIComponent(fullHtml);
     const downloadLink = document.createElement("a");
     document.body.appendChild(downloadLink);
@@ -5090,6 +5145,7 @@ function App() {
               <h1 class="doc-title">${docData.title}</h1>
               ${contentHtml}
           </div>
+
           <script>
               window.onload = function() {
                   setTimeout(function() {
