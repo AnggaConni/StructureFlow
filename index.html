@@ -331,19 +331,21 @@ const AI_BRIDGE = {
         const targetLang = lang === 'en' ? 'English' : 'Indonesian (Bahasa Indonesia)';
         
         return `
-        SYSTEM: You are an expert academic writer and editor.
-        CONTEXT: Document Title: "${docMeta.title}". Section: "${currentSection.sectionKey}".
+        SYSTEM: You are an expert academic and professional writer.
+        DOCUMENT TYPE: You are writing a "${docMeta.name}".
+        CONTEXT: Document Title: "${docMeta.title}". 
+        CURRENT SECTION TO WRITE: "${currentSection.sectionKey}".
         
-        IMPORTANT INSTRUCTION:
-        You MUST write the content in ${targetLang}. 
-        If the input is in English but the target is Indonesian, TRANSLATE and EXPAND it.
-        If the input is in Indonesian but the target is English, TRANSLATE and EXPAND it.
+        CRITICAL RULES (READ CAREFULLY):
+        1. DOCUMENT AWARENESS: If the document type is a "Journal Article", write it as a COMPLETED research paper. DO NOT write it like a thesis proposal. Do not use phrases like "This research will analyze..." (future tense). Use past tense for methodology and findings.
+        2. NO MAGIC DATA (ANTI-HALLUCINATION): If the user's input is empty or lacks specific empirical data, DO NOT fabricate fake numbers, fake quotes, or fake statistics. Instead, build a highly professional academic framework/narrative and insert bold placeholders like **[MASUKKAN DATA/ANGKA ANDA DI SINI]** or **[INSERT YOUR FINDINGS HERE]**.
+        3. LANGUAGE: You MUST write the content in ${targetLang}. 
         
-        INPUT CONTENT:
+        USER'S CURRENT DRAFT / INPUT:
         "${currentSection.content.replace(/<[^>]*>/g, '')}"
         
         OUTPUT FORMAT:
-        Return ONLY valid HTML tags (<h3>, <p>, <ul>, <li>, <strong>). Do not use Markdown blocks.
+        Return ONLY valid HTML tags (<h3>, <p>, <ul>, <li>, <strong>, <em>). Do not use Markdown blocks (\`\`\`html).
         `;
     },
 
@@ -352,17 +354,21 @@ const AI_BRIDGE = {
         const targetLang = lang === 'en' ? 'English' : 'Indonesian (Bahasa Indonesia)';
         
         return `
-        SYSTEM: You are an expert document architect.
-        TASK: Review and fill in missing content for the document "${docMeta.title}".
+        SYSTEM: You are an expert document architect and editor.
+        DOCUMENT TYPE: "${docMeta.name}"
+        TASK: Review and fill in missing content for the document titled "${docMeta.title}".
         
-        STRICT LANGUAGE RULE:
-        ALL generated content MUST be in ${targetLang}.
+        CRITICAL RULES:
+        1. If this is a "Journal Article" or "Research Report", assume the research is already done. DO NOT write future-tense proposals. 
+        2. Do not invent fake empirical data. Use placeholders like **[INSERT LOCAL DATA HERE]** if a section is completely empty.
+        3. Expand bullet points into highly professional, well-structured academic paragraphs.
+        4. STRICT LANGUAGE RULE: ALL generated content MUST be in ${targetLang}.
         
         INPUT DATA (JSON):
-        ${JSON.stringify(sections.map(s => ({id: s.id, content: s.content})))}
+        ${JSON.stringify(sections.map(s => ({id: s.id, sectionKey: s.sectionKey, content: s.content})))}
         
         OUTPUT FORMAT:
-        Return a raw JSON Array of objects with 'id' and 'content' keys.
+        Return a raw JSON Array of objects with 'id' and 'content' keys. Ensure the 'content' contains valid HTML structure. DO NOT wrap the JSON in Markdown ticks (\`\`\`json).
         `;
     },
 
